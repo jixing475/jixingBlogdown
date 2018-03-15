@@ -1,0 +1,314 @@
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>student zero </title>
+  <link href="/index.xml" rel="self"/>
+  <link href="/"/>
+  <updated>2018-03-15T00:00:00+00:00</updated>
+  <id>/</id>
+  <author>
+    <name>Jixing Liu</name>
+  </author>
+  <generator>Hugo -- gohugo.io</generator>
+  <entry>
+    <title type="html"><![CDATA[Hello world]]></title>
+    <link href="/2018/03/hello-world/"/>
+    <id>/2018/03/hello-world/</id>
+    <published>2018-03-15T00:00:00+00:00</published>
+    <updated>2018-03-15T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<p>Just say hello world!</p>
+]]></content>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[Why should I trust you 🤖?]]></title>
+    <link href="/2018/02/why-should-i-trust-you/"/>
+    <id>/2018/02/why-should-i-trust-you/</id>
+    <published>2018-02-11T00:00:00+00:00</published>
+    <updated>2018-02-11T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<p>传统的机器学习工作流程主要集中在模型训练和优化上; 最好的模型通常是通过像精度或者错误这样的性能度量来选择的，而且如果它通过了这些性能标准的某些阈值，我们倾向于假设一个模型是足够好的。在机器学习的许多应用中，用户会使用一个模型来帮助做决定， 例如：一位医生不会对病人进行手术，仅仅因为这个模型说不应该进行手术？</p>
+<p>由于复杂的机器学习模型本质上是黑盒子，而且太复杂，机器学习模型做出的分类决定通常很难被人类的大脑所理解，但是能够理解和解释这些模型对于提高模型质量，提高信任度和透明度以及减少偏见非常重要，因为人类往往具有良好的直觉和因果推理，这些都是难以在数据评估指标中捕获。</p>
+<p>因此，我们希望能够形象的理解它们的工作原理：为什么一个模型将具有特定标签的案例进行准确分类。eg: 为什么一个乳腺肿块样本被归类为“恶性”而不是“良性，仅仅因为它长得丑吗？</p>
+<blockquote>
+<p><a href="https://www.oreilly.com/learning/introduction-to-local-interpretable-model-agnostic-explanations-lime">Local Interpretable Model-Agnostic Explanations (LIME)</a> is an attempt to make these complex models at least partly understandable. The method has been published in <a href="https://arxiv.org/pdf/1602.04938.pdf">“Why Should I Trust You?”</a> Explaining the Predictions of Any Classifier. By Marco Tulio Ribeiro, Sameer Singh and Carlos Guestrin from the University of Washington in Seattle</p>
+</blockquote>
+<div id="how-lime-works" class="section level2">
+<h2><strong>How LIME works</strong></h2>
+<blockquote>
+<p>lime is able to explain all models for which we can obtain prediction probabilities (in R, that is every model that works with predict(type = “prob”)). It makes use of the fact that linear models are easy to explain because they are based on linear relationships between features and class labels: The complex model function is approximated by locally fitting linear models to permutations of the original training set.On each permutation, a linear model is being fit and weights are given so that incorrect classification of instances that are more similar to the original data are penalized (positive weights support a decision, negative weights contradict them). This will give an approximation of how much (and in which way) each feature contributed to a decision made by the model</p>
+</blockquote>
+<p><img src="https://i.loli.net/2018/02/11/5a7fa56fd7333.jpg" width="30%" /></p>
+<blockquote>
+<p>We take the image on the left and divide it into interpretable components</p>
+</blockquote>
+<p><img src="https://i.loli.net/2018/02/11/5a7faba0d302a.jpg" width="30%" /></p>
+<blockquote>
+<p>we then generate a data set of perturbed instances by turning some of the interpretable components “oﬀ”. For each perturbed instance, we get the probability that a tree frog is in the image according to the model.</p>
+</blockquote>
+<p><img src="https://i.loli.net/2018/02/11/5a7fac3ca8787.jpg" width="30%" /></p>
+<blockquote>
+<p>We then learn a simple (linear) model on this data set, which is locally weighted—that is, we care more about making mistakes in perturbed instances that are more similar to the original image</p>
+</blockquote>
+<p><img src="https://i.loli.net/2018/02/11/5a7fac8382a86.jpg" width="30%" /></p>
+<blockquote>
+<p>the end, we present the superpixels with highest positive weights as an explanation, graying out everything else</p>
+</blockquote>
+<p><img src="https://i.loli.net/2018/02/11/5a7faf16f0320.jpg" width="30%" /></p>
+<p>🤖预测这张图是个树蛙是因为这个部分,所以🤖预测结果是比较可信的。 <img src="https://i.loli.net/2018/02/11/5a7faebabe34e.jpg" style="display: block; margin: auto;" /></p>
+<p>🤖预测这张图是台球是根据这些部分，所以🤖预测结果是不可信的。 <img src="https://i.loli.net/2018/02/11/5a7fb61ecb060.jpg" style="display: block; margin: auto;" /></p>
+</div>
+<div id="example-in-r" class="section level2">
+<h2><strong>Example in R</strong></h2>
+<div id="prepare-the-breast-cancer-data" class="section level3">
+<h3>01.Prepare the breast cancer data</h3>
+<p>This <strong>data</strong> of example comes from the book of <strong>R in action</strong></p>
+<pre class="r"><code>loc &lt;- &quot;http://archive.ics.uci.edu/ml/machine-learning-databases/&quot;
+ds  &lt;- &quot;breast-cancer-wisconsin/breast-cancer-wisconsin.data&quot;
+url &lt;- paste(loc, ds, sep=&quot;&quot;)
+
+breast &lt;- read.table(url, sep=&quot;,&quot;, header=FALSE, na.strings=&quot;?&quot;)
+names(breast) &lt;- c(&quot;ID&quot;, &quot;clumpThickness&quot;, &quot;sizeUniformity&quot;,
+                   &quot;shapeUniformity&quot;, &quot;maginalAdhesion&quot;, 
+                   &quot;singleEpithelialCellSize&quot;, &quot;bareNuclei&quot;, 
+                   &quot;blandChromatin&quot;, &quot;normalNucleoli&quot;, &quot;mitosis&quot;, &quot;class&quot;)
+
+df &lt;- breast[-1]
+df$class &lt;- factor(df$class, levels=c(2,4), 
+                   labels=c(&quot;benign&quot;, &quot;malignant&quot;))
+
+set.seed(1234)
+train &lt;- sample(nrow(df), 0.7*nrow(df))
+df.train &lt;- df[train,]
+df.validate &lt;- df[-train,]
+table(df.train$class)</code></pre>
+<pre><code>## 
+##    benign malignant 
+##       329       160</code></pre>
+<pre class="r"><code>table(df.validate$class)</code></pre>
+<pre><code>## 
+##    benign malignant 
+##       129        81</code></pre>
+</div>
+<div id="create-decision-tree-model" class="section level3">
+<h3>02 Create decision tree model</h3>
+<pre class="r"><code>library(rpart)
+set.seed(1234)
+dtree &lt;- rpart(class ~ ., data=df.train, method=&quot;class&quot;,      
+               parms=list(split=&quot;information&quot;))
+dtree$cptable</code></pre>
+<pre><code>##         CP nsplit rel error  xerror       xstd
+## 1 0.800000      0   1.00000 1.00000 0.06484605
+## 2 0.046875      1   0.20000 0.30625 0.04150018
+## 3 0.012500      3   0.10625 0.20625 0.03467089
+## 4 0.010000      4   0.09375 0.18125 0.03264401</code></pre>
+<pre class="r"><code>plotcp(dtree)</code></pre>
+<p><img src="/post/2018-02-11-why-should-i-trust-you_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code>dtree.pruned &lt;- prune(dtree, cp=.0125)</code></pre>
+</div>
+<div id="predict" class="section level3">
+<h3>03 predict</h3>
+<pre class="r"><code>dtree.pred &lt;- predict(dtree.pruned, df.validate, type=&quot;class&quot;)
+(dtree.perf &lt;- table(df.validate$class, dtree.pred, 
+                    dnn=c(&quot;Actual&quot;, &quot;Predicted&quot;)))</code></pre>
+<pre><code>##            Predicted
+## Actual      benign malignant
+##   benign       122         7
+##   malignant      2        79</code></pre>
+</div>
+<div id="plot-decision-tree" class="section level3">
+<h3>04 plot decision tree</h3>
+<pre class="r"><code>#plot01
+library(rpart.plot)
+prp(dtree.pruned, type = 2, extra = 104,  
+    fallen.leaves = TRUE, main=&quot;Decision Tree&quot;)
+#plot02
+library(partykit)</code></pre>
+<p><img src="/post/2018-02-11-why-should-i-trust-you_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<pre class="r"><code>library(dplyr)
+dtree.pruned %&gt;% as.party() %&gt;% plot()</code></pre>
+<p><img src="/post/2018-02-11-why-should-i-trust-you_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
+</div>
+<div id="lime-why-should-i-trust-you" class="section level3">
+<h3>LIME: why should I trust you 🤖?</h3>
+<pre class="r"><code>library(lime)
+explainer &lt;- lime(df.train, model = dtree.pruned)
+
+# Explain new observation
+#[model_type](https://github.com/thomasp85/lime/blob/master/R/models.R)
+model_type.rpart &lt;- function(x, ...) &#39;classification&#39;#defined model_type method
+test.data &lt;- 
+  df.validate %&gt;% 
+  dplyr::select(-class) %&gt;% 
+  head(3)
+explanation &lt;- lime::explain(test.data, explainer, n_labels = 1, n_features = 2)
+
+# The output is provided in a consistent tabular format and includes the
+# output from the model.
+head(explanation)</code></pre>
+<pre><code>##       model_type case     label label_prob  model_r2 model_intercept
+## 1 classification    3    benign  0.9933993 0.1754620      0.05039863
+## 2 classification    3    benign  0.9933993 0.1754620      0.05039863
+## 3 classification    4 malignant  0.9507042 0.2006329      0.53850056
+## 4 classification    4 malignant  0.9507042 0.2006329      0.53850056
+## 5 classification    5    benign  0.9933993 0.1871606      0.05372340
+## 6 classification    5    benign  0.9933993 0.1871606      0.05372340
+##   model_prediction                  feature feature_value feature_weight
+## 1        0.4588963           blandChromatin             3   -0.001710722
+## 2        0.4588963           sizeUniformity             1    0.410208409
+## 3        0.9529770 singleEpithelialCellSize             3    0.003570030
+## 4        0.9529770           sizeUniformity             8    0.410906399
+## 5        0.4660418          maginalAdhesion             3   -0.004419457
+## 6        0.4660418           sizeUniformity             1    0.416737849
+##                        feature_desc                      data
+## 1           2 &lt; blandChromatin &lt;= 3 3, 1, 1, 1, 2, 2, 3, 1, 1
+## 2               sizeUniformity &lt;= 4 3, 1, 1, 1, 2, 2, 3, 1, 1
+## 3 2 &lt; singleEpithelialCellSize &lt;= 4 6, 8, 8, 1, 3, 4, 3, 7, 1
+## 4                4 &lt; sizeUniformity 6, 8, 8, 1, 3, 4, 3, 7, 1
+## 5              maginalAdhesion &lt;= 3 4, 1, 1, 3, 2, 1, 3, 1, 1
+## 6               sizeUniformity &lt;= 4 4, 1, 1, 3, 2, 1, 3, 1, 1
+##               prediction
+## 1 0.99339934, 0.00660066
+## 2 0.99339934, 0.00660066
+## 3 0.04929577, 0.95070423
+## 4 0.04929577, 0.95070423
+## 5 0.99339934, 0.00660066
+## 6 0.99339934, 0.00660066</code></pre>
+<pre class="r"><code># And can be visualised directly
+plot_features(explanation)</code></pre>
+<p><img src="/post/2018-02-11-why-should-i-trust-you_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+</div>
+<div id="links" class="section level2">
+<h2><strong>Links</strong></h2>
+<ul>
+<li><a href="http://archive.ics.uci.edu/ml/datasets/Chronic_Kidney_Disease">CKD data set</a></li>
+<li><a href="https://github.com/marcotcr/lime">open-source Python code for LIME</a></li>
+<li><a href="https://github.com/thomasp85/lime">R package for LIME</a></li>
+</ul>
+</div>
+]]></content>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[Conferences, webinars, podcasts and the likes]]></title>
+    <link href="/page/conferences_podcasts_webinars/"/>
+    <id>/page/conferences_podcasts_webinars/</id>
+    <published>2018-02-01T16:06:06+02:00</published>
+    <updated>2018-02-01T16:06:06+02:00</updated>
+    <content type="html"><![CDATA[
+
+<p>Here, you can find a list of all the talks I gave at conferences, webinars, podcasts, workshops, and all the other places you can and could hear me talk. :-)</p>
+
+<h2 id="workshops-i-am-giving">Workshops I am giving</h2>
+
+<ul>
+<li><a href="https://shirinsplayground.netlify.com/2017/11/deep_learning_keras_tensorflow/">Workshop on Deep Learning with Keras and TensorFlow in R</a></li>
+</ul>
+
+<blockquote>
+<p>I offer a workshop on deep learning with Keras and TensorFlow using R.
+Date and place depend on who and how many people are interested, so please contact me either directly or via the workshop page: <a href="https://www.codecentric.de/schulung/deep-learning-mit-keras-und-tensorflow/">https://www.codecentric.de/schulung/deep-learning-mit-keras-und-tensorflow/</a> (the description is in German but I also offer to give the workshop in English).</p>
+</blockquote>
+
+<h2 id="upcoming-talks-webinars-podcasts-etc">Upcoming talks, webinars, podcasts, etc.</h2>
+
+<ul>
+<li><a href="https://shirinsplayground.netlify.com/2018/02/m3_2018/">Announcing my talk about explainability of machine learning models at Minds Mastering Machines Conference</a></li>
+</ul>
+
+<blockquote>
+<p>On Wednesday, April 25th 2018 I am going to talk about explainability of machine learning models at the Minds Mastering Machines conference in Cologne.</p>
+</blockquote>
+
+<ul>
+<li><a href="JAX 2018 talk announcement: Deep Learning - a Primer">JAX 2018 talk announcement: Deep Learning - a Primer</a></li>
+</ul>
+
+<blockquote>
+<p>Deep Learning is one of the &ldquo;hot&rdquo; topics in the AI area – a lot of hype, a lot of inflated expectation, but also quite some impressive success stories. As some AI experts already predict that Deep Learning will become &ldquo;Software 2.0&rdquo;, it might be a good time to have a closer look at the topic. In this session I will try to give a comprehensive overview of Deep Learning. We will start with a bit of history and some theoretical foundations that we will use to create a little Deep Learning taxonomy. Then we will have a look at current and upcoming application areas: Where can we apply Deep Learning successfully and what does it differentiate from other approaches? Afterwards we will examine the ecosystem: Which tools and libraries are available? What are their strengths and weaknesses? And to complete the session, we will look into some practical code examples and the typical pitfalls of Deep Learning. After this session you will have a much better idea of the why, what and how of Deep Learning, including if and how you might want to apply it to your own work. <a href="https://jax.de/big-data-machine-learning/deep-learning-a-primer/">https://jax.de/big-data-machine-learning/deep-learning-a-primer/</a></p>
+</blockquote>
+
+<h2 id="past-talks-webinars-podcasts-etc">Past talks, webinars, podcasts, etc.</h2>
+
+<ul>
+<li><a href="https://shirinsplayground.netlify.com/2018/02/herr_mies_wills_wissen/">I talk about machine learning with Daniel Mies (Podcast in German, though)</a></li>
+</ul>
+
+<blockquote>
+<p>In January 2018 I was interviewed for a tech podcast where I talked about machine learning, neural nets, why I love R and Rstudio and how I became a Data Scientist.</p>
+</blockquote>
+
+<ul>
+<li><a href="https://shirinsplayground.netlify.com/2017/12/lime_sketchnotes/">Explaining Predictions of Machine Learning Models with LIME - Münster Data Science Meetup</a></li>
+</ul>
+
+<blockquote>
+<p>In December 2017 I talked about Explaining Predictions of Machine Learning Models with LIME at the Münster Data Science Meetup.</p>
+</blockquote>
+
+<ul>
+<li><a href="https://shiring.github.io/blogging/2017/09/20/webinar_biology_to_data_science">From Biology to Industry. A Blogger’s Journey to Data Science</a></li>
+</ul>
+
+<blockquote>
+<p>In September 2017 I gave a webinar for the Applied Epidemiology Didactic of the University of Wisconsin - Madison titled “From Biology to Industry. A Blogger’s Journey to Data Science.”
+I talked about how blogging about R and Data Science helped me become a Data Scientist. I also gave a short introduction to Machine Learning, Big Data and Neural Networks.</p>
+</blockquote>
+
+<ul>
+<li><a href="https://shiring.github.io/machine_learning/2017/03/31/webinar_code">Building meaningful machine learning models for disease prediction</a></li>
+</ul>
+
+<blockquote>
+<p>In March 2017 I gave a webinar for the ISDS R Group about my work on building machine-learning models to predict the course of different diseases. I went over building a model, evaluating its performance, and answering or addressing different disease related questions using machine learning. My talk covered the theory of machine learning as it is applied using R.</p>
+</blockquote>
+]]></content>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[Welcome to my page!]]></title>
+    <link href="/page/about/"/>
+    <id>/page/about/</id>
+    <published>2017-09-12T16:06:06+02:00</published>
+    <updated>2017-09-12T16:06:06+02:00</updated>
+    <content type="html"><![CDATA[
+
+<p><img src="/img/Bewerbungsfoto_klein.jpg" alt="" /></p>
+
+<p>I&rsquo;m Shirin, a biologist turned bioinformatician turned data scientist.</p>
+
+<p>I&rsquo;m especially interested in machine learning and data visualization. While I am using R most every day at work, I wanted to have an incentive to regularly explore other types of analyses and other types of data that I don&rsquo;t normally work with. I have also very often benefited from other people&rsquo;s published code in that it gave me ideas for my own work; and I hope that sharing my own analyses will inspire others as much as I often am by what can be be done with data.  It&rsquo;s amazing to me what can be learned from analyzing and visualizing data!</p>
+
+<p>My tool of choice for data analysis so far has been R. I also organize the <a href="https://shiring.github.io/r_users_group/2017/05/20/muenster_r_user_group">MünsteR R-users group on meetup.com</a>.</p>
+
+<p><img src="http://res.cloudinary.com/shiring/image/upload/v1511852499/my_story_wml3zm.png" alt="My journey to Data Science" /></p>
+
+<p>I love dancing and used to do competitive ballroom and latin dancing. Even though I don&rsquo;t have time for that anymore, I still enjoy teaching &ldquo;social dances&rdquo; once a week with the Hochschulsport (university sports courses).</p>
+
+<p>I created the R package <a href="https://github.com/ShirinG/exprAnalysis">exprAnalysis</a>, designed to streamline my RNA-seq data analysis pipeline. It is available via Github. Instructions for installation and usage can be found <a href="https://shiring.github.io/rna-seq/microarray/2016/09/28/exprAnalysis">here</a>.</p>
+
+<p>This blog will showcase some of the analyses I have been doing with different data sets (all freely available). I will also host teaching materials for students to access in conjunction with R courses I am giving.</p>
+
+<hr />
+
+<h2 id="contact-me">Contact me:</h2>
+
+<ul>
+<li><a href="https://www.codecentric.de/team/shirin-glander/">Codecentric AG</a></li>
+<li><a href="mailto:shirin.glander@gmail.com">Email</a></li>
+<li><a href="http://www.xing.com/profile/Shirin_Glander">Xing</a></li>
+<li><a href="http://de.linkedin.com/in/shirin-glander-01120881">Linkedin</a></li>
+<li><a href="http://twitter.com/ShirinGlander">Twitter</a></li>
+</ul>
+
+<hr />
+
+<p>Also check out <a href="http://www.R-bloggers.com">R-bloggers</a> for lots of cool R stuff!</p>
+]]></content>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[Find all my other posts on my old website!]]></title>
+    <link href="/2017/07/find-all-my-other-posts-on-my-old-website/"/>
+    <id>/2017/07/find-all-my-other-posts-on-my-old-website/</id>
+    <published>2017-07-01T00:00:00+00:00</published>
+    <updated>2017-07-01T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<p>For all my other posts, see my old website:
+<a href="https://shiring.github.io">shiring.github.io</a></p>
+]]></content>
+  </entry>
+</feed>
