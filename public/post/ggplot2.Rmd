@@ -1,0 +1,675 @@
+---
+title: "Visualisation with ggplot2"
+subtitle: "https://privefl.github.io/R-presentation/ggplot2.html"
+author: "Florian Privé"
+date: "October 19, 2017"
+output:
+  xaringan::moon_reader:
+    #includes:
+      #after_body: include_twitter.html
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(cache = TRUE, fig.align = "center", dev = "svg")
+```
+
+class: center, top, inverse
+background-image: url(http://hexb.in/vector/ggplot2.svg)
+background-position: 50% 80%
+background-size: 40%
+
+# http://ggplot2.tidyverse.org/
+
+---
+
+class: center, middle, inverse
+
+> "The simple graph has brought more information to the data analyst’s mind than any other device." --- John Tukey
+
+---
+
+class: center, middle, inverse
+
+# Introduction
+
+---
+
+## What does *ggplot2* stand for?
+
+--
+
+### A __Grammar of Graphics__!
+
+--
+
+```
+ggplot(data = <DATA>) + 
+  <GEOM_FUNCTION>(
+     mapping = aes(<MAPPINGS>),
+     stat = <STAT>, 
+     position = <POSITION>
+  ) +
+  <COORDINATE_FUNCTION> +
+  <FACET_FUNCTION>
+```
+
+--
+
+</br>
+
+#### You can uniquely describe any plot as a combination of these 7 parameters.
+
+---
+
+## How long have you known **ggplot2**?
+
+<br>
+<br>
+<br>
+
+--
+
+<blockquote class="twitter-tweet" data-lang="en" align="center"><p lang="en" dir="ltr">Happy 10th birthday ggplot2! 🎉🎂📊📈10 years ago today the first version was accepted to CRAN: <a href="https://t.co/tiXIkqnCcA">https://t.co/tiXIkqnCcA</a></p>&mdash; Hadley Wickham (@hadleywickham) <a href="https://twitter.com/hadleywickham/status/873556949207535616">10 juin 2017</a></blockquote>
+
+---
+
+## Why use ggplot2?
+
+</br>
+
+- Automatic legends, colors, etc.
+
+- Easy superposition, facetting, etc.
+
+- Nice rendering (yet, I don't like the default grey theme).
+
+- **Store any ggplot2 object for modification or future recall.** Super useful for packages.
+
+- Lots of users (less bugs, much help on Stack Overflow).
+
+- Lots of extensions.
+
+- Nice saving option.
+
+---
+
+class: center, middle, inverse
+
+# Tidy data?
+
+---
+
+## Untidy data
+
+```{r, include=FALSE}
+library(tidyverse)
+fertilityData <- structure(list(Country = structure(c(2L, 5L, 6L, 
+9L, 11L, 12L, 13L, 14L, 15L, 16L, 17L, 18L), .Label = c("Abkhazia", 
+"Afghanistan", "Akrotiri and Dhekelia", "Åland", "Albania", 
+"Algeria", "American Samoa", "Andorra", "Angola", "Anguilla", 
+"Antigua and Barbuda", "Argentina", "Armenia", "Aruba", "Australia", 
+"Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", 
+"Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bermuda", 
+"Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", 
+"British Virgin Islands", "Brunei", "Bulgaria", "Burkina Faso", 
+"Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Cayman Islands", 
+"Central African Republic", "Chad", "Channel Islands", "Chile", 
+"China", "Christmas Island", "Cocos Island", "Colombia", "Comoros", 
+"Congo, Dem. Rep.", "Congo, Rep.", "Cook Is", "Costa Rica", "Cote d'Ivoire", 
+"Croatia", "Cuba", "Cyprus", "Czech Republic", "Czechoslovakia", 
+"Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Germany", 
+"Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", 
+"Eritrea and Ethiopia", "Estonia", "Ethiopia", "Faeroe Islands", 
+"Falkland Is (Malvinas)", "Fiji", "Finland", "France", "French Guiana", 
+"French Polynesia", "Gabon", "Gambia", "Georgia", "Germany", 
+"Ghana", "Gibraltar", "Greece", "Greenland", "Grenada", "Guadeloupe", 
+"Guam", "Guatemala", "Guernsey", "Guinea", "Guinea-Bissau", "Guyana", 
+"Haiti", "Holy See", "Honduras", "Hong Kong, China", "Hungary", 
+"Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Isle of Man", 
+"Israel", "Italy", "Jamaica", "Japan", "Jersey", "Jordan", "Kazakhstan", 
+"Kenya", "Kiribati", "Kosovo", "Kuwait", "Kyrgyz Republic", "Lao", 
+"Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", 
+"Lithuania", "Luxembourg", "Macao, China", "Macedonia, FYR", 
+"Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", 
+"Marshall Islands", "Martinique", "Mauritania", "Mauritius", 
+"Mayotte", "Mexico", "Micronesia, Fed. Sts.", "Moldova", "Monaco", 
+"Mongolia", "Montenegro", "Montserrat", "Morocco", "Mozambique", 
+"Myanmar", "Namibia", "Nauru", "Nepal", "Netherlands", "Netherlands Antilles", 
+"New Caledonia", "New Zealand", "Ngorno-Karabakh", "Nicaragua", 
+"Niger", "Nigeria", "Niue", "Norfolk Island", "North Korea", 
+"North Yemen (former)", "Northern Cyprus", "Northern Mariana Islands", 
+"Norway", "Oman", "Pakistan", "Palau", "Panama", "Papua New Guinea", 
+"Paraguay", "Peru", "Philippines", "Pitcairn", "Poland", "Portugal", 
+"Puerto Rico", "Qatar", "Reunion", "Romania", "Russia", "Rwanda", 
+"Samoa", "San Marino", "Sao Tome and Principe", "Saudi Arabia", 
+"Senegal", "Serbia", "Serbia and Montenegro", "Serbia excluding Kosovo", 
+"Seychelles", "Sierra Leone", "Singapore", "Slovak Republic", 
+"Slovenia", "Solomon Islands", "Somalia", "Somaliland", "South Africa", 
+"South Korea", "South Ossetia", "South Yemen (former)", "Spain", 
+"Sri Lanka", "St. Barthélemy", "St. Helena", "St. Kitts and Nevis", 
+"St. Lucia", "St. Martin", "St. Vincent and the Grenadines", 
+"St.-Pierre-et-Miquelon", "Sudan", "Suriname", "Svalbard", "Swaziland", 
+"Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", 
+"Thailand", "Timor-Leste", "Togo", "Tokelau", "Tonga", "Transnistria", 
+"Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Turks and Caicos Islands", 
+"Tuvalu", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", 
+"United Korea (former)\n", "United States", "Uruguay", "USSR", 
+"Uzbekistan", "Vanuatu", "Venezuela", "Vietnam", "Virgin Islands (U.S.)", 
+"Wallis et Futuna", "West Bank and Gaza", "West Germany", "Western Sahara", 
+"Yemen", "Yugoslavia", "Zambia", "Zimbabwe"), class = "factor"), 
+    `1800` = c(7, 4.6, 6.99, 6.93, 5, 6.8, 7.8, 5.64, 6.5, 5.1, 
+    8.1, 5.9), `1801` = c(7, 4.6, 6.99, 6.93, 5, 6.8, 7.8, 5.64, 
+    6.48, 5.1, 8.1, 5.9), `1802` = c(7, 4.6, 6.99, 6.93, 4.99, 
+    6.8, 7.81, 5.64, 6.46, 5.1, 8.1, 5.9), `1803` = c(7, 4.6, 
+    6.99, 6.93, 4.99, 6.8, 7.81, 5.64, 6.44, 5.1, 8.1, 5.9), 
+    `1804` = c(7, 4.6, 6.99, 6.93, 4.99, 6.8, 7.81, 5.64, 6.42, 
+    5.1, 8.1, 5.9), `1805` = c(7, 4.6, 6.99, 6.93, 4.98, 6.8, 
+    7.82, 5.64, 6.4, 5.1, 8.1, 5.9)), .Names = c("Country", 
+"1800", "1801", "1802", "1803", "1804", "1805"), row.names = c(NA, 
+-12L), class = c("tbl_df", "tbl", "data.frame"))
+```
+
+```{r}
+fertilityData
+```
+
+
+The variables are the **country**, **year** and **fertility rate**.
+
+---
+
+## Tidy data
+
+```{r, echo=FALSE}
+knitr::include_graphics("http://r4ds.had.co.nz/images/tidy-1.png")
+```
+
+It is easier to work and reason with
+
+- operations
+
+- manipulation
+
+- visualization
+
+<br>
+
+Learn more at http://tidyr.tidyverse.org/articles/tidy-data.html.
+
+---
+
+### Tidy the previous data
+
+```{r, cache=FALSE, message=FALSE}
+library(tidyverse)
+```
+
+```{r}
+(fertilityTidy <- fertilityData %>%
+   gather(key = "Year", value = "Fertility", -Country) %>%
+   mutate(Year = as.integer(Year)))
+```
+
+---
+
+### This is easier to plot
+
+```{r, out.width = "80%", fig.asp = 0.7}
+ggplot(data = fertilityTidy) + 
+  geom_point(mapping = aes(x = Year, y = Fertility))
+```
+
+---
+
+class: center, middle, inverse
+
+# Basics & Customization
+
+---
+
+### Custom theme I use: black and white and larger fonts
+
+```{r}
+myggplot <- function(..., coeff = 1) 
+  bigstatsr:::MY_THEME(ggplot(...), coeff = 1.2 * coeff)
+```
+
+***
+
+```{r, out.width = "68%", fig.asp = 0.7}
+myggplot(data = fertilityTidy) + 
+  geom_point(mapping = aes(x = Year, y = Fertility))
+```
+
+---
+
+## Drop extra typing
+
+```{r, out.width = "80%", fig.asp = 0.7}
+myggplot(fertilityTidy) + 
+  geom_point(aes(Year, Fertility))
+```
+
+---
+
+## Add colors
+
+```{r, out.width = "80%", fig.asp = 0.7}
+myggplot(fertilityTidy) + 
+  geom_point(aes(Year, Fertility, color = Country))
+```
+
+---
+
+## Add lines: add one geom
+
+```{r, out.width = "80%", fig.asp = 0.7}
+myggplot(fertilityTidy) + 
+  geom_point(aes(Year, Fertility, color = Country)) + 
+  geom_line(aes(Year, Fertility, color = Country))
+```
+
+---
+
+### Remove redundancy: move 'aes' to the top
+
+#### So that the mapping is inherited by both geoms
+
+```{r, out.width = "72%", fig.asp = 0.7}
+myggplot(fertilityTidy, aes(Year, Fertility, color = Country)) + 
+  geom_point() +
+  geom_line()
+```
+
+---
+
+### Larger points and lines
+
+```{r out.width = "80%", fig.asp = 0.7}
+myggplot(fertilityTidy, aes(Year, Fertility, color = Country)) + 
+  geom_point(size = 4) +
+  geom_line(size = 3)
+```
+
+---
+
+### Futher customization: themes
+
+```{r out.width = "90%", fig.asp = 0.7, fig.width=8}
+myggplot(fertilityTidy, aes(Year, Fertility, color = Country)) + 
+  geom_point(size = 4) +
+  geom_line(size = 3) +
+  theme(aspect.ratio = 0.8, legend.key.width = unit(3, "line"))
+```
+
+---
+
+class: center, middle, inverse
+
+# Layers 
+
+---
+
+## Iris: base dataset of R
+
+### about plants
+
+```{r}
+as_tibble(iris)   ## print better
+```
+
+---
+
+## Layers: example with geom_smooth()
+
+```{r out.width = "80%", fig.asp = 0.7}
+myggplot(iris) + 
+  geom_point(aes(Petal.Length, Petal.Width, 
+                 color = Species, shape = Species), size = 3)
+```
+
+---
+
+### Geom_smooth on all: move x and y on top
+
+```{r out.width = "75%", fig.asp = 0.7}
+myggplot(iris, aes(Petal.Length, Petal.Width)) + 
+  geom_point(aes(color = Species, shape = Species), size = 3) + 
+  geom_smooth(color = "black")
+```
+
+---
+
+### Points on top: change the order of layers
+
+```{r out.width = "75%", fig.asp = 0.7}
+myggplot(iris, aes(Petal.Length, Petal.Width)) + 
+  geom_smooth(color = "black") + 
+  geom_point(aes(color = Species, shape = Species), size = 3)
+```
+
+---
+
+### Geom_smooth by group
+
+```{r out.width = "75%", fig.asp = 0.7}
+myggplot(iris, aes(Petal.Length, Petal.Width)) + 
+  geom_smooth(aes(group = Species), color = "black") + 
+  geom_point(aes(color = Species, shape = Species), size = 3)
+```
+
+---
+
+### Or use color for both geoms
+
+```{r out.width = "75%", fig.asp = 0.7}
+myggplot(iris, aes(Petal.Length, Petal.Width, color = Species)) + 
+  geom_smooth() + 
+  geom_point(aes(shape = Species), size = 3)
+```
+
+---
+
+## An important application
+
+### Simpson's Paradox
+
+<br>
+
+```{r, echo=FALSE}
+knitr::include_graphics("https://paulvanderlaken.files.wordpress.com/2017/09/simpsonsparadox.png?w=1080")
+```
+
+.footnote[Source: https://goo.gl/GycYod]
+
+---
+
+## Learn more
+
+- [Chapter *Data Visualisation*](http://r4ds.had.co.nz/data-visualisation.html) of 
+
+```{r, out.width="35%", echo=FALSE}
+knitr::include_graphics("http://r4ds.had.co.nz/cover.png")
+```
+
+.footnote[Freely available online.]
+
+---
+
+## Find answers
+
+### [Stack Overflow questions with tag `[ggplot2]`](https://stackoverflow.com/questions/tagged/ggplot2)
+
+<blockquote class="twitter-tweet" data-lang="en" align="center"><p lang="en" dir="ltr">ok, hands up... when looking up code errors/questions with the intent of finding answers on Stack Overflow, do you:</p>&mdash; Sharla Gelfand (@sharlagelfand) <a href="https://twitter.com/sharlagelfand/status/915654253456318464?ref_src=twsrc%5Etfw">4 octobre 2017</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<br><center>e.g. google "larger points legend ggplot2"
+
+---
+
+## Using the Stack Overflow answer
+
+```{r out.width = "75%", fig.asp = 0.7}
+myggplot(iris) + 
+  geom_point(aes(Petal.Length, Petal.Width, 
+                 color = Species, shape = Species), size = 3) +
+  guides(colour = guide_legend(override.aes = list(size = 10)))
+```
+
+---
+
+## Go check the [**R Graph Gallery**](http://www.r-graph-gallery.com/portfolio/ggplot2-package/)
+
+<br>
+
+<br>
+
+<br>
+
+<blockquote class="twitter-tweet" data-cards="hidden" data-lang="en" align="center"><p lang="en" dir="ltr">🍾🍾 Today the <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> graph gallery reached 1.000.000 visits! 🍾🍾 Thanks to all users &amp; contributors!<a href="https://t.co/94JzuHDJot">https://t.co/94JzuHDJot</a> <a href="https://t.co/xu4XIsqmut">pic.twitter.com/xu4XIsqmut</a></p>&mdash; The R Graph Gallery (@R_Graph_Gallery) <a href="https://twitter.com/R_Graph_Gallery/status/915092693977460741?ref_src=twsrc%5Etfw">3 octobre 2017</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+---
+
+class: center, middle, inverse
+
+# More
+
+---
+
+### Coordinates
+
+```{r out.width = "77%", fig.asp = 0.7}
+myggplot(iris) + 
+  geom_point(aes(Petal.Length, Petal.Width, 
+                 color = Species, shape = Species), size = 3) + 
+  scale_x_log10(breaks = 1:7)
+```
+
+
+---
+
+### Facets
+
+```{r out.width = "85%", fig.asp = 0.6}
+myggplot(iris) + 
+  geom_point(aes(Petal.Length, Petal.Width, 
+                 color = Species, shape = Species), size = 3) + 
+  facet_wrap(~Species) +   ## facet_grid for multiple variables
+  theme(strip.text.x = element_text(size = rel(2.5)))
+```
+
+---
+
+## Iterate over variables with **aes_string**
+
+```{r}
+(var <- names(iris)[1:4])
+p_list <- list()
+for (i in seq_along(var)) {
+  p_list[[i]] <- myggplot(iris, coeff = 0.6) + 
+    geom_density(aes_string(var[i], fill = "Species"), alpha = 0.6)
+    
+}
+
+str(p_list, max.level = 1)
+```
+
+---
+
+## Combine plots with [cowplot](https://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html)
+
+```{r out.width = "85%", fig.asp = 0.65}
+cowplot::plot_grid(plotlist = p_list, ncol = 2, align = "hv",
+                   labels = LETTERS[1:4], label_size = 15)
+```
+
+---
+
+### Common legend
+
+```{r out.width = "85%", fig.asp = 0.6}
+lapply(p_list, function(p) p + theme(legend.position = "none")) %>%
+  cowplot::plot_grid(plotlist = ., ncol = 2, align = "hv",
+                   labels = LETTERS[1:4], label_size = 15) %>%
+  cowplot::plot_grid(cowplot::get_legend(p_list[[1]]),
+                     rel_widths = c(1, 0.3))
+```
+
+---
+
+## Interactive plots
+
+```{r, out.width="80%", fig.asp=0.7, cache=FALSE}
+myggplot(iris, aes(Petal.Length, Petal.Width, 
+                   color = Species, shape = Species)) + 
+  geom_point(size = 3)
+```
+
+---
+
+## Transform ggplot to plotly
+
+```{r}
+plotly::ggplotly(width = 700, height = 450)
+```
+
+---
+
+### Add more infos
+
+```{r}
+plotly::ggplotly(
+  last_plot() + aes(text = bigstatsr::asPlotlyText(iris)),
+  tooltip = "text", width = 700, height = 420)
+```
+
+
+
+---
+
+## Miscellaneous
+
+- [Pie charts](https://guangchuangyu.github.io/2016/12/scatterpie-for-plotting-pies-on-ggplot/) but [others plots are often better](http://annkemery.com/pie-chart-guidelines/)
+
+- [Spatial Visualization](https://cran.r-project.org/web/packages/ggmap/index.html)
+
+- [Heatmaps](http://blog.aicry.com/r-heat-maps-with-ggplot2/)
+
+- [Cookbook for R - Graphs](http://www.cookbook-r.com/Graphs/)
+
+- [**Cheatsheet**](https://www.rstudio.com/wp-content/uploads/2016/11/ggplot2-cheatsheet-2.1.pdf)
+
+- [Top 50 ggplot2 Visualizations](http://r-statistics.co/Top50-Ggplot2-Visualizations-MasterList-R-Code.html)
+
+- [**Viridis color palette**](https://cran.r-project.org/web/packages/viridis/vignettes/intro-to-viridis.html)
+
+- [**An RStudio addin for ggplot2 theme tweaking**](https://github.com/calligross/ggthemeassist)
+
+- [**Publication Ready Plots**](http://www.sthda.com/english/rpkgs/ggpubr/)
+
+- [Extensions](http://www.ggplot2-exts.org/)
+
+---
+
+class: center, middle, inverse
+
+# Two last points from my experience
+
+---
+
+## Why I finally switched to using ggplot2?
+
+```{r out.width = "70%", fig.asp = 0.75, results='hide', cache=FALSE}
+library(bigstatsr)
+X <- big_attachExtdata()
+svd <- big_SVD(X, big_scale(), k = 10)
+plot(svd, type = "scores")
+```
+
+---
+
+### An object that the user can modify
+
+```{r out.width = "60%", fig.asp = 0.7}
+pop <- rep(c("POP1", "POP2", "POP3"), c(143, 167, 207))
+last_plot() + 
+  # add colors
+  aes(color = pop) + labs(color = "Population") +
+  ## change the place of the legend
+  theme(legend.position = c(0.85, 0.2)) + 
+  ## change the title and the label of the x-axis
+  labs(title = "Yet another title", x = "with a new 'x' label")
+```
+
+---
+
+## How I choose the size of a plot?
+
+- I plot something, e.g.
+
+```{r, eval = FALSE}
+ggplot(iris, aes(Petal.Length, Petal.Width, 
+                 color = Species, shape = Species)) + 
+  geom_point(size = 3)
+```
+
+- I use the *Zoom* button of RStudio
+
+- I resize the "Plot Zoom" windows till I'm satisfied
+
+- Right-click on this window -> "Open Image"
+
+- Then, I use the dimensions that are displayed at the top in `ggsave()` with `scale = 1/90` (calibrate the value for your computer), e.g. 
+```{r, eval = FALSE}
+ggsave("myggplot.pdf", scale = 1/90, width = 888, height = 725)
+```
+
+.footnote[In R Markdown, use chunk options `out.width` and `fig.asp`.]
+
+---
+
+class: center, middle, inverse
+
+# Your turn
+
+---
+
+## Use this data..
+
+```{r}
+(df <- gapminder::gapminder %>%
+   filter(year == 1992))
+```
+
+---
+
+## ..to reproduce this plot
+
+```{r, out.width = "100%", fig.asp = 0.7, echo = FALSE, fig.width = 5}
+ggplot(df) + 
+  geom_point(aes(gdpPercap, lifeExp, size = pop, 
+                 color = continent)) +
+  scale_x_log10(breaks = c(300, 1e3, 3e3, 10e3, 30e3)) + 
+  labs(title = "Gapminder for 1992",
+       x = "Gross Domestic Product (log scale)",
+       y = "Life Expectancy at birth (years)",
+       color = "Continent", size = "Population")
+```
+
+---
+
+```{r, out.width = "78%", fig.asp = 0.7, fig.width = 5}
+ggplot(df) + 
+  geom_point(aes(gdpPercap, lifeExp, size = pop, 
+                 color = continent)) +
+  scale_x_log10(breaks = c(300, 1e3, 3e3, 10e3, 30e3)) + 
+  labs(title = "Gapminder for 1992",
+       x = "Gross Domestic Product (log scale)",
+       y = "Life Expectancy at birth (years)",
+       color = "Continent", size = "Population")
+```
+
+---
+
+class: center, middle, inverse
+
+# Thanks!
+
+<br>
+
+Presentation available at
+
+https://privefl.github.io/R-presentation/ggplot2.html
+
+<br>
+
+Twitter and GitHub: [@privefl](https://twitter.com/privefl)
+
+.footnote[Slides created via the R package [**xaringan**](https://github.com/yihui/xaringan).]

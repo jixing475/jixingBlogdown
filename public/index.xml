@@ -2,12 +2,86 @@
   <title>student zero </title>
   <link href="/index.xml" rel="self"/>
   <link href="/"/>
-  <updated>2018-03-15T00:00:00+00:00</updated>
+  <updated>2018-03-18T00:00:00+00:00</updated>
   <id>/</id>
   <author>
     <name>Jixing Liu</name>
   </author>
   <generator>Hugo -- gohugo.io</generator>
+  <entry>
+    <title type="html"><![CDATA[A function for ggplot2: input strings for aes()]]></title>
+    <link href="/2018/03/a-function-for-ggplot2-input-strings-for-aes/"/>
+    <id>/2018/03/a-function-for-ggplot2-input-strings-for-aes/</id>
+    <published>2018-03-18T00:00:00+00:00</published>
+    <updated>2018-03-18T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<p>在我写文章画图时经常遇到的一个问题是：ggplot2 坐标轴的输入不支持输入数据框的变量名，通常会报错找不到对象</p>
+<div class="section level1">
+<h1>🌰：问题描述</h1>
+<p>data: <a href="https://github.com/fivethirtyeight/data/tree/master/early-senate-polls">early senate poll</a></p>
+<pre class="r"><code>library(tidyverse) # general tasks
+library(broom) # tidy model output
+library(ggthemes) # style the plots
+
+poll_data &lt;- read_csv(&quot;https://raw.githubusercontent.com/fivethirtyeight/data/master/early-senate-polls/early-senate-polls.csv&quot;)
+
+glimpse(poll_data)</code></pre>
+<pre><code>## Observations: 107
+## Variables: 4
+## $ year                  &lt;int&gt; 2006, 2006, 2006, 2006, 2006, 2006, 2006...
+## $ election_result       &lt;int&gt; -39, -10, -9, -16, 40, 10, -2, -41, -31,...
+## $ presidential_approval &lt;int&gt; 46, 33, 32, 33, 53, 44, 37, 39, 42, 33, ...
+## $ poll_average          &lt;int&gt; -28, -10, -1, -15, 39, 14, 2, -22, -27, ...</code></pre>
+<p>background: <strong>there is a strong correlation between polling numbers and the ultimate result of an election</strong></p>
+<div id="-" class="section level2">
+<h2>构建模型： 线性模型</h2>
+<pre class="r"><code>poll_lm &lt;- lm(election_result ~ poll_average, data = poll_data)
+
+summary(poll_lm)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = election_result ~ poll_average, data = poll_data)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -29.4281  -5.0197   0.5601   6.1364  17.9357 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  -0.89110    0.76969  -1.158     0.25    
+## poll_average  1.04460    0.03777  27.659   &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 7.93 on 105 degrees of freedom
+## Multiple R-squared:  0.8793, Adjusted R-squared:  0.8782 
+## F-statistic:   765 on 1 and 105 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="section level2">
+<h2>写个函数画出因变量和自变量的关系</h2>
+<p>结果出现了一个令我费解的报错</p>
+<blockquote>
+<p><strong>Error in FUN(X[[i]], …) : object ‘poll_average’ not found</strong></p>
+</blockquote>
+<p>我不断地检查我的拼写，直到我开始怀疑人生</p>
+</div>
+</div>
+<div id="define-aesthetic-mappings-programatically" class="section level1">
+<h1>解决办法：<a href="http://ggplot2.tidyverse.org/reference/aes_.html"><strong>Define aesthetic mappings programatically</strong></a></h1>
+<pre class="r"><code>plot_model &lt;- function(mod, explanatory, response, .fitted = &quot;.fitted&quot;) {
+  augment(mod) %&gt;%
+  ggplot() +
+    geom_point(aes_string(x = explanatory, y = response), color = &quot;#2CA58D&quot;) +
+    geom_line(aes_string(x = explanatory, y = .fitted), color = &quot;#033F63&quot;) +
+    theme_solarized() +
+    theme(axis.title = element_text()) +
+    labs(x = &quot;Poll average&quot;, y = &quot;Election results&quot;)
+}
+
+plot_model(poll_lm, &quot;poll_average&quot;, &quot;election_result&quot;)</code></pre>
+<p><img src="/post/2018-03-18-a-function-for-ggplot2-input-strings-for-aes_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+]]></content>
+  </entry>
   <entry>
     <title type="html"><![CDATA[Hello world]]></title>
     <link href="/2018/03/hello-world/"/>

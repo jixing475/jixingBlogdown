@@ -642,6 +642,25 @@ plot_features(explanation)</code></pre>
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/a-function-for-ggplot2-input-strings-for-aes/">
+                <h3 class="media-heading">A function for ggplot2: input strings for aes()</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">在我写文章画图时经常遇到的一个问题是：ggplot2 坐标轴的输入不支持输入数据框的变量名，通常会报错找不到对象
+🌰：问题描述 data: early senate poll
+library(tidyverse) # general tasks library(broom) # tidy model output library(ggthemes) # style the plots poll_data &lt;- read_csv(&quot;https://raw.githubusercontent.com/fivethirtyeight/data/master/early-senate-polls/early-senate-polls.csv&quot;) glimpse(poll_data) ## Observations: 107 ## Variables: 4 ## $ year &lt;int&gt; 2006, 2006, 2006, 2006, 2006, 2006, 2006... ## $ election_result &lt;int&gt; -39, -10, -9, -16, 40, 10, -2, -41, -31,... ## $ presidential_approval &lt;int&gt; 46, 33, 32, 33, 53, 44, 37, 39, 42, 33, ... ## $ poll_average &lt;int&gt; -28, -10, -1, -15, 39, 14, 2, -22, -27, .</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2018/03/hello-world/">
                 <h3 class="media-heading">Hello world</h3>
               </a>
@@ -718,7 +737,7 @@ plot_features(explanation)</code></pre>
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         4 posts found
+         5 posts found
       </p>
     </div>
   </div>

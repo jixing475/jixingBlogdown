@@ -34,8 +34,6 @@
     <meta name="twitter:title" content="student zero ">
     <meta name="twitter:description" content="exploring and playing with data in R">
     
-      <meta name="twitter:creator" content="@ShirinGlander">
-    
     
 
     
@@ -147,7 +145,7 @@
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/page/about/">
+      <a class="sidebar-button-link " href="/#about">
     
       <i class="sidebar-button-icon fa fa-lg fa-question"></i>
       
@@ -159,16 +157,6 @@
     </ul>
     <ul class="sidebar-buttons">
       
-  <li class="sidebar-button">
-    
-      <a class="sidebar-button-link " href="https://stackoverflow.com/users/6623620/shirin-glander">
-    
-      <i class="sidebar-button-icon fa fa-lg fa-stack-overflow"></i>
-      
-      <span class="sidebar-button-desc">Stack Overflow</span>
-    </a>
-  </li>
-
   <li class="sidebar-button">
     
       <a class="sidebar-button-link " href="https://www.r-bloggers.com/">
@@ -213,16 +201,16 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2017/11/combine_point_boxplot_ggplot/">
-          How to combine point and boxplots in timeline charts with ggplot2 facets
+        <a class="link-unstyled" href="/2018/03/a-function-for-ggplot2-input-strings-for-aes/">
+          A function for ggplot2: input strings for aes()
         </a>
       </h1>
       
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2017-11-18T00:00:00Z">
+      <time itemprop="datePublished" datetime="2018-03-18T00:00:00Z">
         
-  November 18, 2017
+  March 18, 2018
 
       </time>
     
@@ -231,7 +219,7 @@
   
     <span>in</span>
     
-      <a class="category-link" href="/categories/r">R</a>
+      <a class="category-link" href="/categories/datavis-and-dataclean">datavis and dataclean</a>
     
   
 
@@ -240,18 +228,19 @@
 
     </div>
     <div class="postShorten-excerpt" itemprop="articleBody">
-      In a recent project, I was looking to plot data from different variables along the same time axis. The difficulty was, that some of these variables I wanted to have as point plots, while others I wanted as box-plots.
-Because I work with the tidyverse, I wanted to produce these plots with ggplot2. Faceting was the obvious first step but it took me quite a while to figure out how to best combine facets with point plots (where I have one value per time point) with and box-plots (where I have multiple values per time point).
+      在我写文章画图时经常遇到的一个问题是：ggplot2 坐标轴的输入不支持输入数据框的变量名，通常会报错找不到对象
+🌰：问题描述 data: early senate poll
+library(tidyverse) # general tasks library(broom) # tidy model output library(ggthemes) # style the plots poll_data &lt;- read_csv(&quot;https://raw.githubusercontent.com/fivethirtyeight/data/master/early-senate-polls/early-senate-polls.csv&quot;) glimpse(poll_data) ## Observations: 107 ## Variables: 4 ## $ year &lt;int&gt; 2006, 2006, 2006, 2006, 2006, 2006, 2006... ## $ election_result &lt;int&gt; -39, -10, -9, -16, 40, 10, -2, -41, -31,... ## $ presidential_approval &lt;int&gt; 46, 33, 32, 33, 53, 44, 37, 39, 42, 33, ... ## $ poll_average &lt;int&gt; -28, -10, -1, -15, 39, 14, 2, -22, -27, .
       <p>
-        <a href="/2017/11/combine_point_boxplot_ggplot/" class="postShorten-excerpt_link link">Continue reading</a>
+        <a href="/2018/03/a-function-for-ggplot2-input-strings-for-aes/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
     </div>
   </div>
   
-    <a href="/2017/11/combine_point_boxplot_ggplot/">
+    <a href="/2018/03/a-function-for-ggplot2-input-strings-for-aes/">
       <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://shiring.github.io/netlify_images/ggplot_facets_bmudxl.png"/>
+        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/18/5aadb0bc4b1a8.jpg"/>
       </div>
     </a>
   
@@ -322,6 +311,42 @@ Because I work with the tidyverse, I wanted to produce these plots with ggplot2.
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/a-function-for-ggplot2-input-strings-for-aes/">
+                <h3 class="media-heading">A function for ggplot2: input strings for aes()</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">在我写文章画图时经常遇到的一个问题是：ggplot2 坐标轴的输入不支持输入数据框的变量名，通常会报错找不到对象
+🌰：问题描述 data: early senate poll
+library(tidyverse) # general tasks library(broom) # tidy model output library(ggthemes) # style the plots poll_data &lt;- read_csv(&quot;https://raw.githubusercontent.com/fivethirtyeight/data/master/early-senate-polls/early-senate-polls.csv&quot;) glimpse(poll_data) ## Observations: 107 ## Variables: 4 ## $ year &lt;int&gt; 2006, 2006, 2006, 2006, 2006, 2006, 2006... ## $ election_result &lt;int&gt; -39, -10, -9, -16, 40, 10, -2, -41, -31,... ## $ presidential_approval &lt;int&gt; 46, 33, 32, 33, 53, 44, 37, 39, 42, 33, ... ## $ poll_average &lt;int&gt; -28, -10, -1, -15, 39, 14, 2, -22, -27, .</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/hello-world/">
+                <h3 class="media-heading">Hello world</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Just say hello world!</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2018/02/why-should-i-trust-you/">
                 <h3 class="media-heading">Why should I trust you 🤖?</h3>
               </a>
@@ -343,18 +368,15 @@ Because I work with the tidyverse, I wanted to produce these plots with ggplot2.
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2018/02/deep_learning_keras_tensorflow_18_04/">
-                <h3 class="media-heading">April 12th &amp; 13th in Hamburg: Workshop on Deep Learning with Keras and TensorFlow in R</h3>
+              <a class="link-unstyled" href="/2017/07/find-all-my-other-posts-on-my-old-website/">
+                <h3 class="media-heading">Find all my other posts on my old website!</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
-                  Feb 2, 2018
+                  Jul 7, 2017
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">Registration is now open for my 1.5-day workshop on deep learning with Keras and TensorFlow using R.
-It will take place on April 12th and 13th in Hamburg, Germany.
-You can read about one participant’s experience in my last workshop:
- Big Data – a buzz word you can find everywhere these days, from nerdy blogs to scientific research papers and even in the news. But how does Big Data Analysis work, exactly?</div>
+              <div class="media-content hide-xs font-merryweather">For all my other posts, see my old website: shiring.github.io</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -363,152 +385,15 @@ You can read about one participant’s experience in my last workshop:
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2018/02/m3_2018/">
-                <h3 class="media-heading">Announcing my talk about explainability of machine learning models at Minds Mastering Machines conference</h3>
+              <a class="link-unstyled" href="/post/">
+                <h3 class="media-heading">Posts</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
-                  Feb 2, 2018
+                  Mar 3, 2018
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">On Wednesday, April 25th 2018 I am going to talk about explainability of machine learning models at the Minds Mastering Machines conference in Cologne. The conference will be in German, though.
-  ERKLÄRBARKEIT VON MACHINE LEARNING: WIE KÖNNEN WIR VERTRAUEN IN KOMPLEXE MODELLE SCHAFFEN?
-  Mit Machine-Learning getroffene Entscheidungen sind inhärent schwierig – wenn nicht gar unmöglich – nachzuvollziehen. Die Komplexität einiger der besten Modelle, wie Neuronale Netzwerke, ist genau das, was sie so erfolgreich macht.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/02/herr_mies_wills_wissen/">
-                <h3 class="media-heading">I talk about machine learning with Daniel Mies (Podcast in German, though)</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Feb 2, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">For those of you out there who speak German:
-I was interviewed for a tech podcast where I talked about machine learning, neural nets, why I love R and Rstudio and how I became a Data Scientist.
-You can download and listen to the podcast here: https://mies.me/2018/01/31/hmww17-machine-learning-mit-dr-shirin-glander/
-  In der aktuellen Episode gibt Dr. Shirin Glander (Twitter, Homepage) uns ein paar Einblicke in das Thema Machine Learning. Wir klären zunächst, was Machine Learning ist und welche Möglichkeiten es bietet bevor wir etwas mehr in die Tiefe gehen.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/01/jax2018/">
-                <h3 class="media-heading">JAX 2018 talk announcement: Deep Learning - a Primer</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jan 1, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">I am happy to announce that on Tuesday, April 24th 2018 Uwe Friedrichsen and I will give a talk about Deep Learning - a Primer at the JAX conference in Mainz, Germany.
- Deep Learning is one of the “hot” topics in the AI area – a lot of hype, a lot of inflated expectation, but also quite some impressive success stories. As some AI experts already predict that Deep Learning will become “Software 2.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/01/twimlai94/">
-                <h3 class="media-heading">Sketchnotes from TWiML&amp;AI #94: Neuroevolution: Evolving Novel Neural Network Architectures with Kenneth Stanley</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jan 1, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">These are my sketchnotes for Sam Charrington’s podcast This Week in Machine Learning and AI about Neuroevolution: Evolving Novel Neural Network Architectures with Kenneth Stanley:
-Sketchnotes from TWiMLAI talk #94: Neuroevolution: Evolving Novel Neural Network Architectures with Kenneth Stanley
- You can listen to the podcast here.
- Kenneth studied under TWiML Talk #47 guest Risto Miikkulainen at UT Austin, and joined Uber AI Labs after Geometric Intelligence , the company he co-founded with Gary Marcus and others, was acquired in late 2016.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/01/meetup_march18/">
-                <h3 class="media-heading">Join MünsteR for our next meetup on obtaining functional implications of gene expression data with R</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jan 1, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">In our next MünsteR R-user group meetup on March 5th, 2018 Frank Rühle will talk about bioinformatics and how to analyse genome data.
-You can RSVP here: http://meetu.ps/e/DDY1B/w54bW/f
- Next-Generation sequencing and array-based technologies provided a plethora of gene expression data in the public genomics databases. But how to get meaningful information and functional implications out of this vast amount of data? Various R-packages have been published by the Bioconductor user community for distinct kinds of analysis strategies.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/01/twimlai92/">
-                <h3 class="media-heading">Sketchnotes from TWiML&amp;AI #92: Learning State Representations with Yael Niv</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jan 1, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">These are my sketchnotes for Sam Charrington’s podcast This Week in Machine Learning and AI about Learning State Representations with Yael Niv: https://twimlai.com/twiml-talk-92-learning-state-representations-yael-niv/
-Sketchnotes from TWiMLAI talk #92: Learning State Representations with Yael Niv
- You can listen to the podcast here.
- In this interview Yael and I explore the relationship between neuroscience and machine learning. In particular, we discusses the importance of state representations in human learning, some of her experimental results in this area, and how a better understanding of representation learning can lead to insights into machine learning problems such as reinforcement and transfer learning.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/01/plumber/">
-                <h3 class="media-heading">How to make your machine learning model available as an API with the plumber package</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jan 1, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">The plumber package for R makes it easy to expose existing R code as a webservice via an API (https://www.rplumber.io/, Trestle Technology, LLC 2017).
-You take an existing R script and make it accessible with plumber by simply adding a few lines of comments. If you have worked with Roxygen before, e.g. when building a package, you will already be familiar with the core concepts. If not, here are the most important things to know:</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/01/twimlai91/">
-                <h3 class="media-heading">Sketchnotes from TWiML&amp;AI #91: Philosophy of Intelligence with Matthew Crosby</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jan 1, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">These are my sketchnotes for Sam Charrington’s podcast This Week in Machine Learning and AI about Philosophy of Intelligence with Matthew Crosby: https://twimlai.com/twiml-talk-92-learning-state-representations-yael-niv/
-Sketchnotes from TWiMLAI talk #92: Philosophy of Intelligence with Matthew Crosby
- You can listen to the podcast here.
- This week on the podcast we’re featuring a series of conversations from the NIPs conference in Long Beach, California. I attended a bunch of talks and learned a ton, organized an impromptu roundtable on Building AI Products, and met a bunch of great people, including some former TWiML Talk guests.</div>
+              <div class="media-content hide-xs font-merryweather"></div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -521,7 +406,7 @@ Sketchnotes from TWiMLAI talk #92: Philosophy of Intelligence with Matthew Crosb
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         27 posts found
+         5 posts found
       </p>
     </div>
   </div>
