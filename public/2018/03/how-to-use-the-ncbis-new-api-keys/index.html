@@ -20,7 +20,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.32.2 with theme Tranquilpeak 0.4.1-BETA">
-    <title>A function for ggplot2: input strings for aes()</title>
+    <title>HOW TO USE THE NCBI&#39;S NEW API KEYS</title>
     <meta name="author" content="Jixing Liu">
     <meta name="keywords" content=", R">
 
@@ -28,21 +28,15 @@
     
 
     
-    <meta name="description" content="在我写文章画图时经常遇到的一个问题是：ggplot2 坐标轴的输入不支持输入数据框的变量名，通常会报错找不到对象
-🌰：问题描述 data: early senate poll
-library(tidyverse) # general tasks library(broom) # tidy model output library(ggthemes) # style the plots poll_data &lt;- read_csv(&quot;https://raw.githubusercontent.com/fivethirtyeight/data/master/early-senate-polls/early-senate-polls.csv&quot;) glimpse(poll_data) ## Observations: 107 ## Variables: 4 ## $ year &lt;int&gt; 2006, 2006, 2006, 2006, 2006, 2006, 2006... ## $ election_result &lt;int&gt; -39, -10, -9, -16, 40, 10, -2, -41, -31,... ## $ presidential_approval &lt;int&gt; 46, 33, 32, 33, 53, 44, 37, 39, 42, 33, ... ## $ poll_average &lt;int&gt; -28, -10, -1, -15, 39, 14, 2, -22, -27, .">
-    <meta property="og:description" content="在我写文章画图时经常遇到的一个问题是：ggplot2 坐标轴的输入不支持输入数据框的变量名，通常会报错找不到对象
-🌰：问题描述 data: early senate poll
-library(tidyverse) # general tasks library(broom) # tidy model output library(ggthemes) # style the plots poll_data &lt;- read_csv(&quot;https://raw.githubusercontent.com/fivethirtyeight/data/master/early-senate-polls/early-senate-polls.csv&quot;) glimpse(poll_data) ## Observations: 107 ## Variables: 4 ## $ year &lt;int&gt; 2006, 2006, 2006, 2006, 2006, 2006, 2006... ## $ election_result &lt;int&gt; -39, -10, -9, -16, 40, 10, -2, -41, -31,... ## $ presidential_approval &lt;int&gt; 46, 33, 32, 33, 53, 44, 37, 39, 42, 33, ... ## $ poll_average &lt;int&gt; -28, -10, -1, -15, 39, 14, 2, -22, -27, .">
+    <meta name="description" content="The NCBI is one of the most important sources of biological data. The centre provides access to information on 28 million scholarly articles through PubMed and 250 million DNA sequences through GenBank. More importantly, records in the [50 public databases] (https://www.ncbi.nlm.nih.gov/guide/all/#databases) maintained by the NCBI are strongly cross-referenced. As a result, it is possible to pinpoint searches using almost 2 million taxonomic names or a controlled vocabulary with 270,000 terms.">
+    <meta property="og:description" content="The NCBI is one of the most important sources of biological data. The centre provides access to information on 28 million scholarly articles through PubMed and 250 million DNA sequences through GenBank. More importantly, records in the [50 public databases] (https://www.ncbi.nlm.nih.gov/guide/all/#databases) maintained by the NCBI are strongly cross-referenced. As a result, it is possible to pinpoint searches using almost 2 million taxonomic names or a controlled vocabulary with 270,000 terms.">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="A function for ggplot2: input strings for aes()">
-    <meta property="og:url" content="/2018/03/a-function-for-ggplot2-input-strings-for-aes/">
+    <meta property="og:title" content="HOW TO USE THE NCBI&#39;S NEW API KEYS">
+    <meta property="og:url" content="/2018/03/how-to-use-the-ncbis-new-api-keys/">
     <meta property="og:site_name" content="student zero ">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="student zero ">
-    <meta name="twitter:description" content="在我写文章画图时经常遇到的一个问题是：ggplot2 坐标轴的输入不支持输入数据框的变量名，通常会报错找不到对象
-🌰：问题描述 data: early senate poll
-library(tidyverse) # general tasks library(broom) # tidy model output library(ggthemes) # style the plots poll_data &lt;- read_csv(&quot;https://raw.githubusercontent.com/fivethirtyeight/data/master/early-senate-polls/early-senate-polls.csv&quot;) glimpse(poll_data) ## Observations: 107 ## Variables: 4 ## $ year &lt;int&gt; 2006, 2006, 2006, 2006, 2006, 2006, 2006... ## $ election_result &lt;int&gt; -39, -10, -9, -16, 40, 10, -2, -41, -31,... ## $ presidential_approval &lt;int&gt; 46, 33, 32, 33, 53, 44, 37, 39, 42, 33, ... ## $ poll_average &lt;int&gt; -28, -10, -1, -15, 39, 14, 2, -22, -27, .">
+    <meta name="twitter:description" content="The NCBI is one of the most important sources of biological data. The centre provides access to information on 28 million scholarly articles through PubMed and 250 million DNA sequences through GenBank. More importantly, records in the [50 public databases] (https://www.ncbi.nlm.nih.gov/guide/all/#databases) maintained by the NCBI are strongly cross-referenced. As a result, it is possible to pinpoint searches using almost 2 million taxonomic names or a controlled vocabulary with 270,000 terms.">
     
     
 
@@ -54,7 +48,7 @@ library(tidyverse) # general tasks library(broom) # tidy model output library(gg
     
 
     
-      <meta property="og:image" content="https://i.loli.net/2018/03/18/5aadb0bc4b1a8.jpg">
+      <meta property="og:image" content="https://i.loli.net/2018/03/21/5ab1c0c655826.jpg">
     
     
     
@@ -103,7 +97,7 @@ library(tidyverse) # general tasks library(broom) # tidy model output library(gg
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <h1 class="sidebar-profile-title">A function for ggplot2: input strings for aes()</h1>
+        <h1 class="sidebar-profile-title">HOW TO USE THE NCBI&#39;S NEW API KEYS</h1>
         <a href="/#about">
           <img class="sidebar-profile-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
         </a>
@@ -200,15 +194,15 @@ library(tidyverse) # general tasks library(broom) # tidy model output library(gg
             <div class="post-header main-content-wrap text-center">
   
     <h1 class="post-title" itemprop="headline">
-      A function for ggplot2: input strings for aes()
+      HOW TO USE THE NCBI&#39;S NEW API KEYS
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-03-18T00:00:00Z">
+      <time itemprop="datePublished" datetime="2018-03-19T00:00:00Z">
         
-  March 18, 2018
+  March 19, 2018
 
       </time>
     
@@ -217,7 +211,7 @@ library(tidyverse) # general tasks library(broom) # tidy model output library(gg
   
     <span>in</span>
     
-      <a class="category-link" href="/categories/datavis-and-dataclean">datavis and dataclean</a>
+      <a class="category-link" href="/categories/computers">computers</a>
     
   
 
@@ -228,72 +222,55 @@ library(tidyverse) # general tasks library(broom) # tidy model output library(gg
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>在我写文章画图时经常遇到的一个问题是：ggplot2 坐标轴的输入不支持输入数据框的变量名，通常会报错找不到对象</p>
-<div class="section level1">
-<h1>🌰：问题描述</h1>
-<p>data: <a href="https://github.com/fivethirtyeight/data/tree/master/early-senate-polls">early senate poll</a></p>
-<pre class="r"><code>library(tidyverse) # general tasks
-library(broom) # tidy model output
-library(ggthemes) # style the plots
+              <p><a href="https://www.ncbi.nlm.nih.gov/">The NCBI</a> is one of the most important sources of biological data. The centre provides access to information on 28 million scholarly articles through PubMed and 250 million DNA sequences through GenBank. More importantly, records in the [50 public databases] (<a href="https://www.ncbi.nlm.nih.gov/guide/all/#databases" class="uri">https://www.ncbi.nlm.nih.gov/guide/all/#databases</a>) maintained by the NCBI are strongly cross-referenced. As a result, it is possible to pinpoint searches using almost 2 million taxonomic names or a <a href="https://www.nlm.nih.gov/mesh/">controlled vocabulary with 270,000 terms</a>.</p>
+<p><strong>Rentrez has been designed to make it easy to search for and download NCBI records and download them from within an R session.</strong></p>
+<p>I though it might be fun to use this post to find out where papers describing R packages are published these days</p>
+<p>Here we use the <code>entrez_search</code> and <code>entrez_summary</code> functions to get some information on all of the papers published in 2017 with the term ‘R package’ in their title:</p>
+<pre class="r"><code>if (!require(&quot;rentrez&quot;)) install.packages(&quot;rentrez&quot;)
+library(rentrez)
 
-poll_data &lt;- read_csv(&quot;https://raw.githubusercontent.com/fivethirtyeight/data/master/early-senate-polls/early-senate-polls.csv&quot;)
-
-glimpse(poll_data)</code></pre>
-<pre><code>## Observations: 107
-## Variables: 4
-## $ year                  &lt;int&gt; 2006, 2006, 2006, 2006, 2006, 2006, 2006...
-## $ election_result       &lt;int&gt; -39, -10, -9, -16, 40, 10, -2, -41, -31,...
-## $ presidential_approval &lt;int&gt; 46, 33, 32, 33, 53, 44, 37, 39, 42, 33, ...
-## $ poll_average          &lt;int&gt; -28, -10, -1, -15, 39, 14, 2, -22, -27, ...</code></pre>
-<p>background: <strong>there is a strong correlation between polling numbers and the ultimate result of an election</strong></p>
-<div id="-" class="section level2">
-<h2>构建模型： 线性模型</h2>
-<pre class="r"><code>poll_lm &lt;- lm(election_result ~ poll_average, data = poll_data)
-
-summary(poll_lm)</code></pre>
-<pre><code>## 
-## Call:
-## lm(formula = election_result ~ poll_average, data = poll_data)
+pkg_search &lt;- entrez_search(db=&quot;pubmed&quot;, 
+                            term=&quot;(R Package[TITLE]) AND (2018[PDAT])&quot;, 
+                            use_history=TRUE)
+pkg_summs &lt;- entrez_summary(db=&quot;pubmed&quot;, web_history=pkg_search$web_history)
+pkg_summs</code></pre>
+<pre><code>## List of  31 esummary records. First record:
 ## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -29.4281  -5.0197   0.5601   6.1364  17.9357 
-## 
-## Coefficients:
-##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  -0.89110    0.76969  -1.158     0.25    
-## poll_average  1.04460    0.03777  27.659   &lt;2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 7.93 on 105 degrees of freedom
-## Multiple R-squared:  0.8793, Adjusted R-squared:  0.8782 
-## F-statistic:   765 on 1 and 105 DF,  p-value: &lt; 2.2e-16</code></pre>
-</div>
-<div class="section level2">
-<h2>写个函数画出因变量和自变量的关系</h2>
-<p>结果出现了一个令我费解的报错</p>
-<blockquote>
-<p><strong>Error in FUN(X[[i]], …) : object ‘poll_average’ not found</strong></p>
-</blockquote>
-<p>我不断地检查我的拼写，直到我开始怀疑人生</p>
-</div>
-</div>
-<div id="define-aesthetic-mappings-programatically" class="section level1">
-<h1>解决办法：<a href="http://ggplot2.tidyverse.org/reference/aes_.html"><strong>Define aesthetic mappings programatically</strong></a></h1>
-<pre class="r"><code>plot_model &lt;- function(mod, explanatory, response, .fitted = &quot;.fitted&quot;) {
-  augment(mod) %&gt;%
-  ggplot() +
-    geom_point(aes_string(x = explanatory, y = response), color = &quot;#2CA58D&quot;) +
-    geom_line(aes_string(x = explanatory, y = .fitted), color = &quot;#033F63&quot;) +
-    theme_solarized() +
-    theme(axis.title = element_text()) +
-    labs(x = &quot;Poll average&quot;, y = &quot;Election results&quot;)
-}
+##  $`29554216`
+## esummary result with 42 items:
+##  [1] uid               pubdate           epubdate         
+##  [4] source            authors           lastauthor       
+##  [7] title             sorttitle         volume           
+## [10] issue             pages             lang             
+## [13] nlmuniqueid       issn              essn             
+## [16] pubtype           recordstatus      pubstatus        
+## [19] articleids        history           references       
+## [22] attributes        pmcrefcount       fulljournalname  
+## [25] elocationid       doctype           srccontriblist   
+## [28] booktitle         medium            edition          
+## [31] publisherlocation publishername     srcdate          
+## [34] reportnumber      availablefromurl  locationlabel    
+## [37] doccontriblist    docdate           bookname         
+## [40] chapter           sortpubdate       sortfirstauthor</code></pre>
+<p>we are interested in the journals in which these papers appear. We can use the helper function <code>extract_from_esummary</code> to isolate the <em>source</em> of each paper, then use <code>table</code> to count up the frequency of each journal.</p>
+<pre class="r"><code>library(ggplot2)
+library(ggpomological)
+#scales::show_col(ggpomological:::pomological_palette)
 
-plot_model(poll_lm, &quot;poll_average&quot;, &quot;election_result&quot;)</code></pre>
-<p><img src="/post/2018-03-18-a-function-for-ggplot2-input-strings-for-aes_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-</div>
+journals &lt;- extract_from_esummary(pkg_summs, &quot;source&quot;)
+journal_freq &lt;- as.data.frame(table(journals, dnn=&quot;journal&quot;), responseName=&quot;n.papers&quot;)
+pkg_journal &lt;- ggplot(journal_freq, aes(reorder(journal, n.papers), n.papers)) + 
+    geom_point(size=2) + 
+    coord_flip() + 
+    scale_y_continuous(&quot;Number of papers&quot;) +
+    scale_x_discrete(&quot;Journal&quot;) +
+    theme_bw() +
+    ggtitle(&quot;Venues for papers describing R Packages in 2018&quot;)
+
+pkg_journal + ggpomological::theme_pomological()</code></pre>
+<p><img src="/post/2018-03-19-how_to_use_NCBI_API_keys_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>So, it looks like <em>Bioinformatics</em>, <em>Plos One</em> and <em>Comput Methods Progams Biomed</em> Resources are popular destinations for papers describing R packages, but these appear in journals all the way across the biological sciences.</p>
+<p>The NCBI now gives users the opportunity to <a href="https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/">register for an access key</a> that will allow them to make up to 10 requests per second (non-registered users are limited to 3 requests per second per IP address).For one-off cases, this is as simple as adding the api_key argument to a given function call.</p>
 
               
             </div>
@@ -306,7 +283,7 @@ plot_model(poll_lm, &quot;poll_average&quot;, &quot;election_result&quot;)</code
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="//tags/ggplot2/">ggplot2</a>
+  <a class="tag tag--primary tag--small" href="//tags/web/">web</a>
 
                   </div>
                 
@@ -318,7 +295,7 @@ plot_model(poll_lm, &quot;poll_average&quot;, &quot;election_result&quot;)</code
         <ul class="post-actions post-action-nav">
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/how-to-use-the-ncbis-new-api-keys/" data-tooltip="HOW TO USE THE NCBI&#39;S NEW API KEYS">
+                <a class="post-action-btn btn btn--disabled">
               
                 <i class="fa fa-angle-left"></i>
                 <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -326,7 +303,7 @@ plot_model(poll_lm, &quot;poll_average&quot;, &quot;election_result&quot;)</code
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/hello-world/" data-tooltip="Hello world">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/a-function-for-ggplot2-input-strings-for-aes/" data-tooltip="A function for ggplot2: input strings for aes()">
               
                 <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                 <i class="fa fa-angle-right"></i>
@@ -343,19 +320,19 @@ plot_model(poll_lm, &quot;poll_average&quot;, &quot;election_result&quot;)</code
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/03/a-function-for-ggplot2-input-strings-for-aes/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/03/how-to-use-the-ncbis-new-api-keys/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/a-function-for-ggplot2-input-strings-for-aes/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/how-to-use-the-ncbis-new-api-keys/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/a-function-for-ggplot2-input-strings-for-aes/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/how-to-use-the-ncbis-new-api-keys/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -402,7 +379,7 @@ plot_model(poll_lm, &quot;poll_average&quot;, &quot;election_result&quot;)</code
         <ul class="post-actions post-action-nav">
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/how-to-use-the-ncbis-new-api-keys/" data-tooltip="HOW TO USE THE NCBI&#39;S NEW API KEYS">
+                <a class="post-action-btn btn btn--disabled">
               
                 <i class="fa fa-angle-left"></i>
                 <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -410,7 +387,7 @@ plot_model(poll_lm, &quot;poll_average&quot;, &quot;election_result&quot;)</code
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/hello-world/" data-tooltip="Hello world">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/a-function-for-ggplot2-input-strings-for-aes/" data-tooltip="A function for ggplot2: input strings for aes()">
               
                 <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                 <i class="fa fa-angle-right"></i>
@@ -427,19 +404,19 @@ plot_model(poll_lm, &quot;poll_average&quot;, &quot;election_result&quot;)</code
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/03/a-function-for-ggplot2-input-strings-for-aes/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/03/how-to-use-the-ncbis-new-api-keys/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/a-function-for-ggplot2-input-strings-for-aes/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/how-to-use-the-ncbis-new-api-keys/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/a-function-for-ggplot2-input-strings-for-aes/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/how-to-use-the-ncbis-new-api-keys/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -469,19 +446,19 @@ plot_model(poll_lm, &quot;poll_average&quot;, &quot;election_result&quot;)</code
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F03%2Fa-function-for-ggplot2-input-strings-for-aes%2F">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F03%2Fhow-to-use-the-ncbis-new-api-keys%2F">
           <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F03%2Fa-function-for-ggplot2-input-strings-for-aes%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F03%2Fhow-to-use-the-ncbis-new-api-keys%2F">
           <i class="fa fa-twitter"></i><span>Share on Twitter</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F03%2Fa-function-for-ggplot2-input-strings-for-aes%2F">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F03%2Fhow-to-use-the-ncbis-new-api-keys%2F">
           <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
         </a>
       </li>
@@ -692,9 +669,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = '\/2018\/03\/a-function-for-ggplot2-input-strings-for-aes\/';
+          this.page.url = '\/2018\/03\/how-to-use-the-ncbis-new-api-keys\/';
           
-            this.page.identifier = '\/2018\/03\/a-function-for-ggplot2-input-strings-for-aes\/'
+            this.page.identifier = '\/2018\/03\/how-to-use-the-ncbis-new-api-keys\/'
           
         };
         (function() {

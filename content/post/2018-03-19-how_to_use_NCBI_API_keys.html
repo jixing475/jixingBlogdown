@@ -1,0 +1,66 @@
+---
+title: HOW TO USE THE NCBI'S NEW API KEYS
+author: ZERO
+date: '2018-03-19'
+slug: ''
+categories:
+  - computers
+tags:
+  - web
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/03/21/5ab1c0c655826.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+
+
+<p><a href="https://www.ncbi.nlm.nih.gov/">The NCBI</a> is one of the most important sources of biological data. The centre provides access to information on 28 million scholarly articles through PubMed and 250 million DNA sequences through GenBank. More importantly, records in the [50 public databases] (<a href="https://www.ncbi.nlm.nih.gov/guide/all/#databases" class="uri">https://www.ncbi.nlm.nih.gov/guide/all/#databases</a>) maintained by the NCBI are strongly cross-referenced. As a result, it is possible to pinpoint searches using almost 2 million taxonomic names or a <a href="https://www.nlm.nih.gov/mesh/">controlled vocabulary with 270,000 terms</a>.</p>
+<p><strong>Rentrez has been designed to make it easy to search for and download NCBI records and download them from within an R session.</strong></p>
+<p>I though it might be fun to use this post to find out where papers describing R packages are published these days</p>
+<p>Here we use the <code>entrez_search</code> and <code>entrez_summary</code> functions to get some information on all of the papers published in 2017 with the term ‘R package’ in their title:</p>
+<pre class="r"><code>if (!require(&quot;rentrez&quot;)) install.packages(&quot;rentrez&quot;)
+library(rentrez)
+
+pkg_search &lt;- entrez_search(db=&quot;pubmed&quot;, 
+                            term=&quot;(R Package[TITLE]) AND (2018[PDAT])&quot;, 
+                            use_history=TRUE)
+pkg_summs &lt;- entrez_summary(db=&quot;pubmed&quot;, web_history=pkg_search$web_history)
+pkg_summs</code></pre>
+<pre><code>## List of  31 esummary records. First record:
+## 
+##  $`29554216`
+## esummary result with 42 items:
+##  [1] uid               pubdate           epubdate         
+##  [4] source            authors           lastauthor       
+##  [7] title             sorttitle         volume           
+## [10] issue             pages             lang             
+## [13] nlmuniqueid       issn              essn             
+## [16] pubtype           recordstatus      pubstatus        
+## [19] articleids        history           references       
+## [22] attributes        pmcrefcount       fulljournalname  
+## [25] elocationid       doctype           srccontriblist   
+## [28] booktitle         medium            edition          
+## [31] publisherlocation publishername     srcdate          
+## [34] reportnumber      availablefromurl  locationlabel    
+## [37] doccontriblist    docdate           bookname         
+## [40] chapter           sortpubdate       sortfirstauthor</code></pre>
+<p>we are interested in the journals in which these papers appear. We can use the helper function <code>extract_from_esummary</code> to isolate the <em>source</em> of each paper, then use <code>table</code> to count up the frequency of each journal.</p>
+<pre class="r"><code>library(ggplot2)
+library(ggpomological)
+#scales::show_col(ggpomological:::pomological_palette)
+
+journals &lt;- extract_from_esummary(pkg_summs, &quot;source&quot;)
+journal_freq &lt;- as.data.frame(table(journals, dnn=&quot;journal&quot;), responseName=&quot;n.papers&quot;)
+pkg_journal &lt;- ggplot(journal_freq, aes(reorder(journal, n.papers), n.papers)) + 
+    geom_point(size=2) + 
+    coord_flip() + 
+    scale_y_continuous(&quot;Number of papers&quot;) +
+    scale_x_discrete(&quot;Journal&quot;) +
+    theme_bw() +
+    ggtitle(&quot;Venues for papers describing R Packages in 2018&quot;)
+
+pkg_journal + ggpomological::theme_pomological()</code></pre>
+<p><img src="/post/2018-03-19-how_to_use_NCBI_API_keys_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>So, it looks like <em>Bioinformatics</em>, <em>Plos One</em> and <em>Comput Methods Progams Biomed</em> Resources are popular destinations for papers describing R packages, but these appear in journals all the way across the biological sciences.</p>
+<p>The NCBI now gives users the opportunity to <a href="https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/">register for an access key</a> that will allow them to make up to 10 requests per second (non-registered users are limited to 3 requests per second per IP address).For one-off cases, this is as simple as adding the api_key argument to a given function call.</p>

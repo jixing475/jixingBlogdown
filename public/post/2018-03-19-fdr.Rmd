@@ -1,0 +1,25 @@
+---
+title: how to use the NCBI's new API keys
+author: ZERO
+date: '2018-03-19'
+slug: ''
+categories:
+  - computers
+tags:
+  - web
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/02/11/5a7fa56fd7333.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE
+)
+```
+
+
+

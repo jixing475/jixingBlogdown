@@ -1,0 +1,68 @@
+---
+title: HOW TO USE THE NCBI'S NEW API KEYS
+author: ZERO
+date: '2018-03-19'
+slug: ''
+categories:
+  - computers
+tags:
+  - web
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/03/21/5ab1c0c655826.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE
+)
+```
+
+[The NCBI](https://www.ncbi.nlm.nih.gov/) is one of the most important sources of biological data. The centre provides access to information on 28 million scholarly articles through PubMed and 250 million DNA sequences through GenBank. More importantly, records in the [50 public databases] (https://www.ncbi.nlm.nih.gov/guide/all/#databases) maintained by the NCBI are strongly cross-referenced. As a result, it is possible to pinpoint searches using almost 2 million taxonomic names or a [controlled vocabulary with 270,000 terms](https://www.nlm.nih.gov/mesh/).
+
+
+**Rentrez has been designed to make it easy to search for and download NCBI records and download them from within an R session.**
+
+I though it might be fun to use this post to find out where papers describing R packages are published these days
+
+
+Here we use the `entrez_search` and `entrez_summary` functions to get some information on all of the papers published in 2017 with the term ‘R package’ in their title:
+```{r}
+if (!require("rentrez")) install.packages("rentrez")
+library(rentrez)
+
+pkg_search <- entrez_search(db="pubmed", 
+                            term="(R Package[TITLE]) AND (2018[PDAT])", 
+                            use_history=TRUE)
+pkg_summs <- entrez_summary(db="pubmed", web_history=pkg_search$web_history)
+pkg_summs
+```
+
+we are interested in the journals in which these papers appear. We can use the helper function `extract_from_esummary` to isolate the *source* of each paper, then use `table` to count up the frequency of each journal.
+```{r}
+library(ggplot2)
+library(ggpomological)
+#scales::show_col(ggpomological:::pomological_palette)
+
+journals <- extract_from_esummary(pkg_summs, "source")
+journal_freq <- as.data.frame(table(journals, dnn="journal"), responseName="n.papers")
+pkg_journal <- ggplot(journal_freq, aes(reorder(journal, n.papers), n.papers)) + 
+    geom_point(size=2) + 
+    coord_flip() + 
+    scale_y_continuous("Number of papers") +
+    scale_x_discrete("Journal") +
+    theme_bw() +
+    ggtitle("Venues for papers describing R Packages in 2018")
+
+pkg_journal + ggpomological::theme_pomological()
+```
+
+So, it looks like *Bioinformatics*, *Plos One* and *Comput Methods Progams Biomed* Resources are popular destinations for papers describing R packages, but these appear in journals all the way across the biological sciences.
+
+
+The NCBI now gives users the opportunity to [register for an access key](https://ncbiinsights.ncbi.nlm.nih.gov/2017/11/02/new-api-keys-for-the-e-utilities/) that will allow them to make up to 10 requests per second (non-registered users are limited to 3 requests per second per IP address).For one-off cases, this is as simple as adding the api_key argument to a given function call.
+
+
