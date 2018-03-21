@@ -1,0 +1,24 @@
+---
+title: Machine Learning in R 1：introdution
+author: ZERO
+date: '2018-03-21'
+slug: machine-learning-in-r-introdution
+categories:
+  - machine learning
+tags:
+  - caret
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/03/21/5ab1cca60f6fc.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+
+
+<p>Caret Package是一个用于在R中构建机器学习模型的综合框架。在此博文中，我会解释 caret 包的几乎所有核心功能，并引导完成构建预测模型的分步过程。</p>
+<p>Caret 是 Classification And REgression Training 的简称。</p>
+<p>Caret 包很好地让所有与机器学习模型开发相关的步骤集成到一个简化的工作流程中，几乎每个主流的ML算法都可以在R中实现。</p>
+<p>由于R具有如此多的机器学习算法实现包，因此选则在哪个包中实现某种算法是非常头疼的问题。多数时候，实现算法的语法和方法在不同包中有所不同。 结合数据预处理，查阅超参数的帮助页面（定义算法如何学习的参数）并努力寻找最佳模型，可以使构建预测模型成为一项相关任务。</p>
+<p>在本教程后面的部分，我将介绍如何查看所有caret 支持的ML算法（这是一个很长的列表）以及可以调整哪些超参数。</p>
+<p>此外，我们不会止步于 caret 包，我们将看看如何巧妙地集成来自多个最佳模型的预测，并可能使用 <code>caretEnsemble</code> 来产生更好的预测。</p>
+<p>这个教程总共包括5部分，分别是： 1. 数据准备和清理 2. 可视化重要变量 3. 特征选择 4. 训练模型和调节模型 5. 预测</p>

@@ -32,7 +32,7 @@ canonifyurls = true
 
 [author]
   name = "Jixing Liu"
-  bio = "Biologist turned Bioinformatician turned Data Scientist"
+  bio = "Clinical Doctor turned Bioinformatician turned Data Scientist"
   job = "Data Scientist"
   location = "China"
   # Your Gravatar email. Overwrite `author.picture` everywhere in the blog
@@ -41,7 +41,7 @@ canonifyurls = true
   # Overwritten by your gravatar image if `author.gravatarEmail` is filled
   picture = "https://i.loli.net/2018/02/26/5a937bb148b02.jpg"
   # Your Twitter username without the @. E.g : thibaudlepretre
-  #twitter = "ShirinGlander"
+  twitter = "studentZero475"
   # Your google plus profile id. E.g : +ThibaudLepretre or 114625208755123718311
   # googlePlus = "+ThibaudLepretre"
 
@@ -102,12 +102,12 @@ canonifyurls = true
 #  name = "Stack Overflow"
 #  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-stack-overflow\"></i>"
 #  url = "https://stackoverflow.com/users/6623620/shirin-glander"
-#[[menu.links]]
-#  weight = 5
-#  identifier = "twitter"
-#  name = "Twitter"
-#  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-twitter\"></i>"
-#  url = "https://twitter.com/ShirinGlander"
+[[menu.links]]
+  weight = 5
+  identifier = "twitter"
+  name = "Twitter"
+  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-twitter\"></i>"
+  url = "https://twitter.com/studentZero475"
 #[[menu.links]]
 #  weight = 5
 #  identifier = "linkedin"
