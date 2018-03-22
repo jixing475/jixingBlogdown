@@ -1,0 +1,44 @@
+---
+title: 'machine learning 2: load dataset'
+author: ZERO
+date: '2018-03-22'
+slug: machine-learning-2-load-dataset
+categories:
+  - machine learning
+tags:
+  - caret
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/02/11/5a7fa56fd7333.jpg
+metaAlignment: center
+coverMeta: out
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE
+)
+```
+
+#Load the package and dataset
+我们将使用 ISLR 包中的 [Orange Juice Data]('https://raw.githubusercontent.com/selva86/datasets/master/orange_juice_withmissing.csv').
+
+目标： 预测顾客会购买哪两种🍊汁
+
+数据集不是很大，我们的重点是构建模型的过程，而非真正搭建一个有用的模型。
+
+👌，let'go.
+```{r}
+# Load the caret package
+library(caret)
+
+# Import dataset
+orange <- read.csv('../../data/orange_juice_withmissing.csv')
+
+# Structure of the dataframe
+str(orange)
+
+# See top 6 rows and 10 columns
+head(orange[, 1:10])
+```
+
