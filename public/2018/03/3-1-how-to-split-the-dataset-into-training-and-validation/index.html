@@ -20,7 +20,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.32.2 with theme Tranquilpeak 0.4.1-BETA">
-    <title>A function for ggplot2: input strings for aes()</title>
+    <title>3.1 How to split the dataset into training and validation?</title>
     <meta name="author" content="Jixing Liu">
     <meta name="keywords" content=", R">
 
@@ -28,21 +28,24 @@
     
 
     
-    <meta name="description" content="在我写文章画图时经常遇到的一个问题是：ggplot2 坐标轴的输入不支持输入数据框的变量名，通常会报错找不到对象
-🌰：问题描述 data: early senate poll
-library(tidyverse) # general tasks library(broom) # tidy model output library(ggthemes) # style the plots poll_data &lt;- read_csv(&quot;https://raw.githubusercontent.com/fivethirtyeight/data/master/early-senate-polls/early-senate-polls.csv&quot;) glimpse(poll_data) ## Observations: 107 ## Variables: 4 ## $ year &lt;int&gt; 2006, 2006, 2006, 2006, 2006, 2006, 2006... ## $ election_result &lt;int&gt; -39, -10, -9, -16, 40, 10, -2, -41, -31,... ## $ presidential_approval &lt;int&gt; 46, 33, 32, 33, 53, 44, 37, 39, 42, 33, ... ## $ poll_average &lt;int&gt; -28, -10, -1, -15, 39, 14, 2, -22, -27, .">
-    <meta property="og:description" content="在我写文章画图时经常遇到的一个问题是：ggplot2 坐标轴的输入不支持输入数据框的变量名，通常会报错找不到对象
-🌰：问题描述 data: early senate poll
-library(tidyverse) # general tasks library(broom) # tidy model output library(ggthemes) # style the plots poll_data &lt;- read_csv(&quot;https://raw.githubusercontent.com/fivethirtyeight/data/master/early-senate-polls/early-senate-polls.csv&quot;) glimpse(poll_data) ## Observations: 107 ## Variables: 4 ## $ year &lt;int&gt; 2006, 2006, 2006, 2006, 2006, 2006, 2006... ## $ election_result &lt;int&gt; -39, -10, -9, -16, 40, 10, -2, -41, -31,... ## $ presidential_approval &lt;int&gt; 46, 33, 32, 33, 53, 44, 37, 39, 42, 33, ... ## $ poll_average &lt;int&gt; -28, -10, -1, -15, 39, 14, 2, -22, -27, .">
+    <meta name="description" content="数据准备好了之后的第一步就是拆分数据集为训练数据和测试数据，一般是 8:2 的比例。
+为什么拆分数据呢？
+当我们在构建一个机器学习模型上时，真正的目的是为了预测真是世界的数据，而机器学习模型是依靠算法学习训练数据学习Y 与 X 的关系，这种的关系的学习好坏的评判是要依靠没有参与学习模型的数据与预测数据之间的差距来评判的。
+# Load the caret package library(caret) # Import dataset orange &lt;- read.csv(&#39;../../data/orange_juice_withmissing.csv&#39;) # Create the training and test datasets set.seed(100) # Step 1: Get row numbers for the training data trainRowNumbers &lt;- createDataPartition(orange$Purchase, p=0.8, list=FALSE) # Step 2: Create the training dataset trainData &lt;- orange[trainRowNumbers,] # Step 3: Create the test dataset testData &lt;- orange[-trainRowNumbers,] # Store X and Y for later use.">
+    <meta property="og:description" content="数据准备好了之后的第一步就是拆分数据集为训练数据和测试数据，一般是 8:2 的比例。
+为什么拆分数据呢？
+当我们在构建一个机器学习模型上时，真正的目的是为了预测真是世界的数据，而机器学习模型是依靠算法学习训练数据学习Y 与 X 的关系，这种的关系的学习好坏的评判是要依靠没有参与学习模型的数据与预测数据之间的差距来评判的。
+# Load the caret package library(caret) # Import dataset orange &lt;- read.csv(&#39;../../data/orange_juice_withmissing.csv&#39;) # Create the training and test datasets set.seed(100) # Step 1: Get row numbers for the training data trainRowNumbers &lt;- createDataPartition(orange$Purchase, p=0.8, list=FALSE) # Step 2: Create the training dataset trainData &lt;- orange[trainRowNumbers,] # Step 3: Create the test dataset testData &lt;- orange[-trainRowNumbers,] # Store X and Y for later use.">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="A function for ggplot2: input strings for aes()">
-    <meta property="og:url" content="/2018/03/a-function-for-ggplot2-input-strings-for-aes/">
+    <meta property="og:title" content="3.1 How to split the dataset into training and validation?">
+    <meta property="og:url" content="/2018/03/3-1-how-to-split-the-dataset-into-training-and-validation/">
     <meta property="og:site_name" content="student zero ">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="student zero ">
-    <meta name="twitter:description" content="在我写文章画图时经常遇到的一个问题是：ggplot2 坐标轴的输入不支持输入数据框的变量名，通常会报错找不到对象
-🌰：问题描述 data: early senate poll
-library(tidyverse) # general tasks library(broom) # tidy model output library(ggthemes) # style the plots poll_data &lt;- read_csv(&quot;https://raw.githubusercontent.com/fivethirtyeight/data/master/early-senate-polls/early-senate-polls.csv&quot;) glimpse(poll_data) ## Observations: 107 ## Variables: 4 ## $ year &lt;int&gt; 2006, 2006, 2006, 2006, 2006, 2006, 2006... ## $ election_result &lt;int&gt; -39, -10, -9, -16, 40, 10, -2, -41, -31,... ## $ presidential_approval &lt;int&gt; 46, 33, 32, 33, 53, 44, 37, 39, 42, 33, ... ## $ poll_average &lt;int&gt; -28, -10, -1, -15, 39, 14, 2, -22, -27, .">
+    <meta name="twitter:description" content="数据准备好了之后的第一步就是拆分数据集为训练数据和测试数据，一般是 8:2 的比例。
+为什么拆分数据呢？
+当我们在构建一个机器学习模型上时，真正的目的是为了预测真是世界的数据，而机器学习模型是依靠算法学习训练数据学习Y 与 X 的关系，这种的关系的学习好坏的评判是要依靠没有参与学习模型的数据与预测数据之间的差距来评判的。
+# Load the caret package library(caret) # Import dataset orange &lt;- read.csv(&#39;../../data/orange_juice_withmissing.csv&#39;) # Create the training and test datasets set.seed(100) # Step 1: Get row numbers for the training data trainRowNumbers &lt;- createDataPartition(orange$Purchase, p=0.8, list=FALSE) # Step 2: Create the training dataset trainData &lt;- orange[trainRowNumbers,] # Step 3: Create the test dataset testData &lt;- orange[-trainRowNumbers,] # Store X and Y for later use.">
     
       <meta name="twitter:creator" content="@studentZero475">
     
@@ -56,7 +59,7 @@ library(tidyverse) # general tasks library(broom) # tidy model output library(gg
     
 
     
-      <meta property="og:image" content="https://i.loli.net/2018/03/18/5aadb0bc4b1a8.jpg">
+      <meta property="og:image" content="https://i.loli.net/2018/03/23/5ab44d129ce08.jpg">
     
     
     
@@ -105,7 +108,7 @@ library(tidyverse) # general tasks library(broom) # tidy model output library(gg
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <h1 class="sidebar-profile-title">A function for ggplot2: input strings for aes()</h1>
+        <h1 class="sidebar-profile-title">3.1 How to split the dataset into training and validation?</h1>
         <a href="/#about">
           <img class="sidebar-profile-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
         </a>
@@ -212,15 +215,15 @@ library(tidyverse) # general tasks library(broom) # tidy model output library(gg
             <div class="post-header main-content-wrap text-center">
   
     <h1 class="post-title" itemprop="headline">
-      A function for ggplot2: input strings for aes()
+      3.1 How to split the dataset into training and validation?
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-03-18T00:00:00Z">
+      <time itemprop="datePublished" datetime="2018-03-23T00:00:00Z">
         
-  March 18, 2018
+  March 23, 2018
 
       </time>
     
@@ -229,7 +232,7 @@ library(tidyverse) # general tasks library(broom) # tidy model output library(gg
   
     <span>in</span>
     
-      <a class="category-link" href="/categories/datavis-and-dataclean">datavis and dataclean</a>
+      <a class="category-link" href="/categories/machine-learning">machine learning</a>
     
   
 
@@ -240,71 +243,33 @@ library(tidyverse) # general tasks library(broom) # tidy model output library(gg
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>在我写文章画图时经常遇到的一个问题是：ggplot2 坐标轴的输入不支持输入数据框的变量名，通常会报错找不到对象</p>
-<div class="section level1">
-<h1>🌰：问题描述</h1>
-<p>data: <a href="https://github.com/fivethirtyeight/data/tree/master/early-senate-polls">early senate poll</a></p>
-<pre class="r"><code>library(tidyverse) # general tasks
-library(broom) # tidy model output
-library(ggthemes) # style the plots
+              <p>数据准备好了之后的第一步就是拆分数据集为训练数据和测试数据，一般是 8:2 的比例。</p>
+<p>为什么拆分数据呢？</p>
+<p>当我们在构建一个机器学习模型上时，真正的目的是为了预测真是世界的数据，而机器学习模型是依靠算法学习训练数据学习Y 与 X 的关系，这种的关系的学习好坏的评判是要依靠没有参与学习模型的数据与预测数据之间的差距来评判的。</p>
+<pre class="r"><code># Load the caret package
+library(caret)
 
-poll_data &lt;- read_csv(&quot;https://raw.githubusercontent.com/fivethirtyeight/data/master/early-senate-polls/early-senate-polls.csv&quot;)
+# Import dataset
+orange &lt;- read.csv(&#39;../../data/orange_juice_withmissing.csv&#39;)
+# Create the training and test datasets
+set.seed(100)
 
-glimpse(poll_data)</code></pre>
-<pre><code>## Observations: 107
-## Variables: 4
-## $ year                  &lt;int&gt; 2006, 2006, 2006, 2006, 2006, 2006, 2006...
-## $ election_result       &lt;int&gt; -39, -10, -9, -16, 40, 10, -2, -41, -31,...
-## $ presidential_approval &lt;int&gt; 46, 33, 32, 33, 53, 44, 37, 39, 42, 33, ...
-## $ poll_average          &lt;int&gt; -28, -10, -1, -15, 39, 14, 2, -22, -27, ...</code></pre>
-<p>background: <strong>there is a strong correlation between polling numbers and the ultimate result of an election</strong></p>
-<div id="-" class="section level2">
-<h2>构建模型： 线性模型</h2>
-<pre class="r"><code>poll_lm &lt;- lm(election_result ~ poll_average, data = poll_data)
+# Step 1: Get row numbers for the training data
+trainRowNumbers &lt;- createDataPartition(orange$Purchase, p=0.8, list=FALSE)
 
-summary(poll_lm)</code></pre>
-<pre><code>## 
-## Call:
-## lm(formula = election_result ~ poll_average, data = poll_data)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -29.4281  -5.0197   0.5601   6.1364  17.9357 
-## 
-## Coefficients:
-##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  -0.89110    0.76969  -1.158     0.25    
-## poll_average  1.04460    0.03777  27.659   &lt;2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 7.93 on 105 degrees of freedom
-## Multiple R-squared:  0.8793, Adjusted R-squared:  0.8782 
-## F-statistic:   765 on 1 and 105 DF,  p-value: &lt; 2.2e-16</code></pre>
-</div>
-<div class="section level2">
-<h2>写个函数画出因变量和自变量的关系</h2>
-<p>结果出现了一个令我费解的报错</p>
-<blockquote>
-<p><strong>Error in FUN(X[[i]], …) : object ‘poll_average’ not found</strong></p>
-</blockquote>
-<p>我不断地检查我的拼写，直到我开始怀疑人生</p>
-</div>
-</div>
-<div id="define-aesthetic-mappings-programatically" class="section level1">
-<h1>解决办法：<a href="http://ggplot2.tidyverse.org/reference/aes_.html"><strong>Define aesthetic mappings programatically</strong></a></h1>
-<pre class="r"><code>plot_model &lt;- function(mod, explanatory, response, .fitted = &quot;.fitted&quot;) {
-  augment(mod) %&gt;%
-  ggplot() +
-    geom_point(aes_string(x = explanatory, y = response), color = &quot;#2CA58D&quot;) +
-    geom_line(aes_string(x = explanatory, y = .fitted), color = &quot;#033F63&quot;) +
-    theme_solarized() +
-    theme(axis.title = element_text()) +
-    labs(x = &quot;Poll average&quot;, y = &quot;Election results&quot;)
-}
+# Step 2: Create the training  dataset
+trainData &lt;- orange[trainRowNumbers,]
 
-plot_model(poll_lm, &quot;poll_average&quot;, &quot;election_result&quot;)</code></pre>
-<p><img src="/post/2018-03-18-a-function-for-ggplot2-input-strings-for-aes_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+# Step 3: Create the test dataset
+testData &lt;- orange[-trainRowNumbers,]
+
+# Store X and Y for later use.
+x = trainData[, 2:18]
+y = trainData$Purchase</code></pre>
+<p><code>createDataPartition</code>：输入 Y 和 P 比率（训练数据的比率） 输出 训练数据的行索引。</p>
+<div id="save-the-image-for-next-blog" class="section level1">
+<h1>save the image for next blog</h1>
+<pre class="r"><code>save.image(file = &quot;../../data/caret.Rdata&quot;)</code></pre>
 </div>
 
               
@@ -318,7 +283,7 @@ plot_model(poll_lm, &quot;poll_average&quot;, &quot;election_result&quot;)</code
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="//tags/ggplot2/">ggplot2</a>
+  <a class="tag tag--primary tag--small" href="//tags/caret/">caret</a>
 
                   </div>
                 
@@ -330,7 +295,7 @@ plot_model(poll_lm, &quot;poll_average&quot;, &quot;election_result&quot;)</code
         <ul class="post-actions post-action-nav">
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/how-to-use-the-ncbis-new-api-keys/" data-tooltip="HOW TO USE THE NCBI&#39;S NEW API KEYS">
+                <a class="post-action-btn btn btn--disabled">
               
                 <i class="fa fa-angle-left"></i>
                 <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -338,7 +303,7 @@ plot_model(poll_lm, &quot;poll_average&quot;, &quot;election_result&quot;)</code
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/hello-world/" data-tooltip="Hello world">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/machine-learning-2-load-dataset/" data-tooltip="machine learning 2: load dataset">
               
                 <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                 <i class="fa fa-angle-right"></i>
@@ -355,19 +320,19 @@ plot_model(poll_lm, &quot;poll_average&quot;, &quot;election_result&quot;)</code
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/03/a-function-for-ggplot2-input-strings-for-aes/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/03/3-1-how-to-split-the-dataset-into-training-and-validation/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/a-function-for-ggplot2-input-strings-for-aes/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/3-1-how-to-split-the-dataset-into-training-and-validation/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/a-function-for-ggplot2-input-strings-for-aes/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/3-1-how-to-split-the-dataset-into-training-and-validation/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -414,7 +379,7 @@ plot_model(poll_lm, &quot;poll_average&quot;, &quot;election_result&quot;)</code
         <ul class="post-actions post-action-nav">
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/how-to-use-the-ncbis-new-api-keys/" data-tooltip="HOW TO USE THE NCBI&#39;S NEW API KEYS">
+                <a class="post-action-btn btn btn--disabled">
               
                 <i class="fa fa-angle-left"></i>
                 <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -422,7 +387,7 @@ plot_model(poll_lm, &quot;poll_average&quot;, &quot;election_result&quot;)</code
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/hello-world/" data-tooltip="Hello world">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/machine-learning-2-load-dataset/" data-tooltip="machine learning 2: load dataset">
               
                 <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                 <i class="fa fa-angle-right"></i>
@@ -439,19 +404,19 @@ plot_model(poll_lm, &quot;poll_average&quot;, &quot;election_result&quot;)</code
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/03/a-function-for-ggplot2-input-strings-for-aes/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/03/3-1-how-to-split-the-dataset-into-training-and-validation/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/a-function-for-ggplot2-input-strings-for-aes/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/3-1-how-to-split-the-dataset-into-training-and-validation/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/a-function-for-ggplot2-input-strings-for-aes/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/3-1-how-to-split-the-dataset-into-training-and-validation/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -481,19 +446,19 @@ plot_model(poll_lm, &quot;poll_average&quot;, &quot;election_result&quot;)</code
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F03%2Fa-function-for-ggplot2-input-strings-for-aes%2F">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F03%2F3-1-how-to-split-the-dataset-into-training-and-validation%2F">
           <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F03%2Fa-function-for-ggplot2-input-strings-for-aes%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F03%2F3-1-how-to-split-the-dataset-into-training-and-validation%2F">
           <i class="fa fa-twitter"></i><span>Share on Twitter</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F03%2Fa-function-for-ggplot2-input-strings-for-aes%2F">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F03%2F3-1-how-to-split-the-dataset-into-training-and-validation%2F">
           <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
         </a>
       </li>
@@ -768,9 +733,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = '\/2018\/03\/a-function-for-ggplot2-input-strings-for-aes\/';
+          this.page.url = '\/2018\/03\/3-1-how-to-split-the-dataset-into-training-and-validation\/';
           
-            this.page.identifier = '\/2018\/03\/a-function-for-ggplot2-input-strings-for-aes\/'
+            this.page.identifier = '\/2018\/03\/3-1-how-to-split-the-dataset-into-training-and-validation\/'
           
         };
         (function() {

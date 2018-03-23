@@ -1,0 +1,67 @@
+---
+title: 'machine learning 2: load dataset'
+author: ZERO
+date: '2018-03-22'
+slug: machine-learning-2-load-dataset
+categories:
+  - machine learning
+tags:
+  - caret
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/02/11/5a7fa56fd7333.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+
+
+<div id="load-the-package-and-dataset" class="section level1">
+<h1>Load the package and dataset</h1>
+<p>我们将使用 ISLR 包中的 <a href="&#39;https://raw.githubusercontent.com/selva86/datasets/master/orange_juice_withmissing.csv&#39;">Orange Juice Data</a>.</p>
+<p>目标： 预测顾客会购买哪两种🍊汁</p>
+<p>数据集不是很大，我们的重点是构建模型的过程，而非真正搭建一个有用的模型。</p>
+<p>👌，let’go.</p>
+<pre class="r"><code># Load the caret package
+library(caret)
+
+# Import dataset
+orange &lt;- read.csv(&#39;../../data/orange_juice_withmissing.csv&#39;)
+
+# Structure of the dataframe
+str(orange)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    1070 obs. of  18 variables:
+##  $ Purchase      : Factor w/ 2 levels &quot;CH&quot;,&quot;MM&quot;: 1 1 1 2 1 1 1 1 1 1 ...
+##  $ WeekofPurchase: int  237 239 245 227 228 230 232 234 235 238 ...
+##  $ StoreID       : int  1 1 1 1 7 7 7 7 7 7 ...
+##  $ PriceCH       : num  1.75 1.75 1.86 1.69 1.69 1.69 1.69 1.75 1.75 1.75 ...
+##  $ PriceMM       : num  1.99 1.99 2.09 1.69 1.69 1.99 1.99 1.99 1.99 1.99 ...
+##  $ DiscCH        : num  0 0 0.17 0 0 0 0 0 0 0 ...
+##  $ DiscMM        : num  0 0.3 0 0 0 0 0.4 0.4 0.4 0.4 ...
+##  $ SpecialCH     : int  0 0 0 0 0 0 1 1 0 0 ...
+##  $ SpecialMM     : int  0 1 0 0 0 1 1 0 0 0 ...
+##  $ LoyalCH       : num  0.5 0.6 0.68 0.4 0.957 ...
+##  $ SalePriceMM   : num  1.99 1.69 2.09 1.69 1.69 1.99 1.59 1.59 1.59 1.59 ...
+##  $ SalePriceCH   : num  1.75 1.75 1.69 1.69 1.69 1.69 1.69 1.75 1.75 1.75 ...
+##  $ PriceDiff     : num  0.24 -0.06 0.4 0 0 0.3 -0.1 -0.16 -0.16 -0.16 ...
+##  $ Store7        : Factor w/ 2 levels &quot;No&quot;,&quot;Yes&quot;: 1 1 1 1 2 2 2 2 2 2 ...
+##  $ PctDiscMM     : num  0 0.151 0 0 0 ...
+##  $ PctDiscCH     : num  0 0 0.0914 0 0 ...
+##  $ ListPriceDiff : num  0.24 0.24 0.23 0 0 0.3 0.3 0.24 0.24 0.24 ...
+##  $ STORE         : int  1 1 1 1 0 0 0 0 0 0 ...</code></pre>
+<pre class="r"><code># See top 6 rows and 10 columns
+head(orange[, 1:10])</code></pre>
+<pre><code>##   Purchase WeekofPurchase StoreID PriceCH PriceMM DiscCH DiscMM SpecialCH
+## 1       CH            237       1    1.75    1.99   0.00    0.0         0
+## 2       CH            239       1    1.75    1.99   0.00    0.3         0
+## 3       CH            245       1    1.86    2.09   0.17    0.0         0
+## 4       MM            227       1    1.69    1.69   0.00    0.0         0
+## 5       CH            228       7    1.69    1.69   0.00    0.0         0
+## 6       CH            230       7    1.69    1.99   0.00    0.0         0
+##   SpecialMM  LoyalCH
+## 1         0 0.500000
+## 2         1 0.600000
+## 3         0 0.680000
+## 4         0 0.400000
+## 5         0 0.956535
+## 6         1 0.965228</code></pre>
+</div>

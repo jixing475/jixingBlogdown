@@ -1,0 +1,60 @@
+---
+title: 3.1 How to split the dataset into training and validation?
+author: ZERO
+date: '2018-03-23'
+slug: 3-1-how-to-split-the-dataset-into-training-and-validation
+categories:
+  - machine learning
+tags:
+  - caret
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/03/23/5ab44d129ce08.jpg
+metaAlignment: center
+coverMeta: out
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE
+)
+```
+
+数据准备好了之后的第一步就是拆分数据集为训练数据和测试数据，一般是 8:2 的比例。
+
+为什么拆分数据呢？
+
+当我们在构建一个机器学习模型上时，真正的目的是为了预测真是世界的数据，而机器学习模型是依靠算法学习训练数据学习Y 与 X 的关系，这种的关系的学习好坏的评判是要依靠没有参与学习模型的数据与预测数据之间的差距来评判的。
+
+```{r}
+# Load the caret package
+library(caret)
+
+# Import dataset
+orange <- read.csv('../../data/orange_juice_withmissing.csv')
+# Create the training and test datasets
+set.seed(100)
+
+# Step 1: Get row numbers for the training data
+trainRowNumbers <- createDataPartition(orange$Purchase, p=0.8, list=FALSE)
+
+# Step 2: Create the training  dataset
+trainData <- orange[trainRowNumbers,]
+
+# Step 3: Create the test dataset
+testData <- orange[-trainRowNumbers,]
+
+# Store X and Y for later use.
+x = trainData[, 2:18]
+y = trainData$Purchase
+```
+
+`createDataPartition`：输入 Y 和 P 比率（训练数据的比率）
+                       输出 训练数据的行索引。
+
+
+#save the image for next blog
+```{r}
+save.image(file = "../../data/caret.Rdata")
+```
+

@@ -126,6 +126,47 @@
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/3-1-how-to-split-the-dataset-into-training-and-validation/">
+                <h3 class="media-heading">3.1 How to split the dataset into training and validation?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">数据准备好了之后的第一步就是拆分数据集为训练数据和测试数据，一般是 8:2 的比例。
+为什么拆分数据呢？
+当我们在构建一个机器学习模型上时，真正的目的是为了预测真是世界的数据，而机器学习模型是依靠算法学习训练数据学习Y 与 X 的关系，这种的关系的学习好坏的评判是要依靠没有参与学习模型的数据与预测数据之间的差距来评判的。
+# Load the caret package library(caret) # Import dataset orange &lt;- read.csv(&#39;../../data/orange_juice_withmissing.csv&#39;) # Create the training and test datasets set.seed(100) # Step 1: Get row numbers for the training data trainRowNumbers &lt;- createDataPartition(orange$Purchase, p=0.8, list=FALSE) # Step 2: Create the training dataset trainData &lt;- orange[trainRowNumbers,] # Step 3: Create the test dataset testData &lt;- orange[-trainRowNumbers,] # Store X and Y for later use.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/machine-learning-2-load-dataset/">
+                <h3 class="media-heading">machine learning 2: load dataset</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Load the package and dataset 我们将使用 ISLR 包中的 Orange Juice Data.
+目标： 预测顾客会购买哪两种🍊汁
+数据集不是很大，我们的重点是构建模型的过程，而非真正搭建一个有用的模型。
+👌，let’go.
+# Load the caret package library(caret) # Import dataset orange &lt;- read.csv(&#39;../../data/orange_juice_withmissing.csv&#39;) # Structure of the dataframe str(orange) ## &#39;data.frame&#39;: 1070 obs. of 18 variables: ## $ Purchase : Factor w/ 2 levels &quot;CH&quot;,&quot;MM&quot;: 1 1 1 2 1 1 1 1 1 1 ... ## $ WeekofPurchase: int 237 239 245 227 228 230 232 234 235 238 .</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2018/03/machine-learning-in-r-introdution/">
                 <h3 class="media-heading">Machine Learning in R 1：introdution</h3>
               </a>
@@ -261,7 +302,7 @@ library(tidyverse) # general tasks library(broom) # tidy model output library(gg
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         7 posts found
+         9 posts found
       </p>
     </div>
   </div>
