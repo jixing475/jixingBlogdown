@@ -1,5 +1,5 @@
 ---
-title: 'machine learning 2: load dataset'
+title: "2 machine learning: load dataset"
 author: ZERO
 date: '2018-03-22'
 slug: machine-learning-2-load-dataset
