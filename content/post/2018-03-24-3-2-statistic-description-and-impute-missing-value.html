@@ -1,0 +1,74 @@
+---
+title: 3.2 statistic description and impute missing value
+author: ZERO
+date: '2018-03-24'
+slug: 3-2-statistic-description-and-impute-missing-value
+categories:
+  - machine learning
+tags:
+  - caret
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/03/24/5ab6156847293.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+
+
+<div class="section level1">
+<h1>加载数据和包</h1>
+<pre class="r"><code>load(&quot;../../data/caret.Rdata&quot;)
+library(tidyverse)
+library(caret)</code></pre>
+<p>在进行数据整理之前 我们先看看训练数据的统计描述</p>
+<p><code>skimr</code>包对列的统计提供了方便的函数</p>
+<p><code>skimr::skim_to_wide()</code> 输出一个包含列统计描述的数据框</p>
+<pre class="r"><code>library(skimr)
+skimmed &lt;- skim_to_wide(trainData)
+skimmed[, c(1:5, 9:11, 13, 15:16)]</code></pre>
+<pre><code>## # A tibble: 18 x 11
+##    type   variable  missing complete n     mean   sd    p0    median p100 
+##    &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;
+##  1 factor Purchase  0       857      857   &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   &lt;NA&gt; 
+##  2 factor Store7    0       857      857   &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   &lt;NA&gt; 
+##  3 integ… SpecialCH 2       855      857   &quot;  0.… &quot; 0.… 0     0      1    
+##  4 integ… SpecialMM 4       853      857   &quot;  0.… &quot; 0.… 0     0      1    
+##  5 integ… STORE     2       855      857   &quot;  1.… &quot; 1.… 0     2      4    
+##  6 integ… StoreID   1       856      857   &quot;  3.… &quot; 2.… 1     3      7    
+##  7 integ… WeekofPu… 0       857      857   254.17 15.59 227   257    278  
+##  8 numer… DiscCH    2       855      857   0.054  &quot;0.1… &quot; 0 … &quot;0   &quot; &quot;0.5…
+##  9 numer… DiscMM    3       854      857   &quot;0.12… &quot;0.2… &quot; 0 … &quot;0   &quot; &quot;0.8…
+## 10 numer… ListPric… 0       857      857   &quot;0.22… &quot;0.1… &quot; 0 … 0.24   0.44 
+## 11 numer… LoyalCH   5       852      857   &quot;0.56… &quot;0.3… &quot; 1.… &quot;0.6 &quot; &quot;1  …
+## 12 numer… PctDiscCH 2       855      857   0.028  0.063 &quot; 0 … &quot;0   &quot; 0.25 
+## 13 numer… PctDiscMM 2       855      857   0.058  0.099 &quot; 0 … &quot;0   &quot; &quot;0.4…
+## 14 numer… PriceCH   1       856      857   &quot;1.87… &quot;0.1… &quot; 1.… 1.86   2.09 
+## 15 numer… PriceDiff 1       856      857   &quot;0.15… &quot;0.2… &quot;-0.… 0.23   0.64 
+## 16 numer… PriceMM   1       856      857   &quot;2.08… &quot;0.1… &quot; 1.… 2.09   2.29 
+## 17 numer… SalePric… 1       856      857   &quot;1.81… &quot;0.1… &quot; 1.… 1.86   2.09 
+## 18 numer… SalePric… 3       854      857   &quot;1.96… &quot;0.2… &quot; 1.… 2.09   2.29 
+## # ... with 1 more variable: hist &lt;chr&gt;</code></pre>
+</div>
+<div class="section level1">
+<h1>插入数据</h1>
+<p>Caret 提供了一个很方便的函数 <code>preProcess()</code></p>
+<ul>
+<li>设置 <code>method=knnImpute</code> 生成一个模型</li>
+<li>使用 <code>predict()</code> 对数据进行插入</li>
+</ul>
+<pre class="r"><code># Create the knn imputation model on the training data
+preProcess_missingdata_model &lt;- preProcess(trainData, method=&#39;knnImpute&#39;)
+preProcess_missingdata_model</code></pre>
+<pre><code>## Created from 828 samples and 18 variables
+## 
+## Pre-processing:
+##   - centered (16)
+##   - ignored (2)
+##   - 5 nearest neighbor imputation (16)
+##   - scaled (16)</code></pre>
+<pre class="r"><code># Use the imputation model to predict the values of missing data points
+library(RANN)  # required for knnInpute
+trainData &lt;- predict(preProcess_missingdata_model, newdata = trainData)
+anyNA(trainData)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+</div>

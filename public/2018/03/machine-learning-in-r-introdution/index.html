@@ -507,6 +507,26 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/3-2-statistic-description-and-impute-missing-value/">
+                <h3 class="media-heading">3.2 statistic description and impute missing value</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">加载数据和包 load(&quot;../../data/caret.Rdata&quot;) library(tidyverse) library(caret) 在进行数据整理之前 我们先看看训练数据的统计描述
+skimr包对列的统计提供了方便的函数
+skimr::skim_to_wide() 输出一个包含列统计描述的数据框
+library(skimr) skimmed &lt;- skim_to_wide(trainData) skimmed[, c(1:5, 9:11, 13, 15:16)] ## # A tibble: 18 x 11 ## type variable missing complete n mean sd p0 median p100 ## &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; ## 1 factor Purchase 0 857 857 &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; ## 2 factor Store7 0 857 857 &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; ## 3 integ… SpecialCH 2 855 857 &quot; 0.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2018/03/3-1-how-to-split-the-dataset-into-training-and-validation/">
                 <h3 class="media-heading">3.1 How to split the dataset into training and validation?</h3>
               </a>
@@ -683,7 +703,7 @@ library(tidyverse) # general tasks library(broom) # tidy model output library(gg
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         9 posts found
+         10 posts found
       </p>
     </div>
   </div>

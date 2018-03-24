@@ -1,0 +1,58 @@
+---
+title: 3.2 statistic description and impute missing value
+author: ZERO
+date: '2018-03-24'
+slug: 3-2-statistic-description-and-impute-missing-value
+categories:
+  - machine learning
+tags:
+  - caret
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/03/24/5ab6156847293.jpg
+metaAlignment: center
+coverMeta: out
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE
+)
+```
+#加载数据和包
+```{r}
+load("../../data/caret.Rdata")
+library(tidyverse)
+library(caret)
+```
+
+
+在进行数据整理之前 我们先看看训练数据的统计描述
+
+`skimr`包对列的统计提供了方便的函数
+
+`skimr::skim_to_wide()` 输出一个包含列统计描述的数据框
+
+```{r}
+library(skimr)
+skimmed <- skim_to_wide(trainData)
+skimmed[, c(1:5, 9:11, 13, 15:16)]
+```
+
+#插入数据
+
+Caret 提供了一个很方便的函数 `preProcess()`
+
+- 设置 `method=knnImpute` 生成一个模型
+- 使用 `predict()` 对数据进行插入
+```{r}
+# Create the knn imputation model on the training data
+preProcess_missingdata_model <- preProcess(trainData, method='knnImpute')
+preProcess_missingdata_model
+# Use the imputation model to predict the values of missing data points
+library(RANN)  # required for knnInpute
+trainData <- predict(preProcess_missingdata_model, newdata = trainData)
+anyNA(trainData)
+```
+
+

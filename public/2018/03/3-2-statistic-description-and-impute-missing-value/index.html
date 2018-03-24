@@ -1,5 +1,9 @@
 
 
+  
+    
+  
+
 
   
 
@@ -16,7 +20,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.32.2 with theme Tranquilpeak 0.4.1-BETA">
-    <title>student zero </title>
+    <title>3.2 statistic description and impute missing value</title>
     <meta name="author" content="Jixing Liu">
     <meta name="keywords" content=", R">
 
@@ -24,15 +28,24 @@
     
 
     
-    <meta name="description" content="exploring and playing with data in R">
-    <meta property="og:description" content="exploring and playing with data in R">
+    <meta name="description" content="加载数据和包 load(&quot;../../data/caret.Rdata&quot;) library(tidyverse) library(caret) 在进行数据整理之前 我们先看看训练数据的统计描述
+skimr包对列的统计提供了方便的函数
+skimr::skim_to_wide() 输出一个包含列统计描述的数据框
+library(skimr) skimmed &lt;- skim_to_wide(trainData) skimmed[, c(1:5, 9:11, 13, 15:16)] ## # A tibble: 18 x 11 ## type variable missing complete n mean sd p0 median p100 ## &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; ## 1 factor Purchase 0 857 857 &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; ## 2 factor Store7 0 857 857 &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; ## 3 integ… SpecialCH 2 855 857 &quot; 0.">
+    <meta property="og:description" content="加载数据和包 load(&quot;../../data/caret.Rdata&quot;) library(tidyverse) library(caret) 在进行数据整理之前 我们先看看训练数据的统计描述
+skimr包对列的统计提供了方便的函数
+skimr::skim_to_wide() 输出一个包含列统计描述的数据框
+library(skimr) skimmed &lt;- skim_to_wide(trainData) skimmed[, c(1:5, 9:11, 13, 15:16)] ## # A tibble: 18 x 11 ## type variable missing complete n mean sd p0 median p100 ## &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; ## 1 factor Purchase 0 857 857 &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; ## 2 factor Store7 0 857 857 &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; ## 3 integ… SpecialCH 2 855 857 &quot; 0.">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="student zero ">
-    <meta property="og:url" content="/">
+    <meta property="og:title" content="3.2 statistic description and impute missing value">
+    <meta property="og:url" content="/2018/03/3-2-statistic-description-and-impute-missing-value/">
     <meta property="og:site_name" content="student zero ">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="student zero ">
-    <meta name="twitter:description" content="exploring and playing with data in R">
+    <meta name="twitter:description" content="加载数据和包 load(&quot;../../data/caret.Rdata&quot;) library(tidyverse) library(caret) 在进行数据整理之前 我们先看看训练数据的统计描述
+skimr包对列的统计提供了方便的函数
+skimr::skim_to_wide() 输出一个包含列统计描述的数据框
+library(skimr) skimmed &lt;- skim_to_wide(trainData) skimmed[, c(1:5, 9:11, 13, 15:16)] ## # A tibble: 18 x 11 ## type variable missing complete n mean sd p0 median p100 ## &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; ## 1 factor Purchase 0 857 857 &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; ## 2 factor Store7 0 857 857 &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; ## 3 integ… SpecialCH 2 855 857 &quot; 0.">
     
       <meta name="twitter:creator" content="@studentZero475">
     
@@ -45,6 +58,8 @@
       <meta property="og:image" content="https://i.loli.net/2018/02/26/5a937bb148b02.jpg">
     
 
+    
+      <meta property="og:image" content="https://i.loli.net/2018/03/24/5ab6156847293.jpg">
     
     
     
@@ -69,7 +84,7 @@
 
   <body>
     <div id="blog">
-      <header id="header" data-behavior="1">
+      <header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
     <a class="header-title-link" href="/">student zero </a>
@@ -89,11 +104,11 @@
   
 </header>
 
-      <nav id="sidebar" data-behavior="1">
+      <nav id="sidebar" data-behavior="4">
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <h1 class="sidebar-profile-title">student zero </h1>
+        <h1 class="sidebar-profile-title">3.2 statistic description and impute missing value</h1>
         <a href="/#about">
           <img class="sidebar-profile-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
         </a>
@@ -190,31 +205,20 @@
 
       
 
-      <div id="main" data-behavior="1"
+      <div id="main" data-behavior="4"
         class="
-               hasCoverMetaIn
+               hasCoverMetaOut
                ">
-        <section class="postShorten-group main-content-wrap">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
           
           
-            
+            <div class="post-header main-content-wrap text-center">
   
-    
+    <h1 class="post-title" itemprop="headline">
+      3.2 statistic description and impute missing value
+    </h1>
   
-
-
   
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/03/3-2-statistic-description-and-impute-missing-value/">
-          3.2 statistic description and impute missing value
-        </a>
-      </h1>
-      
   <div class="postShorten-meta post-meta">
     
       <time itemprop="datePublished" datetime="2018-03-24T00:00:00Z">
@@ -235,393 +239,161 @@
 
   </div>
 
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      加载数据和包 load(&quot;../../data/caret.Rdata&quot;) library(tidyverse) library(caret) 在进行数据整理之前 我们先看看训练数据的统计描述
-skimr包对列的统计提供了方便的函数
-skimr::skim_to_wide() 输出一个包含列统计描述的数据框
-library(skimr) skimmed &lt;- skim_to_wide(trainData) skimmed[, c(1:5, 9:11, 13, 15:16)] ## # A tibble: 18 x 11 ## type variable missing complete n mean sd p0 median p100 ## &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; ## 1 factor Purchase 0 857 857 &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; ## 2 factor Store7 0 857 857 &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; ## 3 integ… SpecialCH 2 855 857 &quot; 0.
-      <p>
-        <a href="/2018/03/3-2-statistic-description-and-impute-missing-value/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/03/3-2-statistic-description-and-impute-missing-value/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/24/5ab6156847293.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
+</div>
           
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <div class="section level1">
+<h1>加载数据和包</h1>
+<pre class="r"><code>load(&quot;../../data/caret.Rdata&quot;)
+library(tidyverse)
+library(caret)</code></pre>
+<p>在进行数据整理之前 我们先看看训练数据的统计描述</p>
+<p><code>skimr</code>包对列的统计提供了方便的函数</p>
+<p><code>skimr::skim_to_wide()</code> 输出一个包含列统计描述的数据框</p>
+<pre class="r"><code>library(skimr)
+skimmed &lt;- skim_to_wide(trainData)
+skimmed[, c(1:5, 9:11, 13, 15:16)]</code></pre>
+<pre><code>## # A tibble: 18 x 11
+##    type   variable  missing complete n     mean   sd    p0    median p100 
+##    &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;
+##  1 factor Purchase  0       857      857   &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   &lt;NA&gt; 
+##  2 factor Store7    0       857      857   &lt;NA&gt;   &lt;NA&gt;  &lt;NA&gt;  &lt;NA&gt;   &lt;NA&gt; 
+##  3 integ… SpecialCH 2       855      857   &quot;  0.… &quot; 0.… 0     0      1    
+##  4 integ… SpecialMM 4       853      857   &quot;  0.… &quot; 0.… 0     0      1    
+##  5 integ… STORE     2       855      857   &quot;  1.… &quot; 1.… 0     2      4    
+##  6 integ… StoreID   1       856      857   &quot;  3.… &quot; 2.… 1     3      7    
+##  7 integ… WeekofPu… 0       857      857   254.17 15.59 227   257    278  
+##  8 numer… DiscCH    2       855      857   0.054  &quot;0.1… &quot; 0 … &quot;0   &quot; &quot;0.5…
+##  9 numer… DiscMM    3       854      857   &quot;0.12… &quot;0.2… &quot; 0 … &quot;0   &quot; &quot;0.8…
+## 10 numer… ListPric… 0       857      857   &quot;0.22… &quot;0.1… &quot; 0 … 0.24   0.44 
+## 11 numer… LoyalCH   5       852      857   &quot;0.56… &quot;0.3… &quot; 1.… &quot;0.6 &quot; &quot;1  …
+## 12 numer… PctDiscCH 2       855      857   0.028  0.063 &quot; 0 … &quot;0   &quot; 0.25 
+## 13 numer… PctDiscMM 2       855      857   0.058  0.099 &quot; 0 … &quot;0   &quot; &quot;0.4…
+## 14 numer… PriceCH   1       856      857   &quot;1.87… &quot;0.1… &quot; 1.… 1.86   2.09 
+## 15 numer… PriceDiff 1       856      857   &quot;0.15… &quot;0.2… &quot;-0.… 0.23   0.64 
+## 16 numer… PriceMM   1       856      857   &quot;2.08… &quot;0.1… &quot; 1.… 2.09   2.29 
+## 17 numer… SalePric… 1       856      857   &quot;1.81… &quot;0.1… &quot; 1.… 1.86   2.09 
+## 18 numer… SalePric… 3       854      857   &quot;1.96… &quot;0.2… &quot; 1.… 2.09   2.29 
+## # ... with 1 more variable: hist &lt;chr&gt;</code></pre>
+</div>
+<div class="section level1">
+<h1>插入数据</h1>
+<p>Caret 提供了一个很方便的函数 <code>preProcess()</code></p>
+<ul>
+<li>设置 <code>method=knnImpute</code> 生成一个模型</li>
+<li>使用 <code>predict()</code> 对数据进行插入</li>
+</ul>
+<pre class="r"><code># Create the knn imputation model on the training data
+preProcess_missingdata_model &lt;- preProcess(trainData, method=&#39;knnImpute&#39;)
+preProcess_missingdata_model</code></pre>
+<pre><code>## Created from 828 samples and 18 variables
+## 
+## Pre-processing:
+##   - centered (16)
+##   - ignored (2)
+##   - 5 nearest neighbor imputation (16)
+##   - scaled (16)</code></pre>
+<pre class="r"><code># Use the imputation model to predict the values of missing data points
+library(RANN)  # required for knnInpute
+trainData &lt;- predict(preProcess_missingdata_model, newdata = trainData)
+anyNA(trainData)</code></pre>
+<pre><code>## [1] FALSE</code></pre>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
             
-  
-    
-  
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="//tags/caret/">caret</a>
 
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/03/3-1-how-to-split-the-dataset-into-training-and-validation/">
-          3.1 How to split the dataset into training and validation?
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-03-23T00:00:00Z">
-        
-  March 23, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/machine-learning">machine learning</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      数据准备好了之后的第一步就是拆分数据集为训练数据和测试数据，一般是 8:2 的比例。
-为什么拆分数据呢？
-当我们在构建一个机器学习模型上时，真正的目的是为了预测真是世界的数据，而机器学习模型是依靠算法学习训练数据学习Y 与 X 的关系，这种的关系的学习好坏的评判是要依靠没有参与学习模型的数据与预测数据之间的差距来评判的。
-# Load the caret package library(caret) # Import dataset orange &lt;- read.csv(&#39;../../data/orange_juice_withmissing.csv&#39;) # Create the training and test datasets set.seed(100) # Step 1: Get row numbers for the training data trainRowNumbers &lt;- createDataPartition(orange$Purchase, p=0.8, list=FALSE) # Step 2: Create the training dataset trainData &lt;- orange[trainRowNumbers,] # Step 3: Create the test dataset testData &lt;- orange[-trainRowNumbers,] # Store X and Y for later use.
-      <p>
-        <a href="/2018/03/3-1-how-to-split-the-dataset-into-training-and-validation/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/03/3-1-how-to-split-the-dataset-into-training-and-validation/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/23/5ab44d129ce08.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-          
+                  </div>
+                
+              
             
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/03/machine-learning-2-load-dataset/">
-          machine learning 2: load dataset
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-03-22T00:00:00Z">
-        
-  March 22, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/machine-learning">machine learning</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      Load the package and dataset 我们将使用 ISLR 包中的 Orange Juice Data.
-目标： 预测顾客会购买哪两种🍊汁
-数据集不是很大，我们的重点是构建模型的过程，而非真正搭建一个有用的模型。
-👌，let’go.
-# Load the caret package library(caret) # Import dataset orange &lt;- read.csv(&#39;../../data/orange_juice_withmissing.csv&#39;) # Structure of the dataframe str(orange) ## &#39;data.frame&#39;: 1070 obs. of 18 variables: ## $ Purchase : Factor w/ 2 levels &quot;CH&quot;,&quot;MM&quot;: 1 1 1 2 1 1 1 1 1 1 ... ## $ WeekofPurchase: int 237 239 245 227 228 230 232 234 235 238 .
-      <p>
-        <a href="/2018/03/machine-learning-2-load-dataset/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/03/machine-learning-2-load-dataset/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/24/5ab615be1e0dd.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-          
             
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/03/machine-learning-in-r-introdution/">
-          Machine Learning in R 1：introdution
-        </a>
-      </h1>
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/3-1-how-to-split-the-dataset-into-training-and-validation/" data-tooltip="3.1 How to split the dataset into training and validation?">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
       
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-03-21T00:00:00Z">
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
         
-  March 21, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/machine-learning">machine learning</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      Caret Package是一个用于在R中构建机器学习模型的综合框架。在此博文中，我会解释 caret 包的几乎所有核心功能，并引导完成构建预测模型的分步过程。
-Caret 是 Classification And REgression Training 的简称。
-Caret 包很好地让所有与机器学习模型开发相关的步骤集成到一个简化的工作流程中，几乎每个主流的ML算法都可以在R中实现。
-由于R具有如此多的机器学习算法实现包，因此选则在哪个包中实现某种算法是非常头疼的问题。多数时候，实现算法的语法和方法在不同包中有所不同。 结合数据预处理，查阅超参数的帮助页面（定义算法如何学习的参数）并努力寻找最佳模型，可以使构建预测模型成为一项相关任务。
-在本教程后面的部分，我将介绍如何查看所有caret 支持的ML算法（这是一个很长的列表）以及可以调整哪些超参数。
-此外，我们不会止步于 caret 包，我们将看看如何巧妙地集成来自多个最佳模型的预测，并可能使用 caretEnsemble 来产生更好的预测。
-这个教程总共包括5部分，分别是： 1. 数据准备和清理 2. 可视化重要变量 3. 特征选择 4. 训练模型和调节模型 5. 预测
-      <p>
-        <a href="/2018/03/machine-learning-in-r-introdution/" class="postShorten-excerpt_link link">Continue reading</a>
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/03/3-2-statistic-description-and-impute-missing-value/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
         
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/03/machine-learning-in-r-introdution/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/21/5ab1cca60f6fc.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-          
-            
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/03/how-to-use-the-ncbis-new-api-keys/">
-          HOW TO USE THE NCBI&#39;S NEW API KEYS
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-03-19T00:00:00Z">
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/3-2-statistic-description-and-impute-missing-value/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
         
-  March 19, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/computers">computers</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      The NCBI is one of the most important sources of biological data. The centre provides access to information on 28 million scholarly articles through PubMed and 250 million DNA sequences through GenBank. More importantly, records in the [50 public databases] (https://www.ncbi.nlm.nih.gov/guide/all/#databases) maintained by the NCBI are strongly cross-referenced. As a result, it is possible to pinpoint searches using almost 2 million taxonomic names or a controlled vocabulary with 270,000 terms.
-      <p>
-        <a href="/2018/03/how-to-use-the-ncbis-new-api-keys/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/03/how-to-use-the-ncbis-new-api-keys/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/21/5ab1c0c655826.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-          
-            
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/03/a-function-for-ggplot2-input-strings-for-aes/">
-          A function for ggplot2: input strings for aes()
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-03-18T00:00:00Z">
-        
-  March 18, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/datavis-and-dataclean">datavis and dataclean</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      在我写文章画图时经常遇到的一个问题是：ggplot2 坐标轴的输入不支持输入数据框的变量名，通常会报错找不到对象
-🌰：问题描述 data: early senate poll
-library(tidyverse) # general tasks library(broom) # tidy model output library(ggthemes) # style the plots poll_data &lt;- read_csv(&quot;https://raw.githubusercontent.com/fivethirtyeight/data/master/early-senate-polls/early-senate-polls.csv&quot;) glimpse(poll_data) ## Observations: 107 ## Variables: 4 ## $ year &lt;int&gt; 2006, 2006, 2006, 2006, 2006, 2006, 2006... ## $ election_result &lt;int&gt; -39, -10, -9, -16, 40, 10, -2, -41, -31,... ## $ presidential_approval &lt;int&gt; 46, 33, 32, 33, 53, 44, 37, 39, 42, 33, ... ## $ poll_average &lt;int&gt; -28, -10, -1, -15, 39, 14, 2, -22, -27, .
-      <p>
-        <a href="/2018/03/a-function-for-ggplot2-input-strings-for-aes/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/03/a-function-for-ggplot2-input-strings-for-aes/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/18/5aadb0bc4b1a8.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-          
-            
-  
-    
-      
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/3-2-statistic-description-and-impute-missing-value/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
         
       
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/03/hello-world/">
-          Hello world
-        </a>
-      </h1>
       
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-03-15T00:00:00Z">
-        
-  March 15, 2018
-
-      </time>
-    
-    
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      Just say hello world!
-      <p>
-        <a href="/2018/03/hello-world/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-</article>
-
-          
-          
-  <div class="pagination-bar">
-    <ul class="pagination">
-      
-      
-        <li class="pagination-next">
-          <a class="btn btn--default btn--small" href="/page/2/">
-            <span>OLDER POSTS</span>
-            <i class="fa fa-angle-right text-base icon-ml"></i>
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
           </a>
         </li>
       
-      <li class="pagination-number">page 1 of 2</li>
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
     </ul>
   </div>
 
 
-        </section>
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
     &copy; 2018 Jixing Liu. All Rights Reserved
@@ -629,6 +401,100 @@ library(tidyverse) # general tasks library(broom) # tidy model output library(gg
 </footer>
 
       </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/3-1-how-to-split-the-dataset-into-training-and-validation/" data-tooltip="3.1 How to split the dataset into training and validation?">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/03/3-2-statistic-description-and-impute-missing-value/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/3-2-statistic-description-and-impute-missing-value/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/3-2-statistic-description-and-impute-missing-value/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F03%2F3-2-statistic-description-and-impute-missing-value%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F03%2F3-2-statistic-description-and-impute-missing-value%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F03%2F3-2-statistic-description-and-impute-missing-value%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
     </div>
     
     <div id="about">
@@ -912,8 +778,35 @@ $(document).ready(function() {
 });
 </script>
 
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = '\/2018\/03\/3-2-statistic-description-and-impute-missing-value\/';
+          
+            this.page.identifier = '\/2018\/03\/3-2-statistic-description-and-impute-missing-value\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'jixing';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
 
 
     
   </body>
 </html>
+
