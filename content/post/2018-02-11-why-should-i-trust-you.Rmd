@@ -1,7 +1,7 @@
 ---
 title: "Why should I trust you \U0001F916?"
 author: ZERO
-date: '2018-02-11'
+date: '2018-03-26'
 slug: why-should-i-trust-you
 categories:
   - machine learning

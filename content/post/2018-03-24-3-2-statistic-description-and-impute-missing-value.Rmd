@@ -55,4 +55,7 @@ trainData <- predict(preProcess_missingdata_model, newdata = trainData)
 anyNA(trainData)
 ```
 
+```{r}
+save.image(file = "../../data/craet_3-2.Rdata")
+```
 

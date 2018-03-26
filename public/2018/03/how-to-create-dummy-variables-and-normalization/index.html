@@ -1,5 +1,9 @@
 
 
+  
+    
+  
+
 
   
 
@@ -16,7 +20,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.32.2 with theme Tranquilpeak 0.4.1-BETA">
-    <title>Web</title>
+    <title>3.3 How To Create Dummy Variables And Normalization</title>
     <meta name="author" content="Jixing Liu">
     <meta name="keywords" content=", R">
 
@@ -24,15 +28,18 @@
     
 
     
-    <meta name="description" content="exploring and playing with data in R">
-    <meta property="og:description" content="exploring and playing with data in R">
+    <meta name="description" content="Load Package And Data load(&quot;../../data/craet_3-2.Rdata&quot;) library(tidyverse) library(caret)  Why Dummy Variables 对于字符型的因子变量，我们需要把它转变为有序的数值，一般转为 0，1 的二变量， 这样0 就代表基础水平， 1代表比较组
+ How # One-Hot Encoding # Creating dummy variables is converting a categorical variable to as many binary variables as here are categories. dummies_model &lt;- dummyVars(Purchase ~ ., data=trainData) # Create the dummy variables using predict. The Y variable (Purchase) will not be present in trainData_mat. trainData_mat &lt;- predict(dummies_model, newdata = trainData) # # Convert to dataframe trainData &lt;- data.">
+    <meta property="og:description" content="Load Package And Data load(&quot;../../data/craet_3-2.Rdata&quot;) library(tidyverse) library(caret)  Why Dummy Variables 对于字符型的因子变量，我们需要把它转变为有序的数值，一般转为 0，1 的二变量， 这样0 就代表基础水平， 1代表比较组
+ How # One-Hot Encoding # Creating dummy variables is converting a categorical variable to as many binary variables as here are categories. dummies_model &lt;- dummyVars(Purchase ~ ., data=trainData) # Create the dummy variables using predict. The Y variable (Purchase) will not be present in trainData_mat. trainData_mat &lt;- predict(dummies_model, newdata = trainData) # # Convert to dataframe trainData &lt;- data.">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Web">
-    <meta property="og:url" content="/tags/web/">
+    <meta property="og:title" content="3.3 How To Create Dummy Variables And Normalization">
+    <meta property="og:url" content="/2018/03/how-to-create-dummy-variables-and-normalization/">
     <meta property="og:site_name" content="student zero ">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="student zero ">
-    <meta name="twitter:description" content="exploring and playing with data in R">
+    <meta name="twitter:description" content="Load Package And Data load(&quot;../../data/craet_3-2.Rdata&quot;) library(tidyverse) library(caret)  Why Dummy Variables 对于字符型的因子变量，我们需要把它转变为有序的数值，一般转为 0，1 的二变量， 这样0 就代表基础水平， 1代表比较组
+ How # One-Hot Encoding # Creating dummy variables is converting a categorical variable to as many binary variables as here are categories. dummies_model &lt;- dummyVars(Purchase ~ ., data=trainData) # Create the dummy variables using predict. The Y variable (Purchase) will not be present in trainData_mat. trainData_mat &lt;- predict(dummies_model, newdata = trainData) # # Convert to dataframe trainData &lt;- data.">
     
       <meta name="twitter:creator" content="@studentZero475">
     
@@ -45,6 +52,8 @@
       <meta property="og:image" content="https://i.loli.net/2018/02/26/5a937bb148b02.jpg">
     
 
+    
+      <meta property="og:image" content="https://i.loli.net/2018/03/26/5ab843cfa3701.jpg">
     
     
     
@@ -69,7 +78,7 @@
 
   <body>
     <div id="blog">
-      <header id="header" data-behavior="1">
+      <header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
     <a class="header-title-link" href="/">student zero </a>
@@ -89,11 +98,11 @@
   
 </header>
 
-      <nav id="sidebar" data-behavior="1">
+      <nav id="sidebar" data-behavior="4">
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <h1 class="sidebar-profile-title">Web</h1>
+        <h1 class="sidebar-profile-title">3.3 How To Create Dummy Variables And Normalization</h1>
         <a href="/#about">
           <img class="sidebar-profile-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
         </a>
@@ -189,40 +198,26 @@
 </nav>
 
       
-        
 
-      
-      <div id="main" data-behavior="1"
+      <div id="main" data-behavior="4"
         class="
-               hasCoverMetaIn
+               hasCoverMetaOut
                ">
-        
-          <section class="postShorten-group main-content-wrap">
-            
-            
-              
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-center">
   
-    
+    <h1 class="post-title" itemprop="headline">
+      3.3 How To Create Dummy Variables And Normalization
+    </h1>
   
-
-
   
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/03/how-to-use-the-ncbis-new-api-keys/">
-          HOW TO USE THE NCBI&#39;S NEW API KEYS
-        </a>
-      </h1>
-      
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-03-19T00:00:00Z">
+      <time itemprop="datePublished" datetime="2018-03-26T00:00:00Z">
         
-  March 19, 2018
+  March 26, 2018
 
       </time>
     
@@ -231,36 +226,188 @@
   
     <span>in</span>
     
-      <a class="category-link" href="/categories/computers">computers</a>
+      <a class="category-link" href="/categories/machine-learning">machine learning</a>
     
   
 
 
   </div>
 
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      The NCBI is one of the most important sources of biological data. The centre provides access to information on 28 million scholarly articles through PubMed and 250 million DNA sequences through GenBank. More importantly, records in the [50 public databases] (https://www.ncbi.nlm.nih.gov/guide/all/#databases) maintained by the NCBI are strongly cross-referenced. As a result, it is possible to pinpoint searches using almost 2 million taxonomic names or a controlled vocabulary with 270,000 terms.
-      <p>
-        <a href="/2018/03/how-to-use-the-ncbis-new-api-keys/" class="postShorten-excerpt_link link">Continue reading</a>
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <div id="load-package-and-data" class="section level1">
+<h1>Load Package And Data</h1>
+<pre class="r"><code>load(&quot;../../data/craet_3-2.Rdata&quot;)
+library(tidyverse)
+library(caret)</code></pre>
+</div>
+<div id="why-dummy-variables" class="section level1">
+<h1>Why Dummy Variables</h1>
+<p>对于字符型的因子变量，我们需要把它转变为有序的数值，一般转为 0，1 的二变量， 这样0 就代表基础水平， 1代表比较组</p>
+<p><img src="https://i.loli.net/2018/03/26/5ab847e351487.jpg" width="30%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="how" class="section level1">
+<h1>How</h1>
+<pre class="r"><code># One-Hot Encoding
+# Creating dummy variables is converting a categorical variable to as many binary variables as here are categories.
+dummies_model &lt;- dummyVars(Purchase ~ ., data=trainData)
+
+# Create the dummy variables using predict. The Y variable (Purchase) will not be present in trainData_mat.
+trainData_mat &lt;- predict(dummies_model, newdata = trainData)
+
+# # Convert to dataframe
+trainData &lt;- data.frame(trainData_mat)
+
+# # See the structure of the new dataset
+str(trainData)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    857 obs. of  18 variables:
+##  $ WeekofPurchase: num  -1.1 -1.74 -1.68 -1.29 -1.04 ...
+##  $ StoreID       : num  -1.29 -1.29 1.33 1.33 1.33 ...
+##  $ PriceCH       : num  -1.14 -1.73 -1.73 -1.14 -1.14 ...
+##  $ PriceMM       : num  -0.688 -2.898 -2.898 -0.688 -0.688 ...
+##  $ DiscCH        : num  -0.452 -0.452 -0.452 -0.452 -0.452 ...
+##  $ DiscMM        : num  -0.582 -0.582 -0.582 1.341 1.341 ...
+##  $ SpecialCH     : num  -0.429 -0.429 -0.429 2.329 -0.429 ...
+##  $ SpecialMM     : num  -0.42 -0.42 -0.42 -0.42 -0.42 ...
+##  $ LoyalCH       : num  -0.205 -0.525 1.256 1.324 1.35 ...
+##  $ SalePriceMM   : num  0.113 -1.101 -1.101 -1.506 -1.506 ...
+##  $ SalePriceCH   : num  -0.431 -0.844 -0.844 -0.431 -0.431 ...
+##  $ PriceDiff     : num  0.341 -0.563 -0.563 -1.165 -1.165 ...
+##  $ Store7.No     : num  1 1 0 0 0 0 0 0 0 1 ...
+##  $ Store7.Yes    : num  0 0 1 1 1 1 1 1 1 0 ...
+##  $ PctDiscMM     : num  -0.588 -0.588 -0.588 1.447 1.447 ...
+##  $ PctDiscCH     : num  -0.448 -0.448 -0.448 -0.448 -0.448 ...
+##  $ ListPriceDiff : num  0.211 -1.988 -1.988 0.211 0.211 ...
+##  $ STORE         : num  -0.457 -0.457 -1.15 -1.15 -1.15 ...</code></pre>
+</div>
+<div id="why-normalization" class="section level1">
+<h1>Why Normalization</h1>
+<p>为了消除不同变量由于单位造成的权重影响，我们对数据进行数据标准化</p>
+</div>
+<div id="how-1" class="section level1">
+<h1>How</h1>
+<ol style="list-style-type: decimal">
+<li><strong>range:</strong> Normalize values so it ranges between 0 and 1</li>
+<li><strong>center:</strong> Subtract Mean</li>
+<li><strong>scale:</strong> Divide by standard deviation</li>
+<li><strong>BoxCox:</strong> Remove skewness leading to normality. Values must be &gt; 0</li>
+<li><strong>YeoJohnson:</strong> Like BoxCox, but works for negative values.</li>
+<li><strong>expoTrans:</strong> Exponential transformation, works for negative values.</li>
+<li><strong>pca:</strong> Replace with principal components</li>
+<li><strong>ica:</strong> Replace with independent components</li>
+<li><strong>spatialSign:</strong> Project the data to a unit circle</li>
+</ol>
+<pre class="r"><code>preProcess_range_model &lt;- preProcess(trainData, method=&#39;range&#39;)
+trainData &lt;- predict(preProcess_range_model, newdata = trainData)
+
+# Append the Y variable
+trainData$Purchase &lt;- y
+
+apply(trainData[, 1:10], 2, FUN=function(x){c(&#39;min&#39;=min(x), &#39;max&#39;=max(x))})</code></pre>
+<pre><code>##     WeekofPurchase StoreID PriceCH PriceMM DiscCH DiscMM SpecialCH
+## min              0       0       0       0      0      0         0
+## max              1       1       1       1      1      1         1
+##     SpecialMM LoyalCH SalePriceMM
+## min         0       0           0
+## max         1       1           1</code></pre>
+<pre class="r"><code>save.image(file = &quot;../../data/craet_3-3.Rdata&quot;)</code></pre>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="//tags/caret/">caret</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/why-should-i-trust-you/" data-tooltip="Why should I trust you 🤖?">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
         
-      </p>
-    </div>
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/03/how-to-create-dummy-variables-and-normalization/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/how-to-create-dummy-variables-and-normalization/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/how-to-create-dummy-variables-and-normalization/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
   </div>
-  
-    <a href="/2018/03/how-to-use-the-ncbis-new-api-keys/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/21/5ab1c0c655826.jpg"/>
-      </div>
-    </a>
-  
-</article>
+
 
             
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
             
-
-          </section>
-        
+          </div>
+        </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
     &copy; 2018 Jixing Liu. All Rights Reserved
@@ -268,6 +415,100 @@
 </footer>
 
       </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/why-should-i-trust-you/" data-tooltip="Why should I trust you 🤖?">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/03/how-to-create-dummy-variables-and-normalization/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/how-to-create-dummy-variables-and-normalization/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/how-to-create-dummy-variables-and-normalization/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F03%2Fhow-to-create-dummy-variables-and-normalization%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F03%2Fhow-to-create-dummy-variables-and-normalization%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F03%2Fhow-to-create-dummy-variables-and-normalization%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
     </div>
     
     <div id="about">
@@ -551,6 +792,32 @@ $(document).ready(function() {
   });
 });
 </script>
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = '\/2018\/03\/how-to-create-dummy-variables-and-normalization\/';
+          
+            this.page.identifier = '\/2018\/03\/how-to-create-dummy-variables-and-normalization\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'jixing';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
 
 
 

@@ -2,12 +2,265 @@
   <title>student zero </title>
   <link href="/index.xml" rel="self"/>
   <link href="/"/>
-  <updated>2018-03-24T00:00:00+00:00</updated>
+  <updated>2018-03-26T00:00:00+00:00</updated>
   <id>/</id>
   <author>
     <name>Jixing Liu</name>
   </author>
   <generator>Hugo -- gohugo.io</generator>
+  <entry>
+    <title type="html"><![CDATA[3.3 How To Create Dummy Variables And Normalization]]></title>
+    <link href="/2018/03/how-to-create-dummy-variables-and-normalization/"/>
+    <id>/2018/03/how-to-create-dummy-variables-and-normalization/</id>
+    <published>2018-03-26T00:00:00+00:00</published>
+    <updated>2018-03-26T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<div id="load-package-and-data" class="section level1">
+<h1>Load Package And Data</h1>
+<pre class="r"><code>load(&quot;../../data/craet_3-2.Rdata&quot;)
+library(tidyverse)
+library(caret)</code></pre>
+</div>
+<div id="why-dummy-variables" class="section level1">
+<h1>Why Dummy Variables</h1>
+<p>对于字符型的因子变量，我们需要把它转变为有序的数值，一般转为 0，1 的二变量， 这样0 就代表基础水平， 1代表比较组</p>
+<p><img src="https://i.loli.net/2018/03/26/5ab847e351487.jpg" width="30%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="how" class="section level1">
+<h1>How</h1>
+<pre class="r"><code># One-Hot Encoding
+# Creating dummy variables is converting a categorical variable to as many binary variables as here are categories.
+dummies_model &lt;- dummyVars(Purchase ~ ., data=trainData)
+
+# Create the dummy variables using predict. The Y variable (Purchase) will not be present in trainData_mat.
+trainData_mat &lt;- predict(dummies_model, newdata = trainData)
+
+# # Convert to dataframe
+trainData &lt;- data.frame(trainData_mat)
+
+# # See the structure of the new dataset
+str(trainData)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    857 obs. of  18 variables:
+##  $ WeekofPurchase: num  -1.1 -1.74 -1.68 -1.29 -1.04 ...
+##  $ StoreID       : num  -1.29 -1.29 1.33 1.33 1.33 ...
+##  $ PriceCH       : num  -1.14 -1.73 -1.73 -1.14 -1.14 ...
+##  $ PriceMM       : num  -0.688 -2.898 -2.898 -0.688 -0.688 ...
+##  $ DiscCH        : num  -0.452 -0.452 -0.452 -0.452 -0.452 ...
+##  $ DiscMM        : num  -0.582 -0.582 -0.582 1.341 1.341 ...
+##  $ SpecialCH     : num  -0.429 -0.429 -0.429 2.329 -0.429 ...
+##  $ SpecialMM     : num  -0.42 -0.42 -0.42 -0.42 -0.42 ...
+##  $ LoyalCH       : num  -0.205 -0.525 1.256 1.324 1.35 ...
+##  $ SalePriceMM   : num  0.113 -1.101 -1.101 -1.506 -1.506 ...
+##  $ SalePriceCH   : num  -0.431 -0.844 -0.844 -0.431 -0.431 ...
+##  $ PriceDiff     : num  0.341 -0.563 -0.563 -1.165 -1.165 ...
+##  $ Store7.No     : num  1 1 0 0 0 0 0 0 0 1 ...
+##  $ Store7.Yes    : num  0 0 1 1 1 1 1 1 1 0 ...
+##  $ PctDiscMM     : num  -0.588 -0.588 -0.588 1.447 1.447 ...
+##  $ PctDiscCH     : num  -0.448 -0.448 -0.448 -0.448 -0.448 ...
+##  $ ListPriceDiff : num  0.211 -1.988 -1.988 0.211 0.211 ...
+##  $ STORE         : num  -0.457 -0.457 -1.15 -1.15 -1.15 ...</code></pre>
+</div>
+<div id="why-normalization" class="section level1">
+<h1>Why Normalization</h1>
+<p>为了消除不同变量由于单位造成的权重影响，我们对数据进行数据标准化</p>
+</div>
+<div id="how-1" class="section level1">
+<h1>How</h1>
+<ol style="list-style-type: decimal">
+<li><strong>range:</strong> Normalize values so it ranges between 0 and 1</li>
+<li><strong>center:</strong> Subtract Mean</li>
+<li><strong>scale:</strong> Divide by standard deviation</li>
+<li><strong>BoxCox:</strong> Remove skewness leading to normality. Values must be &gt; 0</li>
+<li><strong>YeoJohnson:</strong> Like BoxCox, but works for negative values.</li>
+<li><strong>expoTrans:</strong> Exponential transformation, works for negative values.</li>
+<li><strong>pca:</strong> Replace with principal components</li>
+<li><strong>ica:</strong> Replace with independent components</li>
+<li><strong>spatialSign:</strong> Project the data to a unit circle</li>
+</ol>
+<pre class="r"><code>preProcess_range_model &lt;- preProcess(trainData, method=&#39;range&#39;)
+trainData &lt;- predict(preProcess_range_model, newdata = trainData)
+
+# Append the Y variable
+trainData$Purchase &lt;- y
+
+apply(trainData[, 1:10], 2, FUN=function(x){c(&#39;min&#39;=min(x), &#39;max&#39;=max(x))})</code></pre>
+<pre><code>##     WeekofPurchase StoreID PriceCH PriceMM DiscCH DiscMM SpecialCH
+## min              0       0       0       0      0      0         0
+## max              1       1       1       1      1      1         1
+##     SpecialMM LoyalCH SalePriceMM
+## min         0       0           0
+## max         1       1           1</code></pre>
+<pre class="r"><code>save.image(file = &quot;../../data/craet_3-3.Rdata&quot;)</code></pre>
+</div>
+]]></content>
+  </entry>
+  <entry>
+    <title type="html"><![CDATA[Why should I trust you 🤖?]]></title>
+    <link href="/2018/03/why-should-i-trust-you/"/>
+    <id>/2018/03/why-should-i-trust-you/</id>
+    <published>2018-03-26T00:00:00+00:00</published>
+    <updated>2018-03-26T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<p>传统的机器学习工作流程主要集中在模型训练和优化上; 最好的模型通常是通过像精度或者错误这样的性能度量来选择的，而且如果它通过了这些性能标准的某些阈值，我们倾向于假设一个模型是足够好的。在机器学习的许多应用中，用户会使用一个模型来帮助做决定， 例如：一位医生不会对病人进行手术，仅仅因为这个模型说不应该进行手术？</p>
+<p>由于复杂的机器学习模型本质上是黑盒子，而且太复杂，机器学习模型做出的分类决定通常很难被人类的大脑所理解，但是能够理解和解释这些模型对于提高模型质量，提高信任度和透明度以及减少偏见非常重要，因为人类往往具有良好的直觉和因果推理，这些都是难以在数据评估指标中捕获。</p>
+<p>因此，我们希望能够形象的理解它们的工作原理：为什么一个模型将具有特定标签的案例进行准确分类。eg: 为什么一个乳腺肿块样本被归类为“恶性”而不是“良性，仅仅因为它长得丑吗？</p>
+<blockquote>
+<p><a href="https://www.oreilly.com/learning/introduction-to-local-interpretable-model-agnostic-explanations-lime">Local Interpretable Model-Agnostic Explanations (LIME)</a> is an attempt to make these complex models at least partly understandable. The method has been published in <a href="https://arxiv.org/pdf/1602.04938.pdf">“Why Should I Trust You?”</a> Explaining the Predictions of Any Classifier. By Marco Tulio Ribeiro, Sameer Singh and Carlos Guestrin from the University of Washington in Seattle</p>
+</blockquote>
+<div id="how-lime-works" class="section level2">
+<h2><strong>How LIME works</strong></h2>
+<blockquote>
+<p>lime is able to explain all models for which we can obtain prediction probabilities (in R, that is every model that works with predict(type = “prob”)). It makes use of the fact that linear models are easy to explain because they are based on linear relationships between features and class labels: The complex model function is approximated by locally fitting linear models to permutations of the original training set.On each permutation, a linear model is being fit and weights are given so that incorrect classification of instances that are more similar to the original data are penalized (positive weights support a decision, negative weights contradict them). This will give an approximation of how much (and in which way) each feature contributed to a decision made by the model</p>
+</blockquote>
+<p><img src="https://i.loli.net/2018/02/11/5a7fa56fd7333.jpg" width="30%" /></p>
+<blockquote>
+<p>We take the image on the left and divide it into interpretable components</p>
+</blockquote>
+<p><img src="https://i.loli.net/2018/02/11/5a7faba0d302a.jpg" width="30%" /></p>
+<blockquote>
+<p>we then generate a data set of perturbed instances by turning some of the interpretable components “oﬀ”. For each perturbed instance, we get the probability that a tree frog is in the image according to the model.</p>
+</blockquote>
+<p><img src="https://i.loli.net/2018/02/11/5a7fac3ca8787.jpg" width="30%" /></p>
+<blockquote>
+<p>We then learn a simple (linear) model on this data set, which is locally weighted—that is, we care more about making mistakes in perturbed instances that are more similar to the original image</p>
+</blockquote>
+<p><img src="https://i.loli.net/2018/02/11/5a7fac8382a86.jpg" width="30%" /></p>
+<blockquote>
+<p>the end, we present the superpixels with highest positive weights as an explanation, graying out everything else</p>
+</blockquote>
+<p><img src="https://i.loli.net/2018/02/11/5a7faf16f0320.jpg" width="30%" /></p>
+<p>🤖预测这张图是个树蛙是因为这个部分,所以🤖预测结果是比较可信的。 <img src="https://i.loli.net/2018/02/11/5a7faebabe34e.jpg" style="display: block; margin: auto;" /></p>
+<p>🤖预测这张图是台球是根据这些部分，所以🤖预测结果是不可信的。 <img src="https://i.loli.net/2018/02/11/5a7fb61ecb060.jpg" style="display: block; margin: auto;" /></p>
+</div>
+<div id="example-in-r" class="section level2">
+<h2><strong>Example in R</strong></h2>
+<div id="prepare-the-breast-cancer-data" class="section level3">
+<h3>01.Prepare the breast cancer data</h3>
+<p>This <strong>data</strong> of example comes from the book of <strong>R in action</strong></p>
+<pre class="r"><code>loc &lt;- &quot;http://archive.ics.uci.edu/ml/machine-learning-databases/&quot;
+ds  &lt;- &quot;breast-cancer-wisconsin/breast-cancer-wisconsin.data&quot;
+url &lt;- paste(loc, ds, sep=&quot;&quot;)
+
+breast &lt;- read.table(url, sep=&quot;,&quot;, header=FALSE, na.strings=&quot;?&quot;)
+names(breast) &lt;- c(&quot;ID&quot;, &quot;clumpThickness&quot;, &quot;sizeUniformity&quot;,
+                   &quot;shapeUniformity&quot;, &quot;maginalAdhesion&quot;, 
+                   &quot;singleEpithelialCellSize&quot;, &quot;bareNuclei&quot;, 
+                   &quot;blandChromatin&quot;, &quot;normalNucleoli&quot;, &quot;mitosis&quot;, &quot;class&quot;)
+
+df &lt;- breast[-1]
+df$class &lt;- factor(df$class, levels=c(2,4), 
+                   labels=c(&quot;benign&quot;, &quot;malignant&quot;))
+
+set.seed(1234)
+train &lt;- sample(nrow(df), 0.7*nrow(df))
+df.train &lt;- df[train,]
+df.validate &lt;- df[-train,]
+table(df.train$class)</code></pre>
+<pre><code>## 
+##    benign malignant 
+##       329       160</code></pre>
+<pre class="r"><code>table(df.validate$class)</code></pre>
+<pre><code>## 
+##    benign malignant 
+##       129        81</code></pre>
+</div>
+<div id="create-decision-tree-model" class="section level3">
+<h3>02 Create decision tree model</h3>
+<pre class="r"><code>library(rpart)
+set.seed(1234)
+dtree &lt;- rpart(class ~ ., data=df.train, method=&quot;class&quot;,      
+               parms=list(split=&quot;information&quot;))
+dtree$cptable</code></pre>
+<pre><code>##         CP nsplit rel error  xerror       xstd
+## 1 0.800000      0   1.00000 1.00000 0.06484605
+## 2 0.046875      1   0.20000 0.30625 0.04150018
+## 3 0.012500      3   0.10625 0.20625 0.03467089
+## 4 0.010000      4   0.09375 0.18125 0.03264401</code></pre>
+<pre class="r"><code>plotcp(dtree)</code></pre>
+<p><img src="/post/2018-02-11-why-should-i-trust-you_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code>dtree.pruned &lt;- prune(dtree, cp=.0125)</code></pre>
+</div>
+<div id="predict" class="section level3">
+<h3>03 predict</h3>
+<pre class="r"><code>dtree.pred &lt;- predict(dtree.pruned, df.validate, type=&quot;class&quot;)
+(dtree.perf &lt;- table(df.validate$class, dtree.pred, 
+                    dnn=c(&quot;Actual&quot;, &quot;Predicted&quot;)))</code></pre>
+<pre><code>##            Predicted
+## Actual      benign malignant
+##   benign       122         7
+##   malignant      2        79</code></pre>
+</div>
+<div id="plot-decision-tree" class="section level3">
+<h3>04 plot decision tree</h3>
+<pre class="r"><code>#plot01
+library(rpart.plot)
+prp(dtree.pruned, type = 2, extra = 104,  
+    fallen.leaves = TRUE, main=&quot;Decision Tree&quot;)
+#plot02
+library(partykit)</code></pre>
+<p><img src="/post/2018-02-11-why-should-i-trust-you_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<pre class="r"><code>library(dplyr)
+dtree.pruned %&gt;% as.party() %&gt;% plot()</code></pre>
+<p><img src="/post/2018-02-11-why-should-i-trust-you_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
+</div>
+<div id="lime-why-should-i-trust-you" class="section level3">
+<h3>LIME: why should I trust you 🤖?</h3>
+<pre class="r"><code>library(lime)
+explainer &lt;- lime(df.train, model = dtree.pruned)
+
+# Explain new observation
+#[model_type](https://github.com/thomasp85/lime/blob/master/R/models.R)
+model_type.rpart &lt;- function(x, ...) &#39;classification&#39;#defined model_type method
+test.data &lt;- 
+  df.validate %&gt;% 
+  dplyr::select(-class) %&gt;% 
+  head(3)
+explanation &lt;- lime::explain(test.data, explainer, n_labels = 1, n_features = 2)
+
+# The output is provided in a consistent tabular format and includes the
+# output from the model.
+head(explanation)</code></pre>
+<pre><code>##       model_type case     label label_prob  model_r2 model_intercept
+## 1 classification    3    benign  0.9933993 0.1809444      0.05042991
+## 2 classification    3    benign  0.9933993 0.1809444      0.05042991
+## 3 classification    4 malignant  0.9507042 0.1918642      0.54743276
+## 4 classification    4 malignant  0.9507042 0.1918642      0.54743276
+## 5 classification    5    benign  0.9933993 0.1924691      0.05378321
+## 6 classification    5    benign  0.9933993 0.1924691      0.05378321
+##   model_prediction                  feature feature_value feature_weight
+## 1        0.4637659           blandChromatin             3   -0.001977357
+## 2        0.4637659           sizeUniformity             1    0.415313316
+## 3        0.9524157 singleEpithelialCellSize             3    0.002885248
+## 4        0.9524157           sizeUniformity             8    0.402097681
+## 5        0.4712710          maginalAdhesion             3   -0.004533032
+## 6        0.4712710           sizeUniformity             1    0.422020822
+##                        feature_desc                      data
+## 1           2 &lt; blandChromatin &lt;= 3 3, 1, 1, 1, 2, 2, 3, 1, 1
+## 2               sizeUniformity &lt;= 4 3, 1, 1, 1, 2, 2, 3, 1, 1
+## 3 2 &lt; singleEpithelialCellSize &lt;= 4 6, 8, 8, 1, 3, 4, 3, 7, 1
+## 4                4 &lt; sizeUniformity 6, 8, 8, 1, 3, 4, 3, 7, 1
+## 5              maginalAdhesion &lt;= 3 4, 1, 1, 3, 2, 1, 3, 1, 1
+## 6               sizeUniformity &lt;= 4 4, 1, 1, 3, 2, 1, 3, 1, 1
+##               prediction
+## 1 0.99339934, 0.00660066
+## 2 0.99339934, 0.00660066
+## 3 0.04929577, 0.95070423
+## 4 0.04929577, 0.95070423
+## 5 0.99339934, 0.00660066
+## 6 0.99339934, 0.00660066</code></pre>
+<pre class="r"><code># And can be visualised directly
+plot_features(explanation)</code></pre>
+<p><img src="/post/2018-02-11-why-should-i-trust-you_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+</div>
+<div id="links" class="section level2">
+<h2><strong>Links</strong></h2>
+<ul>
+<li><a href="http://archive.ics.uci.edu/ml/datasets/Chronic_Kidney_Disease">CKD data set</a></li>
+<li><a href="https://github.com/marcotcr/lime">open-source Python code for LIME</a></li>
+<li><a href="https://github.com/thomasp85/lime">R package for LIME</a></li>
+</ul>
+</div>
+]]></content>
+  </entry>
   <entry>
     <title type="html"><![CDATA[3.2 statistic description and impute missing value]]></title>
     <link href="/2018/03/3-2-statistic-description-and-impute-missing-value/"/>
@@ -70,6 +323,7 @@ library(RANN)  # required for knnInpute
 trainData &lt;- predict(preProcess_missingdata_model, newdata = trainData)
 anyNA(trainData)</code></pre>
 <pre><code>## [1] FALSE</code></pre>
+<pre class="r"><code>save.image(file = &quot;../../data/craet_3-2.Rdata&quot;)</code></pre>
 </div>
 ]]></content>
   </entry>
@@ -323,174 +577,6 @@ plot_model(poll_lm, &quot;poll_average&quot;, &quot;election_result&quot;)</code
 ]]></content>
   </entry>
   <entry>
-    <title type="html"><![CDATA[Why should I trust you 🤖?]]></title>
-    <link href="/2018/02/why-should-i-trust-you/"/>
-    <id>/2018/02/why-should-i-trust-you/</id>
-    <published>2018-02-11T00:00:00+00:00</published>
-    <updated>2018-02-11T00:00:00+00:00</updated>
-    <content type="html"><![CDATA[<p>传统的机器学习工作流程主要集中在模型训练和优化上; 最好的模型通常是通过像精度或者错误这样的性能度量来选择的，而且如果它通过了这些性能标准的某些阈值，我们倾向于假设一个模型是足够好的。在机器学习的许多应用中，用户会使用一个模型来帮助做决定， 例如：一位医生不会对病人进行手术，仅仅因为这个模型说不应该进行手术？</p>
-<p>由于复杂的机器学习模型本质上是黑盒子，而且太复杂，机器学习模型做出的分类决定通常很难被人类的大脑所理解，但是能够理解和解释这些模型对于提高模型质量，提高信任度和透明度以及减少偏见非常重要，因为人类往往具有良好的直觉和因果推理，这些都是难以在数据评估指标中捕获。</p>
-<p>因此，我们希望能够形象的理解它们的工作原理：为什么一个模型将具有特定标签的案例进行准确分类。eg: 为什么一个乳腺肿块样本被归类为“恶性”而不是“良性，仅仅因为它长得丑吗？</p>
-<blockquote>
-<p><a href="https://www.oreilly.com/learning/introduction-to-local-interpretable-model-agnostic-explanations-lime">Local Interpretable Model-Agnostic Explanations (LIME)</a> is an attempt to make these complex models at least partly understandable. The method has been published in <a href="https://arxiv.org/pdf/1602.04938.pdf">“Why Should I Trust You?”</a> Explaining the Predictions of Any Classifier. By Marco Tulio Ribeiro, Sameer Singh and Carlos Guestrin from the University of Washington in Seattle</p>
-</blockquote>
-<div id="how-lime-works" class="section level2">
-<h2><strong>How LIME works</strong></h2>
-<blockquote>
-<p>lime is able to explain all models for which we can obtain prediction probabilities (in R, that is every model that works with predict(type = “prob”)). It makes use of the fact that linear models are easy to explain because they are based on linear relationships between features and class labels: The complex model function is approximated by locally fitting linear models to permutations of the original training set.On each permutation, a linear model is being fit and weights are given so that incorrect classification of instances that are more similar to the original data are penalized (positive weights support a decision, negative weights contradict them). This will give an approximation of how much (and in which way) each feature contributed to a decision made by the model</p>
-</blockquote>
-<p><img src="https://i.loli.net/2018/02/11/5a7fa56fd7333.jpg" width="30%" /></p>
-<blockquote>
-<p>We take the image on the left and divide it into interpretable components</p>
-</blockquote>
-<p><img src="https://i.loli.net/2018/02/11/5a7faba0d302a.jpg" width="30%" /></p>
-<blockquote>
-<p>we then generate a data set of perturbed instances by turning some of the interpretable components “oﬀ”. For each perturbed instance, we get the probability that a tree frog is in the image according to the model.</p>
-</blockquote>
-<p><img src="https://i.loli.net/2018/02/11/5a7fac3ca8787.jpg" width="30%" /></p>
-<blockquote>
-<p>We then learn a simple (linear) model on this data set, which is locally weighted—that is, we care more about making mistakes in perturbed instances that are more similar to the original image</p>
-</blockquote>
-<p><img src="https://i.loli.net/2018/02/11/5a7fac8382a86.jpg" width="30%" /></p>
-<blockquote>
-<p>the end, we present the superpixels with highest positive weights as an explanation, graying out everything else</p>
-</blockquote>
-<p><img src="https://i.loli.net/2018/02/11/5a7faf16f0320.jpg" width="30%" /></p>
-<p>🤖预测这张图是个树蛙是因为这个部分,所以🤖预测结果是比较可信的。 <img src="https://i.loli.net/2018/02/11/5a7faebabe34e.jpg" style="display: block; margin: auto;" /></p>
-<p>🤖预测这张图是台球是根据这些部分，所以🤖预测结果是不可信的。 <img src="https://i.loli.net/2018/02/11/5a7fb61ecb060.jpg" style="display: block; margin: auto;" /></p>
-</div>
-<div id="example-in-r" class="section level2">
-<h2><strong>Example in R</strong></h2>
-<div id="prepare-the-breast-cancer-data" class="section level3">
-<h3>01.Prepare the breast cancer data</h3>
-<p>This <strong>data</strong> of example comes from the book of <strong>R in action</strong></p>
-<pre class="r"><code>loc &lt;- &quot;http://archive.ics.uci.edu/ml/machine-learning-databases/&quot;
-ds  &lt;- &quot;breast-cancer-wisconsin/breast-cancer-wisconsin.data&quot;
-url &lt;- paste(loc, ds, sep=&quot;&quot;)
-
-breast &lt;- read.table(url, sep=&quot;,&quot;, header=FALSE, na.strings=&quot;?&quot;)
-names(breast) &lt;- c(&quot;ID&quot;, &quot;clumpThickness&quot;, &quot;sizeUniformity&quot;,
-                   &quot;shapeUniformity&quot;, &quot;maginalAdhesion&quot;, 
-                   &quot;singleEpithelialCellSize&quot;, &quot;bareNuclei&quot;, 
-                   &quot;blandChromatin&quot;, &quot;normalNucleoli&quot;, &quot;mitosis&quot;, &quot;class&quot;)
-
-df &lt;- breast[-1]
-df$class &lt;- factor(df$class, levels=c(2,4), 
-                   labels=c(&quot;benign&quot;, &quot;malignant&quot;))
-
-set.seed(1234)
-train &lt;- sample(nrow(df), 0.7*nrow(df))
-df.train &lt;- df[train,]
-df.validate &lt;- df[-train,]
-table(df.train$class)</code></pre>
-<pre><code>## 
-##    benign malignant 
-##       329       160</code></pre>
-<pre class="r"><code>table(df.validate$class)</code></pre>
-<pre><code>## 
-##    benign malignant 
-##       129        81</code></pre>
-</div>
-<div id="create-decision-tree-model" class="section level3">
-<h3>02 Create decision tree model</h3>
-<pre class="r"><code>library(rpart)
-set.seed(1234)
-dtree &lt;- rpart(class ~ ., data=df.train, method=&quot;class&quot;,      
-               parms=list(split=&quot;information&quot;))
-dtree$cptable</code></pre>
-<pre><code>##         CP nsplit rel error  xerror       xstd
-## 1 0.800000      0   1.00000 1.00000 0.06484605
-## 2 0.046875      1   0.20000 0.30625 0.04150018
-## 3 0.012500      3   0.10625 0.20625 0.03467089
-## 4 0.010000      4   0.09375 0.18125 0.03264401</code></pre>
-<pre class="r"><code>plotcp(dtree)</code></pre>
-<p><img src="/post/2018-02-11-why-should-i-trust-you_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<pre class="r"><code>dtree.pruned &lt;- prune(dtree, cp=.0125)</code></pre>
-</div>
-<div id="predict" class="section level3">
-<h3>03 predict</h3>
-<pre class="r"><code>dtree.pred &lt;- predict(dtree.pruned, df.validate, type=&quot;class&quot;)
-(dtree.perf &lt;- table(df.validate$class, dtree.pred, 
-                    dnn=c(&quot;Actual&quot;, &quot;Predicted&quot;)))</code></pre>
-<pre><code>##            Predicted
-## Actual      benign malignant
-##   benign       122         7
-##   malignant      2        79</code></pre>
-</div>
-<div id="plot-decision-tree" class="section level3">
-<h3>04 plot decision tree</h3>
-<pre class="r"><code>#plot01
-library(rpart.plot)
-prp(dtree.pruned, type = 2, extra = 104,  
-    fallen.leaves = TRUE, main=&quot;Decision Tree&quot;)
-#plot02
-library(partykit)</code></pre>
-<p><img src="/post/2018-02-11-why-should-i-trust-you_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<pre class="r"><code>library(dplyr)
-dtree.pruned %&gt;% as.party() %&gt;% plot()</code></pre>
-<p><img src="/post/2018-02-11-why-should-i-trust-you_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
-</div>
-<div id="lime-why-should-i-trust-you" class="section level3">
-<h3>LIME: why should I trust you 🤖?</h3>
-<pre class="r"><code>library(lime)
-explainer &lt;- lime(df.train, model = dtree.pruned)
-
-# Explain new observation
-#[model_type](https://github.com/thomasp85/lime/blob/master/R/models.R)
-model_type.rpart &lt;- function(x, ...) &#39;classification&#39;#defined model_type method
-test.data &lt;- 
-  df.validate %&gt;% 
-  dplyr::select(-class) %&gt;% 
-  head(3)
-explanation &lt;- lime::explain(test.data, explainer, n_labels = 1, n_features = 2)
-
-# The output is provided in a consistent tabular format and includes the
-# output from the model.
-head(explanation)</code></pre>
-<pre><code>##       model_type case     label label_prob  model_r2 model_intercept
-## 1 classification    3    benign  0.9933993 0.1754620      0.05039863
-## 2 classification    3    benign  0.9933993 0.1754620      0.05039863
-## 3 classification    4 malignant  0.9507042 0.2006329      0.53850056
-## 4 classification    4 malignant  0.9507042 0.2006329      0.53850056
-## 5 classification    5    benign  0.9933993 0.1871606      0.05372340
-## 6 classification    5    benign  0.9933993 0.1871606      0.05372340
-##   model_prediction                  feature feature_value feature_weight
-## 1        0.4588963           blandChromatin             3   -0.001710722
-## 2        0.4588963           sizeUniformity             1    0.410208409
-## 3        0.9529770 singleEpithelialCellSize             3    0.003570030
-## 4        0.9529770           sizeUniformity             8    0.410906399
-## 5        0.4660418          maginalAdhesion             3   -0.004419457
-## 6        0.4660418           sizeUniformity             1    0.416737849
-##                        feature_desc                      data
-## 1           2 &lt; blandChromatin &lt;= 3 3, 1, 1, 1, 2, 2, 3, 1, 1
-## 2               sizeUniformity &lt;= 4 3, 1, 1, 1, 2, 2, 3, 1, 1
-## 3 2 &lt; singleEpithelialCellSize &lt;= 4 6, 8, 8, 1, 3, 4, 3, 7, 1
-## 4                4 &lt; sizeUniformity 6, 8, 8, 1, 3, 4, 3, 7, 1
-## 5              maginalAdhesion &lt;= 3 4, 1, 1, 3, 2, 1, 3, 1, 1
-## 6               sizeUniformity &lt;= 4 4, 1, 1, 3, 2, 1, 3, 1, 1
-##               prediction
-## 1 0.99339934, 0.00660066
-## 2 0.99339934, 0.00660066
-## 3 0.04929577, 0.95070423
-## 4 0.04929577, 0.95070423
-## 5 0.99339934, 0.00660066
-## 6 0.99339934, 0.00660066</code></pre>
-<pre class="r"><code># And can be visualised directly
-plot_features(explanation)</code></pre>
-<p><img src="/post/2018-02-11-why-should-i-trust-you_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-</div>
-</div>
-<div id="links" class="section level2">
-<h2><strong>Links</strong></h2>
-<ul>
-<li><a href="http://archive.ics.uci.edu/ml/datasets/Chronic_Kidney_Disease">CKD data set</a></li>
-<li><a href="https://github.com/marcotcr/lime">open-source Python code for LIME</a></li>
-<li><a href="https://github.com/thomasp85/lime">R package for LIME</a></li>
-</ul>
-</div>
-]]></content>
-  </entry>
-  <entry>
     <title type="html"><![CDATA[Conferences, webinars, podcasts and the likes]]></title>
     <link href="/page/conferences_podcasts_webinars/"/>
     <id>/page/conferences_podcasts_webinars/</id>
@@ -604,16 +690,6 @@ I talked about how blogging about R and Data Science helped me become a Data Sci
 <hr />
 
 <p>Also check out <a href="http://www.R-bloggers.com">R-bloggers</a> for lots of cool R stuff!</p>
-]]></content>
-  </entry>
-  <entry>
-    <title type="html"><![CDATA[Find all my other posts on my old website!]]></title>
-    <link href="/2017/07/find-all-my-other-posts-on-my-old-website/"/>
-    <id>/2017/07/find-all-my-other-posts-on-my-old-website/</id>
-    <published>2017-07-01T00:00:00+00:00</published>
-    <updated>2017-07-01T00:00:00+00:00</updated>
-    <content type="html"><![CDATA[<p>For all my other posts, see my old website:
-<a href="https://shiring.github.io">shiring.github.io</a></p>
 ]]></content>
   </entry>
 </feed>

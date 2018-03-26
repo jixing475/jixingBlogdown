@@ -1,7 +1,7 @@
 ---
 title: "Why should I trust you \U0001F916?"
 author: ZERO
-date: '2018-02-11'
+date: '2018-03-26'
 slug: why-should-i-trust-you
 categories:
   - machine learning
@@ -135,19 +135,19 @@ explanation &lt;- lime::explain(test.data, explainer, n_labels = 1, n_features =
 # output from the model.
 head(explanation)</code></pre>
 <pre><code>##       model_type case     label label_prob  model_r2 model_intercept
-## 1 classification    3    benign  0.9933993 0.1754620      0.05039863
-## 2 classification    3    benign  0.9933993 0.1754620      0.05039863
-## 3 classification    4 malignant  0.9507042 0.2006329      0.53850056
-## 4 classification    4 malignant  0.9507042 0.2006329      0.53850056
-## 5 classification    5    benign  0.9933993 0.1871606      0.05372340
-## 6 classification    5    benign  0.9933993 0.1871606      0.05372340
+## 1 classification    3    benign  0.9933993 0.1809444      0.05042991
+## 2 classification    3    benign  0.9933993 0.1809444      0.05042991
+## 3 classification    4 malignant  0.9507042 0.1918642      0.54743276
+## 4 classification    4 malignant  0.9507042 0.1918642      0.54743276
+## 5 classification    5    benign  0.9933993 0.1924691      0.05378321
+## 6 classification    5    benign  0.9933993 0.1924691      0.05378321
 ##   model_prediction                  feature feature_value feature_weight
-## 1        0.4588963           blandChromatin             3   -0.001710722
-## 2        0.4588963           sizeUniformity             1    0.410208409
-## 3        0.9529770 singleEpithelialCellSize             3    0.003570030
-## 4        0.9529770           sizeUniformity             8    0.410906399
-## 5        0.4660418          maginalAdhesion             3   -0.004419457
-## 6        0.4660418           sizeUniformity             1    0.416737849
+## 1        0.4637659           blandChromatin             3   -0.001977357
+## 2        0.4637659           sizeUniformity             1    0.415313316
+## 3        0.9524157 singleEpithelialCellSize             3    0.002885248
+## 4        0.9524157           sizeUniformity             8    0.402097681
+## 5        0.4712710          maginalAdhesion             3   -0.004533032
+## 6        0.4712710           sizeUniformity             1    0.422020822
 ##                        feature_desc                      data
 ## 1           2 &lt; blandChromatin &lt;= 3 3, 1, 1, 1, 2, 2, 3, 1, 1
 ## 2               sizeUniformity &lt;= 4 3, 1, 1, 1, 2, 2, 3, 1, 1
