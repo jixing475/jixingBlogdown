@@ -260,6 +260,25 @@
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/4-how-to-visualize-the-importance-of-variables-using-featureplot/">
+                <h3 class="media-heading">4 How To Visualize The Importance Of Variables Using featurePlot</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Load Package And Data load(&quot;../../data/craet_3-3.Rdata&quot;) library(tidyverse) library(caret)  Q: How The Predictors Influence The Y 选择重要的变量: 通过观察在Y的分组下各个变量的分布情况
+一般有 箱线图 和 密度图
+ box-plot featurePlot(x = trainData[, 1:18], y = trainData$Purchase, plot = &quot;box&quot;,#&quot;density&quot; strip=strip.custom(par.strip.text=list(cex=.7)), scales = list(x = list(relation=&quot;free&quot;), y = list(relation=&quot;free&quot;)))  Density featurePlot(x = trainData[, 1:18], y = trainData$Purchase, plot = &quot;density&quot;, strip=strip.custom(par.strip.text=list(cex=.7)), scales = list(x = list(relation=&quot;free&quot;), y = list(relation=&quot;free&quot;)))  </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2018/03/how-to-create-dummy-variables-and-normalization/">
                 <h3 class="media-heading">3.3 How To Create Dummy Variables And Normalization</h3>
               </a>
@@ -433,23 +452,6 @@ library(tidyverse) # general tasks library(broom) # tidy model output library(gg
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/post/">
-                <h3 class="media-heading">Posts</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Mar 3, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -457,7 +459,7 @@ library(tidyverse) # general tasks library(broom) # tidy model output library(gg
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         10 posts found
+         11 posts found
       </p>
     </div>
   </div>

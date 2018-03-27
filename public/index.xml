@@ -2,12 +2,51 @@
   <title>student zero </title>
   <link href="/index.xml" rel="self"/>
   <link href="/"/>
-  <updated>2018-03-26T00:00:00+00:00</updated>
+  <updated>2018-03-27T00:00:00+00:00</updated>
   <id>/</id>
   <author>
     <name>Jixing Liu</name>
   </author>
   <generator>Hugo -- gohugo.io</generator>
+  <entry>
+    <title type="html"><![CDATA[4 How To Visualize The Importance Of Variables Using featurePlot]]></title>
+    <link href="/2018/03/4-how-to-visualize-the-importance-of-variables-using-featureplot/"/>
+    <id>/2018/03/4-how-to-visualize-the-importance-of-variables-using-featureplot/</id>
+    <published>2018-03-27T00:00:00+00:00</published>
+    <updated>2018-03-27T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<div id="load-package-and-data" class="section level1">
+<h1>Load Package And Data</h1>
+<pre class="r"><code>load(&quot;../../data/craet_3-3.Rdata&quot;)
+library(tidyverse)
+library(caret)</code></pre>
+</div>
+<div id="q-how-the-predictors-influence-the-y" class="section level1">
+<h1>Q: How The Predictors Influence The Y</h1>
+<p>选择重要的变量: 通过观察在Y的分组下各个变量的分布情况</p>
+<p>一般有 箱线图 和 密度图</p>
+</div>
+<div id="box-plot" class="section level1">
+<h1>box-plot</h1>
+<pre class="r"><code>featurePlot(x = trainData[, 1:18], 
+            y = trainData$Purchase, 
+            plot = &quot;box&quot;,#&quot;density&quot;
+            strip=strip.custom(par.strip.text=list(cex=.7)),
+            scales = list(x = list(relation=&quot;free&quot;), 
+                          y = list(relation=&quot;free&quot;)))</code></pre>
+<p><img src="/post/2018-03-27-4-how-to-visualize-the-importance-of-variables-using-featureplot_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="density" class="section level1">
+<h1>Density</h1>
+<pre class="r"><code>featurePlot(x = trainData[, 1:18], 
+            y = trainData$Purchase, 
+            plot = &quot;density&quot;,
+            strip=strip.custom(par.strip.text=list(cex=.7)),
+            scales = list(x = list(relation=&quot;free&quot;), 
+                          y = list(relation=&quot;free&quot;)))</code></pre>
+<p><img src="/post/2018-03-27-4-how-to-visualize-the-importance-of-variables-using-featureplot_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+]]></content>
+  </entry>
   <entry>
     <title type="html"><![CDATA[3.3 How To Create Dummy Variables And Normalization]]></title>
     <link href="/2018/03/how-to-create-dummy-variables-and-normalization/"/>

@@ -1,0 +1,56 @@
+---
+title: 4 How To Visualize The Importance Of Variables Using featurePlot
+author: ZERO
+date: '2018-03-27'
+slug: 4-how-to-visualize-the-importance-of-variables-using-featureplot
+categories:
+  - machine learning
+tags:
+  - caret
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/03/27/5ab98e69022d0.jpg
+metaAlignment: center
+coverMeta: out
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE
+)
+```
+# Load Package And Data
+```{r}
+load("../../data/craet_3-3.Rdata")
+library(tidyverse)
+library(caret)
+```
+
+
+#Q: How The Predictors Influence The Y
+
+选择重要的变量: 通过观察在Y的分组下各个变量的分布情况
+
+一般有 箱线图 和 密度图
+
+# box-plot
+
+```{r}
+featurePlot(x = trainData[, 1:18], 
+            y = trainData$Purchase, 
+            plot = "box",#"density"
+            strip=strip.custom(par.strip.text=list(cex=.7)),
+            scales = list(x = list(relation="free"), 
+                          y = list(relation="free")))
+```
+
+# Density
+```{r}
+featurePlot(x = trainData[, 1:18], 
+            y = trainData$Purchase, 
+            plot = "density",
+            strip=strip.custom(par.strip.text=list(cex=.7)),
+            scales = list(x = list(relation="free"), 
+                          y = list(relation="free")))
+```
+
