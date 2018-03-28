@@ -2,12 +2,214 @@
   <title>student zero </title>
   <link href="/index.xml" rel="self"/>
   <link href="/"/>
-  <updated>2018-03-28T00:00:00+00:00</updated>
+  <updated>2018-03-29T00:00:00+00:00</updated>
   <id>/</id>
   <author>
     <name>Jixing Liu</name>
   </author>
   <generator>Hugo -- gohugo.io</generator>
+  <entry>
+    <title type="html"><![CDATA[6 Training and Tuning the model]]></title>
+    <link href="/2018/03/6-training-and-tuning-the-model/"/>
+    <id>/2018/03/6-training-and-tuning-the-model/</id>
+    <published>2018-03-29T00:00:00+00:00</published>
+    <updated>2018-03-29T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<div id="load-package-and-data" class="section level1">
+<h1>Load Package And Data</h1>
+</div>
+<div id="training" class="section level1">
+<h1>Training</h1>
+<div id="how-to-train-the-model-and-interpret-the-results" class="section level2">
+<h2>1. How to train the model and interpret the results?</h2>
+<p>Once you have chosen an algorithm, building the model is fairly easy using the train() function</p>
+<p><code>train()</code> does multiple other things like:</p>
+<ol style="list-style-type: decimal">
+<li><em>Cross validating the model</em></li>
+<li><em>Tune the hyper parameters for optimal model performance</em></li>
+<li><em>Choose the optimal model based on a given evaluation metric</em></li>
+<li><em>Preprocess the predictors (what we did so far using preProcess())</em></li>
+</ol>
+<pre class="r"><code>#====See available algorithms in caret====
+modelnames &lt;- paste(names(getModelInfo()), collapse=&#39;,  &#39;)
+modelnames</code></pre>
+<pre><code>## [1] &quot;ada,  AdaBag,  AdaBoost.M1,  adaboost,  amdai,  ANFIS,  avNNet,  awnb,  awtan,  bag,  bagEarth,  bagEarthGCV,  bagFDA,  bagFDAGCV,  bam,  bartMachine,  bayesglm,  binda,  blackboost,  blasso,  blassoAveraged,  bridge,  brnn,  BstLm,  bstSm,  bstTree,  C5.0,  C5.0Cost,  C5.0Rules,  C5.0Tree,  cforest,  chaid,  CSimca,  ctree,  ctree2,  cubist,  dda,  deepboost,  DENFIS,  dnn,  dwdLinear,  dwdPoly,  dwdRadial,  earth,  elm,  enet,  evtree,  extraTrees,  fda,  FH.GBML,  FIR.DM,  foba,  FRBCS.CHI,  FRBCS.W,  FS.HGD,  gam,  gamboost,  gamLoess,  gamSpline,  gaussprLinear,  gaussprPoly,  gaussprRadial,  gbm_h2o,  gbm,  gcvEarth,  GFS.FR.MOGUL,  GFS.LT.RS,  GFS.THRIFT,  glm.nb,  glm,  glmboost,  glmnet_h2o,  glmnet,  glmStepAIC,  gpls,  hda,  hdda,  hdrda,  HYFIS,  icr,  J48,  JRip,  kernelpls,  kknn,  knn,  krlsPoly,  krlsRadial,  lars,  lars2,  lasso,  lda,  lda2,  leapBackward,  leapForward,  leapSeq,  Linda,  lm,  lmStepAIC,  LMT,  loclda,  logicBag,  LogitBoost,  logreg,  lssvmLinear,  lssvmPoly,  lssvmRadial,  lvq,  M5,  M5Rules,  manb,  mda,  Mlda,  mlp,  mlpKerasDecay,  mlpKerasDecayCost,  mlpKerasDropout,  mlpKerasDropoutCost,  mlpML,  mlpSGD,  mlpWeightDecay,  mlpWeightDecayML,  monmlp,  msaenet,  multinom,  mxnet,  mxnetAdam,  naive_bayes,  nb,  nbDiscrete,  nbSearch,  neuralnet,  nnet,  nnls,  nodeHarvest,  null,  OneR,  ordinalNet,  ORFlog,  ORFpls,  ORFridge,  ORFsvm,  ownn,  pam,  parRF,  PART,  partDSA,  pcaNNet,  pcr,  pda,  pda2,  penalized,  PenalizedLDA,  plr,  pls,  plsRglm,  polr,  ppr,  PRIM,  protoclass,  pythonKnnReg,  qda,  QdaCov,  qrf,  qrnn,  randomGLM,  ranger,  rbf,  rbfDDA,  Rborist,  rda,  regLogistic,  relaxo,  rf,  rFerns,  RFlda,  rfRules,  ridge,  rlda,  rlm,  rmda,  rocc,  rotationForest,  rotationForestCp,  rpart,  rpart1SE,  rpart2,  rpartCost,  rpartScore,  rqlasso,  rqnc,  RRF,  RRFglobal,  rrlda,  RSimca,  rvmLinear,  rvmPoly,  rvmRadial,  SBC,  sda,  sdwd,  simpls,  SLAVE,  slda,  smda,  snn,  sparseLDA,  spikeslab,  spls,  stepLDA,  stepQDA,  superpc,  svmBoundrangeString,  svmExpoString,  svmLinear,  svmLinear2,  svmLinear3,  svmLinearWeights,  svmLinearWeights2,  svmPoly,  svmRadial,  svmRadialCost,  svmRadialSigma,  svmRadialWeights,  svmSpectrumString,  tan,  tanSearch,  treebag,  vbmpRadial,  vglmAdjCat,  vglmContRatio,  vglmCumulative,  widekernelpls,  WM,  wsrf,  xgbDART,  xgbLinear,  xgbTree,  xyf&quot;</code></pre>
+<pre class="r"><code>modelLookup(c(&quot;lm&quot;,&quot;glm&quot;,&quot;knn&quot;,&quot;kknn&quot;,&quot;earth&quot;))</code></pre>
+<pre><code>##   model parameter           label forReg forClass probModel
+## 1  kknn      kmax Max. #Neighbors   TRUE     TRUE      TRUE
+## 2  kknn  distance        Distance   TRUE     TRUE      TRUE
+## 3  kknn    kernel          Kernel   TRUE     TRUE      TRUE</code></pre>
+<pre class="r"><code>#==== training====
+# Set the seed for reproducibility
+set.seed(100)
+
+# Train the model using randomForest and predict on the training data itself.
+model_mars = train(Purchase ~ ., data=trainData, method=&#39;earth&#39;)
+fitted &lt;- predict(model_mars)
+
+#see what the train() has generated.
+model_mars</code></pre>
+<pre><code>## Multivariate Adaptive Regression Spline 
+## 
+## 857 samples
+##  18 predictor
+##   2 classes: &#39;CH&#39;, &#39;MM&#39; 
+## 
+## No pre-processing
+## Resampling: Bootstrapped (25 reps) 
+## Summary of sample sizes: 857, 857, 857, 857, 857, 857, ... 
+## Resampling results across tuning parameters:
+## 
+##   nprune  Accuracy   Kappa    
+##    2      0.8013184  0.5746285
+##   10      0.8102610  0.5987447
+##   19      0.8103685  0.5986923
+## 
+## Tuning parameter &#39;degree&#39; was held constant at a value of 1
+## Accuracy was used to select the optimal model using the largest value.
+## The final values used for the model were nprune = 19 and degree = 1.</code></pre>
+<pre class="r"><code>#Plotting the model shows how the various iterations of hyperparameter search performed
+plot(model_mars, main=&quot;Model Accuracies with MARS&quot;)</code></pre>
+<p><img src="/post/2018-03-29-6-training-and-tuning-the-model_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="how-to-compute-variable-importance" class="section level2">
+<h2>2. How to compute variable importance?</h2>
+<p>Which variables came out to be useful?</p>
+<pre class="r"><code>varimp_mars &lt;- varImp(model_mars)
+plot(varimp_mars, main=&quot;Variable Importance with MARS&quot;)</code></pre>
+<p><img src="/post/2018-03-29-6-training-and-tuning-the-model_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+</div>
+<div id="tuning" class="section level1">
+<h1>Tuning</h1>
+<div id="preprocess-the-test-dataset-and-predict" class="section level2">
+<h2>1. Preprocess the test dataset and predict</h2>
+<p>The pre-processing in the following sequence: <strong>Missing Value imputation –&gt; One-Hot Encoding –&gt; Range Normalization</strong></p>
+<p><strong>All the information required for pre-processing is stored in the respective preProcess model and dummyVar model.</strong></p>
+<p>pass the testData through these models in the same sequence: <strong>preProcess_missingdata_model –&gt; dummies_model –&gt; preProcess_range_model</strong></p>
+<pre class="r"><code># Step 1: Impute missing values 
+testData2 &lt;- predict(preProcess_missingdata_model, testData)  
+
+# Step 2: Create one-hot encodings (dummy variables)
+testData3 &lt;- predict(dummies_model, testData2)
+
+# Step 3: Transform the features to range between 0 and 1
+testData4 &lt;- predict(preProcess_range_model, testData3)
+
+# View
+head(testData4[, 1:10])</code></pre>
+<pre><code>##    WeekofPurchase StoreID PriceCH   PriceMM DiscCH DiscMM SpecialCH
+## 2      0.23529412       0   0.150 0.5000000   0.00  0.375         0
+## 3      0.35294118       0   0.425 0.6666667   0.34  0.000         0
+## 6      0.05882353       1   0.000 0.5000000   0.00  0.000         0
+## 7      0.09803922       1   0.000 0.5000000   0.00  0.500         1
+## 9      0.15686275       1   0.150 0.5000000   0.00  0.500         0
+## 13     0.96078431       1   0.750 0.7333333   0.00  0.675         0
+##    SpecialMM   LoyalCH SalePriceMM
+## 2          1 0.6000352   0.4545455
+## 3          0 0.6800414   0.8181818
+## 6          1 0.9652913   0.7272727
+## 7          1 0.9722459   0.3636364
+## 9          0 0.9822616   0.3636364
+## 13         1 0.9927734   0.3636364</code></pre>
+</div>
+<div id="predict-on-testdata-and-confusion-matrix" class="section level2">
+<h2>2. Predict on testData and Confusion Matrix</h2>
+<pre class="r"><code># Predict on testData
+predicted &lt;- predict(model_mars, testData4)
+head(predicted)</code></pre>
+<pre><code>## [1] CH CH CH CH CH MM
+## Levels: CH MM</code></pre>
+<pre class="r"><code># Compute the confusion matrix
+confusionMatrix(reference = testData$Purchase, data = predicted, mode=&#39;everything&#39;, positive=&#39;MM&#39;)</code></pre>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  CH  MM
+##         CH 113  21
+##         MM  17  62
+##                                           
+##                Accuracy : 0.8216          
+##                  95% CI : (0.7635, 0.8705)
+##     No Information Rate : 0.6103          
+##     P-Value [Acc &gt; NIR] : 2.139e-11       
+##                                           
+##                   Kappa : 0.6216          
+##  Mcnemar&#39;s Test P-Value : 0.6265          
+##                                           
+##             Sensitivity : 0.7470          
+##             Specificity : 0.8692          
+##          Pos Pred Value : 0.7848          
+##          Neg Pred Value : 0.8433          
+##               Precision : 0.7848          
+##                  Recall : 0.7470          
+##                      F1 : 0.7654          
+##              Prevalence : 0.3897          
+##          Detection Rate : 0.2911          
+##    Detection Prevalence : 0.3709          
+##       Balanced Accuracy : 0.8081          
+##                                           
+##        &#39;Positive&#39; Class : MM              
+## </code></pre>
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>## R version 3.4.3 (2017-11-30)
+## Platform: x86_64-apple-darwin15.6.0 (64-bit)
+## Running under: macOS Sierra 10.12.6
+## 
+## Matrix products: default
+## BLAS: /Library/Frameworks/R.framework/Versions/3.4/Resources/lib/libRblas.0.dylib
+## LAPACK: /Library/Frameworks/R.framework/Versions/3.4/Resources/lib/libRlapack.dylib
+## 
+## locale:
+## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
+## 
+## attached base packages:
+## [1] parallel  methods   stats     graphics  grDevices utils     datasets 
+## [8] base     
+## 
+## other attached packages:
+##  [1] earth_4.6.1        plotmo_3.3.5       TeachingDemos_2.10
+##  [4] plotrix_3.7        doMC_1.3.5         iterators_1.0.9   
+##  [7] foreach_1.4.4      caret_6.0-78       lattice_0.20-35   
+## [10] forcats_0.3.0      stringr_1.3.0      dplyr_0.7.4       
+## [13] purrr_0.2.4        readr_1.1.1        tidyr_0.8.0       
+## [16] tibble_1.4.2       ggplot2_2.2.1      tidyverse_1.2.1   
+## 
+## loaded via a namespace (and not attached):
+##  [1] nlme_3.1-131.1     lubridate_1.7.3    dimRed_0.1.0      
+##  [4] httr_1.3.1         rprojroot_1.3-2    tools_3.4.3       
+##  [7] backports_1.1.2    R6_2.2.2           rpart_4.1-13      
+## [10] lazyeval_0.2.1     colorspace_1.3-2   nnet_7.3-12       
+## [13] withr_2.1.1.9000   tidyselect_0.2.4   mnormt_1.5-5      
+## [16] compiler_3.4.3     cli_1.0.0          rvest_0.3.2       
+## [19] xml2_1.2.0         bookdown_0.7       scales_0.5.0.9000 
+## [22] sfsmisc_1.1-2      DEoptimR_1.0-8     psych_1.7.8       
+## [25] robustbase_0.92-8  digest_0.6.15      foreign_0.8-69    
+## [28] rmarkdown_1.9      pkgconfig_2.0.1    htmltools_0.3.6   
+## [31] rlang_0.2.0.9000   readxl_1.0.0       ddalpha_1.3.1.1   
+## [34] bindr_0.1.1        jsonlite_1.5       ModelMetrics_1.1.0
+## [37] magrittr_1.5       Matrix_1.2-12      Rcpp_0.12.16      
+## [40] munsell_0.4.3      stringi_1.1.7      yaml_2.1.18       
+## [43] MASS_7.3-49        plyr_1.8.4         recipes_0.1.2     
+## [46] grid_3.4.3         crayon_1.3.4       haven_1.1.1       
+## [49] splines_3.4.3      hms_0.4.2          knitr_1.20        
+## [52] pillar_1.2.1       reshape2_1.4.3     codetools_0.2-15  
+## [55] stats4_3.4.3       CVST_0.2-1         glue_1.2.0        
+## [58] evaluate_0.10.1    blogdown_0.5       modelr_0.1.1      
+## [61] cellranger_1.1.0   RANN_2.5.1         gtable_0.2.0      
+## [64] kernlab_0.9-25     assertthat_0.2.0   DRR_0.0.3         
+## [67] xfun_0.1           gower_0.1.2        prodlim_1.6.1     
+## [70] broom_0.4.3        e1071_1.6-8        class_7.3-14      
+## [73] survival_2.41-3    timeDate_3043.102  RcppRoll_0.2.2    
+## [76] bindrcpp_0.2       lava_1.6           ipred_0.9-6</code></pre>
+<pre class="r"><code>save.image(file=&quot;../../data/craet_6.Rdata&quot;)</code></pre>
+</div>
+<div id="reference" class="section level2">
+<h2><strong>Reference</strong></h2>
+<p><a href="https://www.machinelearningplus.com/caret-package/">Traing and Tuning model</a></p>
+</div>
+</div>
+]]></content>
+  </entry>
   <entry>
     <title type="html"><![CDATA[5 How to do feature selection using recursive feature elimination]]></title>
     <link href="/2018/03/5-how-to-do-feature-selection-using-recursive-feature-elimination/"/>
@@ -22,9 +224,14 @@
 <p>Step 3: The model performances are compared across different subset sizes to arrive at the optimal number and list of final predictors.（比较不同自由度的测试错误率，给出最佳自由度模型选择）</p>
 <div id="load-package-and-data" class="section level1">
 <h1>Load Package And Data</h1>
-<pre class="r"><code>load(&quot;../../data/craet_4.Rdata&quot;)
+<pre class="r"><code># Load Package And Data
+load(&quot;../../data/craet_4.Rdata&quot;)
 library(tidyverse)
-library(caret)</code></pre>
+library(caret)
+#Set Parallel Processing - Decrease computation time
+if (!require(&quot;doMC&quot;)) install.packages(&quot;doMC&quot;)
+library(doMC)
+registerDoMC(cores = 4)</code></pre>
 </div>
 <div id="feature-select" class="section level1">
 <h1>Feature select</h1>
@@ -35,8 +242,9 @@ subsets &lt;- c(1:5, 10, 15, 18)
 
 #Step 1: Build a ML model on a training dataset and estimate the feature importances on the test dataset.（在确定自由度的情况下，评价变量在测试数据集中的重要性）
 ctrl &lt;- rfeControl(functions = rfFuncs,
-                   method = &quot;repeatedcv&quot;,
-                   repeats = 5,
+                   method = &quot;repeatedcv&quot;,#repeated K-fold cross-validation
+                   number = 10,#10-fold cross-validations
+                   repeats = 5, #five separate 10-fold cross-validations are used
                    verbose = FALSE)
 #Step 2: Keeping priority to the most important variables, iterate through by building models of given sizes. Ranking of the predictors is recalculated in each iteration.（把刚才的过程在不同的自由度下迭代执行
 lmProfile &lt;- rfe(x=trainData[, 1:18], y=trainData$Purchase,
@@ -53,14 +261,14 @@ lmProfile</code></pre>
 ## Resampling performance over subset size:
 ## 
 ##  Variables Accuracy  Kappa AccuracySD KappaSD Selected
-##          1   0.7433 0.4554    0.04107 0.08692         
-##          2   0.8143 0.6063    0.04037 0.08559         
-##          3   0.8187 0.6147    0.04194 0.08896        *
-##          4   0.8058 0.5904    0.04253 0.08750         
-##          5   0.7988 0.5743    0.04379 0.09258         
-##         10   0.8024 0.5810    0.04464 0.09557         
-##         15   0.8070 0.5879    0.04215 0.09079         
-##         18   0.8065 0.5879    0.03882 0.08297         
+##          1   0.7442 0.4569    0.04125 0.08753         
+##          2   0.8124 0.6031    0.04002 0.08505         
+##          3   0.8182 0.6136    0.04170 0.08790        *
+##          4   0.8047 0.5879    0.04314 0.08993         
+##          5   0.8000 0.5770    0.04215 0.08861         
+##         10   0.8035 0.5826    0.04112 0.08815         
+##         15   0.8089 0.5918    0.04209 0.09076         
+##         18   0.8084 0.5918    0.04118 0.08894         
 ## 
 ## The top 3 variables (out of 3):
 ##    LoyalCH, PriceDiff, StoreID</code></pre>
@@ -70,11 +278,11 @@ lmProfile</code></pre>
 <li><p>Size: sizes determines what all model sizes (the number of most important features) the rfe should consider</p></li>
 <li>rfeControl():
 <ul>
-<li>what type of algorithm should be used <em>rfFuncs:: random forest based</em></li>
-<li>what cross validation method should be used.
+<li>functions: what type of algorithm should be used <strong>rfFuncs:: random forest based</strong>
 <ul>
-<li>cross validation method is <em>repeatedcv</em></li>
-<li>which implements k-Fold cross validation repeated 5 times</li>
+<li>methods: repeated K-fold cross-validation</li>
+<li>number: 10-fold cross-validations</li>
+<li>repeats: five separate 10-fold cross-validations are used</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -97,41 +305,42 @@ sessionInfo()</code></pre>
 ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 ## 
 ## attached base packages:
-## [1] methods   stats     graphics  grDevices utils     datasets  base     
+## [1] parallel  methods   stats     graphics  grDevices utils     datasets 
+## [8] base     
 ## 
 ## other attached packages:
-##  [1] caret_6.0-78    lattice_0.20-35 forcats_0.3.0   stringr_1.3.0  
-##  [5] dplyr_0.7.4     purrr_0.2.4     readr_1.1.1     tidyr_0.8.0    
-##  [9] tibble_1.4.2    ggplot2_2.2.1   tidyverse_1.2.1
+##  [1] doMC_1.3.5      iterators_1.0.9 foreach_1.4.4   caret_6.0-78   
+##  [5] lattice_0.20-35 forcats_0.3.0   stringr_1.3.0   dplyr_0.7.4    
+##  [9] purrr_0.2.4     readr_1.1.1     tidyr_0.8.0     tibble_1.4.2   
+## [13] ggplot2_2.2.1   tidyverse_1.2.1
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] httr_1.3.1          ddalpha_1.3.1.1     sfsmisc_1.1-2      
-##  [4] jsonlite_1.5        splines_3.4.3       foreach_1.4.4      
-##  [7] prodlim_1.6.1       modelr_0.1.1        assertthat_0.2.0   
-## [10] stats4_3.4.3        DRR_0.0.3           cellranger_1.1.0   
-## [13] yaml_2.1.18         robustbase_0.92-8   ipred_0.9-6        
-## [16] pillar_1.2.1        backports_1.1.2     glue_1.2.0         
-## [19] digest_0.6.15       randomForest_4.6-12 rvest_0.3.2        
-## [22] colorspace_1.3-2    recipes_0.1.2       htmltools_0.3.6    
-## [25] Matrix_1.2-12       plyr_1.8.4          psych_1.7.8        
-## [28] timeDate_3043.102   pkgconfig_2.0.1     CVST_0.2-1         
-## [31] broom_0.4.3         haven_1.1.1         bookdown_0.7       
-## [34] scales_0.5.0.9000   gower_0.1.2         lava_1.6           
-## [37] withr_2.1.1.9000    nnet_7.3-12         lazyeval_0.2.1     
-## [40] cli_1.0.0           mnormt_1.5-5        survival_2.41-3    
-## [43] magrittr_1.5        crayon_1.3.4        readxl_1.0.0       
-## [46] evaluate_0.10.1     nlme_3.1-131.1      MASS_7.3-49        
-## [49] xml2_1.2.0          dimRed_0.1.0        foreign_0.8-69     
-## [52] class_7.3-14        blogdown_0.5        tools_3.4.3        
-## [55] hms_0.4.2           kernlab_0.9-25      munsell_0.4.3      
-## [58] bindrcpp_0.2        e1071_1.6-8         compiler_3.4.3     
-## [61] RcppRoll_0.2.2      rlang_0.2.0.9000    grid_3.4.3         
-## [64] iterators_1.0.9     rmarkdown_1.9       gtable_0.2.0       
-## [67] ModelMetrics_1.1.0  codetools_0.2-15    reshape2_1.4.3     
-## [70] R6_2.2.2            lubridate_1.7.3     knitr_1.20         
-## [73] bindr_0.1.1         rprojroot_1.3-2     stringi_1.1.7      
-## [76] parallel_3.4.3      Rcpp_0.12.16        rpart_4.1-13       
-## [79] tidyselect_0.2.4    DEoptimR_1.0-8      xfun_0.1</code></pre>
+##  [4] jsonlite_1.5        splines_3.4.3       prodlim_1.6.1      
+##  [7] modelr_0.1.1        assertthat_0.2.0    stats4_3.4.3       
+## [10] DRR_0.0.3           cellranger_1.1.0    yaml_2.1.18        
+## [13] robustbase_0.92-8   ipred_0.9-6         pillar_1.2.1       
+## [16] backports_1.1.2     glue_1.2.0          digest_0.6.15      
+## [19] randomForest_4.6-12 rvest_0.3.2         colorspace_1.3-2   
+## [22] recipes_0.1.2       htmltools_0.3.6     Matrix_1.2-12      
+## [25] plyr_1.8.4          psych_1.7.8         timeDate_3043.102  
+## [28] pkgconfig_2.0.1     CVST_0.2-1          broom_0.4.3        
+## [31] haven_1.1.1         bookdown_0.7        scales_0.5.0.9000  
+## [34] gower_0.1.2         lava_1.6            withr_2.1.1.9000   
+## [37] nnet_7.3-12         lazyeval_0.2.1      cli_1.0.0          
+## [40] mnormt_1.5-5        survival_2.41-3     magrittr_1.5       
+## [43] crayon_1.3.4        readxl_1.0.0        evaluate_0.10.1    
+## [46] nlme_3.1-131.1      MASS_7.3-49         xml2_1.2.0         
+## [49] dimRed_0.1.0        foreign_0.8-69      class_7.3-14       
+## [52] blogdown_0.5        tools_3.4.3         hms_0.4.2          
+## [55] kernlab_0.9-25      munsell_0.4.3       bindrcpp_0.2       
+## [58] e1071_1.6-8         compiler_3.4.3      RcppRoll_0.2.2     
+## [61] rlang_0.2.0.9000    grid_3.4.3          rmarkdown_1.9      
+## [64] gtable_0.2.0        ModelMetrics_1.1.0  codetools_0.2-15   
+## [67] reshape2_1.4.3      R6_2.2.2            lubridate_1.7.3    
+## [70] knitr_1.20          bindr_0.1.1         rprojroot_1.3-2    
+## [73] stringi_1.1.7       Rcpp_0.12.16        rpart_4.1-13       
+## [76] tidyselect_0.2.4    DEoptimR_1.0-8      xfun_0.1</code></pre>
 </div>
 <div id="reference" class="section level2">
 <h2><strong>Reference</strong></h2>

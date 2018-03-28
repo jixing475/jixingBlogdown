@@ -16,7 +16,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.32.2 with theme Tranquilpeak 0.4.1-BETA">
-    <title>Ggplot2</title>
+    <title>Caret</title>
     <meta name="author" content="Jixing Liu">
     <meta name="keywords" content=", R">
 
@@ -27,8 +27,8 @@
     <meta name="description" content="exploring and playing with data in R">
     <meta property="og:description" content="exploring and playing with data in R">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Ggplot2">
-    <meta property="og:url" content="/tags/ggplot2/">
+    <meta property="og:title" content="Caret">
+    <meta property="og:url" content="/tags/caret/">
     <meta property="og:site_name" content="student zero ">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="student zero ">
@@ -93,7 +93,7 @@
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <h1 class="sidebar-profile-title">Ggplot2</h1>
+        <h1 class="sidebar-profile-title">Caret</h1>
         <a href="/#about">
           <img class="sidebar-profile-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
         </a>
@@ -213,16 +213,16 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/03/a-function-for-ggplot2-input-strings-for-aes/">
-          A function for ggplot2: input strings for aes()
+        <a class="link-unstyled" href="/2018/03/machine-learning-in-r-introdution/">
+          Machine Learning in R 1：introdution
         </a>
       </h1>
       
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-03-18T00:00:00Z">
+      <time itemprop="datePublished" datetime="2018-03-21T00:00:00Z">
         
-  March 18, 2018
+  March 21, 2018
 
       </time>
     
@@ -231,7 +231,7 @@
   
     <span>in</span>
     
-      <a class="category-link" href="/categories/datavis-and-dataclean">datavis and dataclean</a>
+      <a class="category-link" href="/categories/machine-learning">machine learning</a>
     
   
 
@@ -240,19 +240,23 @@
 
     </div>
     <div class="postShorten-excerpt" itemprop="articleBody">
-      在我写文章画图时经常遇到的一个问题是：ggplot2 坐标轴的输入不支持输入数据框的变量名，通常会报错找不到对象
-🌰：问题描述 data: early senate poll
-library(tidyverse) # general tasks library(broom) # tidy model output library(ggthemes) # style the plots poll_data &lt;- read_csv(&quot;https://raw.githubusercontent.com/fivethirtyeight/data/master/early-senate-polls/early-senate-polls.csv&quot;) glimpse(poll_data) ## Observations: 107 ## Variables: 4 ## $ year &lt;int&gt; 2006, 2006, 2006, 2006, 2006, 2006, 2006... ## $ election_result &lt;int&gt; -39, -10, -9, -16, 40, 10, -2, -41, -31,... ## $ presidential_approval &lt;int&gt; 46, 33, 32, 33, 53, 44, 37, 39, 42, 33, ... ## $ poll_average &lt;int&gt; -28, -10, -1, -15, 39, 14, 2, -22, -27, .
+      Caret Package是一个用于在R中构建机器学习模型的综合框架。在此博文中，我会解释 caret 包的几乎所有核心功能，并引导完成构建预测模型的分步过程。
+Caret 是 Classification And REgression Training 的简称。
+Caret 包很好地让所有与机器学习模型开发相关的步骤集成到一个简化的工作流程中，几乎每个主流的ML算法都可以在R中实现。
+由于R具有如此多的机器学习算法实现包，因此选则在哪个包中实现某种算法是非常头疼的问题。多数时候，实现算法的语法和方法在不同包中有所不同。 结合数据预处理，查阅超参数的帮助页面（定义算法如何学习的参数）并努力寻找最佳模型，可以使构建预测模型成为一项相关任务。
+在本教程后面的部分，我将介绍如何查看所有caret 支持的ML算法（这是一个很长的列表）以及可以调整哪些超参数。
+此外，我们不会止步于 caret 包，我们将看看如何巧妙地集成来自多个最佳模型的预测，并可能使用 caretEnsemble 来产生更好的预测。
+这个教程总共包括5部分，分别是： 1. 数据准备和清理 2. 可视化重要变量 3. 特征选择 4. 训练模型和调节模型 5. 预测
       <p>
-        <a href="/2018/03/a-function-for-ggplot2-input-strings-for-aes/" class="postShorten-excerpt_link link">Continue reading</a>
+        <a href="/2018/03/machine-learning-in-r-introdution/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
     </div>
   </div>
   
-    <a href="/2018/03/a-function-for-ggplot2-input-strings-for-aes/">
+    <a href="/2018/03/machine-learning-in-r-introdution/">
       <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/18/5aadb0bc4b1a8.jpg"/>
+        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/21/5ab1cca60f6fc.jpg"/>
       </div>
     </a>
   
@@ -260,6 +264,21 @@ library(tidyverse) # general tasks library(broom) # tidy model output library(gg
 
             
             
+  <div class="pagination-bar">
+    <ul class="pagination">
+      
+        <li class="pagination-prev">
+          <a class="btn btn--default btn--small" href="/tags/caret/">
+            <i class="fa fa-angle-left text-base icon-mr"></i>
+            <span>NEWER POSTS</span>
+          </a>
+        </li>
+      
+      
+      <li class="pagination-number">page 2 of 2</li>
+    </ul>
+  </div>
+
 
           </section>
         

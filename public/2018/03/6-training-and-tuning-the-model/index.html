@@ -20,7 +20,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.32.2 with theme Tranquilpeak 0.4.1-BETA">
-    <title>Scraping and Wranging Tables from Research Articles</title>
+    <title>6 Training and Tuning the model</title>
     <meta name="author" content="Jixing Liu">
     <meta name="keywords" content=", R">
 
@@ -28,18 +28,21 @@
     
 
     
-    <meta name="description" content="What do you do when you want to use results from the literature to anchor your own analysis? we’ll go through a practical scenario on scraping an html table from a Nature Genetics article into R and wrangling the data into a useful format.
-01. Scraping a html table from a webpage #load packages library(&quot;rvest&quot;) library(&quot;knitr&quot;) library(tidyverse) #scraping web page url &lt;- &quot;https://www.nature.com/articles/ng.2802/tables/2&quot; #====🔥find where is the table lives on this webpage==== table_path=&#39;//*[@id=&quot;content&quot;]/div/div/figure/div[1]/div/div[1]/table&#39; #get the table nature_genetics_table2 &lt;- url %&gt;% read_html() %&gt;% html_nodes(xpath=table_path) %&gt;% html_table(fill=T) %&gt;% .">
-    <meta property="og:description" content="What do you do when you want to use results from the literature to anchor your own analysis? we’ll go through a practical scenario on scraping an html table from a Nature Genetics article into R and wrangling the data into a useful format.
-01. Scraping a html table from a webpage #load packages library(&quot;rvest&quot;) library(&quot;knitr&quot;) library(tidyverse) #scraping web page url &lt;- &quot;https://www.nature.com/articles/ng.2802/tables/2&quot; #====🔥find where is the table lives on this webpage==== table_path=&#39;//*[@id=&quot;content&quot;]/div/div/figure/div[1]/div/div[1]/table&#39; #get the table nature_genetics_table2 &lt;- url %&gt;% read_html() %&gt;% html_nodes(xpath=table_path) %&gt;% html_table(fill=T) %&gt;% .">
+    <meta name="description" content="Load Package And Data  Training 1. How to train the model and interpret the results? Once you have chosen an algorithm, building the model is fairly easy using the train() function
+train() does multiple other things like:
+Cross validating the model Tune the hyper parameters for optimal model performance Choose the optimal model based on a given evaluation metric Preprocess the predictors (what we did so far using preProcess())  #====See available algorithms in caret==== modelnames &lt;- paste(names(getModelInfo()), collapse=&#39;, &#39;) modelnames ## [1] &quot;ada, AdaBag, AdaBoost.">
+    <meta property="og:description" content="Load Package And Data  Training 1. How to train the model and interpret the results? Once you have chosen an algorithm, building the model is fairly easy using the train() function
+train() does multiple other things like:
+Cross validating the model Tune the hyper parameters for optimal model performance Choose the optimal model based on a given evaluation metric Preprocess the predictors (what we did so far using preProcess())  #====See available algorithms in caret==== modelnames &lt;- paste(names(getModelInfo()), collapse=&#39;, &#39;) modelnames ## [1] &quot;ada, AdaBag, AdaBoost.">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Scraping and Wranging Tables from Research Articles">
-    <meta property="og:url" content="/2018/03/scraping-and-wranging-tables-from-research-articles/">
+    <meta property="og:title" content="6 Training and Tuning the model">
+    <meta property="og:url" content="/2018/03/6-training-and-tuning-the-model/">
     <meta property="og:site_name" content="student zero ">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="student zero ">
-    <meta name="twitter:description" content="What do you do when you want to use results from the literature to anchor your own analysis? we’ll go through a practical scenario on scraping an html table from a Nature Genetics article into R and wrangling the data into a useful format.
-01. Scraping a html table from a webpage #load packages library(&quot;rvest&quot;) library(&quot;knitr&quot;) library(tidyverse) #scraping web page url &lt;- &quot;https://www.nature.com/articles/ng.2802/tables/2&quot; #====🔥find where is the table lives on this webpage==== table_path=&#39;//*[@id=&quot;content&quot;]/div/div/figure/div[1]/div/div[1]/table&#39; #get the table nature_genetics_table2 &lt;- url %&gt;% read_html() %&gt;% html_nodes(xpath=table_path) %&gt;% html_table(fill=T) %&gt;% .">
+    <meta name="twitter:description" content="Load Package And Data  Training 1. How to train the model and interpret the results? Once you have chosen an algorithm, building the model is fairly easy using the train() function
+train() does multiple other things like:
+Cross validating the model Tune the hyper parameters for optimal model performance Choose the optimal model based on a given evaluation metric Preprocess the predictors (what we did so far using preProcess())  #====See available algorithms in caret==== modelnames &lt;- paste(names(getModelInfo()), collapse=&#39;, &#39;) modelnames ## [1] &quot;ada, AdaBag, AdaBoost.">
     
       <meta name="twitter:creator" content="@studentZero475">
     
@@ -53,7 +56,7 @@
     
 
     
-      <meta property="og:image" content="https://i.loli.net/2018/03/27/5aba60b02b557.jpg">
+      <meta property="og:image" content="https://i.loli.net/2018/03/29/5abc3100c85c2.jpg">
     
     
     
@@ -102,7 +105,7 @@
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <h1 class="sidebar-profile-title">Scraping and Wranging Tables from Research Articles</h1>
+        <h1 class="sidebar-profile-title">6 Training and Tuning the model</h1>
         <a href="/#about">
           <img class="sidebar-profile-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
         </a>
@@ -209,15 +212,15 @@
             <div class="post-header main-content-wrap text-center">
   
     <h1 class="post-title" itemprop="headline">
-      Scraping and Wranging Tables from Research Articles
+      6 Training and Tuning the model
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-03-27T00:00:00Z">
+      <time itemprop="datePublished" datetime="2018-03-29T00:00:00Z">
         
-  March 27, 2018
+  March 29, 2018
 
       </time>
     
@@ -226,7 +229,7 @@
   
     <span>in</span>
     
-      <a class="category-link" href="/categories/statistics">statistics</a>
+      <a class="category-link" href="/categories/machine-learning">machine learning</a>
     
   
 
@@ -237,294 +240,142 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>What do you do when you want to use results from the literature to anchor your own analysis? we’ll go through a practical scenario on scraping an html table from a Nature Genetics article into R and wrangling the data into a useful format.</p>
-<div id="scraping-a-html-table-from-a-webpage" class="section level1">
-<h1>01. Scraping a html table from a webpage</h1>
-<pre class="r"><code>#load packages
-library(&quot;rvest&quot;)
-library(&quot;knitr&quot;)
-library(tidyverse)
-#scraping web page
-url &lt;- &quot;https://www.nature.com/articles/ng.2802/tables/2&quot;
+              <div id="load-package-and-data" class="section level1">
+<h1>Load Package And Data</h1>
+</div>
+<div id="training" class="section level1">
+<h1>Training</h1>
+<div id="how-to-train-the-model-and-interpret-the-results" class="section level2">
+<h2>1. How to train the model and interpret the results?</h2>
+<p>Once you have chosen an algorithm, building the model is fairly easy using the train() function</p>
+<p><code>train()</code> does multiple other things like:</p>
+<ol style="list-style-type: decimal">
+<li><em>Cross validating the model</em></li>
+<li><em>Tune the hyper parameters for optimal model performance</em></li>
+<li><em>Choose the optimal model based on a given evaluation metric</em></li>
+<li><em>Preprocess the predictors (what we did so far using preProcess())</em></li>
+</ol>
+<pre class="r"><code>#====See available algorithms in caret====
+modelnames &lt;- paste(names(getModelInfo()), collapse=&#39;,  &#39;)
+modelnames</code></pre>
+<pre><code>## [1] &quot;ada,  AdaBag,  AdaBoost.M1,  adaboost,  amdai,  ANFIS,  avNNet,  awnb,  awtan,  bag,  bagEarth,  bagEarthGCV,  bagFDA,  bagFDAGCV,  bam,  bartMachine,  bayesglm,  binda,  blackboost,  blasso,  blassoAveraged,  bridge,  brnn,  BstLm,  bstSm,  bstTree,  C5.0,  C5.0Cost,  C5.0Rules,  C5.0Tree,  cforest,  chaid,  CSimca,  ctree,  ctree2,  cubist,  dda,  deepboost,  DENFIS,  dnn,  dwdLinear,  dwdPoly,  dwdRadial,  earth,  elm,  enet,  evtree,  extraTrees,  fda,  FH.GBML,  FIR.DM,  foba,  FRBCS.CHI,  FRBCS.W,  FS.HGD,  gam,  gamboost,  gamLoess,  gamSpline,  gaussprLinear,  gaussprPoly,  gaussprRadial,  gbm_h2o,  gbm,  gcvEarth,  GFS.FR.MOGUL,  GFS.LT.RS,  GFS.THRIFT,  glm.nb,  glm,  glmboost,  glmnet_h2o,  glmnet,  glmStepAIC,  gpls,  hda,  hdda,  hdrda,  HYFIS,  icr,  J48,  JRip,  kernelpls,  kknn,  knn,  krlsPoly,  krlsRadial,  lars,  lars2,  lasso,  lda,  lda2,  leapBackward,  leapForward,  leapSeq,  Linda,  lm,  lmStepAIC,  LMT,  loclda,  logicBag,  LogitBoost,  logreg,  lssvmLinear,  lssvmPoly,  lssvmRadial,  lvq,  M5,  M5Rules,  manb,  mda,  Mlda,  mlp,  mlpKerasDecay,  mlpKerasDecayCost,  mlpKerasDropout,  mlpKerasDropoutCost,  mlpML,  mlpSGD,  mlpWeightDecay,  mlpWeightDecayML,  monmlp,  msaenet,  multinom,  mxnet,  mxnetAdam,  naive_bayes,  nb,  nbDiscrete,  nbSearch,  neuralnet,  nnet,  nnls,  nodeHarvest,  null,  OneR,  ordinalNet,  ORFlog,  ORFpls,  ORFridge,  ORFsvm,  ownn,  pam,  parRF,  PART,  partDSA,  pcaNNet,  pcr,  pda,  pda2,  penalized,  PenalizedLDA,  plr,  pls,  plsRglm,  polr,  ppr,  PRIM,  protoclass,  pythonKnnReg,  qda,  QdaCov,  qrf,  qrnn,  randomGLM,  ranger,  rbf,  rbfDDA,  Rborist,  rda,  regLogistic,  relaxo,  rf,  rFerns,  RFlda,  rfRules,  ridge,  rlda,  rlm,  rmda,  rocc,  rotationForest,  rotationForestCp,  rpart,  rpart1SE,  rpart2,  rpartCost,  rpartScore,  rqlasso,  rqnc,  RRF,  RRFglobal,  rrlda,  RSimca,  rvmLinear,  rvmPoly,  rvmRadial,  SBC,  sda,  sdwd,  simpls,  SLAVE,  slda,  smda,  snn,  sparseLDA,  spikeslab,  spls,  stepLDA,  stepQDA,  superpc,  svmBoundrangeString,  svmExpoString,  svmLinear,  svmLinear2,  svmLinear3,  svmLinearWeights,  svmLinearWeights2,  svmPoly,  svmRadial,  svmRadialCost,  svmRadialSigma,  svmRadialWeights,  svmSpectrumString,  tan,  tanSearch,  treebag,  vbmpRadial,  vglmAdjCat,  vglmContRatio,  vglmCumulative,  widekernelpls,  WM,  wsrf,  xgbDART,  xgbLinear,  xgbTree,  xyf&quot;</code></pre>
+<pre class="r"><code>modelLookup(c(&quot;lm&quot;,&quot;glm&quot;,&quot;knn&quot;,&quot;kknn&quot;,&quot;earth&quot;))</code></pre>
+<pre><code>##   model parameter           label forReg forClass probModel
+## 1  kknn      kmax Max. #Neighbors   TRUE     TRUE      TRUE
+## 2  kknn  distance        Distance   TRUE     TRUE      TRUE
+## 3  kknn    kernel          Kernel   TRUE     TRUE      TRUE</code></pre>
+<pre class="r"><code>#==== training====
+# Set the seed for reproducibility
+set.seed(100)
 
-#====🔥find where is the table lives on this webpage====
-table_path=&#39;//*[@id=&quot;content&quot;]/div/div/figure/div[1]/div/div[1]/table&#39;
-#get the table
-nature_genetics_table2 &lt;- url %&gt;%
-  read_html() %&gt;%
-  html_nodes(xpath=table_path) %&gt;%
-  html_table(fill=T) %&gt;% .[[1]]
-#the first few lines of table
-kable(nature_genetics_table2[1:4,])</code></pre>
-<table>
-<thead>
-<tr class="header">
-<th align="left">SNPa</th>
-<th align="left">Chr.</th>
-<th align="left">Positionb</th>
-<th align="left">Closest genec</th>
-<th align="left">Major/minor alleles</th>
-<th align="left">MAFd</th>
-<th align="left">Stage 1</th>
-<th align="left">Stage 1</th>
-<th align="left">Stage 2</th>
-<th align="left">Stage 2</th>
-<th align="left">Overall</th>
-<th align="left">Overall</th>
-<th align="left">Overall</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">SNPa</td>
-<td align="left">Chr.</td>
-<td align="left">Positionb</td>
-<td align="left">Closest genec</td>
-<td align="left">Major/minor alleles</td>
-<td align="left">MAFd</td>
-<td align="left">OR (95% CI)e</td>
-<td align="left">Meta P value</td>
-<td align="left">OR (95% CI)e</td>
-<td align="left">Meta P value</td>
-<td align="left">OR (95% CI)e</td>
-<td align="left">Meta P value</td>
-<td align="left">I2 (%), P valuef</td>
-</tr>
-<tr class="even">
-<td align="left">Known GWAS-defined associated genes</td>
-<td align="left">Known GWAS-defined associated genes</td>
-<td align="left">Known GWAS-defined associated genes</td>
-<td align="left">Known GWAS-defined associated genes</td>
-<td align="left">Known GWAS-defined associated genes</td>
-<td align="left">Known GWAS-defined associated genes</td>
-<td align="left">Known GWAS-defined associated genes</td>
-<td align="left">Known GWAS-defined associated genes</td>
-<td align="left">Known GWAS-defined associated genes</td>
-<td align="left">Known GWAS-defined associated genes</td>
-<td align="left">Known GWAS-defined associated genes</td>
-<td align="left">Known GWAS-defined associated genes</td>
-<td align="left">Known GWAS-defined associated genes</td>
-</tr>
-<tr class="odd">
-<td align="left">rs6656401</td>
-<td align="left">1</td>
-<td align="left">207692049</td>
-<td align="left">CR1</td>
-<td align="left">G/A</td>
-<td align="left">0.197</td>
-<td align="left">1.17 (1.12–1.22)</td>
-<td align="left">7.7 × 10−15</td>
-<td align="left">1.21 (1.14–1.28)</td>
-<td align="left">7.9 × 10−11</td>
-<td align="left">1.18 (1.14–1.22)</td>
-<td align="left">5.7 × 10−24</td>
-<td align="left">0, 7.8 × 10−1</td>
-</tr>
-<tr class="even">
-<td align="left">rs6733839</td>
-<td align="left">2</td>
-<td align="left">127892810</td>
-<td align="left">BIN1</td>
-<td align="left">C/T</td>
-<td align="left">0.409</td>
-<td align="left">1.21 (1.17–1.25)</td>
-<td align="left">1.7 × 10−26</td>
-<td align="left">1.24 (1.18–1.29)</td>
-<td align="left">3.4 × 10−19</td>
-<td align="left">1.22 (1.18–1.25)</td>
-<td align="left">6.9 × 10−44</td>
-<td align="left">28, 6.1 × 10−2</td>
-</tr>
-</tbody>
-</table>
-</div>
-<div id="making-messy-data-useful" class="section level1">
-<h1>02 Making messy data useful</h1>
-<div id="cleaning-up-the-rows" class="section level2">
-<h2>Cleaning up the rows</h2>
-<p>All The Elements Of These Rows Contain The Exact Same Text</p>
-<pre class="r"><code>v=which(apply(nature_genetics_table2,1, function(x) length(unique(unlist(x))) )==1)
-v</code></pre>
-<pre><code>## [1]  2 12 18</code></pre>
-</div>
-<div id="split-table" class="section level2">
-<h2>split table</h2>
-<pre class="r"><code>nature_genetics_table2_list = split(nature_genetics_table2, cumsum(1:nrow(nature_genetics_table2) %in% v))
-nature_genetics_table2_list = lapply(nature_genetics_table2_list[2:4], function(y) {
-y$Description = unique(as.character(y[1, ]))
-y[-1, ]
-})
+# Train the model using randomForest and predict on the training data itself.
+model_mars = train(Purchase ~ ., data=trainData, method=&#39;earth&#39;)
+fitted &lt;- predict(model_mars)
 
-#rbind three table
-nature_genetics_table2_clean = do.call(&quot;rbind&quot;, nature_genetics_table2_list)
+#see what the train() has generated.
+model_mars</code></pre>
+<pre><code>## Multivariate Adaptive Regression Spline 
+## 
+## 857 samples
+##  18 predictor
+##   2 classes: &#39;CH&#39;, &#39;MM&#39; 
+## 
+## No pre-processing
+## Resampling: Bootstrapped (25 reps) 
+## Summary of sample sizes: 857, 857, 857, 857, 857, 857, ... 
+## Resampling results across tuning parameters:
+## 
+##   nprune  Accuracy   Kappa    
+##    2      0.8013184  0.5746285
+##   10      0.8102610  0.5987447
+##   19      0.8103685  0.5986923
+## 
+## Tuning parameter &#39;degree&#39; was held constant at a value of 1
+## Accuracy was used to select the optimal model using the largest value.
+## The final values used for the model were nprune = 19 and degree = 1.</code></pre>
+<pre class="r"><code>#Plotting the model shows how the various iterations of hyperparameter search performed
+plot(model_mars, main=&quot;Model Accuracies with MARS&quot;)</code></pre>
+<p><img src="/post/2018-03-29-6-training-and-tuning-the-model_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="how-to-compute-variable-importance" class="section level2">
+<h2>2. How to compute variable importance?</h2>
+<p>Which variables came out to be useful?</p>
+<pre class="r"><code>varimp_mars &lt;- varImp(model_mars)
+plot(varimp_mars, main=&quot;Variable Importance with MARS&quot;)</code></pre>
+<p><img src="/post/2018-03-29-6-training-and-tuning-the-model_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+</div>
+<div id="tuning" class="section level1">
+<h1>Tuning</h1>
+<div id="preprocess-the-test-dataset-and-predict" class="section level2">
+<h2>1. Preprocess the test dataset and predict</h2>
+<p>The pre-processing in the following sequence: <strong>Missing Value imputation –&gt; One-Hot Encoding –&gt; Range Normalization</strong></p>
+<p><strong>All the information required for pre-processing is stored in the respective preProcess model and dummyVar model.</strong></p>
+<p>pass the testData through these models in the same sequence: <strong>preProcess_missingdata_model –&gt; dummies_model –&gt; preProcess_range_model</strong></p>
+<pre class="r"><code># Step 1: Impute missing values 
+testData2 &lt;- predict(preProcess_missingdata_model, testData)  
 
-kable(nature_genetics_table2_clean[1:3,])</code></pre>
-<table>
-<thead>
-<tr class="header">
-<th></th>
-<th align="left">SNPa</th>
-<th align="left">Chr.</th>
-<th align="left">Positionb</th>
-<th align="left">Closest genec</th>
-<th align="left">Major/minor alleles</th>
-<th align="left">MAFd</th>
-<th align="left">Stage 1</th>
-<th align="left">Stage 1</th>
-<th align="left">Stage 2</th>
-<th align="left">Stage 2</th>
-<th align="left">Overall</th>
-<th align="left">Overall</th>
-<th align="left">Overall</th>
-<th align="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1.3</td>
-<td align="left">rs6656401</td>
-<td align="left">1</td>
-<td align="left">207692049</td>
-<td align="left">CR1</td>
-<td align="left">G/A</td>
-<td align="left">0.197</td>
-<td align="left">1.17 (1.12–1.22)</td>
-<td align="left">7.7 × 10−15</td>
-<td align="left">1.21 (1.14–1.28)</td>
-<td align="left">7.9 × 10−11</td>
-<td align="left">1.18 (1.14–1.22)</td>
-<td align="left">5.7 × 10−24</td>
-<td align="left">0, 7.8 × 10−1</td>
-<td align="left">Known GWAS-defined associated genes</td>
-</tr>
-<tr class="even">
-<td>1.4</td>
-<td align="left">rs6733839</td>
-<td align="left">2</td>
-<td align="left">127892810</td>
-<td align="left">BIN1</td>
-<td align="left">C/T</td>
-<td align="left">0.409</td>
-<td align="left">1.21 (1.17–1.25)</td>
-<td align="left">1.7 × 10−26</td>
-<td align="left">1.24 (1.18–1.29)</td>
-<td align="left">3.4 × 10−19</td>
-<td align="left">1.22 (1.18–1.25)</td>
-<td align="left">6.9 × 10−44</td>
-<td align="left">28, 6.1 × 10−2</td>
-<td align="left">Known GWAS-defined associated genes</td>
-</tr>
-<tr class="odd">
-<td>1.5</td>
-<td align="left">rs10948363</td>
-<td align="left">6</td>
-<td align="left">47487762</td>
-<td align="left">CD2AP</td>
-<td align="left">A/G</td>
-<td align="left">0.266</td>
-<td align="left">1.10 (1.07–1.14)</td>
-<td align="left">3.1 × 10−8</td>
-<td align="left">1.09 (1.04–1.15)</td>
-<td align="left">4.1 × 10−4</td>
-<td align="left">1.10 (1.07–1.13)</td>
-<td align="left">5.2 × 10−11</td>
-<td align="left">0, 9 × 10−1</td>
-<td align="left">Known GWAS-defined associated genes</td>
-</tr>
-</tbody>
-</table>
+# Step 2: Create one-hot encodings (dummy variables)
+testData3 &lt;- predict(dummies_model, testData2)
+
+# Step 3: Transform the features to range between 0 and 1
+testData4 &lt;- predict(preProcess_range_model, testData3)
+
+# View
+head(testData4[, 1:10])</code></pre>
+<pre><code>##    WeekofPurchase StoreID PriceCH   PriceMM DiscCH DiscMM SpecialCH
+## 2      0.23529412       0   0.150 0.5000000   0.00  0.375         0
+## 3      0.35294118       0   0.425 0.6666667   0.34  0.000         0
+## 6      0.05882353       1   0.000 0.5000000   0.00  0.000         0
+## 7      0.09803922       1   0.000 0.5000000   0.00  0.500         1
+## 9      0.15686275       1   0.150 0.5000000   0.00  0.500         0
+## 13     0.96078431       1   0.750 0.7333333   0.00  0.675         0
+##    SpecialMM   LoyalCH SalePriceMM
+## 2          1 0.6000352   0.4545455
+## 3          0 0.6800414   0.8181818
+## 6          1 0.9652913   0.7272727
+## 7          1 0.9722459   0.3636364
+## 9          0 0.9822616   0.3636364
+## 13         1 0.9927734   0.3636364</code></pre>
 </div>
-</div>
-<div id="fixing-column-names" class="section level1">
-<h1>03. Fixing column names</h1>
-<pre class="r"><code>colnames(nature_genetics_table2_clean) &lt;- c(&quot;SNP&quot;, &quot;Chr&quot;, &quot;Position&quot;, &quot;Closest gene&quot;, &quot;Major/minor alleles&quot;, &quot;MAF&quot;, &quot;Stage1_OR&quot;, &quot;Stage1_MetaP&quot;, &quot;Stage2_OR&quot;,&quot;Stage2_MetaP&quot;,    &quot;Overall_OR&quot;, &quot;Overall_MetaP&quot;, &quot;I2_Percent/P&quot;,&quot;Description&quot;)
-colnames(nature_genetics_table2_clean)</code></pre>
-<pre><code>##  [1] &quot;SNP&quot;                 &quot;Chr&quot;                 &quot;Position&quot;           
-##  [4] &quot;Closest gene&quot;        &quot;Major/minor alleles&quot; &quot;MAF&quot;                
-##  [7] &quot;Stage1_OR&quot;           &quot;Stage1_MetaP&quot;        &quot;Stage2_OR&quot;          
-## [10] &quot;Stage2_MetaP&quot;        &quot;Overall_OR&quot;          &quot;Overall_MetaP&quot;      
-## [13] &quot;I2_Percent/P&quot;        &quot;Description&quot;</code></pre>
-</div>
-<div id="making-a-character-variable-into-a-numeric-variable" class="section level1">
-<h1>04. Making a character variable into a numeric variable</h1>
-<pre class="r"><code># &quot; × 10-&quot; -&gt; &quot;e-&quot;
-nature_genetics_table2_clean$Stage1_MetaP &lt;- 
-str_replace(nature_genetics_table2_clean$Stage1_MetaP,&quot; × 10−&quot;,&quot;e-&quot;) %&gt;% as.numeric()
-kable(nature_genetics_table2_clean[1:3,])</code></pre>
-<table>
-<thead>
-<tr class="header">
-<th></th>
-<th align="left">SNP</th>
-<th align="left">Chr</th>
-<th align="left">Position</th>
-<th align="left">Closest gene</th>
-<th align="left">Major/minor alleles</th>
-<th align="left">MAF</th>
-<th align="left">Stage1_OR</th>
-<th align="right">Stage1_MetaP</th>
-<th align="left">Stage2_OR</th>
-<th align="left">Stage2_MetaP</th>
-<th align="left">Overall_OR</th>
-<th align="left">Overall_MetaP</th>
-<th align="left">I2_Percent/P</th>
-<th align="left">Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1.3</td>
-<td align="left">rs6656401</td>
-<td align="left">1</td>
-<td align="left">207692049</td>
-<td align="left">CR1</td>
-<td align="left">G/A</td>
-<td align="left">0.197</td>
-<td align="left">1.17 (1.12–1.22)</td>
-<td align="right">0</td>
-<td align="left">1.21 (1.14–1.28)</td>
-<td align="left">7.9 × 10−11</td>
-<td align="left">1.18 (1.14–1.22)</td>
-<td align="left">5.7 × 10−24</td>
-<td align="left">0, 7.8 × 10−1</td>
-<td align="left">Known GWAS-defined associated genes</td>
-</tr>
-<tr class="even">
-<td>1.4</td>
-<td align="left">rs6733839</td>
-<td align="left">2</td>
-<td align="left">127892810</td>
-<td align="left">BIN1</td>
-<td align="left">C/T</td>
-<td align="left">0.409</td>
-<td align="left">1.21 (1.17–1.25)</td>
-<td align="right">0</td>
-<td align="left">1.24 (1.18–1.29)</td>
-<td align="left">3.4 × 10−19</td>
-<td align="left">1.22 (1.18–1.25)</td>
-<td align="left">6.9 × 10−44</td>
-<td align="left">28, 6.1 × 10−2</td>
-<td align="left">Known GWAS-defined associated genes</td>
-</tr>
-<tr class="odd">
-<td>1.5</td>
-<td align="left">rs10948363</td>
-<td align="left">6</td>
-<td align="left">47487762</td>
-<td align="left">CD2AP</td>
-<td align="left">A/G</td>
-<td align="left">0.266</td>
-<td align="left">1.10 (1.07–1.14)</td>
-<td align="right">0</td>
-<td align="left">1.09 (1.04–1.15)</td>
-<td align="left">4.1 × 10−4</td>
-<td align="left">1.10 (1.07–1.13)</td>
-<td align="left">5.2 × 10−11</td>
-<td align="left">0, 9 × 10−1</td>
-<td align="left">Known GWAS-defined associated genes</td>
-</tr>
-</tbody>
-</table>
+<div id="predict-on-testdata-and-confusion-matrix" class="section level2">
+<h2>2. Predict on testData and Confusion Matrix</h2>
+<pre class="r"><code># Predict on testData
+predicted &lt;- predict(model_mars, testData4)
+head(predicted)</code></pre>
+<pre><code>## [1] CH CH CH CH CH MM
+## Levels: CH MM</code></pre>
+<pre class="r"><code># Compute the confusion matrix
+confusionMatrix(reference = testData$Purchase, data = predicted, mode=&#39;everything&#39;, positive=&#39;MM&#39;)</code></pre>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  CH  MM
+##         CH 113  21
+##         MM  17  62
+##                                           
+##                Accuracy : 0.8216          
+##                  95% CI : (0.7635, 0.8705)
+##     No Information Rate : 0.6103          
+##     P-Value [Acc &gt; NIR] : 2.139e-11       
+##                                           
+##                   Kappa : 0.6216          
+##  Mcnemar&#39;s Test P-Value : 0.6265          
+##                                           
+##             Sensitivity : 0.7470          
+##             Specificity : 0.8692          
+##          Pos Pred Value : 0.7848          
+##          Neg Pred Value : 0.8433          
+##               Precision : 0.7848          
+##                  Recall : 0.7470          
+##                      F1 : 0.7654          
+##              Prevalence : 0.3897          
+##          Detection Rate : 0.2911          
+##    Detection Prevalence : 0.3709          
+##       Balanced Accuracy : 0.8081          
+##                                           
+##        &#39;Positive&#39; Class : MM              
+## </code></pre>
 <pre class="r"><code>sessionInfo()</code></pre>
 <pre><code>## R version 3.4.3 (2017-11-30)
 ## Platform: x86_64-apple-darwin15.6.0 (64-bit)
@@ -538,37 +389,50 @@ kable(nature_genetics_table2_clean[1:3,])</code></pre>
 ## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
 ## 
 ## attached base packages:
-## [1] methods   stats     graphics  grDevices utils     datasets  base     
+## [1] parallel  methods   stats     graphics  grDevices utils     datasets 
+## [8] base     
 ## 
 ## other attached packages:
-##  [1] forcats_0.3.0   stringr_1.3.0   dplyr_0.7.4     purrr_0.2.4    
-##  [5] readr_1.1.1     tidyr_0.8.0     tibble_1.4.2    ggplot2_2.2.1  
-##  [9] tidyverse_1.2.1 knitr_1.20      rvest_0.3.2     xml2_1.2.0     
+##  [1] earth_4.6.1        plotmo_3.3.5       TeachingDemos_2.10
+##  [4] plotrix_3.7        doMC_1.3.5         iterators_1.0.9   
+##  [7] foreach_1.4.4      caret_6.0-78       lattice_0.20-35   
+## [10] forcats_0.3.0      stringr_1.3.0      dplyr_0.7.4       
+## [13] purrr_0.2.4        readr_1.1.1        tidyr_0.8.0       
+## [16] tibble_1.4.2       ggplot2_2.2.1      tidyverse_1.2.1   
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] xfun_0.1          reshape2_1.4.3    haven_1.1.1      
-##  [4] lattice_0.20-35   colorspace_1.3-2  htmltools_0.3.6  
-##  [7] yaml_2.1.18       rlang_0.2.0.9000  pillar_1.2.1     
-## [10] foreign_0.8-69    glue_1.2.0        selectr_0.3-2    
-## [13] modelr_0.1.1      readxl_1.0.0      bindrcpp_0.2     
-## [16] bindr_0.1.1       plyr_1.8.4        munsell_0.4.3    
-## [19] blogdown_0.5      gtable_0.2.0      cellranger_1.1.0 
-## [22] psych_1.7.8       evaluate_0.10.1   parallel_3.4.3   
-## [25] curl_3.1          highr_0.6         broom_0.4.3      
-## [28] Rcpp_0.12.16      backports_1.1.2   scales_0.5.0.9000
-## [31] jsonlite_1.5      mnormt_1.5-5      hms_0.4.2        
-## [34] digest_0.6.15     stringi_1.1.7     bookdown_0.7     
-## [37] grid_3.4.3        rprojroot_1.3-2   cli_1.0.0        
-## [40] tools_3.4.3       magrittr_1.5      lazyeval_0.2.1   
-## [43] crayon_1.3.4      pkgconfig_2.0.1   lubridate_1.7.3  
-## [46] assertthat_0.2.0  rmarkdown_1.9     httr_1.3.1       
-## [49] R6_2.2.2          nlme_3.1-131.1    compiler_3.4.3</code></pre>
+##  [1] nlme_3.1-131.1     lubridate_1.7.3    dimRed_0.1.0      
+##  [4] httr_1.3.1         rprojroot_1.3-2    tools_3.4.3       
+##  [7] backports_1.1.2    R6_2.2.2           rpart_4.1-13      
+## [10] lazyeval_0.2.1     colorspace_1.3-2   nnet_7.3-12       
+## [13] withr_2.1.1.9000   tidyselect_0.2.4   mnormt_1.5-5      
+## [16] compiler_3.4.3     cli_1.0.0          rvest_0.3.2       
+## [19] xml2_1.2.0         bookdown_0.7       scales_0.5.0.9000 
+## [22] sfsmisc_1.1-2      DEoptimR_1.0-8     psych_1.7.8       
+## [25] robustbase_0.92-8  digest_0.6.15      foreign_0.8-69    
+## [28] rmarkdown_1.9      pkgconfig_2.0.1    htmltools_0.3.6   
+## [31] rlang_0.2.0.9000   readxl_1.0.0       ddalpha_1.3.1.1   
+## [34] bindr_0.1.1        jsonlite_1.5       ModelMetrics_1.1.0
+## [37] magrittr_1.5       Matrix_1.2-12      Rcpp_0.12.16      
+## [40] munsell_0.4.3      stringi_1.1.7      yaml_2.1.18       
+## [43] MASS_7.3-49        plyr_1.8.4         recipes_0.1.2     
+## [46] grid_3.4.3         crayon_1.3.4       haven_1.1.1       
+## [49] splines_3.4.3      hms_0.4.2          knitr_1.20        
+## [52] pillar_1.2.1       reshape2_1.4.3     codetools_0.2-15  
+## [55] stats4_3.4.3       CVST_0.2-1         glue_1.2.0        
+## [58] evaluate_0.10.1    blogdown_0.5       modelr_0.1.1      
+## [61] cellranger_1.1.0   RANN_2.5.1         gtable_0.2.0      
+## [64] kernlab_0.9-25     assertthat_0.2.0   DRR_0.0.3         
+## [67] xfun_0.1           gower_0.1.2        prodlim_1.6.1     
+## [70] broom_0.4.3        e1071_1.6-8        class_7.3-14      
+## [73] survival_2.41-3    timeDate_3043.102  RcppRoll_0.2.2    
+## [76] bindrcpp_0.2       lava_1.6           ipred_0.9-6</code></pre>
+<pre class="r"><code>save.image(file=&quot;../../data/craet_6.Rdata&quot;)</code></pre>
 </div>
-<div id="reference" class="section level1">
-<h1><strong>Reference</strong></h1>
-<ul>
-<li><a href="http://research.libd.org/rstatsclub/2018/03/19/introduction-to-scraping-and-wranging-tables-from-research-articles/">Introduction to Scraping and Wranging Tables from Research Articles</a></li>
-</ul>
+<div id="reference" class="section level2">
+<h2><strong>Reference</strong></h2>
+<p><a href="https://www.machinelearningplus.com/caret-package/">Traing and Tuning model</a></p>
+</div>
 </div>
 
               
@@ -582,9 +446,7 @@ kable(nature_genetics_table2_clean[1:3,])</code></pre>
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="//tags/rvest/">rvest</a>
-
-  <a class="tag tag--primary tag--small" href="//tags/scraping/">scraping</a>
+  <a class="tag tag--primary tag--small" href="//tags/caret/">caret</a>
 
                   </div>
                 
@@ -596,7 +458,7 @@ kable(nature_genetics_table2_clean[1:3,])</code></pre>
         <ul class="post-actions post-action-nav">
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/4-how-to-visualize-the-importance-of-variables-using-featureplot/" data-tooltip="4 How To Visualize The Importance Of Variables Using featurePlot">
+                <a class="post-action-btn btn btn--disabled">
               
                 <i class="fa fa-angle-left"></i>
                 <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -604,7 +466,7 @@ kable(nature_genetics_table2_clean[1:3,])</code></pre>
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/how-to-create-dummy-variables-and-normalization/" data-tooltip="3.3 How To Create Dummy Variables And Normalization">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/5-how-to-do-feature-selection-using-recursive-feature-elimination/" data-tooltip="5 How to do feature selection using recursive feature elimination">
               
                 <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                 <i class="fa fa-angle-right"></i>
@@ -621,19 +483,19 @@ kable(nature_genetics_table2_clean[1:3,])</code></pre>
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/03/scraping-and-wranging-tables-from-research-articles/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/03/6-training-and-tuning-the-model/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/scraping-and-wranging-tables-from-research-articles/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/6-training-and-tuning-the-model/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/scraping-and-wranging-tables-from-research-articles/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/6-training-and-tuning-the-model/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -680,7 +542,7 @@ kable(nature_genetics_table2_clean[1:3,])</code></pre>
         <ul class="post-actions post-action-nav">
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/4-how-to-visualize-the-importance-of-variables-using-featureplot/" data-tooltip="4 How To Visualize The Importance Of Variables Using featurePlot">
+                <a class="post-action-btn btn btn--disabled">
               
                 <i class="fa fa-angle-left"></i>
                 <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -688,7 +550,7 @@ kable(nature_genetics_table2_clean[1:3,])</code></pre>
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/how-to-create-dummy-variables-and-normalization/" data-tooltip="3.3 How To Create Dummy Variables And Normalization">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/5-how-to-do-feature-selection-using-recursive-feature-elimination/" data-tooltip="5 How to do feature selection using recursive feature elimination">
               
                 <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                 <i class="fa fa-angle-right"></i>
@@ -705,19 +567,19 @@ kable(nature_genetics_table2_clean[1:3,])</code></pre>
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/03/scraping-and-wranging-tables-from-research-articles/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/03/6-training-and-tuning-the-model/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/scraping-and-wranging-tables-from-research-articles/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/6-training-and-tuning-the-model/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/scraping-and-wranging-tables-from-research-articles/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/6-training-and-tuning-the-model/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -747,19 +609,19 @@ kable(nature_genetics_table2_clean[1:3,])</code></pre>
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F03%2Fscraping-and-wranging-tables-from-research-articles%2F">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F03%2F6-training-and-tuning-the-model%2F">
           <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F03%2Fscraping-and-wranging-tables-from-research-articles%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F03%2F6-training-and-tuning-the-model%2F">
           <i class="fa fa-twitter"></i><span>Share on Twitter</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F03%2Fscraping-and-wranging-tables-from-research-articles%2F">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F03%2F6-training-and-tuning-the-model%2F">
           <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
         </a>
       </li>
@@ -1062,9 +924,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = '\/2018\/03\/scraping-and-wranging-tables-from-research-articles\/';
+          this.page.url = '\/2018\/03\/6-training-and-tuning-the-model\/';
           
-            this.page.identifier = '\/2018\/03\/scraping-and-wranging-tables-from-research-articles\/'
+            this.page.identifier = '\/2018\/03\/6-training-and-tuning-the-model\/'
           
         };
         (function() {

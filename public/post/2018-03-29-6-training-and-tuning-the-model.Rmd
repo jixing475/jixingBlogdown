@@ -1,0 +1,122 @@
+---
+title: 6 Training and Tuning the model
+author: ZERO
+date: '2018-03-29'
+slug: 6-training-and-tuning-the-model
+categories:
+  - machine learning
+tags:
+  - caret
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/03/29/5abc3100c85c2.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE
+)
+```
+
+# Load Package And Data
+```{r include=FALSE}
+load("../../data/craet_5.Rdata")
+library(tidyverse)
+library(caret)
+#Set Parallel Processing - Decrease computation time
+if (!require("doMC")) install.packages("doMC")
+library(doMC)
+registerDoMC(cores = 4)
+```
+
+# Training
+
+## 1. How to train the model and interpret the results?
+
+Once you have chosen an algorithm, building the model is fairly easy using the train() function
+
+`train()` does multiple other things like:
+
+  1. *Cross validating the model*
+  2. *Tune the hyper parameters for optimal model performance*
+  3. *Choose the optimal model based on a given evaluation metric*
+  4. *Preprocess the predictors (what we did so far using preProcess())*
+
+
+```{r}
+#====See available algorithms in caret====
+modelnames <- paste(names(getModelInfo()), collapse=',  ')
+modelnames
+modelLookup(c("lm","glm","knn","kknn","earth"))
+
+#==== training====
+# Set the seed for reproducibility
+set.seed(100)
+
+# Train the model using randomForest and predict on the training data itself.
+model_mars = train(Purchase ~ ., data=trainData, method='earth')
+fitted <- predict(model_mars)
+
+#see what the train() has generated.
+model_mars
+
+#Plotting the model shows how the various iterations of hyperparameter search performed
+plot(model_mars, main="Model Accuracies with MARS")
+```
+
+## 2. How to compute variable importance?
+
+Which variables came out to be useful?
+```{r}
+varimp_mars <- varImp(model_mars)
+plot(varimp_mars, main="Variable Importance with MARS")
+```
+
+# Tuning
+
+## 1. Preprocess the test dataset and predict
+
+The pre-processing in the following sequence:
+**Missing Value imputation –> One-Hot Encoding –> Range Normalization**
+
+**All the information required for pre-processing is stored in the respective preProcess model and dummyVar model.**
+
+pass the testData through these models in the same sequence:
+**preProcess_missingdata_model –> dummies_model –> preProcess_range_model**
+
+```{r}
+# Step 1: Impute missing values 
+testData2 <- predict(preProcess_missingdata_model, testData)  
+
+# Step 2: Create one-hot encodings (dummy variables)
+testData3 <- predict(dummies_model, testData2)
+
+# Step 3: Transform the features to range between 0 and 1
+testData4 <- predict(preProcess_range_model, testData3)
+
+# View
+head(testData4[, 1:10])
+```
+
+
+## 2. Predict on testData and Confusion Matrix
+
+```{r}
+# Predict on testData
+predicted <- predict(model_mars, testData4)
+head(predicted)
+
+# Compute the confusion matrix
+confusionMatrix(reference = testData$Purchase, data = predicted, mode='everything', positive='MM')
+```
+
+```{r}
+sessionInfo()
+save.image(file="../../data/craet_6.Rdata")
+```
+
+##**Reference**
+[Traing and Tuning model](https://www.machinelearningplus.com/caret-package/)

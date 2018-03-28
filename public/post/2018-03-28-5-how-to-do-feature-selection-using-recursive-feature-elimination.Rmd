@@ -34,9 +34,14 @@ Step 3: The model performances are compared across different subset sizes to arr
 
 # Load Package And Data
 ```{r}
+# Load Package And Data
 load("../../data/craet_4.Rdata")
 library(tidyverse)
 library(caret)
+#Set Parallel Processing - Decrease computation time
+if (!require("doMC")) install.packages("doMC")
+library(doMC)
+registerDoMC(cores = 4)
 ```
 
 # Feature select
@@ -49,8 +54,9 @@ subsets <- c(1:5, 10, 15, 18)
 
 #Step 1: Build a ML model on a training dataset and estimate the feature importances on the test dataset.（在确定自由度的情况下，评价变量在测试数据集中的重要性）
 ctrl <- rfeControl(functions = rfFuncs,
-                   method = "repeatedcv",
-                   repeats = 5,
+                   method = "repeatedcv",#repeated K-fold cross-validation
+                   number = 10,#10-fold cross-validations
+                   repeats = 5, #five separate 10-fold cross-validations are used
                    verbose = FALSE)
 #Step 2: Keeping priority to the most important variables, iterate through by building models of given sizes. Ranking of the predictors is recalculated in each iteration.（把刚才的过程在不同的自由度下迭代执行
 lmProfile <- rfe(x=trainData[, 1:18], y=trainData$Purchase,
@@ -65,10 +71,10 @@ lmProfile
   - Size: sizes determines what all model sizes (the number of most important features) the rfe should consider
 
   - rfeControl():
-	  - what type of algorithm should be used *rfFuncs:: random forest based* 
-	  - what cross validation method should be used.
-		- cross validation method is *repeatedcv* 
-		- which implements k-Fold cross validation repeated 5 times
+	  - functions: what type of algorithm should be used **rfFuncs:: random forest based**
+		- methods: repeated K-fold cross-validation
+		- number: 10-fold cross-validations 
+		- repeats: five separate 10-fold cross-validations are used
 
 ##output
  The Output Shows:

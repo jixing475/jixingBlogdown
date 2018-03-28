@@ -323,6 +323,25 @@ library(tidyverse) # general tasks library(broom) # tidy model output library(gg
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/6-training-and-tuning-the-model/">
+                <h3 class="media-heading">6 Training and Tuning the model</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Load Package And Data  Training 1. How to train the model and interpret the results? Once you have chosen an algorithm, building the model is fairly easy using the train() function
+train() does multiple other things like:
+Cross validating the model Tune the hyper parameters for optimal model performance Choose the optimal model based on a given evaluation metric Preprocess the predictors (what we did so far using preProcess())  #====See available algorithms in caret==== modelnames &lt;- paste(names(getModelInfo()), collapse=&#39;, &#39;) modelnames ## [1] &quot;ada, AdaBag, AdaBoost.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2018/03/5-how-to-do-feature-selection-using-recursive-feature-elimination/">
                 <h3 class="media-heading">5 How to do feature selection using recursive feature elimination</h3>
               </a>
@@ -501,23 +520,6 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/03/how-to-use-the-ncbis-new-api-keys/">
-                <h3 class="media-heading">HOW TO USE THE NCBI&#39;S NEW API KEYS</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Mar 3, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">The NCBI is one of the most important sources of biological data. The centre provides access to information on 28 million scholarly articles through PubMed and 250 million DNA sequences through GenBank. More importantly, records in the [50 public databases] (https://www.ncbi.nlm.nih.gov/guide/all/#databases) maintained by the NCBI are strongly cross-referenced. As a result, it is possible to pinpoint searches using almost 2 million taxonomic names or a controlled vocabulary with 270,000 terms.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -525,7 +527,7 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         13 posts found
+         14 posts found
       </p>
     </div>
   </div>
