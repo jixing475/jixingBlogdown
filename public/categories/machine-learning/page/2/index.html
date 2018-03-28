@@ -1,0 +1,586 @@
+
+
+
+  
+
+
+
+
+
+  
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.32.2 with theme Tranquilpeak 0.4.1-BETA">
+    <title>Machine Learning</title>
+    <meta name="author" content="Jixing Liu">
+    <meta name="keywords" content=", R">
+
+    <link rel="icon" href="img/R_py.png">
+    
+
+    
+    <meta name="description" content="exploring and playing with data in R">
+    <meta property="og:description" content="exploring and playing with data in R">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Machine Learning">
+    <meta property="og:url" content="/categories/machine-learning/">
+    <meta property="og:site_name" content="student zero ">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="student zero ">
+    <meta name="twitter:description" content="exploring and playing with data in R">
+    
+      <meta name="twitter:creator" content="@studentZero475">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="https://i.loli.net/2018/02/26/5a937bb148b02.jpg">
+    
+
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-hbs5om8csx9a8yrv5hnhpi2qqdv4ykuslajwbramhqxvleqbfklxgek50hye.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="1">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">student zero </a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="1">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <h1 class="sidebar-profile-title">Machine Learning</h1>
+        <a href="/#about">
+          <img class="sidebar-profile-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Jixing Liu</h4>
+        
+          <h5 class="sidebar-profile-bio">Clinical Doctor turned Bioinformatician turned Data Scientist</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/studentZero475">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">Twitter</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.r-bloggers.com/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-book"></i>
+      
+      <span class="sidebar-button-desc">R-bloggers</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+        
+
+      
+      <div id="main" data-behavior="1"
+        class="
+               hasCoverMetaIn
+               ">
+        
+          <section class="postShorten-group main-content-wrap">
+            
+            
+              
+  
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="/2018/03/machine-learning-in-r-introdution/">
+          Machine Learning in R 1：introdution
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-03-21T00:00:00Z">
+        
+  March 21, 2018
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/machine-learning">machine learning</a>
+    
+  
+
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      Caret Package是一个用于在R中构建机器学习模型的综合框架。在此博文中，我会解释 caret 包的几乎所有核心功能，并引导完成构建预测模型的分步过程。
+Caret 是 Classification And REgression Training 的简称。
+Caret 包很好地让所有与机器学习模型开发相关的步骤集成到一个简化的工作流程中，几乎每个主流的ML算法都可以在R中实现。
+由于R具有如此多的机器学习算法实现包，因此选则在哪个包中实现某种算法是非常头疼的问题。多数时候，实现算法的语法和方法在不同包中有所不同。 结合数据预处理，查阅超参数的帮助页面（定义算法如何学习的参数）并努力寻找最佳模型，可以使构建预测模型成为一项相关任务。
+在本教程后面的部分，我将介绍如何查看所有caret 支持的ML算法（这是一个很长的列表）以及可以调整哪些超参数。
+此外，我们不会止步于 caret 包，我们将看看如何巧妙地集成来自多个最佳模型的预测，并可能使用 caretEnsemble 来产生更好的预测。
+这个教程总共包括5部分，分别是： 1. 数据准备和清理 2. 可视化重要变量 3. 特征选择 4. 训练模型和调节模型 5. 预测
+      <p>
+        <a href="/2018/03/machine-learning-in-r-introdution/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="/2018/03/machine-learning-in-r-introdution/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/21/5ab1cca60f6fc.jpg"/>
+      </div>
+    </a>
+  
+</article>
+
+            
+            
+  <div class="pagination-bar">
+    <ul class="pagination">
+      
+        <li class="pagination-prev">
+          <a class="btn btn--default btn--small" href="/categories/machine-learning/">
+            <i class="fa fa-angle-left text-base icon-mr"></i>
+            <span>NEWER POSTS</span>
+          </a>
+        </li>
+      
+      
+      <li class="pagination-number">page 2 of 2</li>
+    </ul>
+  </div>
+
+
+          </section>
+        
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2018 Jixing Liu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Jixing Liu</h4>
+    
+      <div id="about-card-bio">Clinical Doctor turned Bioinformatician turned Data Scientist</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Data Scientist
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/5-how-to-do-feature-selection-using-recursive-feature-elimination/">
+                <h3 class="media-heading">5 How to do feature selection using recursive feature elimination</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">You might need a rigorous way to determine the important variables first before feeding them to the ML algorithm. This is important.
+A good choice of selecting the important features is the recursive feature elimination (RFE)
+RFE works in 3 broad steps:
+Step 1: Build a ML model on a training dataset and estimate the feature importances on the test dataset.（在确定自由度的情况下，评价变量在测试数据集中的重要性）
+Step 2: Keeping priority to the most important variables, iterate through by building models of given sizes.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/4-how-to-visualize-the-importance-of-variables-using-featureplot/">
+                <h3 class="media-heading">4 How To Visualize The Importance Of Variables Using featurePlot</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Load Package And Data load(&quot;../../data/craet_3-3.Rdata&quot;) library(tidyverse) library(caret)  Q: How The Predictors Influence The Y 选择重要的变量: 通过观察在Y的分组下各个变量的分布情况
+一般有 箱线图 和 密度图
+ box-plot featurePlot(x = trainData[, 1:18], y = trainData$Purchase, plot = &quot;box&quot;,#&quot;density&quot; strip=strip.custom(par.strip.text=list(cex=.7)), scales = list(x = list(relation=&quot;free&quot;), y = list(relation=&quot;free&quot;)))  Density featurePlot(x = trainData[, 1:18], y = trainData$Purchase, plot = &quot;density&quot;, strip=strip.custom(par.strip.text=list(cex=.7)), scales = list(x = list(relation=&quot;free&quot;), y = list(relation=&quot;free&quot;))) save.image(&quot;../../data/craet_4.Rdata&quot;)  </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/scraping-and-wranging-tables-from-research-articles/">
+                <h3 class="media-heading">Scraping and Wranging Tables from Research Articles</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">What do you do when you want to use results from the literature to anchor your own analysis? we’ll go through a practical scenario on scraping an html table from a Nature Genetics article into R and wrangling the data into a useful format.
+01. Scraping a html table from a webpage #load packages library(&quot;rvest&quot;) library(&quot;knitr&quot;) library(tidyverse) #scraping web page url &lt;- &quot;https://www.nature.com/articles/ng.2802/tables/2&quot; #====🔥find where is the table lives on this webpage==== table_path=&#39;//*[@id=&quot;content&quot;]/div/div/figure/div[1]/div/div[1]/table&#39; #get the table nature_genetics_table2 &lt;- url %&gt;% read_html() %&gt;% html_nodes(xpath=table_path) %&gt;% html_table(fill=T) %&gt;% .</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/how-to-create-dummy-variables-and-normalization/">
+                <h3 class="media-heading">3.3 How To Create Dummy Variables And Normalization</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Load Package And Data load(&quot;../../data/craet_3-2.Rdata&quot;) library(tidyverse) library(caret)  Why Dummy Variables 对于字符型的因子变量，我们需要把它转变为有序的数值，一般转为 0，1 的二变量， 这样0 就代表基础水平， 1代表比较组
+ How # One-Hot Encoding # Creating dummy variables is converting a categorical variable to as many binary variables as here are categories. dummies_model &lt;- dummyVars(Purchase ~ ., data=trainData) # Create the dummy variables using predict. The Y variable (Purchase) will not be present in trainData_mat. trainData_mat &lt;- predict(dummies_model, newdata = trainData) # # Convert to dataframe trainData &lt;- data.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/why-should-i-trust-you/">
+                <h3 class="media-heading">Why should I trust you 🤖?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">传统的机器学习工作流程主要集中在模型训练和优化上; 最好的模型通常是通过像精度或者错误这样的性能度量来选择的，而且如果它通过了这些性能标准的某些阈值，我们倾向于假设一个模型是足够好的。在机器学习的许多应用中，用户会使用一个模型来帮助做决定， 例如：一位医生不会对病人进行手术，仅仅因为这个模型说不应该进行手术？
+由于复杂的机器学习模型本质上是黑盒子，而且太复杂，机器学习模型做出的分类决定通常很难被人类的大脑所理解，但是能够理解和解释这些模型对于提高模型质量，提高信任度和透明度以及减少偏见非常重要，因为人类往往具有良好的直觉和因果推理，这些都是难以在数据评估指标中捕获。
+因此，我们希望能够形象的理解它们的工作原理：为什么一个模型将具有特定标签的案例进行准确分类。eg: 为什么一个乳腺肿块样本被归类为“恶性”而不是“良性，仅仅因为它长得丑吗？
+ Local Interpretable Model-Agnostic Explanations (LIME) is an attempt to make these complex models at least partly understandable. The method has been published in “Why Should I Trust You?” Explaining the Predictions of Any Classifier. By Marco Tulio Ribeiro, Sameer Singh and Carlos Guestrin from the University of Washington in Seattle
+ How LIME works  lime is able to explain all models for which we can obtain prediction probabilities (in R, that is every model that works with predict(type = “prob”)).</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/3-2-statistic-description-and-impute-missing-value/">
+                <h3 class="media-heading">3.2 statistic description and impute missing value</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">加载数据和包 load(&quot;../../data/caret.Rdata&quot;) library(tidyverse) library(caret) 在进行数据整理之前 我们先看看训练数据的统计描述
+skimr包对列的统计提供了方便的函数
+skimr::skim_to_wide() 输出一个包含列统计描述的数据框
+library(skimr) skimmed &lt;- skim_to_wide(trainData) skimmed[, c(1:5, 9:11, 13, 15:16)] ## # A tibble: 18 x 11 ## type variable missing complete n mean sd p0 median p100 ## &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; ## 1 factor Purchase 0 857 857 &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; ## 2 factor Store7 0 857 857 &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; ## 3 integ… SpecialCH 2 855 857 &quot; 0.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/3-1-how-to-split-the-dataset-into-training-and-validation/">
+                <h3 class="media-heading">3.1 How to split the dataset into training and validation?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">数据准备好了之后的第一步就是拆分数据集为训练数据和测试数据，一般是 8:2 的比例。
+为什么拆分数据呢？
+当我们在构建一个机器学习模型上时，真正的目的是为了预测真是世界的数据，而机器学习模型是依靠算法学习训练数据学习Y 与 X 的关系，这种的关系的学习好坏的评判是要依靠没有参与学习模型的数据与预测数据之间的差距来评判的。
+# Load the caret package library(caret) # Import dataset orange &lt;- read.csv(&#39;../../data/orange_juice_withmissing.csv&#39;) # Create the training and test datasets set.seed(100) # Step 1: Get row numbers for the training data trainRowNumbers &lt;- createDataPartition(orange$Purchase, p=0.8, list=FALSE) # Step 2: Create the training dataset trainData &lt;- orange[trainRowNumbers,] # Step 3: Create the test dataset testData &lt;- orange[-trainRowNumbers,] # Store X and Y for later use.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/machine-learning-2-load-dataset/">
+                <h3 class="media-heading">2 machine learning: load dataset</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Load the package and dataset 我们将使用 ISLR 包中的 Orange Juice Data.
+目标： 预测顾客会购买哪两种🍊汁
+数据集不是很大，我们的重点是构建模型的过程，而非真正搭建一个有用的模型。
+👌，let’go.
+# Load the caret package library(caret) # Import dataset orange &lt;- read.csv(&#39;../../data/orange_juice_withmissing.csv&#39;) # Structure of the dataframe str(orange) ## &#39;data.frame&#39;: 1070 obs. of 18 variables: ## $ Purchase : Factor w/ 2 levels &quot;CH&quot;,&quot;MM&quot;: 1 1 1 2 1 1 1 1 1 1 ... ## $ WeekofPurchase: int 237 239 245 227 228 230 232 234 235 238 .</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/machine-learning-in-r-introdution/">
+                <h3 class="media-heading">Machine Learning in R 1：introdution</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Caret Package是一个用于在R中构建机器学习模型的综合框架。在此博文中，我会解释 caret 包的几乎所有核心功能，并引导完成构建预测模型的分步过程。
+Caret 是 Classification And REgression Training 的简称。
+Caret 包很好地让所有与机器学习模型开发相关的步骤集成到一个简化的工作流程中，几乎每个主流的ML算法都可以在R中实现。
+由于R具有如此多的机器学习算法实现包，因此选则在哪个包中实现某种算法是非常头疼的问题。多数时候，实现算法的语法和方法在不同包中有所不同。 结合数据预处理，查阅超参数的帮助页面（定义算法如何学习的参数）并努力寻找最佳模型，可以使构建预测模型成为一项相关任务。
+在本教程后面的部分，我将介绍如何查看所有caret 支持的ML算法（这是一个很长的列表）以及可以调整哪些超参数。
+此外，我们不会止步于 caret 包，我们将看看如何巧妙地集成来自多个最佳模型的预测，并可能使用 caretEnsemble 来产生更好的预测。
+这个教程总共包括5部分，分别是： 1. 数据准备和清理 2. 可视化重要变量 3. 特征选择 4. 训练模型和调节模型 5. 预测</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/how-to-use-the-ncbis-new-api-keys/">
+                <h3 class="media-heading">HOW TO USE THE NCBI&#39;S NEW API KEYS</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">The NCBI is one of the most important sources of biological data. The centre provides access to information on 28 million scholarly articles through PubMed and 250 million DNA sequences through GenBank. More importantly, records in the [50 public databases] (https://www.ncbi.nlm.nih.gov/guide/all/#databases) maintained by the NCBI are strongly cross-referenced. As a result, it is possible to pinpoint searches using almost 2 million taxonomic names or a controlled vocabulary with 270,000 terms.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         13 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://i.loli.net/2018/02/26/5a9416186c149.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" integrity="sha256-IFHWFEbU2/+wNycDECKgjIRSirRNIDp2acEB5fvdVRU=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js" integrity="sha256-+mpyNVJsNt4rVXCw0F+pAOiB3YxmHgrbJsx4ecPuUaI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js" integrity="sha256-vMxgR/7FtLovVA+IPrR7+xTgIgARH7y9VZQnmmi0HDI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js" integrity="sha256-N0qFUh7/9vLvia87dDndewmsgsyYoNkdA212tPc+2NI=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-kr8dyqj6rb6ortyib7whfo9x9p6td6zo8t1v4fdz4ecx5kwybsdlmk1slygn.min.js"></script>
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+
+    
+  </body>
+</html>
+

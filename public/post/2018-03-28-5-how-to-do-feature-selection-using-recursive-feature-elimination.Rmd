@@ -1,0 +1,86 @@
+---
+title: 5 How to do feature selection using recursive feature elimination
+author: ZERO
+date: '2018-03-28'
+slug: 5-how-to-do-feature-selection-using-recursive-feature-elimination
+categories:
+  - machine learning
+tags:
+  - caret
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/03/28/5abaee8867c4c.jpg
+metaAlignment: center
+coverMeta: out
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE
+)
+```
+
+You might need *a rigorous way to determine the important variables* first before feeding them to the ML algorithm. This is important.
+
+A good choice of selecting the important features is the *recursive feature elimination (RFE)*
+
+RFE works in 3 broad steps:
+
+Step 1: Build a ML model on a training dataset and estimate the feature importances on the test dataset.（在确定自由度的情况下，评价变量在测试数据集中的重要性）
+
+Step 2: Keeping priority to the most important variables, iterate through by building models of given sizes. Ranking of the predictors is recalculated in each iteration.（把刚才的过程在不同的自由度下迭代执行）
+
+Step 3: The model performances are compared across different subset sizes to arrive at the optimal number and list of final predictors.（比较不同自由度的测试错误率，给出最佳自由度模型选择）
+
+# Load Package And Data
+```{r}
+load("../../data/craet_4.Rdata")
+library(tidyverse)
+library(caret)
+```
+
+# Feature select
+ 	
+```{r}
+set.seed(100)
+options(warn=-1)
+
+subsets <- c(1:5, 10, 15, 18)
+
+#Step 1: Build a ML model on a training dataset and estimate the feature importances on the test dataset.（在确定自由度的情况下，评价变量在测试数据集中的重要性）
+ctrl <- rfeControl(functions = rfFuncs,
+                   method = "repeatedcv",
+                   repeats = 5,
+                   verbose = FALSE)
+#Step 2: Keeping priority to the most important variables, iterate through by building models of given sizes. Ranking of the predictors is recalculated in each iteration.（把刚才的过程在不同的自由度下迭代执行
+lmProfile <- rfe(x=trainData[, 1:18], y=trainData$Purchase,
+                 sizes = subsets,
+                 rfeControl = ctrl)
+
+#Step 3: The model performances are compared across different subset sizes to arrive at the optimal number and list of final predictors.（比较不同自由度的测试错误率，给出最佳自由度模型选择
+lmProfile
+```
+
+##input
+  - Size: sizes determines what all model sizes (the number of most important features) the rfe should consider
+
+  - rfeControl():
+	  - what type of algorithm should be used *rfFuncs:: random forest based* 
+	  - what cross validation method should be used.
+		- cross validation method is *repeatedcv* 
+		- which implements k-Fold cross validation repeated 5 times
+
+##output
+ The Output Shows:
+ 	- accuracy  
+ 	- kappa (and their standard deviation) for the different model sizes we provided
+ 	- The final selected model subset size is marked with a * in the rightmost Selected column.
+ 	
+```{r}
+save.image("../../data/craet_5.Rdata")
+sessionInfo()
+```
+
+##**Reference**
+- [How to do feature selection using recursive feature elimination (rfe)?](https://www.machinelearningplus.com/caret-package/)
+

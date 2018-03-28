@@ -54,3 +54,7 @@ featurePlot(x = trainData[, 1:18],
                           y = list(relation="free")))
 ```
 
+```{r}
+save.image("../../data/craet_4.Rdata")
+```
+

@@ -1,0 +1,88 @@
+---
+title: Scraping and Wranging Tables from Research Articles
+author: ZERO
+date: '2018-03-27'
+slug: scraping-and-wranging-tables-from-research-articles
+categories:
+  - statistics
+tags:
+  - rvest
+  - scraping
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/03/27/5aba60b02b557.jpg
+metaAlignment: center
+coverMeta: out
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE
+)
+```
+
+What do you do when you want to use results from the literature to anchor your own analysis? we’ll go through a practical scenario on scraping an html table from a Nature Genetics article into R and wrangling the data into a useful format. 
+
+#01. Scraping a html table from a webpage
+```{r}
+#load packages
+library("rvest")
+library("knitr")
+library(tidyverse)
+#scraping web page
+url <- "https://www.nature.com/articles/ng.2802/tables/2"
+
+#====🔥find where is the table lives on this webpage====
+table_path='//*[@id="content"]/div/div/figure/div[1]/div/div[1]/table'
+#get the table
+nature_genetics_table2 <- url %>%
+  read_html() %>%
+  html_nodes(xpath=table_path) %>%
+  html_table(fill=T) %>% .[[1]]
+#the first few lines of table
+kable(nature_genetics_table2[1:4,])
+```
+
+#02  Making messy data useful
+
+## Cleaning up the rows
+
+All The Elements Of These Rows Contain The Exact Same Text
+```{r}
+v=which(apply(nature_genetics_table2,1, function(x) length(unique(unlist(x))) )==1)
+v
+```
+
+##split table
+```{r}
+nature_genetics_table2_list = split(nature_genetics_table2, cumsum(1:nrow(nature_genetics_table2) %in% v))
+nature_genetics_table2_list = lapply(nature_genetics_table2_list[2:4], function(y) {
+y$Description = unique(as.character(y[1, ]))
+y[-1, ]
+})
+
+#rbind three table
+nature_genetics_table2_clean = do.call("rbind", nature_genetics_table2_list)
+
+kable(nature_genetics_table2_clean[1:3,])
+```
+
+#03. Fixing column names
+```{r}
+colnames(nature_genetics_table2_clean) <- c("SNP", "Chr", "Position", "Closest gene", "Major/minor alleles", "MAF", "Stage1_OR", "Stage1_MetaP", "Stage2_OR","Stage2_MetaP",    "Overall_OR", "Overall_MetaP", "I2_Percent/P","Description")
+colnames(nature_genetics_table2_clean)
+
+```
+
+#04. Making a character variable into a numeric variable
+```{r}
+# " × 10-" -> "e-"
+nature_genetics_table2_clean$Stage1_MetaP <- 
+str_replace(nature_genetics_table2_clean$Stage1_MetaP," × 10−","e-") %>% as.numeric()
+kable(nature_genetics_table2_clean[1:3,])
+```
+```{r}
+sessionInfo()
+```
+#**Reference**
+- [Introduction to Scraping and Wranging Tables from Research Articles](http://research.libd.org/rstatsclub/2018/03/19/introduction-to-scraping-and-wranging-tables-from-research-articles/)

@@ -24,7 +24,7 @@
     <meta name="author" content="Jixing Liu">
     <meta name="keywords" content=", R">
 
-    <link rel="icon" href="img/favicon.png">
+    <link rel="icon" href="img/R_py.png">
     
 
     
@@ -463,6 +463,27 @@
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/5-how-to-do-feature-selection-using-recursive-feature-elimination/">
+                <h3 class="media-heading">5 How to do feature selection using recursive feature elimination</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">You might need a rigorous way to determine the important variables first before feeding them to the ML algorithm. This is important.
+A good choice of selecting the important features is the recursive feature elimination (RFE)
+RFE works in 3 broad steps:
+Step 1: Build a ML model on a training dataset and estimate the feature importances on the test dataset.（在确定自由度的情况下，评价变量在测试数据集中的重要性）
+Step 2: Keeping priority to the most important variables, iterate through by building models of given sizes.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2018/03/4-how-to-visualize-the-importance-of-variables-using-featureplot/">
                 <h3 class="media-heading">4 How To Visualize The Importance Of Variables Using featurePlot</h3>
               </a>
@@ -473,7 +494,25 @@
               </span>
               <div class="media-content hide-xs font-merryweather">Load Package And Data load(&quot;../../data/craet_3-3.Rdata&quot;) library(tidyverse) library(caret)  Q: How The Predictors Influence The Y 选择重要的变量: 通过观察在Y的分组下各个变量的分布情况
 一般有 箱线图 和 密度图
- box-plot featurePlot(x = trainData[, 1:18], y = trainData$Purchase, plot = &quot;box&quot;,#&quot;density&quot; strip=strip.custom(par.strip.text=list(cex=.7)), scales = list(x = list(relation=&quot;free&quot;), y = list(relation=&quot;free&quot;)))  Density featurePlot(x = trainData[, 1:18], y = trainData$Purchase, plot = &quot;density&quot;, strip=strip.custom(par.strip.text=list(cex=.7)), scales = list(x = list(relation=&quot;free&quot;), y = list(relation=&quot;free&quot;)))  </div>
+ box-plot featurePlot(x = trainData[, 1:18], y = trainData$Purchase, plot = &quot;box&quot;,#&quot;density&quot; strip=strip.custom(par.strip.text=list(cex=.7)), scales = list(x = list(relation=&quot;free&quot;), y = list(relation=&quot;free&quot;)))  Density featurePlot(x = trainData[, 1:18], y = trainData$Purchase, plot = &quot;density&quot;, strip=strip.custom(par.strip.text=list(cex=.7)), scales = list(x = list(relation=&quot;free&quot;), y = list(relation=&quot;free&quot;))) save.image(&quot;../../data/craet_4.Rdata&quot;)  </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/scraping-and-wranging-tables-from-research-articles/">
+                <h3 class="media-heading">Scraping and Wranging Tables from Research Articles</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">What do you do when you want to use results from the literature to anchor your own analysis? we’ll go through a practical scenario on scraping an html table from a Nature Genetics article into R and wrangling the data into a useful format.
+01. Scraping a html table from a webpage #load packages library(&quot;rvest&quot;) library(&quot;knitr&quot;) library(tidyverse) #scraping web page url &lt;- &quot;https://www.nature.com/articles/ng.2802/tables/2&quot; #====🔥find where is the table lives on this webpage==== table_path=&#39;//*[@id=&quot;content&quot;]/div/div/figure/div[1]/div/div[1]/table&#39; #get the table nature_genetics_table2 &lt;- url %&gt;% read_html() %&gt;% html_nodes(xpath=table_path) %&gt;% html_table(fill=T) %&gt;% .</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -619,42 +658,6 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/03/a-function-for-ggplot2-input-strings-for-aes/">
-                <h3 class="media-heading">A function for ggplot2: input strings for aes()</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Mar 3, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">在我写文章画图时经常遇到的一个问题是：ggplot2 坐标轴的输入不支持输入数据框的变量名，通常会报错找不到对象
-🌰：问题描述 data: early senate poll
-library(tidyverse) # general tasks library(broom) # tidy model output library(ggthemes) # style the plots poll_data &lt;- read_csv(&quot;https://raw.githubusercontent.com/fivethirtyeight/data/master/early-senate-polls/early-senate-polls.csv&quot;) glimpse(poll_data) ## Observations: 107 ## Variables: 4 ## $ year &lt;int&gt; 2006, 2006, 2006, 2006, 2006, 2006, 2006... ## $ election_result &lt;int&gt; -39, -10, -9, -16, 40, 10, -2, -41, -31,... ## $ presidential_approval &lt;int&gt; 46, 33, 32, 33, 53, 44, 37, 39, 42, 33, ... ## $ poll_average &lt;int&gt; -28, -10, -1, -15, 39, 14, 2, -22, -27, .</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/03/hello-world/">
-                <h3 class="media-heading">Hello world</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Mar 3, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Just say hello world!</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -662,7 +665,7 @@ library(tidyverse) # general tasks library(broom) # tidy model output library(gg
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         11 posts found
+         13 posts found
       </p>
     </div>
   </div>

@@ -3,7 +3,17 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/2018/03/5-how-to-do-feature-selection-using-recursive-feature-elimination/</loc>
+    <lastmod>2018-03-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2018/03/4-how-to-visualize-the-importance-of-variables-using-featureplot/</loc>
+    <lastmod>2018-03-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2018/03/scraping-and-wranging-tables-from-research-articles/</loc>
     <lastmod>2018-03-27T00:00:00+00:00</lastmod>
   </url>
   
@@ -69,7 +79,7 @@
   
   <url>
     <loc>/tags/caret/</loc>
-    <lastmod>2018-03-27T00:00:00+00:00</lastmod>
+    <lastmod>2018-03-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -104,7 +114,7 @@
   
   <url>
     <loc>/categories/machine-learning/</loc>
-    <lastmod>2018-03-27T00:00:00+00:00</lastmod>
+    <lastmod>2018-03-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -116,13 +126,31 @@
   
   <url>
     <loc>/post/</loc>
+    <lastmod>2018-03-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/rvest/</loc>
+    <lastmod>2018-03-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/scraping/</loc>
+    <lastmod>2018-03-27T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/statistics/</loc>
     <lastmod>2018-03-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2018-03-27T00:00:00+00:00</lastmod>
+    <lastmod>2018-03-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -134,7 +162,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-03-27T00:00:00+00:00</lastmod>
+    <lastmod>2018-03-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
