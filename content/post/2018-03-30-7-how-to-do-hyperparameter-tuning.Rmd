@@ -1,0 +1,88 @@
+---
+title: '7 How To Do Hyperparameter Tuning '
+author: ZERO
+date: '2018-03-30'
+slug: 7-how-to-do-hyperparameter-tuning
+categories:
+  - machine learning
+tags:
+  - caret
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/03/30/5abd8ebe45769.jpg
+metaAlignment: center
+coverMeta: out
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE
+)
+```
+
+# Load Package And Data
+```{r}
+load("../../data/craet_6.Rdata")
+library(tidyverse)
+library(caret)
+#Set Parallel Processing - Decrease computation time
+if (!require("doMC")) install.packages("doMC")
+library(doMC)
+registerDoMC(cores = 4)
+```
+
+
+##Hyper parameter tuning using tuneGrid
+  1. Model Tuning Parameter Set
+  
+  2. Cross Validation Set
+  
+    **Cross validation `method` can be one amongst**:
+      * ‘boot’: Bootstrap sampling
+      * ‘boot632’: Bootstrap sampling with 63.2% bias correction applied
+      * ‘optimism_boot’: The optimism bootstrap estimator
+      * ‘boot_all’: All boot methods.
+      * ‘cv’: k-Fold cross validation
+      * ‘repeatedcv’: Repeated k-Fold cross validation
+      * ‘oob’: Out of Bag cross validation
+      * ‘LOOCV’: Leave one out cross validation
+      * ‘LGOCV’: Leave group out cross validation
+
+  3. Training And Tuning
+  
+  4. Predict
+  
+  5. Confusion Matrix
+```{r}
+# Step 1: Define the tuneGrid
+marsGrid <-  expand.grid(nprune = c(2, 4, 6, 8, 10), 
+                        degree = c(1, 2, 3))
+
+# Step 2: Define the training control
+fitControl <- trainControl(
+    method = 'cv',                   # k-fold cross validation
+    number = 5,                      # number of folds
+    savePredictions = 'final',       # saves predictions for optimal tuning parameter
+    classProbs = T,                  # should class probabilities be returned
+    summaryFunction=twoClassSummary  # results summary function
+) 
+
+# Step 3: Training and Tuning hyper parameters by setting tuneGrid
+set.seed(100)
+model_mars3 = train(Purchase ~ ., data=trainData, method='earth', metric='ROC', tuneGrid = marsGrid, trControl = fitControl)
+model_mars3
+
+# Step 4: Predict on testData 
+predicted3 <- predict(model_mars3, testData4)
+
+# Step 5: Compute the confusion matrix
+confusionMatrix(reference = testData$Purchase, data = predicted3, mode='everything', positive='MM')
+```
+
+```{r}
+sessionInfo()
+save.image(file = "../../data/craet_7.Rdata")
+```
+
+##**Links**
+- [How to do hyperparameter tuning to optimize the model for better performance?](https://www.machinelearningplus.com/caret-package/#7howtodohyperparametertuningtooptimizethemodelforbetterperformance?)

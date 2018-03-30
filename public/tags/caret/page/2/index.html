@@ -213,6 +213,67 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="/2018/03/machine-learning-2-load-dataset/">
+          2 machine learning: load dataset
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-03-22T00:00:00Z">
+        
+  March 22, 2018
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/machine-learning">machine learning</a>
+    
+  
+
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      Load the package and dataset 我们将使用 ISLR 包中的 Orange Juice Data.
+目标： 预测顾客会购买哪两种🍊汁
+数据集不是很大，我们的重点是构建模型的过程，而非真正搭建一个有用的模型。
+👌，let’go.
+# Load the caret package library(caret) # Import dataset orange &lt;- read.csv(&#39;../../data/orange_juice_withmissing.csv&#39;) # Structure of the dataframe str(orange) ## &#39;data.frame&#39;: 1070 obs. of 18 variables: ## $ Purchase : Factor w/ 2 levels &quot;CH&quot;,&quot;MM&quot;: 1 1 1 2 1 1 1 1 1 1 ... ## $ WeekofPurchase: int 237 239 245 227 228 230 232 234 235 238 .
+      <p>
+        <a href="/2018/03/machine-learning-2-load-dataset/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="/2018/03/machine-learning-2-load-dataset/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/24/5ab615be1e0dd.jpg"/>
+      </div>
+    </a>
+  
+</article>
+
+            
+              
+  
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
         <a class="link-unstyled" href="/2018/03/machine-learning-in-r-introdution/">
           Machine Learning in R 1：introdution
         </a>
@@ -338,6 +399,25 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
       <div class="no-result text-color-light text-center">no post found</div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/7-how-to-do-hyperparameter-tuning/">
+                <h3 class="media-heading">7 How To Do Hyperparameter Tuning </h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Load Package And Data load(&quot;../../data/craet_6.Rdata&quot;) library(tidyverse) library(caret) #Set Parallel Processing - Decrease computation time if (!require(&quot;doMC&quot;)) install.packages(&quot;doMC&quot;) library(doMC) registerDoMC(cores = 4) Hyper parameter tuning using tuneGrid Model Tuning Parameter Set
+ Cross Validation Set
+Cross validation method can be one amongst:  ‘boot’: Bootstrap sampling ‘boot632’: Bootstrap sampling with 63.2% bias correction applied ‘optimism_boot’: The optimism bootstrap estimator ‘boot_all’: All boot methods. ‘cv’: k-Fold cross validation ‘repeatedcv’: Repeated k-Fold cross validation ‘oob’: Out of Bag cross validation ‘LOOCV’: Leave one out cross validation ‘LGOCV’: Leave group out cross validation  Training And Tuning</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -516,29 +596,6 @@ library(skimr) skimmed &lt;- skim_to_wide(trainData) skimmed[, c(1:5, 9:11, 13, 
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/03/machine-learning-in-r-introdution/">
-                <h3 class="media-heading">Machine Learning in R 1：introdution</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Mar 3, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Caret Package是一个用于在R中构建机器学习模型的综合框架。在此博文中，我会解释 caret 包的几乎所有核心功能，并引导完成构建预测模型的分步过程。
-Caret 是 Classification And REgression Training 的简称。
-Caret 包很好地让所有与机器学习模型开发相关的步骤集成到一个简化的工作流程中，几乎每个主流的ML算法都可以在R中实现。
-由于R具有如此多的机器学习算法实现包，因此选则在哪个包中实现某种算法是非常头疼的问题。多数时候，实现算法的语法和方法在不同包中有所不同。 结合数据预处理，查阅超参数的帮助页面（定义算法如何学习的参数）并努力寻找最佳模型，可以使构建预测模型成为一项相关任务。
-在本教程后面的部分，我将介绍如何查看所有caret 支持的ML算法（这是一个很长的列表）以及可以调整哪些超参数。
-此外，我们不会止步于 caret 包，我们将看看如何巧妙地集成来自多个最佳模型的预测，并可能使用 caretEnsemble 来产生更好的预测。
-这个教程总共包括5部分，分别是： 1. 数据准备和清理 2. 可视化重要变量 3. 特征选择 4. 训练模型和调节模型 5. 预测</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -546,7 +603,7 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         14 posts found
+         15 posts found
       </p>
     </div>
   </div>

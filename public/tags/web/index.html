@@ -321,6 +321,25 @@
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/7-how-to-do-hyperparameter-tuning/">
+                <h3 class="media-heading">7 How To Do Hyperparameter Tuning </h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Load Package And Data load(&quot;../../data/craet_6.Rdata&quot;) library(tidyverse) library(caret) #Set Parallel Processing - Decrease computation time if (!require(&quot;doMC&quot;)) install.packages(&quot;doMC&quot;) library(doMC) registerDoMC(cores = 4) Hyper parameter tuning using tuneGrid Model Tuning Parameter Set
+ Cross Validation Set
+Cross validation method can be one amongst:  ‘boot’: Bootstrap sampling ‘boot632’: Bootstrap sampling with 63.2% bias correction applied ‘optimism_boot’: The optimism bootstrap estimator ‘boot_all’: All boot methods. ‘cv’: k-Fold cross validation ‘repeatedcv’: Repeated k-Fold cross validation ‘oob’: Out of Bag cross validation ‘LOOCV’: Leave one out cross validation ‘LGOCV’: Leave group out cross validation  Training And Tuning</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2018/03/6-training-and-tuning-the-model/">
                 <h3 class="media-heading">6 Training and Tuning the model</h3>
               </a>
@@ -495,29 +514,6 @@ library(skimr) skimmed &lt;- skim_to_wide(trainData) skimmed[, c(1:5, 9:11, 13, 
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/03/machine-learning-in-r-introdution/">
-                <h3 class="media-heading">Machine Learning in R 1：introdution</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Mar 3, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Caret Package是一个用于在R中构建机器学习模型的综合框架。在此博文中，我会解释 caret 包的几乎所有核心功能，并引导完成构建预测模型的分步过程。
-Caret 是 Classification And REgression Training 的简称。
-Caret 包很好地让所有与机器学习模型开发相关的步骤集成到一个简化的工作流程中，几乎每个主流的ML算法都可以在R中实现。
-由于R具有如此多的机器学习算法实现包，因此选则在哪个包中实现某种算法是非常头疼的问题。多数时候，实现算法的语法和方法在不同包中有所不同。 结合数据预处理，查阅超参数的帮助页面（定义算法如何学习的参数）并努力寻找最佳模型，可以使构建预测模型成为一项相关任务。
-在本教程后面的部分，我将介绍如何查看所有caret 支持的ML算法（这是一个很长的列表）以及可以调整哪些超参数。
-此外，我们不会止步于 caret 包，我们将看看如何巧妙地集成来自多个最佳模型的预测，并可能使用 caretEnsemble 来产生更好的预测。
-这个教程总共包括5部分，分别是： 1. 数据准备和清理 2. 可视化重要变量 3. 特征选择 4. 训练模型和调节模型 5. 预测</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -525,7 +521,7 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         14 posts found
+         15 posts found
       </p>
     </div>
   </div>

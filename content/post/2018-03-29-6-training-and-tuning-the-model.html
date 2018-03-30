@@ -84,9 +84,11 @@ plot(varimp_mars, main=&quot;Variable Importance with MARS&quot;)</code></pre>
 <h1>Tuning</h1>
 <div id="preprocess-the-test-dataset-and-predict" class="section level2">
 <h2>1. Preprocess the test dataset and predict</h2>
-<p>The pre-processing in the following sequence: <strong>Missing Value imputation –&gt; One-Hot Encoding –&gt; Range Normalization</strong></p>
+<p>The pre-processing in the following sequence:</p>
+<p><strong>Missing Value imputation –&gt; One-Hot Encoding –&gt; Range Normalization</strong></p>
 <p><strong>All the information required for pre-processing is stored in the respective preProcess model and dummyVar model.</strong></p>
-<p>pass the testData through these models in the same sequence: <strong>preProcess_missingdata_model –&gt; dummies_model –&gt; preProcess_range_model</strong></p>
+<p>pass the testData through these models in the same sequence:</p>
+<p><strong>preProcess_missingdata_model –&gt; dummies_model –&gt; preProcess_range_model</strong></p>
 <pre class="r"><code># Step 1: Impute missing values 
 testData2 &lt;- predict(preProcess_missingdata_model, testData)  
 

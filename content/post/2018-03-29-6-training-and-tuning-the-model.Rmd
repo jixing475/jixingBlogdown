@@ -80,11 +80,13 @@ plot(varimp_mars, main="Variable Importance with MARS")
 ## 1. Preprocess the test dataset and predict
 
 The pre-processing in the following sequence:
+
 **Missing Value imputation –> One-Hot Encoding –> Range Normalization**
 
 **All the information required for pre-processing is stored in the respective preProcess model and dummyVar model.**
 
 pass the testData through these models in the same sequence:
+
 **preProcess_missingdata_model –> dummies_model –> preProcess_range_model**
 
 ```{r}
