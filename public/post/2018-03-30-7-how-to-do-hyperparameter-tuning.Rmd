@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 load("../../data/craet_6.Rdata")
 library(tidyverse)
 library(caret)
-#Set Parallel Processing - Decrease computation time
+# Set Parallel Processing - Decrease computation time
 if (!require("doMC")) install.packages("doMC")
 library(doMC)
 registerDoMC(cores = 4)

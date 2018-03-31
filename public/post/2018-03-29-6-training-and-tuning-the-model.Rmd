@@ -15,9 +15,9 @@ coverMeta: out
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
-	echo = TRUE,#show code and output
 	message = FALSE,
-	warning = FALSE
+	warning = FALSE,
+	include = FALSE
 )
 ```
 

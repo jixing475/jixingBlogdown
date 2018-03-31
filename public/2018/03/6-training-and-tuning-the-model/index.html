@@ -30,10 +30,10 @@
     
     <meta name="description" content="Load Package And Data  Training 1. How to train the model and interpret the results? Once you have chosen an algorithm, building the model is fairly easy using the train() function
 train() does multiple other things like:
-Cross validating the model Tune the hyper parameters for optimal model performance Choose the optimal model based on a given evaluation metric Preprocess the predictors (what we did so far using preProcess())  #====See available algorithms in caret==== modelnames &lt;- paste(names(getModelInfo()), collapse=&#39;, &#39;) modelnames ## [1] &quot;ada, AdaBag, AdaBoost.">
+Cross validating the model Tune the hyper parameters for optimal model performance Choose the optimal model based on a given evaluation metric Preprocess the predictors (what we did so far using preProcess())   2.">
     <meta property="og:description" content="Load Package And Data  Training 1. How to train the model and interpret the results? Once you have chosen an algorithm, building the model is fairly easy using the train() function
 train() does multiple other things like:
-Cross validating the model Tune the hyper parameters for optimal model performance Choose the optimal model based on a given evaluation metric Preprocess the predictors (what we did so far using preProcess())  #====See available algorithms in caret==== modelnames &lt;- paste(names(getModelInfo()), collapse=&#39;, &#39;) modelnames ## [1] &quot;ada, AdaBag, AdaBoost.">
+Cross validating the model Tune the hyper parameters for optimal model performance Choose the optimal model based on a given evaluation metric Preprocess the predictors (what we did so far using preProcess())   2.">
     <meta property="og:type" content="blog">
     <meta property="og:title" content="6 Training and Tuning the model">
     <meta property="og:url" content="/2018/03/6-training-and-tuning-the-model/">
@@ -42,7 +42,7 @@ Cross validating the model Tune the hyper parameters for optimal model performan
     <meta name="twitter:title" content="student zero ">
     <meta name="twitter:description" content="Load Package And Data  Training 1. How to train the model and interpret the results? Once you have chosen an algorithm, building the model is fairly easy using the train() function
 train() does multiple other things like:
-Cross validating the model Tune the hyper parameters for optimal model performance Choose the optimal model based on a given evaluation metric Preprocess the predictors (what we did so far using preProcess())  #====See available algorithms in caret==== modelnames &lt;- paste(names(getModelInfo()), collapse=&#39;, &#39;) modelnames ## [1] &quot;ada, AdaBag, AdaBoost.">
+Cross validating the model Tune the hyper parameters for optimal model performance Choose the optimal model based on a given evaluation metric Preprocess the predictors (what we did so far using preProcess())   2.">
     
       <meta name="twitter:creator" content="@studentZero475">
     
@@ -259,54 +259,10 @@ Cross validating the model Tune the hyper parameters for optimal model performan
 <li><em>Choose the optimal model based on a given evaluation metric</em></li>
 <li><em>Preprocess the predictors (what we did so far using preProcess())</em></li>
 </ol>
-<pre class="r"><code>#====See available algorithms in caret====
-modelnames &lt;- paste(names(getModelInfo()), collapse=&#39;,  &#39;)
-modelnames</code></pre>
-<pre><code>## [1] &quot;ada,  AdaBag,  AdaBoost.M1,  adaboost,  amdai,  ANFIS,  avNNet,  awnb,  awtan,  bag,  bagEarth,  bagEarthGCV,  bagFDA,  bagFDAGCV,  bam,  bartMachine,  bayesglm,  binda,  blackboost,  blasso,  blassoAveraged,  bridge,  brnn,  BstLm,  bstSm,  bstTree,  C5.0,  C5.0Cost,  C5.0Rules,  C5.0Tree,  cforest,  chaid,  CSimca,  ctree,  ctree2,  cubist,  dda,  deepboost,  DENFIS,  dnn,  dwdLinear,  dwdPoly,  dwdRadial,  earth,  elm,  enet,  evtree,  extraTrees,  fda,  FH.GBML,  FIR.DM,  foba,  FRBCS.CHI,  FRBCS.W,  FS.HGD,  gam,  gamboost,  gamLoess,  gamSpline,  gaussprLinear,  gaussprPoly,  gaussprRadial,  gbm_h2o,  gbm,  gcvEarth,  GFS.FR.MOGUL,  GFS.LT.RS,  GFS.THRIFT,  glm.nb,  glm,  glmboost,  glmnet_h2o,  glmnet,  glmStepAIC,  gpls,  hda,  hdda,  hdrda,  HYFIS,  icr,  J48,  JRip,  kernelpls,  kknn,  knn,  krlsPoly,  krlsRadial,  lars,  lars2,  lasso,  lda,  lda2,  leapBackward,  leapForward,  leapSeq,  Linda,  lm,  lmStepAIC,  LMT,  loclda,  logicBag,  LogitBoost,  logreg,  lssvmLinear,  lssvmPoly,  lssvmRadial,  lvq,  M5,  M5Rules,  manb,  mda,  Mlda,  mlp,  mlpKerasDecay,  mlpKerasDecayCost,  mlpKerasDropout,  mlpKerasDropoutCost,  mlpML,  mlpSGD,  mlpWeightDecay,  mlpWeightDecayML,  monmlp,  msaenet,  multinom,  mxnet,  mxnetAdam,  naive_bayes,  nb,  nbDiscrete,  nbSearch,  neuralnet,  nnet,  nnls,  nodeHarvest,  null,  OneR,  ordinalNet,  ORFlog,  ORFpls,  ORFridge,  ORFsvm,  ownn,  pam,  parRF,  PART,  partDSA,  pcaNNet,  pcr,  pda,  pda2,  penalized,  PenalizedLDA,  plr,  pls,  plsRglm,  polr,  ppr,  PRIM,  protoclass,  pythonKnnReg,  qda,  QdaCov,  qrf,  qrnn,  randomGLM,  ranger,  rbf,  rbfDDA,  Rborist,  rda,  regLogistic,  relaxo,  rf,  rFerns,  RFlda,  rfRules,  ridge,  rlda,  rlm,  rmda,  rocc,  rotationForest,  rotationForestCp,  rpart,  rpart1SE,  rpart2,  rpartCost,  rpartScore,  rqlasso,  rqnc,  RRF,  RRFglobal,  rrlda,  RSimca,  rvmLinear,  rvmPoly,  rvmRadial,  SBC,  sda,  sdwd,  simpls,  SLAVE,  slda,  smda,  snn,  sparseLDA,  spikeslab,  spls,  stepLDA,  stepQDA,  superpc,  svmBoundrangeString,  svmExpoString,  svmLinear,  svmLinear2,  svmLinear3,  svmLinearWeights,  svmLinearWeights2,  svmPoly,  svmRadial,  svmRadialCost,  svmRadialSigma,  svmRadialWeights,  svmSpectrumString,  tan,  tanSearch,  treebag,  vbmpRadial,  vglmAdjCat,  vglmContRatio,  vglmCumulative,  widekernelpls,  WM,  wsrf,  xgbDART,  xgbLinear,  xgbTree,  xyf&quot;</code></pre>
-<pre class="r"><code>modelLookup(c(&quot;lm&quot;,&quot;glm&quot;,&quot;knn&quot;,&quot;kknn&quot;,&quot;earth&quot;))</code></pre>
-<pre><code>##   model parameter           label forReg forClass probModel
-## 1  kknn      kmax Max. #Neighbors   TRUE     TRUE      TRUE
-## 2  kknn  distance        Distance   TRUE     TRUE      TRUE
-## 3  kknn    kernel          Kernel   TRUE     TRUE      TRUE</code></pre>
-<pre class="r"><code>#==== training====
-# Set the seed for reproducibility
-set.seed(100)
-
-# Train the model using randomForest and predict on the training data itself.
-model_mars = train(Purchase ~ ., data=trainData, method=&#39;earth&#39;)
-fitted &lt;- predict(model_mars)
-
-#see what the train() has generated.
-model_mars</code></pre>
-<pre><code>## Multivariate Adaptive Regression Spline 
-## 
-## 857 samples
-##  18 predictor
-##   2 classes: &#39;CH&#39;, &#39;MM&#39; 
-## 
-## No pre-processing
-## Resampling: Bootstrapped (25 reps) 
-## Summary of sample sizes: 857, 857, 857, 857, 857, 857, ... 
-## Resampling results across tuning parameters:
-## 
-##   nprune  Accuracy   Kappa    
-##    2      0.8013184  0.5746285
-##   10      0.8102610  0.5987447
-##   19      0.8103685  0.5986923
-## 
-## Tuning parameter &#39;degree&#39; was held constant at a value of 1
-## Accuracy was used to select the optimal model using the largest value.
-## The final values used for the model were nprune = 19 and degree = 1.</code></pre>
-<pre class="r"><code>#Plotting the model shows how the various iterations of hyperparameter search performed
-plot(model_mars, main=&quot;Model Accuracies with MARS&quot;)</code></pre>
-<p><img src="/post/2018-03-29-6-training-and-tuning-the-model_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 </div>
 <div id="how-to-compute-variable-importance" class="section level2">
 <h2>2. How to compute variable importance?</h2>
 <p>Which variables came out to be useful?</p>
-<pre class="r"><code>varimp_mars &lt;- varImp(model_mars)
-plot(varimp_mars, main=&quot;Variable Importance with MARS&quot;)</code></pre>
-<p><img src="/post/2018-03-29-6-training-and-tuning-the-model_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 </div>
 </div>
 <div id="tuning" class="section level1">
@@ -318,122 +274,9 @@ plot(varimp_mars, main=&quot;Variable Importance with MARS&quot;)</code></pre>
 <p><strong>All the information required for pre-processing is stored in the respective preProcess model and dummyVar model.</strong></p>
 <p>pass the testData through these models in the same sequence:</p>
 <p><strong>preProcess_missingdata_model –&gt; dummies_model –&gt; preProcess_range_model</strong></p>
-<pre class="r"><code># Step 1: Impute missing values 
-testData2 &lt;- predict(preProcess_missingdata_model, testData)  
-
-# Step 2: Create one-hot encodings (dummy variables)
-testData3 &lt;- predict(dummies_model, testData2)
-
-# Step 3: Transform the features to range between 0 and 1
-testData4 &lt;- predict(preProcess_range_model, testData3)
-
-# View
-head(testData4[, 1:10])</code></pre>
-<pre><code>##    WeekofPurchase StoreID PriceCH   PriceMM DiscCH DiscMM SpecialCH
-## 2      0.23529412       0   0.150 0.5000000   0.00  0.375         0
-## 3      0.35294118       0   0.425 0.6666667   0.34  0.000         0
-## 6      0.05882353       1   0.000 0.5000000   0.00  0.000         0
-## 7      0.09803922       1   0.000 0.5000000   0.00  0.500         1
-## 9      0.15686275       1   0.150 0.5000000   0.00  0.500         0
-## 13     0.96078431       1   0.750 0.7333333   0.00  0.675         0
-##    SpecialMM   LoyalCH SalePriceMM
-## 2          1 0.6000352   0.4545455
-## 3          0 0.6800414   0.8181818
-## 6          1 0.9652913   0.7272727
-## 7          1 0.9722459   0.3636364
-## 9          0 0.9822616   0.3636364
-## 13         1 0.9927734   0.3636364</code></pre>
 </div>
 <div id="predict-on-testdata-and-confusion-matrix" class="section level2">
 <h2>2. Predict on testData and Confusion Matrix</h2>
-<pre class="r"><code># Predict on testData
-predicted &lt;- predict(model_mars, testData4)
-head(predicted)</code></pre>
-<pre><code>## [1] CH CH CH CH CH MM
-## Levels: CH MM</code></pre>
-<pre class="r"><code># Compute the confusion matrix
-confusionMatrix(reference = testData$Purchase, data = predicted, mode=&#39;everything&#39;, positive=&#39;MM&#39;)</code></pre>
-<pre><code>## Confusion Matrix and Statistics
-## 
-##           Reference
-## Prediction  CH  MM
-##         CH 113  21
-##         MM  17  62
-##                                           
-##                Accuracy : 0.8216          
-##                  95% CI : (0.7635, 0.8705)
-##     No Information Rate : 0.6103          
-##     P-Value [Acc &gt; NIR] : 2.139e-11       
-##                                           
-##                   Kappa : 0.6216          
-##  Mcnemar&#39;s Test P-Value : 0.6265          
-##                                           
-##             Sensitivity : 0.7470          
-##             Specificity : 0.8692          
-##          Pos Pred Value : 0.7848          
-##          Neg Pred Value : 0.8433          
-##               Precision : 0.7848          
-##                  Recall : 0.7470          
-##                      F1 : 0.7654          
-##              Prevalence : 0.3897          
-##          Detection Rate : 0.2911          
-##    Detection Prevalence : 0.3709          
-##       Balanced Accuracy : 0.8081          
-##                                           
-##        &#39;Positive&#39; Class : MM              
-## </code></pre>
-<pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>## R version 3.4.3 (2017-11-30)
-## Platform: x86_64-apple-darwin15.6.0 (64-bit)
-## Running under: macOS Sierra 10.12.6
-## 
-## Matrix products: default
-## BLAS: /Library/Frameworks/R.framework/Versions/3.4/Resources/lib/libRblas.0.dylib
-## LAPACK: /Library/Frameworks/R.framework/Versions/3.4/Resources/lib/libRlapack.dylib
-## 
-## locale:
-## [1] en_US.UTF-8/en_US.UTF-8/en_US.UTF-8/C/en_US.UTF-8/en_US.UTF-8
-## 
-## attached base packages:
-## [1] parallel  methods   stats     graphics  grDevices utils     datasets 
-## [8] base     
-## 
-## other attached packages:
-##  [1] earth_4.6.1        plotmo_3.3.5       TeachingDemos_2.10
-##  [4] plotrix_3.7        doMC_1.3.5         iterators_1.0.9   
-##  [7] foreach_1.4.4      caret_6.0-78       lattice_0.20-35   
-## [10] forcats_0.3.0      stringr_1.3.0      dplyr_0.7.4       
-## [13] purrr_0.2.4        readr_1.1.1        tidyr_0.8.0       
-## [16] tibble_1.4.2       ggplot2_2.2.1      tidyverse_1.2.1   
-## 
-## loaded via a namespace (and not attached):
-##  [1] nlme_3.1-131.1     lubridate_1.7.3    dimRed_0.1.0      
-##  [4] httr_1.3.1         rprojroot_1.3-2    tools_3.4.3       
-##  [7] backports_1.1.2    R6_2.2.2           rpart_4.1-13      
-## [10] lazyeval_0.2.1     colorspace_1.3-2   nnet_7.3-12       
-## [13] withr_2.1.1.9000   tidyselect_0.2.4   mnormt_1.5-5      
-## [16] compiler_3.4.3     cli_1.0.0          rvest_0.3.2       
-## [19] xml2_1.2.0         bookdown_0.7       scales_0.5.0.9000 
-## [22] sfsmisc_1.1-2      DEoptimR_1.0-8     psych_1.7.8       
-## [25] robustbase_0.92-8  digest_0.6.15      foreign_0.8-69    
-## [28] rmarkdown_1.9      pkgconfig_2.0.1    htmltools_0.3.6   
-## [31] rlang_0.2.0.9000   readxl_1.0.0       ddalpha_1.3.1.1   
-## [34] bindr_0.1.1        jsonlite_1.5       ModelMetrics_1.1.0
-## [37] magrittr_1.5       Matrix_1.2-12      Rcpp_0.12.16      
-## [40] munsell_0.4.3      stringi_1.1.7      yaml_2.1.18       
-## [43] MASS_7.3-49        plyr_1.8.4         recipes_0.1.2     
-## [46] grid_3.4.3         crayon_1.3.4       haven_1.1.1       
-## [49] splines_3.4.3      hms_0.4.2          knitr_1.20        
-## [52] pillar_1.2.1       reshape2_1.4.3     codetools_0.2-15  
-## [55] stats4_3.4.3       CVST_0.2-1         glue_1.2.0        
-## [58] evaluate_0.10.1    blogdown_0.5       modelr_0.1.1      
-## [61] cellranger_1.1.0   RANN_2.5.1         gtable_0.2.0      
-## [64] kernlab_0.9-25     assertthat_0.2.0   DRR_0.0.3         
-## [67] xfun_0.1           gower_0.1.2        prodlim_1.6.1     
-## [70] broom_0.4.3        e1071_1.6-8        class_7.3-14      
-## [73] survival_2.41-3    timeDate_3043.102  RcppRoll_0.2.2    
-## [76] bindrcpp_0.2       lava_1.6           ipred_0.9-6</code></pre>
-<pre class="r"><code>save.image(file=&quot;../../data/craet_6.Rdata&quot;)</code></pre>
 </div>
 <div id="reference" class="section level2">
 <h2><strong>Reference</strong></h2>
@@ -688,6 +531,23 @@ confusionMatrix(reference = testData$Purchase, data = predicted, mode=&#39;every
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/8-how-to-evaluate-performance-of-multiple-machine-learning-algorithms/">
+                <h3 class="media-heading">8 How To Evaluate Performance Of Multiple Machine Learning Algorithms?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Load Package And Data load(&quot;../../data/craet_7.Rdata&quot;) library(tidyverse) library(caret) #Set Parallel Processing - Decrease computation time if (!require(&quot;doMC&quot;)) install.packages(&quot;doMC&quot;) library(doMC) registerDoMC(cores = 4)  Caret provides the resamples() function where you can provide multiple machine learning models and collectively evaluate them Define the training control fitControl &lt;- trainControl( method = &#39;cv&#39;, # k-fold cross validation number = 5, # number of folds savePredictions = &#39;final&#39;, # saves predictions for optimal tuning parameter classProbs = T, # should class probabilities be returned summaryFunction=twoClassSummary # results summary function )   train models set.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2018/03/7-how-to-do-hyperparameter-tuning/">
                 <h3 class="media-heading">7 How To Do Hyperparameter Tuning </h3>
               </a>
@@ -696,7 +556,7 @@ confusionMatrix(reference = testData$Purchase, data = predicted, mode=&#39;every
                   Mar 3, 2018
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">Load Package And Data load(&quot;../../data/craet_6.Rdata&quot;) library(tidyverse) library(caret) #Set Parallel Processing - Decrease computation time if (!require(&quot;doMC&quot;)) install.packages(&quot;doMC&quot;) library(doMC) registerDoMC(cores = 4) Hyper parameter tuning using tuneGrid Model Tuning Parameter Set
+              <div class="media-content hide-xs font-merryweather">Load Package And Data load(&quot;../../data/craet_6.Rdata&quot;) library(tidyverse) library(caret) # Set Parallel Processing - Decrease computation time if (!require(&quot;doMC&quot;)) install.packages(&quot;doMC&quot;) library(doMC) registerDoMC(cores = 4) Hyper parameter tuning using tuneGrid Model Tuning Parameter Set
  Cross Validation Set
 Cross validation method can be one amongst:  ‘boot’: Bootstrap sampling ‘boot632’: Bootstrap sampling with 63.2% bias correction applied ‘optimism_boot’: The optimism bootstrap estimator ‘boot_all’: All boot methods. ‘cv’: k-Fold cross validation ‘repeatedcv’: Repeated k-Fold cross validation ‘oob’: Out of Bag cross validation ‘LOOCV’: Leave one out cross validation ‘LGOCV’: Leave group out cross validation  Training And Tuning</div>
             </div>
@@ -717,7 +577,7 @@ Cross validation method can be one amongst:  ‘boot’: Bootstrap sampling �
               </span>
               <div class="media-content hide-xs font-merryweather">Load Package And Data  Training 1. How to train the model and interpret the results? Once you have chosen an algorithm, building the model is fairly easy using the train() function
 train() does multiple other things like:
-Cross validating the model Tune the hyper parameters for optimal model performance Choose the optimal model based on a given evaluation metric Preprocess the predictors (what we did so far using preProcess())  #====See available algorithms in caret==== modelnames &lt;- paste(names(getModelInfo()), collapse=&#39;, &#39;) modelnames ## [1] &quot;ada, AdaBag, AdaBoost.</div>
+Cross validating the model Tune the hyper parameters for optimal model performance Choose the optimal model based on a given evaluation metric Preprocess the predictors (what we did so far using preProcess())   2.</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -860,27 +720,6 @@ library(skimr) skimmed &lt;- skim_to_wide(trainData) skimmed[, c(1:5, 9:11, 13, 
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/03/machine-learning-2-load-dataset/">
-                <h3 class="media-heading">2 machine learning: load dataset</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Mar 3, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Load the package and dataset 我们将使用 ISLR 包中的 Orange Juice Data.
-目标： 预测顾客会购买哪两种🍊汁
-数据集不是很大，我们的重点是构建模型的过程，而非真正搭建一个有用的模型。
-👌，let’go.
-# Load the caret package library(caret) # Import dataset orange &lt;- read.csv(&#39;../../data/orange_juice_withmissing.csv&#39;) # Structure of the dataframe str(orange) ## &#39;data.frame&#39;: 1070 obs. of 18 variables: ## $ Purchase : Factor w/ 2 levels &quot;CH&quot;,&quot;MM&quot;: 1 1 1 2 1 1 1 1 1 1 ... ## $ WeekofPurchase: int 237 239 245 227 228 230 232 234 235 238 .</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -888,7 +727,7 @@ library(skimr) skimmed &lt;- skim_to_wide(trainData) skimmed[, c(1:5, 9:11, 13, 
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         15 posts found
+         16 posts found
       </p>
     </div>
   </div>

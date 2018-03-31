@@ -1,0 +1,81 @@
+---
+title: 8 How To Evaluate Performance Of Multiple Machine Learning Algorithms?
+author: ZERO
+date: '2018-03-31'
+slug: 8-how-to-evaluate-performance-of-multiple-machine-learning-algorithms
+categories:
+  - machine learning
+tags:
+  - caret
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/03/31/5abecb63996b5.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE
+)
+```
+# Load Package And Data
+```{r}
+load("../../data/craet_7.Rdata")
+library(tidyverse)
+library(caret)
+#Set Parallel Processing - Decrease computation time
+if (!require("doMC")) install.packages("doMC")
+library(doMC)
+registerDoMC(cores = 4)
+```
+
+# Caret provides the resamples() function where you can provide multiple machine learning models and collectively evaluate them
+
+## Define the training control
+
+```{r}
+fitControl <- trainControl(
+    method = 'cv',                   # k-fold cross validation
+    number = 5,                      # number of folds
+    savePredictions = 'final',       # saves predictions for optimal tuning parameter
+    classProbs = T,                  # should class probabilities be returned
+    summaryFunction=twoClassSummary  # results summary function
+) 
+```
+
+## train models
+```{r}
+set.seed(100)
+
+# Training Adaboost using adaboost
+model_adaboost = train(Purchase ~ ., data=trainData, method='adaboost', tuneLength=2, trControl = fitControl)
+
+# Training Random Forest model using rf
+model_rf = train(Purchase ~ ., data=trainData, method='rf', tuneLength=5, trControl = fitControl)
+
+# Training xgBoost Dart
+#model_xgbDART = train(Purchase ~ ., data=trainData, method='xgbDART', tuneLength=5, trControl = fitControl, verbose=F)
+
+# Train SVM using MARS
+model_svmRadial = train(Purchase ~ ., data=trainData, method='svmRadial', tuneLength=15, trControl = fitControl)
+```
+
+# Run resamples() to compare the models
+
+```{r}
+# Compare model performances using resample()
+models_compare <- resamples(list(ADABOOST=model_adaboost, RF=model_rf, MARS=model_mars3, SVM=model_svmRadial))
+
+# Summary of the models performances
+summary(models_compare)
+
+# Draw box plots to compare models
+scales <- list(x=list(relation="free"), y=list(relation="free"))
+bwplot(models_compare, scales=scales)
+```
+
+```{r}
+save.image("../../data/craet_8.Rdata")
+```

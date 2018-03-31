@@ -217,6 +217,63 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="/2018/03/8-how-to-evaluate-performance-of-multiple-machine-learning-algorithms/">
+          8 How To Evaluate Performance Of Multiple Machine Learning Algorithms?
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-03-31T00:00:00Z">
+        
+  March 31, 2018
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/machine-learning">machine learning</a>
+    
+  
+
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      Load Package And Data load(&quot;../../data/craet_7.Rdata&quot;) library(tidyverse) library(caret) #Set Parallel Processing - Decrease computation time if (!require(&quot;doMC&quot;)) install.packages(&quot;doMC&quot;) library(doMC) registerDoMC(cores = 4)  Caret provides the resamples() function where you can provide multiple machine learning models and collectively evaluate them Define the training control fitControl &lt;- trainControl( method = &#39;cv&#39;, # k-fold cross validation number = 5, # number of folds savePredictions = &#39;final&#39;, # saves predictions for optimal tuning parameter classProbs = T, # should class probabilities be returned summaryFunction=twoClassSummary # results summary function )   train models set.
+      <p>
+        <a href="/2018/03/8-how-to-evaluate-performance-of-multiple-machine-learning-algorithms/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="/2018/03/8-how-to-evaluate-performance-of-multiple-machine-learning-algorithms/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/31/5abecb63996b5.jpg"/>
+      </div>
+    </a>
+  
+</article>
+
+            
+              
+  
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
         <a class="link-unstyled" href="/2018/03/7-how-to-do-hyperparameter-tuning/">
           7 How To Do Hyperparameter Tuning 
         </a>
@@ -244,7 +301,7 @@
 
     </div>
     <div class="postShorten-excerpt" itemprop="articleBody">
-      Load Package And Data load(&quot;../../data/craet_6.Rdata&quot;) library(tidyverse) library(caret) #Set Parallel Processing - Decrease computation time if (!require(&quot;doMC&quot;)) install.packages(&quot;doMC&quot;) library(doMC) registerDoMC(cores = 4) Hyper parameter tuning using tuneGrid Model Tuning Parameter Set
+      Load Package And Data load(&quot;../../data/craet_6.Rdata&quot;) library(tidyverse) library(caret) # Set Parallel Processing - Decrease computation time if (!require(&quot;doMC&quot;)) install.packages(&quot;doMC&quot;) library(doMC) registerDoMC(cores = 4) Hyper parameter tuning using tuneGrid Model Tuning Parameter Set
  Cross Validation Set
 Cross validation method can be one amongst:  ‘boot’: Bootstrap sampling ‘boot632’: Bootstrap sampling with 63.2% bias correction applied ‘optimism_boot’: The optimism bootstrap estimator ‘boot_all’: All boot methods. ‘cv’: k-Fold cross validation ‘repeatedcv’: Repeated k-Fold cross validation ‘oob’: Out of Bag cross validation ‘LOOCV’: Leave one out cross validation ‘LGOCV’: Leave group out cross validation  Training And Tuning
       <p>
@@ -305,7 +362,7 @@ Cross validation method can be one amongst:  ‘boot’: Bootstrap sampling �
     <div class="postShorten-excerpt" itemprop="articleBody">
       Load Package And Data  Training 1. How to train the model and interpret the results? Once you have chosen an algorithm, building the model is fairly easy using the train() function
 train() does multiple other things like:
-Cross validating the model Tune the hyper parameters for optimal model performance Choose the optimal model based on a given evaluation metric Preprocess the predictors (what we did so far using preProcess())  #====See available algorithms in caret==== modelnames &lt;- paste(names(getModelInfo()), collapse=&#39;, &#39;) modelnames ## [1] &quot;ada, AdaBag, AdaBoost.
+Cross validating the model Tune the hyper parameters for optimal model performance Choose the optimal model based on a given evaluation metric Preprocess the predictors (what we did so far using preProcess())   2.
       <p>
         <a href="/2018/03/6-training-and-tuning-the-model/" class="postShorten-excerpt_link link">Continue reading</a>
         
@@ -560,66 +617,6 @@ library(skimr) skimmed &lt;- skim_to_wide(trainData) skimmed[, c(1:5, 9:11, 13, 
 </article>
 
             
-              
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/03/3-1-how-to-split-the-dataset-into-training-and-validation/">
-          3.1 How to split the dataset into training and validation?
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-03-23T00:00:00Z">
-        
-  March 23, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/machine-learning">machine learning</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      数据准备好了之后的第一步就是拆分数据集为训练数据和测试数据，一般是 8:2 的比例。
-为什么拆分数据呢？
-当我们在构建一个机器学习模型上时，真正的目的是为了预测真是世界的数据，而机器学习模型是依靠算法学习训练数据学习Y 与 X 的关系，这种的关系的学习好坏的评判是要依靠没有参与学习模型的数据与预测数据之间的差距来评判的。
-# Load the caret package library(caret) # Import dataset orange &lt;- read.csv(&#39;../../data/orange_juice_withmissing.csv&#39;) # Create the training and test datasets set.seed(100) # Step 1: Get row numbers for the training data trainRowNumbers &lt;- createDataPartition(orange$Purchase, p=0.8, list=FALSE) # Step 2: Create the training dataset trainData &lt;- orange[trainRowNumbers,] # Step 3: Create the test dataset testData &lt;- orange[-trainRowNumbers,] # Store X and Y for later use.
-      <p>
-        <a href="/2018/03/3-1-how-to-split-the-dataset-into-training-and-validation/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/03/3-1-how-to-split-the-dataset-into-training-and-validation/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/23/5ab44d129ce08.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-            
             
   <div class="pagination-bar">
     <ul class="pagination">
@@ -699,6 +696,23 @@ library(skimr) skimmed &lt;- skim_to_wide(trainData) skimmed[, c(1:5, 9:11, 13, 
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/8-how-to-evaluate-performance-of-multiple-machine-learning-algorithms/">
+                <h3 class="media-heading">8 How To Evaluate Performance Of Multiple Machine Learning Algorithms?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Load Package And Data load(&quot;../../data/craet_7.Rdata&quot;) library(tidyverse) library(caret) #Set Parallel Processing - Decrease computation time if (!require(&quot;doMC&quot;)) install.packages(&quot;doMC&quot;) library(doMC) registerDoMC(cores = 4)  Caret provides the resamples() function where you can provide multiple machine learning models and collectively evaluate them Define the training control fitControl &lt;- trainControl( method = &#39;cv&#39;, # k-fold cross validation number = 5, # number of folds savePredictions = &#39;final&#39;, # saves predictions for optimal tuning parameter classProbs = T, # should class probabilities be returned summaryFunction=twoClassSummary # results summary function )   train models set.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2018/03/7-how-to-do-hyperparameter-tuning/">
                 <h3 class="media-heading">7 How To Do Hyperparameter Tuning </h3>
               </a>
@@ -707,7 +721,7 @@ library(skimr) skimmed &lt;- skim_to_wide(trainData) skimmed[, c(1:5, 9:11, 13, 
                   Mar 3, 2018
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">Load Package And Data load(&quot;../../data/craet_6.Rdata&quot;) library(tidyverse) library(caret) #Set Parallel Processing - Decrease computation time if (!require(&quot;doMC&quot;)) install.packages(&quot;doMC&quot;) library(doMC) registerDoMC(cores = 4) Hyper parameter tuning using tuneGrid Model Tuning Parameter Set
+              <div class="media-content hide-xs font-merryweather">Load Package And Data load(&quot;../../data/craet_6.Rdata&quot;) library(tidyverse) library(caret) # Set Parallel Processing - Decrease computation time if (!require(&quot;doMC&quot;)) install.packages(&quot;doMC&quot;) library(doMC) registerDoMC(cores = 4) Hyper parameter tuning using tuneGrid Model Tuning Parameter Set
  Cross Validation Set
 Cross validation method can be one amongst:  ‘boot’: Bootstrap sampling ‘boot632’: Bootstrap sampling with 63.2% bias correction applied ‘optimism_boot’: The optimism bootstrap estimator ‘boot_all’: All boot methods. ‘cv’: k-Fold cross validation ‘repeatedcv’: Repeated k-Fold cross validation ‘oob’: Out of Bag cross validation ‘LOOCV’: Leave one out cross validation ‘LGOCV’: Leave group out cross validation  Training And Tuning</div>
             </div>
@@ -728,7 +742,7 @@ Cross validation method can be one amongst:  ‘boot’: Bootstrap sampling �
               </span>
               <div class="media-content hide-xs font-merryweather">Load Package And Data  Training 1. How to train the model and interpret the results? Once you have chosen an algorithm, building the model is fairly easy using the train() function
 train() does multiple other things like:
-Cross validating the model Tune the hyper parameters for optimal model performance Choose the optimal model based on a given evaluation metric Preprocess the predictors (what we did so far using preProcess())  #====See available algorithms in caret==== modelnames &lt;- paste(names(getModelInfo()), collapse=&#39;, &#39;) modelnames ## [1] &quot;ada, AdaBag, AdaBoost.</div>
+Cross validating the model Tune the hyper parameters for optimal model performance Choose the optimal model based on a given evaluation metric Preprocess the predictors (what we did so far using preProcess())   2.</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -871,27 +885,6 @@ library(skimr) skimmed &lt;- skim_to_wide(trainData) skimmed[, c(1:5, 9:11, 13, 
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/03/machine-learning-2-load-dataset/">
-                <h3 class="media-heading">2 machine learning: load dataset</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Mar 3, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Load the package and dataset 我们将使用 ISLR 包中的 Orange Juice Data.
-目标： 预测顾客会购买哪两种🍊汁
-数据集不是很大，我们的重点是构建模型的过程，而非真正搭建一个有用的模型。
-👌，let’go.
-# Load the caret package library(caret) # Import dataset orange &lt;- read.csv(&#39;../../data/orange_juice_withmissing.csv&#39;) # Structure of the dataframe str(orange) ## &#39;data.frame&#39;: 1070 obs. of 18 variables: ## $ Purchase : Factor w/ 2 levels &quot;CH&quot;,&quot;MM&quot;: 1 1 1 2 1 1 1 1 1 1 ... ## $ WeekofPurchase: int 237 239 245 227 228 230 232 234 235 238 .</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -899,7 +892,7 @@ library(skimr) skimmed &lt;- skim_to_wide(trainData) skimmed[, c(1:5, 9:11, 13, 
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         15 posts found
+         16 posts found
       </p>
     </div>
   </div>

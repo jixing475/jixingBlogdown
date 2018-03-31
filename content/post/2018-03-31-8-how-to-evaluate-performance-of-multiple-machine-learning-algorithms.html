@@ -1,0 +1,96 @@
+---
+title: 8 How To Evaluate Performance Of Multiple Machine Learning Algorithms?
+author: ZERO
+date: '2018-03-31'
+slug: 8-how-to-evaluate-performance-of-multiple-machine-learning-algorithms
+categories:
+  - machine learning
+tags:
+  - caret
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/03/31/5abecb63996b5.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+
+
+<div id="load-package-and-data" class="section level1">
+<h1>Load Package And Data</h1>
+<pre class="r"><code>load(&quot;../../data/craet_7.Rdata&quot;)
+library(tidyverse)
+library(caret)
+#Set Parallel Processing - Decrease computation time
+if (!require(&quot;doMC&quot;)) install.packages(&quot;doMC&quot;)
+library(doMC)
+registerDoMC(cores = 4)</code></pre>
+</div>
+<div id="caret-provides-the-resamples-function-where-you-can-provide-multiple-machine-learning-models-and-collectively-evaluate-them" class="section level1">
+<h1>Caret provides the resamples() function where you can provide multiple machine learning models and collectively evaluate them</h1>
+<div id="define-the-training-control" class="section level2">
+<h2>Define the training control</h2>
+<pre class="r"><code>fitControl &lt;- trainControl(
+    method = &#39;cv&#39;,                   # k-fold cross validation
+    number = 5,                      # number of folds
+    savePredictions = &#39;final&#39;,       # saves predictions for optimal tuning parameter
+    classProbs = T,                  # should class probabilities be returned
+    summaryFunction=twoClassSummary  # results summary function
+) </code></pre>
+</div>
+<div id="train-models" class="section level2">
+<h2>train models</h2>
+<pre class="r"><code>set.seed(100)
+
+# Training Adaboost using adaboost
+model_adaboost = train(Purchase ~ ., data=trainData, method=&#39;adaboost&#39;, tuneLength=2, trControl = fitControl)
+
+# Training Random Forest model using rf
+model_rf = train(Purchase ~ ., data=trainData, method=&#39;rf&#39;, tuneLength=5, trControl = fitControl)
+
+# Training xgBoost Dart
+#model_xgbDART = train(Purchase ~ ., data=trainData, method=&#39;xgbDART&#39;, tuneLength=5, trControl = fitControl, verbose=F)
+
+# Train SVM using MARS
+model_svmRadial = train(Purchase ~ ., data=trainData, method=&#39;svmRadial&#39;, tuneLength=15, trControl = fitControl)</code></pre>
+</div>
+</div>
+<div id="run-resamples-to-compare-the-models" class="section level1">
+<h1>Run resamples() to compare the models</h1>
+<pre class="r"><code># Compare model performances using resample()
+models_compare &lt;- resamples(list(ADABOOST=model_adaboost, RF=model_rf, MARS=model_mars3, SVM=model_svmRadial))
+
+# Summary of the models performances
+summary(models_compare)</code></pre>
+<pre><code>## 
+## Call:
+## summary.resamples(object = models_compare)
+## 
+## Models: ADABOOST, RF, MARS, SVM 
+## Number of resamples: 5 
+## 
+## ROC 
+##               Min.   1st Qu.    Median      Mean   3rd Qu.      Max. NA&#39;s
+## ADABOOST 0.8126510 0.8462687 0.8682549 0.8657598 0.8868515 0.9147727    0
+## RF       0.8635394 0.8647908 0.8748565 0.8841388 0.9046198 0.9128875    0
+## MARS     0.8520967 0.8660981 0.9091561 0.8953757 0.9118590 0.9376688    0
+## SVM      0.8769723 0.8839375 0.8902597 0.8895479 0.8948048 0.9017652    0
+## 
+## Sens 
+##               Min.   1st Qu.    Median      Mean   3rd Qu.      Max. NA&#39;s
+## ADABOOST 0.7619048 0.7904762 0.7904762 0.8070330 0.8076923 0.8846154    0
+## RF       0.7809524 0.8000000 0.8461538 0.8451832 0.8750000 0.9238095    0
+## MARS     0.8190476 0.8476190 0.8857143 0.8739377 0.8942308 0.9230769    0
+## SVM      0.8750000 0.8761905 0.8761905 0.8891209 0.9047619 0.9134615    0
+## 
+## Spec 
+##               Min.   1st Qu.    Median      Mean   3rd Qu.      Max. NA&#39;s
+## ADABOOST 0.7014925 0.7462687 0.7727273 0.7635007 0.7761194 0.8208955    0
+## RF       0.6119403 0.6363636 0.7462687 0.7332429 0.8208955 0.8507463    0
+## MARS     0.6567164 0.7164179 0.7313433 0.7454998 0.7424242 0.8805970    0
+## SVM      0.6969697 0.7164179 0.7313433 0.7364089 0.7611940 0.7761194    0</code></pre>
+<pre class="r"><code># Draw box plots to compare models
+scales &lt;- list(x=list(relation=&quot;free&quot;), y=list(relation=&quot;free&quot;))
+bwplot(models_compare, scales=scales)</code></pre>
+<p><img src="/post/2018-03-31-8-how-to-evaluate-performance-of-multiple-machine-learning-algorithms_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code>save.image(&quot;../../data/craet_8.Rdata&quot;)</code></pre>
+</div>
