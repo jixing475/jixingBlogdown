@@ -264,6 +264,24 @@
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2018/04/9-ensembling-the-predictions/">
+                <h3 class="media-heading">9 Ensembling The Predictions</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Load Package And Data load(&quot;../../data/craet_8.Rdata&quot;) library(tidyverse) library(caret) #Set Parallel Processing - Decrease computation time if (!require(&quot;doMC&quot;)) install.packages(&quot;doMC&quot;) library(doMC) registerDoMC(cores = 4)  Train Multiple Models So now we have predictions from multiple individual models.To do this we had to run the train() function once for each model, store the models and pass it to the res
+library(caretEnsemble) # Stacking Algorithms - Run multiple algos in one call. trainControl &lt;- trainControl(method=&quot;repeatedcv&quot;, number=10, repeats=3, savePredictions=TRUE, classProbs=TRUE) algorithmList &lt;- c(&#39;rf&#39;, &#39;adaboost&#39;, &#39;earth&#39;, &#39;svmRadial&#39;) set.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2018/03/8-how-to-evaluate-performance-of-multiple-machine-learning-algorithms/">
                 <h3 class="media-heading">8 How To Evaluate Performance Of Multiple Machine Learning Algorithms?</h3>
               </a>
@@ -433,26 +451,6 @@ library(skimr) skimmed &lt;- skim_to_wide(trainData) skimmed[, c(1:5, 9:11, 13, 
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/03/3-1-how-to-split-the-dataset-into-training-and-validation/">
-                <h3 class="media-heading">3.1 How to split the dataset into training and validation?</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Mar 3, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">数据准备好了之后的第一步就是拆分数据集为训练数据和测试数据，一般是 8:2 的比例。
-为什么拆分数据呢？
-当我们在构建一个机器学习模型上时，真正的目的是为了预测真是世界的数据，而机器学习模型是依靠算法学习训练数据学习Y 与 X 的关系，这种的关系的学习好坏的评判是要依靠没有参与学习模型的数据与预测数据之间的差距来评判的。
-# Load the caret package library(caret) # Import dataset orange &lt;- read.csv(&#39;../../data/orange_juice_withmissing.csv&#39;) # Create the training and test datasets set.seed(100) # Step 1: Get row numbers for the training data trainRowNumbers &lt;- createDataPartition(orange$Purchase, p=0.8, list=FALSE) # Step 2: Create the training dataset trainData &lt;- orange[trainRowNumbers,] # Step 3: Create the test dataset testData &lt;- orange[-trainRowNumbers,] # Store X and Y for later use.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -460,7 +458,7 @@ library(skimr) skimmed &lt;- skim_to_wide(trainData) skimmed[, c(1:5, 9:11, 13, 
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         16 posts found
+         17 posts found
       </p>
     </div>
   </div>

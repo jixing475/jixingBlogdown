@@ -1,0 +1,113 @@
+---
+title: 9 Ensembling The Predictions
+author: ZERO
+date: '2018-04-01'
+slug: 9-ensembling-the-predictions
+categories:
+  - machine learning
+tags:
+  - caret
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/04/01/5ac0273ca478e.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+
+
+<div id="load-package-and-data" class="section level1">
+<h1>Load Package And Data</h1>
+<pre class="r"><code>load(&quot;../../data/craet_8.Rdata&quot;)
+library(tidyverse)
+library(caret)
+#Set Parallel Processing - Decrease computation time
+if (!require(&quot;doMC&quot;)) install.packages(&quot;doMC&quot;)
+library(doMC)
+registerDoMC(cores = 4)</code></pre>
+</div>
+<div id="train-multiple-models" class="section level1">
+<h1>Train Multiple Models</h1>
+<p>So now we have predictions from multiple individual models.To do this we had to run the train() function once for each model, store the models and pass it to the res</p>
+<pre class="r"><code>library(caretEnsemble)
+
+# Stacking Algorithms - Run multiple algos in one call.
+trainControl &lt;- trainControl(method=&quot;repeatedcv&quot;, 
+                             number=10, 
+                             repeats=3,
+                             savePredictions=TRUE, 
+                             classProbs=TRUE)
+
+algorithmList &lt;- c(&#39;rf&#39;, &#39;adaboost&#39;, &#39;earth&#39;, &#39;svmRadial&#39;)
+
+set.seed(100)
+models &lt;- caretList(Purchase ~ ., data=trainData, trControl=trainControl, methodList=algorithmList) 
+
+results &lt;- resamples(models)
+summary(results)</code></pre>
+<pre><code>## 
+## Call:
+## summary.resamples(object = results)
+## 
+## Models: rf, adaboost, earth, svmRadial 
+## Number of resamples: 30 
+## 
+## Accuracy 
+##                Min.   1st Qu.    Median      Mean   3rd Qu.      Max. NA&#39;s
+## rf        0.7011494 0.7764706 0.7965116 0.8033148 0.8250684 0.9058824    0
+## adaboost  0.6823529 0.7674419 0.7906977 0.7966532 0.8328659 0.8941176    0
+## earth     0.7209302 0.7906977 0.8187415 0.8164175 0.8367305 0.8604651    0
+## svmRadial 0.7558140 0.7948276 0.8304378 0.8261842 0.8588235 0.9058824    0
+## 
+## Kappa 
+##                Min.   1st Qu.    Median      Mean   3rd Qu.      Max. NA&#39;s
+## rf        0.3518625 0.5184810 0.5504351 0.5737290 0.6253768 0.8040346    0
+## adaboost  0.3349754 0.5046620 0.5686668 0.5711983 0.6423870 0.7831018    0
+## earth     0.4102857 0.5609657 0.6148850 0.6095470 0.6580869 0.7147595    0
+## svmRadial 0.4685109 0.5645744 0.6326120 0.6285652 0.6993397 0.7996464    0</code></pre>
+<pre class="r"><code># Box plots to compare models
+scales &lt;- list(x=list(relation=&quot;free&quot;), y=list(relation=&quot;free&quot;))
+bwplot(results, scales=scales)</code></pre>
+<p><img src="/post/2018-04-01-9-ensembling-the-predictions_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="combine-the-predictions-of-multiple-models-to-form-a-final-prediction" class="section level1">
+<h1>Combine The Predictions Of Multiple Models To Form A Final Prediction</h1>
+<ul>
+<li>One thought: Is it possible to combine these predicted values from multiple models somehow and make a new ensemble that predicts better?</li>
+<li>another thought: using the caretStack(). <strong>You just need to make sure you don’t use the same trainControl you used to build the models</strong></li>
+</ul>
+<pre class="r"><code># Create the trainControl
+set.seed(101)
+stackControl &lt;- trainControl(method=&quot;repeatedcv&quot;, 
+                             number=10, 
+                             repeats=3,
+                             savePredictions=TRUE, 
+                             classProbs=TRUE)
+
+# Ensemble the predictions of `models` to form a new combined prediction based on glm
+# 在原有模型的基础上叠加 一般线性模型 作为预测
+stack.glm &lt;- caretStack(models, method=&quot;glm&quot;, metric=&quot;Accuracy&quot;, trControl=stackControl)
+print(stack.glm)</code></pre>
+<pre><code>## A glm ensemble of 2 base models: rf, adaboost, earth, svmRadial
+## 
+## Ensemble results:
+## Generalized Linear Model 
+## 
+## 2571 samples
+##    4 predictor
+##    2 classes: &#39;CH&#39;, &#39;MM&#39; 
+## 
+## No pre-processing
+## Resampling: Cross-Validated (10 fold, repeated 3 times) 
+## Summary of sample sizes: 2314, 2314, 2314, 2314, 2313, 2313, ... 
+## Resampling results:
+## 
+##   Accuracy   Kappa    
+##   0.8321128  0.6419638</code></pre>
+<pre class="r"><code># Predict on testData
+stack_predicteds &lt;- predict(stack.glm, newdata=testData4)
+head(stack_predicteds)</code></pre>
+<pre><code>## [1] CH CH CH CH CH MM
+## Levels: CH MM</code></pre>
+<pre class="r"><code>save.image(&quot;../../data/craet_9.Rdata&quot;)</code></pre>
+<p><strong>A point to consider: The ensembles tend to perform better if the predictions are less correlated with each other.</strong></p>
+</div>

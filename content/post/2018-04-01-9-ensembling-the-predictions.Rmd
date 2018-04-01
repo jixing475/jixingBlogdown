@@ -1,0 +1,88 @@
+---
+title: 9 Ensembling The Predictions
+author: ZERO
+date: '2018-04-01'
+slug: 9-ensembling-the-predictions
+categories:
+  - machine learning
+tags:
+  - caret
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/04/01/5ac0273ca478e.jpg
+metaAlignment: center
+coverMeta: out
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE
+)
+```
+# Load Package And Data
+```{r}
+load("../../data/craet_8.Rdata")
+library(tidyverse)
+library(caret)
+#Set Parallel Processing - Decrease computation time
+if (!require("doMC")) install.packages("doMC")
+library(doMC)
+registerDoMC(cores = 4)
+```
+
+# Train Multiple Models 
+So now we have predictions from multiple individual models.To do this we had to run the train() function once for each model, store the models and pass it to the res
+```{r}
+library(caretEnsemble)
+
+# Stacking Algorithms - Run multiple algos in one call.
+trainControl <- trainControl(method="repeatedcv", 
+                             number=10, 
+                             repeats=3,
+                             savePredictions=TRUE, 
+                             classProbs=TRUE)
+
+algorithmList <- c('rf', 'adaboost', 'earth', 'svmRadial')
+
+set.seed(100)
+models <- caretList(Purchase ~ ., data=trainData, trControl=trainControl, methodList=algorithmList) 
+
+results <- resamples(models)
+summary(results)
+
+# Box plots to compare models
+scales <- list(x=list(relation="free"), y=list(relation="free"))
+bwplot(results, scales=scales)
+```
+
+# Combine The Predictions Of Multiple Models To Form A Final Prediction
+
+  - One thought: Is it possible to combine these predicted values from multiple models somehow and make a new ensemble that predicts better?
+  - another thought: using the caretStack(). **You just need to make sure you don’t use the same trainControl you used to build the models**
+  
+```{r}
+# Create the trainControl
+set.seed(101)
+stackControl <- trainControl(method="repeatedcv", 
+                             number=10, 
+                             repeats=3,
+                             savePredictions=TRUE, 
+                             classProbs=TRUE)
+
+# Ensemble the predictions of `models` to form a new combined prediction based on glm
+# 在原有模型的基础上叠加 一般线性模型 作为预测
+stack.glm <- caretStack(models, method="glm", metric="Accuracy", trControl=stackControl)
+print(stack.glm)
+
+# Predict on testData
+stack_predicteds <- predict(stack.glm, newdata=testData4)
+head(stack_predicteds)
+```
+
+```{r}
+save.image("../../data/craet_9.Rdata")
+```
+
+**A point to consider: The ensembles tend to perform better if the predictions are less correlated with each other.**
+
+

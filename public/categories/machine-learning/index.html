@@ -217,6 +217,64 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="/2018/04/9-ensembling-the-predictions/">
+          9 Ensembling The Predictions
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-04-01T00:00:00Z">
+        
+  April 1, 2018
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/machine-learning">machine learning</a>
+    
+  
+
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      Load Package And Data load(&quot;../../data/craet_8.Rdata&quot;) library(tidyverse) library(caret) #Set Parallel Processing - Decrease computation time if (!require(&quot;doMC&quot;)) install.packages(&quot;doMC&quot;) library(doMC) registerDoMC(cores = 4)  Train Multiple Models So now we have predictions from multiple individual models.To do this we had to run the train() function once for each model, store the models and pass it to the res
+library(caretEnsemble) # Stacking Algorithms - Run multiple algos in one call. trainControl &lt;- trainControl(method=&quot;repeatedcv&quot;, number=10, repeats=3, savePredictions=TRUE, classProbs=TRUE) algorithmList &lt;- c(&#39;rf&#39;, &#39;adaboost&#39;, &#39;earth&#39;, &#39;svmRadial&#39;) set.
+      <p>
+        <a href="/2018/04/9-ensembling-the-predictions/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="/2018/04/9-ensembling-the-predictions/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="https://i.loli.net/2018/04/01/5ac0273ca478e.jpg"/>
+      </div>
+    </a>
+  
+</article>
+
+            
+              
+  
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
         <a class="link-unstyled" href="/2018/03/8-how-to-evaluate-performance-of-multiple-machine-learning-algorithms/">
           8 How To Evaluate Performance Of Multiple Machine Learning Algorithms?
         </a>
@@ -557,67 +615,6 @@ Step 2: Keeping priority to the most important variables, iterate through by bui
 </article>
 
             
-              
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/03/why-should-i-trust-you/">
-          Why should I trust you 🤖?
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-03-26T00:00:00Z">
-        
-  March 26, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/machine-learning">machine learning</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      传统的机器学习工作流程主要集中在模型训练和优化上; 最好的模型通常是通过像精度或者错误这样的性能度量来选择的，而且如果它通过了这些性能标准的某些阈值，我们倾向于假设一个模型是足够好的。在机器学习的许多应用中，用户会使用一个模型来帮助做决定， 例如：一位医生不会对病人进行手术，仅仅因为这个模型说不应该进行手术？
-由于复杂的机器学习模型本质上是黑盒子，而且太复杂，机器学习模型做出的分类决定通常很难被人类的大脑所理解，但是能够理解和解释这些模型对于提高模型质量，提高信任度和透明度以及减少偏见非常重要，因为人类往往具有良好的直觉和因果推理，这些都是难以在数据评估指标中捕获。
-因此，我们希望能够形象的理解它们的工作原理：为什么一个模型将具有特定标签的案例进行准确分类。eg: 为什么一个乳腺肿块样本被归类为“恶性”而不是“良性，仅仅因为它长得丑吗？
- Local Interpretable Model-Agnostic Explanations (LIME) is an attempt to make these complex models at least partly understandable. The method has been published in “Why Should I Trust You?” Explaining the Predictions of Any Classifier. By Marco Tulio Ribeiro, Sameer Singh and Carlos Guestrin from the University of Washington in Seattle
- How LIME works  lime is able to explain all models for which we can obtain prediction probabilities (in R, that is every model that works with predict(type = “prob”)).
-      <p>
-        <a href="/2018/03/why-should-i-trust-you/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/03/why-should-i-trust-you/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/02/11/5a7fa56fd7333.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-            
             
   <div class="pagination-bar">
     <ul class="pagination">
@@ -693,6 +690,24 @@ Step 2: Keeping priority to the most important variables, iterate through by bui
       <div class="no-result text-color-light text-center">no post found</div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/04/9-ensembling-the-predictions/">
+                <h3 class="media-heading">9 Ensembling The Predictions</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Load Package And Data load(&quot;../../data/craet_8.Rdata&quot;) library(tidyverse) library(caret) #Set Parallel Processing - Decrease computation time if (!require(&quot;doMC&quot;)) install.packages(&quot;doMC&quot;) library(doMC) registerDoMC(cores = 4)  Train Multiple Models So now we have predictions from multiple individual models.To do this we had to run the train() function once for each model, store the models and pass it to the res
+library(caretEnsemble) # Stacking Algorithms - Run multiple algos in one call. trainControl &lt;- trainControl(method=&quot;repeatedcv&quot;, number=10, repeats=3, savePredictions=TRUE, classProbs=TRUE) algorithmList &lt;- c(&#39;rf&#39;, &#39;adaboost&#39;, &#39;earth&#39;, &#39;svmRadial&#39;) set.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -866,26 +881,6 @@ library(skimr) skimmed &lt;- skim_to_wide(trainData) skimmed[, c(1:5, 9:11, 13, 
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/03/3-1-how-to-split-the-dataset-into-training-and-validation/">
-                <h3 class="media-heading">3.1 How to split the dataset into training and validation?</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Mar 3, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">数据准备好了之后的第一步就是拆分数据集为训练数据和测试数据，一般是 8:2 的比例。
-为什么拆分数据呢？
-当我们在构建一个机器学习模型上时，真正的目的是为了预测真是世界的数据，而机器学习模型是依靠算法学习训练数据学习Y 与 X 的关系，这种的关系的学习好坏的评判是要依靠没有参与学习模型的数据与预测数据之间的差距来评判的。
-# Load the caret package library(caret) # Import dataset orange &lt;- read.csv(&#39;../../data/orange_juice_withmissing.csv&#39;) # Create the training and test datasets set.seed(100) # Step 1: Get row numbers for the training data trainRowNumbers &lt;- createDataPartition(orange$Purchase, p=0.8, list=FALSE) # Step 2: Create the training dataset trainData &lt;- orange[trainRowNumbers,] # Step 3: Create the test dataset testData &lt;- orange[-trainRowNumbers,] # Store X and Y for later use.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -893,7 +888,7 @@ library(skimr) skimmed &lt;- skim_to_wide(trainData) skimmed[, c(1:5, 9:11, 13, 
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         16 posts found
+         17 posts found
       </p>
     </div>
   </div>
