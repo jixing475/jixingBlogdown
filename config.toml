@@ -32,7 +32,8 @@ canonifyurls = true
 
 [author]
   name = "Jixing Liu"
-  bio = "Clinical Doctor turned Bioinformatician turned Data Scientist"
+  bio = "In God I trust. All others must bring data."
+  #bio = "Clinical Doctor turned Bioinformatician turned Data Scientist"
   job = "Data Scientist"
   location = "China"
   # Your Gravatar email. Overwrite `author.picture` everywhere in the blog

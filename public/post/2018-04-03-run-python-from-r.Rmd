@@ -1,0 +1,162 @@
+---
+title: Run Python From R
+author: ZERO
+date: '2018-04-03'
+slug: run-python-from-r
+categories:
+  - computers
+tags:
+  - Program
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/04/03/5ac2dcfd3d01f.jpg
+metaAlignment: center
+coverMeta: out
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE
+)
+```
+
+**R** is mainly known for data analysis, statistical modeling and visualization. While **python** is popular for deep learning and natural language processing.
+
+Python and R were ranked top 2 tools for data science and machine learning.
+If you really want to boost your career in data science world, these are the languages you need to focus on.
+
+# **How To Call Or Run Python From R?**
+
+RStudio developed a package called **reticulate** which provides a medium to run Python packages and functions from R.
+
+```{r}
+# Load reticulate package
+if (!require("reticulate")) install.packages("reticulate")
+```
+
+# [Python Version Configuration](https://rstudio.github.io/reticulate/articles/versions.html)
+If the version of Python you want to use is located on the system PATH then it will be automatically discovered (via Sys.which) and used.
+
+Alternatively, you can use one of the following functions to specify alternate versions of Python:
+
+Function    Description
+
+- [use_python](https://rstudio.github.io/reticulate/reference/use_python.html)
+Specify the path a specific Python binary.
+
+- [use_virtualenv](https://rstudio.github.io/reticulate/reference/use_python.html)
+Specify the directory containing a Python virtualenv.
+
+- [use_condaenv](https://rstudio.github.io/reticulate/reference/use_python.html)
+Specify the name of a Conda environment.
+
+```{r}
+py_discover_config()
+use_python("/Users/zero/anaconda3/envs/PDSH/bin/python")
+#use_virtualenv("/Users/zero/anaconda3/envs", required = TRUE)
+use_condaenv("PDSH")
+```
+
+# Import a python module within R
+```{r}
+os <- import("os")
+pd <- import("pandas")
+numpy <- import("numpy")
+py_module_available("pandas")
+os$getcwd()
+```
+
+# Install Python package with conda in terminal
+
+# working with **numpy**
+```{r}
+y <- array(1:4, c(2, 2)) # create a matrix with R
+x <- numpy$array(y) # edit it with python
+numpy$transpose(y) # transpose the above array
+numpy$linalg$eig(y) # Eigenvalues and eigen vectors
+numpy$sqrt(x)
+numpy$exp(x)
+```
+
+# ⭐**Access objects created in python from R**
+
+**note: Don't work with Rmd**
+```{r eval=FALSE, include=TRUE}
+repl_python()
+#===== python console====
+
+# Load Pandas package
+import pandas as pd
+
+# Importing Dataset
+travel = pd.read_excel("data/AIR.xlsx")
+
+# Number of rows and columns
+travel.shape
+
+# Select random no. of rows 
+travel.sample(n = 10)
+
+# Group By
+travel.groupby("Year").AIR.mean()
+
+# Filter
+t = travel.loc[(travel.Month >= 6) & (travel.Year >= 1955),:]
+
+# Return to R
+exit
+
+#==== R console====
+# Access objects created in python from R
+summary(py$t)
+
+# Line chart using ggplot2
+library(ggplot2)
+ggplot(py$t, aes(AIR, Year)) + geom_line()
+```
+
+# ⭐**Access objects created in R from Python**
+```{r eval=FALSE, include=TRUE}
+# Let's create a object in R
+#===== R console====
+mydata = head(cars, n=15)
+
+#Use the R created object within Python REPL
+repl_python()
+#===== python console====
+import pandas as pd
+#Access objects created in R from Python: r.mydata
+r.mydata.describe()
+pd.isnull(r.mydata.speed)
+
+exit
+```
+
+
+# ⭐Building Logistic Regression Model using sklearn package
+```{r eval=FALSE, include=TRUE}
+repl_python()
+
+# Load libraries
+from sklearn import datasets
+from sklearn.linear_model import LogisticRegression
+
+# load the iris datasets
+iris = datasets.load_iris()
+
+# Developing logit model
+model = LogisticRegression()
+model.fit(iris.data, iris.target)
+
+# Scoring
+actual = iris.target
+predicted = model.predict(iris.data)
+
+# Performance Metrics
+print(metrics.classification_report(actual, predicted))
+print(metrics.confusion_matrix(actual, predicted))
+```
+
+##**Links**
+- [R Interface to Python](https://www.diycode.cc/projects/rstudio/reticulate)
+

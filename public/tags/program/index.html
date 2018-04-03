@@ -1,9 +1,5 @@
 
 
-  
-    
-  
-
 
   
 
@@ -20,7 +16,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.32.2 with theme Tranquilpeak 0.4.1-BETA">
-    <title>Machine Learning in R 1：introdution</title>
+    <title>Program</title>
     <meta name="author" content="Jixing Liu">
     <meta name="keywords" content=", R">
 
@@ -28,33 +24,15 @@
     
 
     
-    <meta name="description" content="Caret Package是一个用于在R中构建机器学习模型的综合框架。在此博文中，我会解释 caret 包的几乎所有核心功能，并引导完成构建预测模型的分步过程。
-Caret 是 Classification And REgression Training 的简称。
-Caret 包很好地让所有与机器学习模型开发相关的步骤集成到一个简化的工作流程中，几乎每个主流的ML算法都可以在R中实现。
-由于R具有如此多的机器学习算法实现包，因此选则在哪个包中实现某种算法是非常头疼的问题。多数时候，实现算法的语法和方法在不同包中有所不同。 结合数据预处理，查阅超参数的帮助页面（定义算法如何学习的参数）并努力寻找最佳模型，可以使构建预测模型成为一项相关任务。
-在本教程后面的部分，我将介绍如何查看所有caret 支持的ML算法（这是一个很长的列表）以及可以调整哪些超参数。
-此外，我们不会止步于 caret 包，我们将看看如何巧妙地集成来自多个最佳模型的预测，并可能使用 caretEnsemble 来产生更好的预测。
-这个教程总共包括5部分，分别是： 1. 数据准备和清理 2. 可视化重要变量 3. 特征选择 4. 训练模型和调节模型 5. 预测">
-    <meta property="og:description" content="Caret Package是一个用于在R中构建机器学习模型的综合框架。在此博文中，我会解释 caret 包的几乎所有核心功能，并引导完成构建预测模型的分步过程。
-Caret 是 Classification And REgression Training 的简称。
-Caret 包很好地让所有与机器学习模型开发相关的步骤集成到一个简化的工作流程中，几乎每个主流的ML算法都可以在R中实现。
-由于R具有如此多的机器学习算法实现包，因此选则在哪个包中实现某种算法是非常头疼的问题。多数时候，实现算法的语法和方法在不同包中有所不同。 结合数据预处理，查阅超参数的帮助页面（定义算法如何学习的参数）并努力寻找最佳模型，可以使构建预测模型成为一项相关任务。
-在本教程后面的部分，我将介绍如何查看所有caret 支持的ML算法（这是一个很长的列表）以及可以调整哪些超参数。
-此外，我们不会止步于 caret 包，我们将看看如何巧妙地集成来自多个最佳模型的预测，并可能使用 caretEnsemble 来产生更好的预测。
-这个教程总共包括5部分，分别是： 1. 数据准备和清理 2. 可视化重要变量 3. 特征选择 4. 训练模型和调节模型 5. 预测">
+    <meta name="description" content="exploring and playing with data in R">
+    <meta property="og:description" content="exploring and playing with data in R">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Machine Learning in R 1：introdution">
-    <meta property="og:url" content="/2018/03/machine-learning-in-r-introdution/">
+    <meta property="og:title" content="Program">
+    <meta property="og:url" content="/tags/program/">
     <meta property="og:site_name" content="student zero ">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="student zero ">
-    <meta name="twitter:description" content="Caret Package是一个用于在R中构建机器学习模型的综合框架。在此博文中，我会解释 caret 包的几乎所有核心功能，并引导完成构建预测模型的分步过程。
-Caret 是 Classification And REgression Training 的简称。
-Caret 包很好地让所有与机器学习模型开发相关的步骤集成到一个简化的工作流程中，几乎每个主流的ML算法都可以在R中实现。
-由于R具有如此多的机器学习算法实现包，因此选则在哪个包中实现某种算法是非常头疼的问题。多数时候，实现算法的语法和方法在不同包中有所不同。 结合数据预处理，查阅超参数的帮助页面（定义算法如何学习的参数）并努力寻找最佳模型，可以使构建预测模型成为一项相关任务。
-在本教程后面的部分，我将介绍如何查看所有caret 支持的ML算法（这是一个很长的列表）以及可以调整哪些超参数。
-此外，我们不会止步于 caret 包，我们将看看如何巧妙地集成来自多个最佳模型的预测，并可能使用 caretEnsemble 来产生更好的预测。
-这个教程总共包括5部分，分别是： 1. 数据准备和清理 2. 可视化重要变量 3. 特征选择 4. 训练模型和调节模型 5. 预测">
+    <meta name="twitter:description" content="exploring and playing with data in R">
     
       <meta name="twitter:creator" content="@studentZero475">
     
@@ -67,8 +45,6 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
       <meta property="og:image" content="https://i.loli.net/2018/02/26/5a937bb148b02.jpg">
     
 
-    
-      <meta property="og:image" content="https://i.loli.net/2018/03/21/5ab1cca60f6fc.jpg">
     
     
     
@@ -97,7 +73,7 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
 <script src="/js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
-<header id="header" data-behavior="4">
+<header id="header" data-behavior="1">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
     <a class="header-title-link" href="/">student zero </a>
@@ -117,11 +93,11 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
   
 </header>
 
-      <nav id="sidebar" data-behavior="4">
+      <nav id="sidebar" data-behavior="1">
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <h1 class="sidebar-profile-title">Machine Learning in R 1：introdution</h1>
+        <h1 class="sidebar-profile-title">Program</h1>
         <a href="/#about">
           <img class="sidebar-profile-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
         </a>
@@ -217,26 +193,40 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
 </nav>
 
       
+        
 
-      <div id="main" data-behavior="4"
+      
+      <div id="main" data-behavior="1"
         class="
-               hasCoverMetaOut
+               hasCoverMetaIn
                ">
-        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
-          
-          
-            <div class="post-header main-content-wrap text-center">
+        
+          <section class="postShorten-group main-content-wrap">
+            
+            
+              
   
-    <h1 class="post-title" itemprop="headline">
-      Machine Learning in R 1：introdution
-    </h1>
+    
   
+
+
   
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="/2018/04/run-python-from-r/">
+          Run Python From R
+        </a>
+      </h1>
+      
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-03-21T00:00:00Z">
+      <time itemprop="datePublished" datetime="2018-04-03T00:00:00Z">
         
-  March 21, 2018
+  April 3, 2018
 
       </time>
     
@@ -245,118 +235,38 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
   
     <span>in</span>
     
-      <a class="category-link" href="/categories/machine-learning">machine learning</a>
+      <a class="category-link" href="/categories/computers">computers</a>
     
   
 
 
   </div>
 
-</div>
-          
-          <div class="post-content markdown" itemprop="articleBody">
-            <div class="main-content-wrap">
-              <p>Caret Package是一个用于在R中构建机器学习模型的综合框架。在此博文中，我会解释 caret 包的几乎所有核心功能，并引导完成构建预测模型的分步过程。</p>
-<p>Caret 是 Classification And REgression Training 的简称。</p>
-<p>Caret 包很好地让所有与机器学习模型开发相关的步骤集成到一个简化的工作流程中，几乎每个主流的ML算法都可以在R中实现。</p>
-<p>由于R具有如此多的机器学习算法实现包，因此选则在哪个包中实现某种算法是非常头疼的问题。多数时候，实现算法的语法和方法在不同包中有所不同。 结合数据预处理，查阅超参数的帮助页面（定义算法如何学习的参数）并努力寻找最佳模型，可以使构建预测模型成为一项相关任务。</p>
-<p>在本教程后面的部分，我将介绍如何查看所有caret 支持的ML算法（这是一个很长的列表）以及可以调整哪些超参数。</p>
-<p>此外，我们不会止步于 caret 包，我们将看看如何巧妙地集成来自多个最佳模型的预测，并可能使用 <code>caretEnsemble</code> 来产生更好的预测。</p>
-<p>这个教程总共包括5部分，分别是： 1. 数据准备和清理 2. 可视化重要变量 3. 特征选择 4. 训练模型和调节模型 5. 预测</p>
-
-              
-            </div>
-          </div>
-          <div id="post-footer" class="post-footer main-content-wrap">
-            
-              
-                
-                
-                  <div class="post-footer-tags">
-                    <span class="text-color-light text-small">TAGGED IN</span><br/>
-                    
-  <a class="tag tag--primary tag--small" href="//tags/caret/">caret</a>
-
-                  </div>
-                
-              
-            
-            
-  <div class="post-actions-wrap">
-      <nav >
-        <ul class="post-actions post-action-nav">
-            <li class="post-action">
-              
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/machine-learning-2-load-dataset/" data-tooltip="2 machine learning: load dataset">
-              
-                <i class="fa fa-angle-left"></i>
-                <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
-              </a>
-            </li>
-            <li class="post-action">
-              
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/how-to-use-the-ncbis-new-api-keys/" data-tooltip="HOW TO USE THE NCBI&#39;S NEW API KEYS">
-              
-                <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
-                <i class="fa fa-angle-right"></i>
-              </a>
-            </li>
-        </ul>
-      </nav>
-    <ul class="post-actions post-action-share" >
-      
-        <li class="post-action hide-lg hide-md hide-sm">
-          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
-            <i class="fa fa-share-alt"></i>
-          </a>
-        </li>
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      R is mainly known for data analysis, statistical modeling and visualization. While python is popular for deep learning and natural language processing.
+Python and R were ranked top 2 tools for data science and machine learning. If you really want to boost your career in data science world, these are the languages you need to focus on.
+How To Call Or Run Python From R? RStudio developed a package called reticulate which provides a medium to run Python packages and functions from R.
+      <p>
+        <a href="/2018/04/run-python-from-r/" class="postShorten-excerpt_link link">Continue reading</a>
         
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/03/machine-learning-in-r-introdution/">
-              <i class="fa fa-facebook-official"></i>
-            </a>
-          </li>
-        
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/machine-learning-in-r-introdution/">
-              <i class="fa fa-twitter"></i>
-            </a>
-          </li>
-        
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/machine-learning-in-r-introdution/">
-              <i class="fa fa-google-plus"></i>
-            </a>
-          </li>
-        
-      
-      
-        <li class="post-action">
-          <a class="post-action-btn btn btn--default" href="#disqus_thread">
-            <i class="fa fa-comment-o"></i>
-          </a>
-        </li>
-      
-      <li class="post-action">
-        
-          <a class="post-action-btn btn btn--default" href="#">
-        
-          <i class="fa fa-list"></i>
-        </a>
-      </li>
-    </ul>
+      </p>
+    </div>
   </div>
-
+  
+    <a href="/2018/04/run-python-from-r/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="https://i.loli.net/2018/04/03/5ac2dcfd3d01f.jpg"/>
+      </div>
+    </a>
+  
+</article>
 
             
-              
-                <div id="disqus_thread">
-  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-</div>
-              
             
-          </div>
-        </article>
+
+          </section>
+        
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
     &copy; 2018 Jixing Liu. All Rights Reserved
@@ -364,100 +274,6 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
 </footer>
 
       </div>
-      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
-        
-  <div class="post-actions-wrap">
-      <nav >
-        <ul class="post-actions post-action-nav">
-            <li class="post-action">
-              
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/machine-learning-2-load-dataset/" data-tooltip="2 machine learning: load dataset">
-              
-                <i class="fa fa-angle-left"></i>
-                <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
-              </a>
-            </li>
-            <li class="post-action">
-              
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/how-to-use-the-ncbis-new-api-keys/" data-tooltip="HOW TO USE THE NCBI&#39;S NEW API KEYS">
-              
-                <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
-                <i class="fa fa-angle-right"></i>
-              </a>
-            </li>
-        </ul>
-      </nav>
-    <ul class="post-actions post-action-share" >
-      
-        <li class="post-action hide-lg hide-md hide-sm">
-          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
-            <i class="fa fa-share-alt"></i>
-          </a>
-        </li>
-        
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/03/machine-learning-in-r-introdution/">
-              <i class="fa fa-facebook-official"></i>
-            </a>
-          </li>
-        
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/machine-learning-in-r-introdution/">
-              <i class="fa fa-twitter"></i>
-            </a>
-          </li>
-        
-          <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/machine-learning-in-r-introdution/">
-              <i class="fa fa-google-plus"></i>
-            </a>
-          </li>
-        
-      
-      
-        <li class="post-action">
-          <a class="post-action-btn btn btn--default" href="#disqus_thread">
-            <i class="fa fa-comment-o"></i>
-          </a>
-        </li>
-      
-      <li class="post-action">
-        
-          <a class="post-action-btn btn btn--default" href="#">
-        
-          <i class="fa fa-list"></i>
-        </a>
-      </li>
-    </ul>
-  </div>
-
-
-      </div>
-      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
-  <i id="btn-close-shareoptions" class="fa fa-close"></i>
-  <ul class="share-options">
-    
-      <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F03%2Fmachine-learning-in-r-introdution%2F">
-          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
-        </a>
-      </li>
-    
-      <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F03%2Fmachine-learning-in-r-introdution%2F">
-          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
-        </a>
-      </li>
-    
-      <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F03%2Fmachine-learning-in-r-introdution%2F">
-          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
-        </a>
-      </li>
-    
-  </ul>
-</div>
-<div id="share-options-mask" class="share-options-mask"></div>
     </div>
     
     <div id="about">
@@ -737,32 +553,6 @@ $(document).ready(function() {
   });
 });
 </script>
-
-  
-    
-      <script>
-        var disqus_config = function () {
-          this.page.url = '\/2018\/03\/machine-learning-in-r-introdution\/';
-          
-            this.page.identifier = '\/2018\/03\/machine-learning-in-r-introdution\/'
-          
-        };
-        (function() {
-          
-          
-          if (window.location.hostname == "localhost") {
-            return;
-          }
-          var d = document, s = d.createElement('script');
-          var disqus_shortname = 'jixing';
-          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-
-          s.setAttribute('data-timestamp', +new Date());
-          (d.head || d.body).appendChild(s);
-        })();
-      </script>
-    
-  
 
 
 

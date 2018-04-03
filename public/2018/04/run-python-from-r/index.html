@@ -20,7 +20,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.32.2 with theme Tranquilpeak 0.4.1-BETA">
-    <title>Machine Learning in R 1：introdution</title>
+    <title>Run Python From R</title>
     <meta name="author" content="Jixing Liu">
     <meta name="keywords" content=", R">
 
@@ -28,33 +28,21 @@
     
 
     
-    <meta name="description" content="Caret Package是一个用于在R中构建机器学习模型的综合框架。在此博文中，我会解释 caret 包的几乎所有核心功能，并引导完成构建预测模型的分步过程。
-Caret 是 Classification And REgression Training 的简称。
-Caret 包很好地让所有与机器学习模型开发相关的步骤集成到一个简化的工作流程中，几乎每个主流的ML算法都可以在R中实现。
-由于R具有如此多的机器学习算法实现包，因此选则在哪个包中实现某种算法是非常头疼的问题。多数时候，实现算法的语法和方法在不同包中有所不同。 结合数据预处理，查阅超参数的帮助页面（定义算法如何学习的参数）并努力寻找最佳模型，可以使构建预测模型成为一项相关任务。
-在本教程后面的部分，我将介绍如何查看所有caret 支持的ML算法（这是一个很长的列表）以及可以调整哪些超参数。
-此外，我们不会止步于 caret 包，我们将看看如何巧妙地集成来自多个最佳模型的预测，并可能使用 caretEnsemble 来产生更好的预测。
-这个教程总共包括5部分，分别是： 1. 数据准备和清理 2. 可视化重要变量 3. 特征选择 4. 训练模型和调节模型 5. 预测">
-    <meta property="og:description" content="Caret Package是一个用于在R中构建机器学习模型的综合框架。在此博文中，我会解释 caret 包的几乎所有核心功能，并引导完成构建预测模型的分步过程。
-Caret 是 Classification And REgression Training 的简称。
-Caret 包很好地让所有与机器学习模型开发相关的步骤集成到一个简化的工作流程中，几乎每个主流的ML算法都可以在R中实现。
-由于R具有如此多的机器学习算法实现包，因此选则在哪个包中实现某种算法是非常头疼的问题。多数时候，实现算法的语法和方法在不同包中有所不同。 结合数据预处理，查阅超参数的帮助页面（定义算法如何学习的参数）并努力寻找最佳模型，可以使构建预测模型成为一项相关任务。
-在本教程后面的部分，我将介绍如何查看所有caret 支持的ML算法（这是一个很长的列表）以及可以调整哪些超参数。
-此外，我们不会止步于 caret 包，我们将看看如何巧妙地集成来自多个最佳模型的预测，并可能使用 caretEnsemble 来产生更好的预测。
-这个教程总共包括5部分，分别是： 1. 数据准备和清理 2. 可视化重要变量 3. 特征选择 4. 训练模型和调节模型 5. 预测">
+    <meta name="description" content="R is mainly known for data analysis, statistical modeling and visualization. While python is popular for deep learning and natural language processing.
+Python and R were ranked top 2 tools for data science and machine learning. If you really want to boost your career in data science world, these are the languages you need to focus on.
+How To Call Or Run Python From R? RStudio developed a package called reticulate which provides a medium to run Python packages and functions from R.">
+    <meta property="og:description" content="R is mainly known for data analysis, statistical modeling and visualization. While python is popular for deep learning and natural language processing.
+Python and R were ranked top 2 tools for data science and machine learning. If you really want to boost your career in data science world, these are the languages you need to focus on.
+How To Call Or Run Python From R? RStudio developed a package called reticulate which provides a medium to run Python packages and functions from R.">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Machine Learning in R 1：introdution">
-    <meta property="og:url" content="/2018/03/machine-learning-in-r-introdution/">
+    <meta property="og:title" content="Run Python From R">
+    <meta property="og:url" content="/2018/04/run-python-from-r/">
     <meta property="og:site_name" content="student zero ">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="student zero ">
-    <meta name="twitter:description" content="Caret Package是一个用于在R中构建机器学习模型的综合框架。在此博文中，我会解释 caret 包的几乎所有核心功能，并引导完成构建预测模型的分步过程。
-Caret 是 Classification And REgression Training 的简称。
-Caret 包很好地让所有与机器学习模型开发相关的步骤集成到一个简化的工作流程中，几乎每个主流的ML算法都可以在R中实现。
-由于R具有如此多的机器学习算法实现包，因此选则在哪个包中实现某种算法是非常头疼的问题。多数时候，实现算法的语法和方法在不同包中有所不同。 结合数据预处理，查阅超参数的帮助页面（定义算法如何学习的参数）并努力寻找最佳模型，可以使构建预测模型成为一项相关任务。
-在本教程后面的部分，我将介绍如何查看所有caret 支持的ML算法（这是一个很长的列表）以及可以调整哪些超参数。
-此外，我们不会止步于 caret 包，我们将看看如何巧妙地集成来自多个最佳模型的预测，并可能使用 caretEnsemble 来产生更好的预测。
-这个教程总共包括5部分，分别是： 1. 数据准备和清理 2. 可视化重要变量 3. 特征选择 4. 训练模型和调节模型 5. 预测">
+    <meta name="twitter:description" content="R is mainly known for data analysis, statistical modeling and visualization. While python is popular for deep learning and natural language processing.
+Python and R were ranked top 2 tools for data science and machine learning. If you really want to boost your career in data science world, these are the languages you need to focus on.
+How To Call Or Run Python From R? RStudio developed a package called reticulate which provides a medium to run Python packages and functions from R.">
     
       <meta name="twitter:creator" content="@studentZero475">
     
@@ -68,7 +56,7 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
     
 
     
-      <meta property="og:image" content="https://i.loli.net/2018/03/21/5ab1cca60f6fc.jpg">
+      <meta property="og:image" content="https://i.loli.net/2018/04/03/5ac2dcfd3d01f.jpg">
     
     
     
@@ -121,7 +109,7 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <h1 class="sidebar-profile-title">Machine Learning in R 1：introdution</h1>
+        <h1 class="sidebar-profile-title">Run Python From R</h1>
         <a href="/#about">
           <img class="sidebar-profile-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
         </a>
@@ -228,15 +216,15 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
             <div class="post-header main-content-wrap text-center">
   
     <h1 class="post-title" itemprop="headline">
-      Machine Learning in R 1：introdution
+      Run Python From R
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-03-21T00:00:00Z">
+      <time itemprop="datePublished" datetime="2018-04-03T00:00:00Z">
         
-  March 21, 2018
+  April 3, 2018
 
       </time>
     
@@ -245,7 +233,7 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
   
     <span>in</span>
     
-      <a class="category-link" href="/categories/machine-learning">machine learning</a>
+      <a class="category-link" href="/categories/computers">computers</a>
     
   
 
@@ -256,13 +244,167 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>Caret Package是一个用于在R中构建机器学习模型的综合框架。在此博文中，我会解释 caret 包的几乎所有核心功能，并引导完成构建预测模型的分步过程。</p>
-<p>Caret 是 Classification And REgression Training 的简称。</p>
-<p>Caret 包很好地让所有与机器学习模型开发相关的步骤集成到一个简化的工作流程中，几乎每个主流的ML算法都可以在R中实现。</p>
-<p>由于R具有如此多的机器学习算法实现包，因此选则在哪个包中实现某种算法是非常头疼的问题。多数时候，实现算法的语法和方法在不同包中有所不同。 结合数据预处理，查阅超参数的帮助页面（定义算法如何学习的参数）并努力寻找最佳模型，可以使构建预测模型成为一项相关任务。</p>
-<p>在本教程后面的部分，我将介绍如何查看所有caret 支持的ML算法（这是一个很长的列表）以及可以调整哪些超参数。</p>
-<p>此外，我们不会止步于 caret 包，我们将看看如何巧妙地集成来自多个最佳模型的预测，并可能使用 <code>caretEnsemble</code> 来产生更好的预测。</p>
-<p>这个教程总共包括5部分，分别是： 1. 数据准备和清理 2. 可视化重要变量 3. 特征选择 4. 训练模型和调节模型 5. 预测</p>
+              <p><strong>R</strong> is mainly known for data analysis, statistical modeling and visualization. While <strong>python</strong> is popular for deep learning and natural language processing.</p>
+<p>Python and R were ranked top 2 tools for data science and machine learning. If you really want to boost your career in data science world, these are the languages you need to focus on.</p>
+<div id="how-to-call-or-run-python-from-r" class="section level1">
+<h1><strong>How To Call Or Run Python From R?</strong></h1>
+<p>RStudio developed a package called <strong>reticulate</strong> which provides a medium to run Python packages and functions from R.</p>
+<pre class="r"><code># Load reticulate package
+if (!require(&quot;reticulate&quot;)) install.packages(&quot;reticulate&quot;)</code></pre>
+</div>
+<div id="python-version-configuration" class="section level1">
+<h1><a href="https://rstudio.github.io/reticulate/articles/versions.html">Python Version Configuration</a></h1>
+<p>If the version of Python you want to use is located on the system PATH then it will be automatically discovered (via Sys.which) and used.</p>
+<p>Alternatively, you can use one of the following functions to specify alternate versions of Python:</p>
+<p>Function Description</p>
+<ul>
+<li><p><a href="https://rstudio.github.io/reticulate/reference/use_python.html">use_python</a> Specify the path a specific Python binary.</p></li>
+<li><p><a href="https://rstudio.github.io/reticulate/reference/use_python.html">use_virtualenv</a> Specify the directory containing a Python virtualenv.</p></li>
+<li><p><a href="https://rstudio.github.io/reticulate/reference/use_python.html">use_condaenv</a> Specify the name of a Conda environment.</p></li>
+</ul>
+<pre class="r"><code>py_discover_config()</code></pre>
+<pre><code>## python:         /usr/bin/python
+## libpython:      /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/config/libpython2.7.dylib
+## pythonhome:     /System/Library/Frameworks/Python.framework/Versions/2.7:/System/Library/Frameworks/Python.framework/Versions/2.7
+## version:        2.7.10 (default, Feb  7 2017, 00:08:15)  [GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.34)]
+## numpy:          /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/numpy
+## numpy_version:  1.8.1
+## 
+## python versions found: 
+##  /usr/bin/python
+##  /usr/local/bin/python3
+##  /Users/zero/anaconda/bin/python
+##  /Users/zero/anaconda3/bin/python
+##  /Users/zero/anaconda3/envs/circRNA/bin/python
+##  /Users/zero/anaconda3/envs/lifeifei/bin/python
+##  /Users/zero/anaconda3/envs/PDSH/bin/python
+##  /Users/zero/anaconda3/envs/py27/bin/python
+##  /Users/zero/anaconda3/envs/RvsPython/bin/python
+##  /Users/zero/anaconda3/envs/tfdeeplearning/bin/python
+##  /Users/zero/miniconda2/bin/python
+##  /Users/zero/miniconda3/bin/python</code></pre>
+<pre class="r"><code>use_python(&quot;/Users/zero/anaconda3/envs/PDSH/bin/python&quot;)
+#use_virtualenv(&quot;/Users/zero/anaconda3/envs&quot;, required = TRUE)
+use_condaenv(&quot;PDSH&quot;)</code></pre>
+</div>
+<div id="import-a-python-module-within-r" class="section level1">
+<h1>Import a python module within R</h1>
+<pre class="r"><code>os &lt;- import(&quot;os&quot;)
+pd &lt;- import(&quot;pandas&quot;)
+numpy &lt;- import(&quot;numpy&quot;)
+py_module_available(&quot;pandas&quot;)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>os$getcwd()</code></pre>
+<pre><code>## [1] &quot;/Users/zero/Documents/_14_tmp/jixingBlogdown/content/post&quot;</code></pre>
+</div>
+<div id="install-python-package-with-conda-in-terminal" class="section level1">
+<h1>Install Python package with conda in terminal</h1>
+</div>
+<div id="working-with-numpy" class="section level1">
+<h1>working with <strong>numpy</strong></h1>
+<pre class="r"><code>y &lt;- array(1:4, c(2, 2)) # create a matrix with R
+x &lt;- numpy$array(y) # edit it with python
+numpy$transpose(y) # transpose the above array</code></pre>
+<pre><code>##      [,1] [,2]
+## [1,]    1    2
+## [2,]    3    4</code></pre>
+<pre class="r"><code>numpy$linalg$eig(y) # Eigenvalues and eigen vectors</code></pre>
+<pre><code>## [[1]]
+## [1] -0.3722813  5.3722813
+## 
+## [[2]]
+##            [,1]       [,2]
+## [1,] -0.9093767 -0.5657675
+## [2,]  0.4159736 -0.8245648</code></pre>
+<pre class="r"><code>numpy$sqrt(x)</code></pre>
+<pre><code>##          [,1]     [,2]
+## [1,] 1.000000 1.732051
+## [2,] 1.414214 2.000000</code></pre>
+<pre class="r"><code>numpy$exp(x)</code></pre>
+<pre><code>##          [,1]     [,2]
+## [1,] 2.718282 20.08554
+## [2,] 7.389056 54.59815</code></pre>
+</div>
+<div id="access-objects-created-in-python-from-r" class="section level1">
+<h1>⭐<strong>Access objects created in python from R</strong></h1>
+<p><strong>note: Don’t work with Rmd</strong></p>
+<pre class="r"><code>repl_python()
+#===== python console====
+
+# Load Pandas package
+import pandas as pd
+
+# Importing Dataset
+travel = pd.read_excel(&quot;data/AIR.xlsx&quot;)
+
+# Number of rows and columns
+travel.shape
+
+# Select random no. of rows 
+travel.sample(n = 10)
+
+# Group By
+travel.groupby(&quot;Year&quot;).AIR.mean()
+
+# Filter
+t = travel.loc[(travel.Month &gt;= 6) &amp; (travel.Year &gt;= 1955),:]
+
+# Return to R
+exit
+
+#==== R console====
+# Access objects created in python from R
+summary(py$t)
+
+# Line chart using ggplot2
+library(ggplot2)
+ggplot(py$t, aes(AIR, Year)) + geom_line()</code></pre>
+</div>
+<div id="access-objects-created-in-r-from-python" class="section level1">
+<h1>⭐<strong>Access objects created in R from Python</strong></h1>
+<pre class="r"><code># Let&#39;s create a object in R
+#===== R console====
+mydata = head(cars, n=15)
+
+#Use the R created object within Python REPL
+repl_python()
+#===== python console====
+import pandas as pd
+#Access objects created in R from Python: r.mydata
+r.mydata.describe()
+pd.isnull(r.mydata.speed)
+
+exit</code></pre>
+</div>
+<div id="building-logistic-regression-model-using-sklearn-package" class="section level1">
+<h1>⭐Building Logistic Regression Model using sklearn package</h1>
+<pre class="r"><code>repl_python()
+
+# Load libraries
+from sklearn import datasets
+from sklearn.linear_model import LogisticRegression
+
+# load the iris datasets
+iris = datasets.load_iris()
+
+# Developing logit model
+model = LogisticRegression()
+model.fit(iris.data, iris.target)
+
+# Scoring
+actual = iris.target
+predicted = model.predict(iris.data)
+
+# Performance Metrics
+print(metrics.classification_report(actual, predicted))
+print(metrics.confusion_matrix(actual, predicted))</code></pre>
+<div id="links" class="section level2">
+<h2><strong>Links</strong></h2>
+<ul>
+<li><a href="https://www.diycode.cc/projects/rstudio/reticulate">R Interface to Python</a></li>
+</ul>
+</div>
+</div>
 
               
             </div>
@@ -275,7 +417,7 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="//tags/caret/">caret</a>
+  <a class="tag tag--primary tag--small" href="//tags/program/">Program</a>
 
                   </div>
                 
@@ -287,7 +429,7 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
         <ul class="post-actions post-action-nav">
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/machine-learning-2-load-dataset/" data-tooltip="2 machine learning: load dataset">
+                <a class="post-action-btn btn btn--disabled">
               
                 <i class="fa fa-angle-left"></i>
                 <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -295,7 +437,7 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/how-to-use-the-ncbis-new-api-keys/" data-tooltip="HOW TO USE THE NCBI&#39;S NEW API KEYS">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/04/9-ensembling-the-predictions/" data-tooltip="9 Ensembling The Predictions">
               
                 <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                 <i class="fa fa-angle-right"></i>
@@ -312,19 +454,19 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/03/machine-learning-in-r-introdution/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/04/run-python-from-r/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/machine-learning-in-r-introdution/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/04/run-python-from-r/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/machine-learning-in-r-introdution/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/04/run-python-from-r/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -371,7 +513,7 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
         <ul class="post-actions post-action-nav">
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/machine-learning-2-load-dataset/" data-tooltip="2 machine learning: load dataset">
+                <a class="post-action-btn btn btn--disabled">
               
                 <i class="fa fa-angle-left"></i>
                 <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -379,7 +521,7 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/how-to-use-the-ncbis-new-api-keys/" data-tooltip="HOW TO USE THE NCBI&#39;S NEW API KEYS">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/04/9-ensembling-the-predictions/" data-tooltip="9 Ensembling The Predictions">
               
                 <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                 <i class="fa fa-angle-right"></i>
@@ -396,19 +538,19 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/03/machine-learning-in-r-introdution/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/04/run-python-from-r/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/03/machine-learning-in-r-introdution/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/04/run-python-from-r/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/03/machine-learning-in-r-introdution/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/04/run-python-from-r/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -438,19 +580,19 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F03%2Fmachine-learning-in-r-introdution%2F">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F04%2Frun-python-from-r%2F">
           <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F03%2Fmachine-learning-in-r-introdution%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F04%2Frun-python-from-r%2F">
           <i class="fa fa-twitter"></i><span>Share on Twitter</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F03%2Fmachine-learning-in-r-introdution%2F">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F04%2Frun-python-from-r%2F">
           <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
         </a>
       </li>
@@ -742,9 +884,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = '\/2018\/03\/machine-learning-in-r-introdution\/';
+          this.page.url = '\/2018\/04\/run-python-from-r\/';
           
-            this.page.identifier = '\/2018\/03\/machine-learning-in-r-introdution\/'
+            this.page.identifier = '\/2018\/04\/run-python-from-r\/'
           
         };
         (function() {

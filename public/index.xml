@@ -2,12 +2,181 @@
   <title>student zero </title>
   <link href="/index.xml" rel="self"/>
   <link href="/"/>
-  <updated>2018-04-01T00:00:00+00:00</updated>
+  <updated>2018-04-03T00:00:00+00:00</updated>
   <id>/</id>
   <author>
     <name>Jixing Liu</name>
   </author>
   <generator>Hugo -- gohugo.io</generator>
+  <entry>
+    <title type="html"><![CDATA[Run Python From R]]></title>
+    <link href="/2018/04/run-python-from-r/"/>
+    <id>/2018/04/run-python-from-r/</id>
+    <published>2018-04-03T00:00:00+00:00</published>
+    <updated>2018-04-03T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<p><strong>R</strong> is mainly known for data analysis, statistical modeling and visualization. While <strong>python</strong> is popular for deep learning and natural language processing.</p>
+<p>Python and R were ranked top 2 tools for data science and machine learning. If you really want to boost your career in data science world, these are the languages you need to focus on.</p>
+<div id="how-to-call-or-run-python-from-r" class="section level1">
+<h1><strong>How To Call Or Run Python From R?</strong></h1>
+<p>RStudio developed a package called <strong>reticulate</strong> which provides a medium to run Python packages and functions from R.</p>
+<pre class="r"><code># Load reticulate package
+if (!require(&quot;reticulate&quot;)) install.packages(&quot;reticulate&quot;)</code></pre>
+</div>
+<div id="python-version-configuration" class="section level1">
+<h1><a href="https://rstudio.github.io/reticulate/articles/versions.html">Python Version Configuration</a></h1>
+<p>If the version of Python you want to use is located on the system PATH then it will be automatically discovered (via Sys.which) and used.</p>
+<p>Alternatively, you can use one of the following functions to specify alternate versions of Python:</p>
+<p>Function Description</p>
+<ul>
+<li><p><a href="https://rstudio.github.io/reticulate/reference/use_python.html">use_python</a> Specify the path a specific Python binary.</p></li>
+<li><p><a href="https://rstudio.github.io/reticulate/reference/use_python.html">use_virtualenv</a> Specify the directory containing a Python virtualenv.</p></li>
+<li><p><a href="https://rstudio.github.io/reticulate/reference/use_python.html">use_condaenv</a> Specify the name of a Conda environment.</p></li>
+</ul>
+<pre class="r"><code>py_discover_config()</code></pre>
+<pre><code>## python:         /usr/bin/python
+## libpython:      /System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/config/libpython2.7.dylib
+## pythonhome:     /System/Library/Frameworks/Python.framework/Versions/2.7:/System/Library/Frameworks/Python.framework/Versions/2.7
+## version:        2.7.10 (default, Feb  7 2017, 00:08:15)  [GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.34)]
+## numpy:          /System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/numpy
+## numpy_version:  1.8.1
+## 
+## python versions found: 
+##  /usr/bin/python
+##  /usr/local/bin/python3
+##  /Users/zero/anaconda/bin/python
+##  /Users/zero/anaconda3/bin/python
+##  /Users/zero/anaconda3/envs/circRNA/bin/python
+##  /Users/zero/anaconda3/envs/lifeifei/bin/python
+##  /Users/zero/anaconda3/envs/PDSH/bin/python
+##  /Users/zero/anaconda3/envs/py27/bin/python
+##  /Users/zero/anaconda3/envs/RvsPython/bin/python
+##  /Users/zero/anaconda3/envs/tfdeeplearning/bin/python
+##  /Users/zero/miniconda2/bin/python
+##  /Users/zero/miniconda3/bin/python</code></pre>
+<pre class="r"><code>use_python(&quot;/Users/zero/anaconda3/envs/PDSH/bin/python&quot;)
+#use_virtualenv(&quot;/Users/zero/anaconda3/envs&quot;, required = TRUE)
+use_condaenv(&quot;PDSH&quot;)</code></pre>
+</div>
+<div id="import-a-python-module-within-r" class="section level1">
+<h1>Import a python module within R</h1>
+<pre class="r"><code>os &lt;- import(&quot;os&quot;)
+pd &lt;- import(&quot;pandas&quot;)
+numpy &lt;- import(&quot;numpy&quot;)
+py_module_available(&quot;pandas&quot;)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code>os$getcwd()</code></pre>
+<pre><code>## [1] &quot;/Users/zero/Documents/_14_tmp/jixingBlogdown/content/post&quot;</code></pre>
+</div>
+<div id="install-python-package-with-conda-in-terminal" class="section level1">
+<h1>Install Python package with conda in terminal</h1>
+</div>
+<div id="working-with-numpy" class="section level1">
+<h1>working with <strong>numpy</strong></h1>
+<pre class="r"><code>y &lt;- array(1:4, c(2, 2)) # create a matrix with R
+x &lt;- numpy$array(y) # edit it with python
+numpy$transpose(y) # transpose the above array</code></pre>
+<pre><code>##      [,1] [,2]
+## [1,]    1    2
+## [2,]    3    4</code></pre>
+<pre class="r"><code>numpy$linalg$eig(y) # Eigenvalues and eigen vectors</code></pre>
+<pre><code>## [[1]]
+## [1] -0.3722813  5.3722813
+## 
+## [[2]]
+##            [,1]       [,2]
+## [1,] -0.9093767 -0.5657675
+## [2,]  0.4159736 -0.8245648</code></pre>
+<pre class="r"><code>numpy$sqrt(x)</code></pre>
+<pre><code>##          [,1]     [,2]
+## [1,] 1.000000 1.732051
+## [2,] 1.414214 2.000000</code></pre>
+<pre class="r"><code>numpy$exp(x)</code></pre>
+<pre><code>##          [,1]     [,2]
+## [1,] 2.718282 20.08554
+## [2,] 7.389056 54.59815</code></pre>
+</div>
+<div id="access-objects-created-in-python-from-r" class="section level1">
+<h1>⭐<strong>Access objects created in python from R</strong></h1>
+<p><strong>note: Don’t work with Rmd</strong></p>
+<pre class="r"><code>repl_python()
+#===== python console====
+
+# Load Pandas package
+import pandas as pd
+
+# Importing Dataset
+travel = pd.read_excel(&quot;data/AIR.xlsx&quot;)
+
+# Number of rows and columns
+travel.shape
+
+# Select random no. of rows 
+travel.sample(n = 10)
+
+# Group By
+travel.groupby(&quot;Year&quot;).AIR.mean()
+
+# Filter
+t = travel.loc[(travel.Month &gt;= 6) &amp; (travel.Year &gt;= 1955),:]
+
+# Return to R
+exit
+
+#==== R console====
+# Access objects created in python from R
+summary(py$t)
+
+# Line chart using ggplot2
+library(ggplot2)
+ggplot(py$t, aes(AIR, Year)) + geom_line()</code></pre>
+</div>
+<div id="access-objects-created-in-r-from-python" class="section level1">
+<h1>⭐<strong>Access objects created in R from Python</strong></h1>
+<pre class="r"><code># Let&#39;s create a object in R
+#===== R console====
+mydata = head(cars, n=15)
+
+#Use the R created object within Python REPL
+repl_python()
+#===== python console====
+import pandas as pd
+#Access objects created in R from Python: r.mydata
+r.mydata.describe()
+pd.isnull(r.mydata.speed)
+
+exit</code></pre>
+</div>
+<div id="building-logistic-regression-model-using-sklearn-package" class="section level1">
+<h1>⭐Building Logistic Regression Model using sklearn package</h1>
+<pre class="r"><code>repl_python()
+
+# Load libraries
+from sklearn import datasets
+from sklearn.linear_model import LogisticRegression
+
+# load the iris datasets
+iris = datasets.load_iris()
+
+# Developing logit model
+model = LogisticRegression()
+model.fit(iris.data, iris.target)
+
+# Scoring
+actual = iris.target
+predicted = model.predict(iris.data)
+
+# Performance Metrics
+print(metrics.classification_report(actual, predicted))
+print(metrics.confusion_matrix(actual, predicted))</code></pre>
+<div id="links" class="section level2">
+<h2><strong>Links</strong></h2>
+<ul>
+<li><a href="https://www.diycode.cc/projects/rstudio/reticulate">R Interface to Python</a></li>
+</ul>
+</div>
+</div>
+]]></content>
+  </entry>
   <entry>
     <title type="html"><![CDATA[9 Ensembling The Predictions]]></title>
     <link href="/2018/04/9-ensembling-the-predictions/"/>
