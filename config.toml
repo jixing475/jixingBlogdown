@@ -154,6 +154,12 @@ canonifyurls = true
   # Default format is: January 2, 2006 
   # dateFormat = "2 January 2006"
 
+  # options for highlight.js (version, additional languages, and theme)
+  #  highlightjsVersion = "9.11.0"
+  #  highlightjsCDN = "//cdn.bootcss.com"
+  #  highlightjsLang = ["r", "yaml"]
+  #  highlightjsTheme = "monokai-sublime"
+
   # Global keywords configuration. Following keywords will be add to every pages
   keywords = ["R"]
 
@@ -164,7 +170,7 @@ canonifyurls = true
   # If false it will flat categories.
   hierarchicalCategories = false
 
-  description = "exploring and playing with data in R"
+  description = "exploring and playing with data in R and python"
 
   # Customization
   # Define the behavior of the sidebar

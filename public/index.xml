@@ -2,12 +2,117 @@
   <title>student zero </title>
   <link href="/index.xml" rel="self"/>
   <link href="/"/>
-  <updated>2018-04-03T00:00:00+00:00</updated>
+  <updated>2018-04-09T00:00:00+00:00</updated>
   <id>/</id>
   <author>
     <name>Jixing Liu</name>
   </author>
   <generator>Hugo -- gohugo.io</generator>
+  <entry>
+    <title type="html"><![CDATA[Build Webapp In R Using Shiny]]></title>
+    <link href="/2018/04/build-webapp-in-r-using-shiny/"/>
+    <id>/2018/04/build-webapp-in-r-using-shiny/</id>
+    <published>2018-04-09T00:00:00+00:00</published>
+    <updated>2018-04-09T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<p><strong>How to build shiny app from scratch in R</strong>?</p>
+<p>You can build web page (online reporting tool) without knowing any web programming languages such as Javascript / PHP / CSS.</p>
+<p>The best part about shiny package is that you can easily integrate R with webpage.</p>
+<p>Suppose you want your web page run machine learning algorithms like random forest, SVM etc and display summary of the model with the flexibility of selecting inputs from user.</p>
+<p>Shiny can do it?</p>
+<div id="shinys-prominent-features" class="section level2">
+<h2><strong>Shiny’s prominent features</strong></h2>
+<ol style="list-style-type: decimal">
+<li>Customizable widgets like sliders, drop down lists, numeric inputs and many more.</li>
+<li><strong>Downloading</strong> datasets, graphs and tables in various formats.</li>
+<li><strong>Uploading</strong> files.</li>
+<li>Provides utility to <strong>create brilliant plots</strong>.</li>
+<li>In-built functions for viewing data or printing the text or summaries.</li>
+<li>Reactive programs which makes data handling easier.</li>
+<li>Conditional Panels for only when a particular condition is present.</li>
+<li>Works in any R environment (Console R, RGUI for Windows or Mac,  RStudio, etc)</li>
+<li>No need to learn another software for online dashboarding</li>
+<li><strong>Can style your app with CSS</strong> / HTML (Optional)</li>
+</ol>
+<p>Two must things in shiny 1. UI: user interface which is controlled by ui script 2. Sever: It contains the instructions that your computer needs when the user interacts with the app</p>
+</div>
+<div id="basic-layout-of-ui" class="section level2">
+<h2><strong>Basic layout of UI</strong></h2>
+<p><code>User Interface: </code>A simple shiny UI consists of a <strong>fluidpage </strong>which contains various panels. We can divide the display in two parts named <strong>sidebdarPanel( ) </strong> and <strong>mainPanel( ).</strong> Both of the panels can be accessed using <strong>sidebarLayout( ).</strong></p>
+<ol style="list-style-type: decimal">
+<li><strong>Title panel </strong>is a place where the title of the app is displayed.</li>
+<li><strong>Sidebar panel</strong> is where special instructions or widgets (drop down / slider/ checkbox) are displayed to the app user. The sidebar panel appears on the left side of your app by default. You can move it to the right side by changing the position argument in the sidebar layout.</li>
+<li><strong>Main panel</strong> is the area where all the outputs are generally placed.</li>
+</ol>
+<p><img src="https://i.loli.net/2018/04/09/5acac07887856.jpg" width="30%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="the-first-simple-shiny-app-with-basic-layout" class="section level2">
+<h2><strong>The first simple shiny app with basic layout</strong></h2>
+<pre class="r"><code>library(shiny)
+ui = fluidPage(sidebarLayout(sidebarPanel(&quot;Welcome to Shiny App&quot;),
+                             mainPanel(&quot;This is main Panel&quot;)))
+server = function(input, output) {  }
+shinyApp(ui, server)</code></pre>
+</div>
+<div id="guidelines-for-beginners-to-run-a-shiny-app" class="section level2">
+<h2><strong>Guidelines for beginners to run a shiny app</strong></h2>
+<p><strong>Step 1 : shinyApp(ui,server)</strong> <strong>: </strong>It is an in-built function in shiny package to run the app with ui and server as the arguments. Select the code and run it. Once you do it successfully, you would find the text **Listening on <a href="http://127.0.0.1:4692**" class="uri">http://127.0.0.1:4692**</a> on console.</p>
+<p><strong>Step 2 : </strong>To create your app you need to save the code as an <strong>app.R</strong> file and a <strong>RunApp </strong>icon will get displayed on your screen. Click on it and a new prompt window as your app will appear.</p>
+</div>
+<div id="using-html-tags-in-shiny" class="section level2">
+<h2><strong>Using HTML tags in Shiny</strong></h2>
+<p>Content can be added in various panels. To change the <strong>appearance of the text by bolds, italics, images, changing the fonts and colors, adding heading</strong> etc. we can use various HTML functions in shiny. Some of them being the same in both of them are:</p>
+<p><img src="https://i.loli.net/2018/04/09/5acac1e2659cd.jpg" width="30%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="creating-a-hyperlink" class="section level2">
+<h2><strong>Creating a hyperlink</strong></h2>
+<p>A hyperlink can be created using <strong>a( ) </strong>where the first argument is the text with which the link is attached. <strong>href</strong> contains the link for our website which we want to attach.</p>
+<div id="modifying-the-text-presentation-using-html-tags." class="section level3">
+<h3><strong>Modifying the text presentation using HTML tags.</strong></h3>
+<p>We create an app containing the list of the favorite novels . You can refer to the above mentioned table of HTML and shiny functions.</p>
+<p><img src="https://i.loli.net/2018/04/09/5acac3fc6bb2b.jpg" width="30%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="introducing-widgets" class="section level3">
+<h3><strong>Introducing widgets</strong></h3>
+<p>Various widgets are used in shiny to select various outputs. These widgets can be inserted in the ui function (anywhere in the main panel and sidebar panel).<br />
+The most commonly used widgets are:</p>
+<p><img src="https://i.loli.net/2018/04/09/5acac49acf925.jpg" width="30%" style="display: block; margin: auto;" /><img src="https://i.loli.net/2018/04/09/5acac4b608308.jpg" width="30%" style="display: block; margin: auto;" /></p>
+<ul>
+<li>‘Buttons’ can be created using an <strong>actionButton </strong>and <strong>submitButton </strong>widgets</li>
+<li>Single check box, multiple check box and date inputs are created using <strong>checkboxInput</strong>, <strong>checkboxGroupInput </strong>and <strong>dateInput </strong>respectively.</li>
+<li>Date range is created using <strong>dateRangeInput</strong>.</li>
+</ul>
+<p>More detail see: <a href="https://www.listendata.com/2018/02/shiny-tutorial-r.html">Most commonly used widgets</a></p>
+</div>
+<div id="sharing-the-app-with-others" class="section level3">
+<h3><strong>Sharing the app with others</strong></h3>
+<p><strong>Share your app as a web page:</strong> You need to create an account on<a href="http://shinyapps.io/"><strong>shinyapps.io</strong></a> and follow the instructions below to share your app.R file.</p>
+</div>
+<div id="deploying-shiny-app-on-shinyapps.io" class="section level3">
+<h3><strong>Deploying shiny app on shinyapps.io</strong></h3>
+<p>First you need to have an account on shinyapps.io.</p>
+<p>Import library <strong>rsconnect </strong>by using</p>
+<blockquote>
+<p><code>library(rsconnect)</code> </p>
+</blockquote>
+<p>Then you need to configure the <strong>rsconnect </strong>package to your account using the code below -</p>
+<blockquote>
+<p><code>rsconnect::setAccountInfo(name=&quot;&lt;ACCOUNT&gt;&quot;, token=&quot;&lt;TOKEN&gt;&quot;, secret=&quot;&lt;SECRET&gt;&quot;)</code></p>
+</blockquote>
+<p>To deploy the app you can write: </p>
+<blockquote>
+<p><code>rsconnect::deployApp(' Folder path in which your app.R file is saved') </code></p>
+</blockquote>
+<p> As a result a new web page of your app link will be opened. </p>
+</div>
+</div>
+<div id="links" class="section level2">
+<h2><strong>Links</strong></h2>
+<ul>
+<li><a href="https://www.listendata.com/2018/02/shiny-tutorial-r.html">shiny</a></li>
+</ul>
+</div>
+]]></content>
+  </entry>
   <entry>
     <title type="html"><![CDATA[Run Python From R]]></title>
     <link href="/2018/04/run-python-from-r/"/>
