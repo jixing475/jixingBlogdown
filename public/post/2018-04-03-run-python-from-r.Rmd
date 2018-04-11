@@ -55,6 +55,8 @@ py_discover_config()
 use_python("/Users/zero/anaconda3/envs/PDSH/bin/python")
 #use_virtualenv("/Users/zero/anaconda3/envs", required = TRUE)
 use_condaenv("PDSH")
+#==== 这样就可以在 Rmd 文件中直接运行Python代码，便于编译
+#reticulate::source_python("test.py")
 ```
 
 # Import a python module within R

@@ -32,7 +32,7 @@ canonifyurls = true
 
 [author]
   name = "Jixing Liu"
-  bio = "In God I trust. All others must bring data."
+  bio = "Reading And Writing"
   #bio = "Clinical Doctor turned Bioinformatician turned Data Scientist"
   job = "Data Scientist"
   location = "China"

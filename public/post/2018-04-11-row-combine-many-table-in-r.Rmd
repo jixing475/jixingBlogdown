@@ -1,0 +1,71 @@
+---
+title: 'Row Combine Many Table In R '
+author: ZERO
+date: '2018-04-11'
+slug: row-combine-many-table-in-r
+categories:
+  - computers
+tags:
+  - R
+thumbnailImagePosition: left
+thumbnailImage: /post/2018-04-11-row-combine-many-table-in-r_files/IMG_7012.PNG
+metaAlignment: center
+coverMeta: out
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE
+)
+```
+
+**Q: I has many separate tables that need to be combined into a single file?**
+
+google search "R read many datasets or tables"
+
+# **Three steps**:
+  1. Getting a list of files path to read
+  2. Write a function to read a file 
+  3. Then loop it
+<br>
+
+## step01: list all files path
+```{r }
+library(here) 
+allfiles = list.files(path = here("data"), #Use the ⭐here package to indicate the directory the files are in relative to the root directory
+                        pattern = "AB.csv|ab.csv",#tell R which file paths should be listed
+                        full.names = TRUE,
+                        recursive = TRUE) #indicate whether or not child folders in the parent directory should be searched for files to list or not
+```
+
+
+## step02: write a function to read a single file
+```{r}
+library(stringr)
+
+#eg_path: data/Block1/Siteone/SIT1_17_12_21_5.2_AB.csv
+read_fun = function(path) {
+     test = read.csv(path, 
+                skip = 6,
+                header = FALSE,
+                col.names = c("date", "temperature") )
+     allnames = str_split( path, pattern = "/", simplify = TRUE)
+     test$block = allnames[, ncol(allnames) - 2] 
+     test$site = allnames[, ncol(allnames) - 1] #The information on the physical units of the study, “Blocks” and “Sites”
+     test$plot = str_extract(allnames[, ncol(allnames)], pattern = "[0-9](?=\\.)")
+     test$logloc = toupper( str_sub(allnames[, ncol(allnames)], start = -6, end = -5) )
+     test
+}
+```
+
+step03: read all files
+
+If using either of for or lapply, the final concatenation step can be done via rbind in do.call
+
+`map_dfr` looks like, looping through each element of allfiles to read and modify the datasets with the read_fun function and then stacking everything together into a final combined dataset
+```{r}
+library(purrr)
+( combined_dat = map_dfr(allfiles, read_fun) )
+```
+

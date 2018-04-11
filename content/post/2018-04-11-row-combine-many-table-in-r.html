@@ -1,0 +1,96 @@
+---
+title: 'Row Combine Many Table In R '
+author: ZERO
+date: '2018-04-11'
+slug: row-combine-many-table-in-r
+categories:
+  - computers
+tags:
+  - R
+thumbnailImagePosition: left
+thumbnailImage: /post/2018-04-11-row-combine-many-table-in-r_files/IMG_7012.PNG
+metaAlignment: center
+coverMeta: out
+---
+
+
+
+<p><strong>Q: I has many separate tables that need to be combined into a single file?</strong></p>
+<p>google search “R read many datasets or tables”</p>
+<div id="three-steps" class="section level1">
+<h1><strong>Three steps</strong>:</h1>
+<ol style="list-style-type: decimal">
+<li>Getting a list of files path to read</li>
+<li>Write a function to read a file</li>
+<li>Then loop it <br></li>
+</ol>
+<div id="step01-list-all-files-path" class="section level2">
+<h2>step01: list all files path</h2>
+<pre class="r"><code>library(here) 
+allfiles = list.files(path = here(&quot;data&quot;), #Use the ⭐here package to indicate the directory the files are in relative to the root directory
+                        pattern = &quot;AB.csv|ab.csv&quot;,#tell R which file paths should be listed
+                        full.names = TRUE,
+                        recursive = TRUE) #indicate whether or not child folders in the parent directory should be searched for files to list or not</code></pre>
+</div>
+<div id="step02-write-a-function-to-read-a-single-file" class="section level2">
+<h2>step02: write a function to read a single file</h2>
+<pre class="r"><code>library(stringr)
+
+#eg_path: data/Block1/Siteone/SIT1_17_12_21_5.2_AB.csv
+read_fun = function(path) {
+     test = read.csv(path, 
+                skip = 6,
+                header = FALSE,
+                col.names = c(&quot;date&quot;, &quot;temperature&quot;) )
+     allnames = str_split( path, pattern = &quot;/&quot;, simplify = TRUE)
+     test$block = allnames[, ncol(allnames) - 2] 
+     test$site = allnames[, ncol(allnames) - 1] #The information on the physical units of the study, “Blocks” and “Sites”
+     test$plot = str_extract(allnames[, ncol(allnames)], pattern = &quot;[0-9](?=\\.)&quot;)
+     test$logloc = toupper( str_sub(allnames[, ncol(allnames)], start = -6, end = -5) )
+     test
+}</code></pre>
+<p>step03: read all files</p>
+<p>If using either of for or lapply, the final concatenation step can be done via rbind in do.call</p>
+<p><code>map_dfr</code> looks like, looping through each element of allfiles to read and modify the datasets with the read_fun function and then stacking everything together into a final combined dataset</p>
+<pre class="r"><code>library(purrr)
+( combined_dat = map_dfr(allfiles, read_fun) )</code></pre>
+<pre><code>##    date temperature  block    site plot logloc
+## 1    15           9 Block1 Siteone    5     AB
+## 2    16           8 Block1 Siteone    5     AB
+## 3    17          15 Block1 Siteone    5     AB
+## 4    18           9 Block1 Siteone    5     AB
+## 5    19          10 Block1 Siteone    5     AB
+## 6     1          12 Block1 Siteone    2     AB
+## 7     2          15 Block1 Siteone    2     AB
+## 8     3          21 Block1 Siteone    2     AB
+## 9     4          20 Block1 Siteone    2     AB
+## 10    5          20 Block1 Siteone    2     AB
+## 11    6          13 Block1 Siteone    2     AB
+## 12    1          10 Block1 Siteone    5     AB
+## 13    2          19 Block1 Siteone    5     AB
+## 14    3          17 Block1 Siteone    5     AB
+## 15    4           6 Block1 Siteone    5     AB
+## 16    5           5 Block1 Siteone    5     AB
+## 17    6          10 Block1 Siteone    5     AB
+## 18    7          15 Block1 Siteone    5     AB
+## 19    8          16 Block1 Siteone    5     AB
+## 20    9          10 Block1 Siteone    5     AB
+## 21    1           9 Block2 Sitenew    3     AB
+## 22    2           8 Block2 Sitenew    3     AB
+## 23    3          15 Block2 Sitenew    3     AB
+## 24    5          10 Block2 Sitenew    3     AB
+## 25    6           9 Block2 Sitenew    3     AB
+## 26    7          10 Block2 Sitenew    3     AB
+## 27    8           8 Block2 Sitenew    3     AB
+## 28    1          11 Block2 Sitenew    5     AB
+## 29    2          12 Block2 Sitenew    5     AB
+## 30    3          13 Block2 Sitenew    5     AB
+## 31    4          18 Block2 Sitenew    5     AB
+## 32    5          19 Block2 Sitenew    5     AB
+## 33    6          18 Block2 Sitenew    5     AB
+## 34    8          19 Block2 Sitenew    5     AB
+## 35    7          18 Block2 Sitenew    5     AB
+## 36    9          19 Block2 Sitenew    5     AB
+## 37   10          10 Block2 Sitenew    5     AB</code></pre>
+</div>
+</div>

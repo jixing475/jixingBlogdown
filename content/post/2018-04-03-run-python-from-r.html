@@ -56,7 +56,9 @@ if (!require(&quot;reticulate&quot;)) install.packages(&quot;reticulate&quot;)</
 ##  /Users/zero/miniconda3/bin/python</code></pre>
 <pre class="r"><code>use_python(&quot;/Users/zero/anaconda3/envs/PDSH/bin/python&quot;)
 #use_virtualenv(&quot;/Users/zero/anaconda3/envs&quot;, required = TRUE)
-use_condaenv(&quot;PDSH&quot;)</code></pre>
+use_condaenv(&quot;PDSH&quot;)
+#==== 这样就可以在 Rmd 文件中直接运行Python代码，便于编译
+#reticulate::source_python(&quot;test.py&quot;)</code></pre>
 </div>
 <div id="import-a-python-module-within-r" class="section level1">
 <h1>Import a python module within R</h1>
