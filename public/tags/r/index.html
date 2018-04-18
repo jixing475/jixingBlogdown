@@ -327,6 +327,92 @@ Three steps: Getting a list of files path to read Write a function to read a fil
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2018/04/algorithms-quick-sort/">
+                <h3 class="media-heading">algorithms: quick sort</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">快速排序 和 分而治之（D&amp;C）divde and conquer  D&amp;C 将问题逐步分解，找到最基本的情况为止 快速排序，随机的选择基准值，平均运行时间为**O(n*logn)**  def quicksort(array): if len(array) &lt; 2:# base case, arrays with 0 or 1 element are already &quot;sorted&quot; return array else:# recursive case pivot = array[0]# sub-array of all the elements less than the pivot less = [i for i in array[1:] if i &lt;= pivot]# sub-array of all the elements greater than the pivot greater = [i for i in array[1:] if i &gt; pivot] return quicksort(less) + [pivot] + quicksort(greater) print(quicksort([10, 5, 2, 3]))  ## [2, 3, 5, 10]  </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/04/algorithms-recursive/">
+                <h3 class="media-heading">algorithms: recursive</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">递归  递归指的是调用自己的函数 每个递归都有两个条件  base case: 终止条件 recursive case: 递归条件  所有的函数的调用都遵循 call stack 递归语法的清晰是以内存为代价的   通过递归求阶乘 def fact(n): if n == 1: #base case(终止条件) return 1 else: return n * fact(n-1)#recursive case print(fact(5)) ## 120  </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/04/workflow-organising-projects-for-reproducibility/">
+                <h3 class="media-heading">workflow: Organising projects for reproducibility</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">why reproducible  The fundamental idea behind a robust, reproducible analysis is a clean, repeatable script-based workflow (i.e. the sequence of tasks from the start to the end of a project) that links raw data through to clean data and to final analysis outputs.
+ principles of a good analysis workflow Any cleaning, merging, transforming, etc. of data should be done in scripts, not manually. Split your workflow (scripts) into logical thematic units.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/04/algorithms-selection-sort/">
+                <h3 class="media-heading">algorithms: selection sort</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">选择排序  计算机内存就像一大堆的抽屉， 每个抽屉都有地址 存储多个元素可以使用：数组和链表 数组的元素都在一起 链表的元素是分开的，每个元素都存着下一个元素的地址 数组的读取速度很快 链表的插入和删除速度很快 在同一个数组中，所有的元素类型必须一致   def findSmallest(arr): smallest = arr[0] #初始化：存储最小的值 smallest_index=0 #初始化: 存储最小值的索引 for i in range(1, len(arr)): if arr[i] &lt; smallest: smallest=arr[i] smallest_index=i return smallest_index def selectionSort(arr): #对数据进行排序 newArr=[] for i in range(len(arr)): smallest=findSmallest(arr)#找出数据中最小的元素，并将其加到新的数组中去 newArr.append(arr.pop(smallest)) return newArr print(selectionSort([5,3,6,2])) ## [2, 3, 5, 6]  </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/04/hierarchical-clustering/">
+                <h3 class="media-heading">Hierarchical Clustering</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">What Is Clustering  Clustering refers to a very broad set of techniques for finding subgroups, or clusters, in a data set. When we cluster the observations of a data set, we seek to partition them into distinct groups so that the observations within each group are quite similar to each other, while observations in different groups are quite different from each other. Of course, to make this concrete, we must define what it means for two or more observations to be similar or different.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2018/04/row-combine-many-table-in-r/">
                 <h3 class="media-heading">Row Combine Many Table In R </h3>
               </a>
@@ -417,102 +503,6 @@ library(caretEnsemble) # Stacking Algorithms - Run multiple algos in one call. t
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/03/7-how-to-do-hyperparameter-tuning/">
-                <h3 class="media-heading">7 How To Do Hyperparameter Tuning </h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Mar 3, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Load Package And Data load(&quot;../../data/craet_6.Rdata&quot;) library(tidyverse) library(caret) # Set Parallel Processing - Decrease computation time if (!require(&quot;doMC&quot;)) install.packages(&quot;doMC&quot;) library(doMC) registerDoMC(cores = 4) Hyper parameter tuning using tuneGrid Model Tuning Parameter Set
- Cross Validation Set
-Cross validation method can be one amongst:  ‘boot’: Bootstrap sampling ‘boot632’: Bootstrap sampling with 63.2% bias correction applied ‘optimism_boot’: The optimism bootstrap estimator ‘boot_all’: All boot methods. ‘cv’: k-Fold cross validation ‘repeatedcv’: Repeated k-Fold cross validation ‘oob’: Out of Bag cross validation ‘LOOCV’: Leave one out cross validation ‘LGOCV’: Leave group out cross validation  Training And Tuning</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/03/6-training-and-tuning-the-model/">
-                <h3 class="media-heading">6 Training and Tuning the model</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Mar 3, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Load Package And Data  Training 1. How to train the model and interpret the results? Once you have chosen an algorithm, building the model is fairly easy using the train() function
-train() does multiple other things like:
-Cross validating the model Tune the hyper parameters for optimal model performance Choose the optimal model based on a given evaluation metric Preprocess the predictors (what we did so far using preProcess())   2.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/03/5-how-to-do-feature-selection-using-recursive-feature-elimination/">
-                <h3 class="media-heading">5 How to do feature selection using recursive feature elimination</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Mar 3, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">You might need a rigorous way to determine the important variables first before feeding them to the ML algorithm. This is important.
-A good choice of selecting the important features is the recursive feature elimination (RFE)
-RFE works in 3 broad steps:
-Step 1: Build a ML model on a training dataset and estimate the feature importances on the test dataset.（在确定自由度的情况下，评价变量在测试数据集中的重要性）
-Step 2: Keeping priority to the most important variables, iterate through by building models of given sizes.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/03/4-how-to-visualize-the-importance-of-variables-using-featureplot/">
-                <h3 class="media-heading">4 How To Visualize The Importance Of Variables Using featurePlot</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Mar 3, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Load Package And Data load(&quot;../../data/craet_3-3.Rdata&quot;) library(tidyverse) library(caret)  Q: How The Predictors Influence The Y 选择重要的变量: 通过观察在Y的分组下各个变量的分布情况
-一般有 箱线图 和 密度图
- box-plot featurePlot(x = trainData[, 1:18], y = trainData$Purchase, plot = &quot;box&quot;,#&quot;density&quot; strip=strip.custom(par.strip.text=list(cex=.7)), scales = list(x = list(relation=&quot;free&quot;), y = list(relation=&quot;free&quot;)))  Density featurePlot(x = trainData[, 1:18], y = trainData$Purchase, plot = &quot;density&quot;, strip=strip.custom(par.strip.text=list(cex=.7)), scales = list(x = list(relation=&quot;free&quot;), y = list(relation=&quot;free&quot;))) save.image(&quot;../../data/craet_4.Rdata&quot;)  </div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/03/scraping-and-wranging-tables-from-research-articles/">
-                <h3 class="media-heading">Scraping and Wranging Tables from Research Articles</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Mar 3, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">What do you do when you want to use results from the literature to anchor your own analysis? we’ll go through a practical scenario on scraping an html table from a Nature Genetics article into R and wrangling the data into a useful format.
-01. Scraping a html table from a webpage #load packages library(&quot;rvest&quot;) library(&quot;knitr&quot;) library(tidyverse) #scraping web page url &lt;- &quot;https://www.nature.com/articles/ng.2802/tables/2&quot; #====🔥find where is the table lives on this webpage==== table_path=&#39;//*[@id=&quot;content&quot;]/div/div/figure/div[1]/div/div[1]/table&#39; #get the table nature_genetics_table2 &lt;- url %&gt;% read_html() %&gt;% html_nodes(xpath=table_path) %&gt;% html_table(fill=T) %&gt;% .</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -520,7 +510,7 @@ Step 2: Keeping priority to the most important variables, iterate through by bui
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         20 posts found
+         25 posts found
       </p>
     </div>
   </div>

@@ -3,6 +3,31 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/2018/04/algorithms-quick-sort/</loc>
+    <lastmod>2018-04-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2018/04/algorithms-recursive/</loc>
+    <lastmod>2018-04-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2018/04/workflow-organising-projects-for-reproducibility/</loc>
+    <lastmod>2018-04-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2018/04/algorithms-selection-sort/</loc>
+    <lastmod>2018-04-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2018/04/hierarchical-clustering/</loc>
+    <lastmod>2018-04-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2018/04/row-combine-many-table-in-r/</loc>
     <lastmod>2018-04-11T00:00:00+00:00</lastmod>
   </url>
@@ -108,6 +133,12 @@
   </url>
   
   <url>
+    <loc>/tags/algorithms/</loc>
+    <lastmod>2018-04-17T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/archives/</loc>
     <priority>0</priority>
   </url>
@@ -124,8 +155,14 @@
   </url>
   
   <url>
+    <loc>/tags/clustering/</loc>
+    <lastmod>2018-04-16T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/categories/computers/</loc>
-    <lastmod>2018-04-11T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -149,7 +186,7 @@
   
   <url>
     <loc>/categories/machine-learning/</loc>
-    <lastmod>2018-04-01T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -161,7 +198,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2018-04-11T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -174,6 +211,12 @@
   <url>
     <loc>/tags/r/</loc>
     <lastmod>2018-04-11T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/recursive/</loc>
+    <lastmod>2018-04-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -196,6 +239,12 @@
   </url>
   
   <url>
+    <loc>/tags/sort/</loc>
+    <lastmod>2018-04-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/categories/statistics/</loc>
     <lastmod>2018-03-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -203,7 +252,7 @@
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2018-04-01T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -214,8 +263,14 @@
   </url>
   
   <url>
+    <loc>/tags/workflow/</loc>
+    <lastmod>2018-04-18T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/</loc>
-    <lastmod>2018-04-11T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

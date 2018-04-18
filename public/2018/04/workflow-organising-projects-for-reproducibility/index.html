@@ -1,0 +1,805 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+
+  
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.32.2 with theme Tranquilpeak 0.4.1-BETA">
+    <title>workflow: Organising projects for reproducibility</title>
+    <meta name="author" content="Jixing Liu">
+    <meta name="keywords" content=", R">
+
+    <link rel="icon" href="img/R_py.png">
+    
+
+    
+    <meta name="description" content="why reproducible  The fundamental idea behind a robust, reproducible analysis is a clean, repeatable script-based workflow (i.e. the sequence of tasks from the start to the end of a project) that links raw data through to clean data and to final analysis outputs.
+ principles of a good analysis workflow Any cleaning, merging, transforming, etc. of data should be done in scripts, not manually. Split your workflow (scripts) into logical thematic units.">
+    <meta property="og:description" content="why reproducible  The fundamental idea behind a robust, reproducible analysis is a clean, repeatable script-based workflow (i.e. the sequence of tasks from the start to the end of a project) that links raw data through to clean data and to final analysis outputs.
+ principles of a good analysis workflow Any cleaning, merging, transforming, etc. of data should be done in scripts, not manually. Split your workflow (scripts) into logical thematic units.">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="workflow: Organising projects for reproducibility">
+    <meta property="og:url" content="/2018/04/workflow-organising-projects-for-reproducibility/">
+    <meta property="og:site_name" content="student zero ">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="student zero ">
+    <meta name="twitter:description" content="why reproducible  The fundamental idea behind a robust, reproducible analysis is a clean, repeatable script-based workflow (i.e. the sequence of tasks from the start to the end of a project) that links raw data through to clean data and to final analysis outputs.
+ principles of a good analysis workflow Any cleaning, merging, transforming, etc. of data should be done in scripts, not manually. Split your workflow (scripts) into logical thematic units.">
+    
+      <meta name="twitter:creator" content="@studentZero475">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="https://i.loli.net/2018/02/26/5a937bb148b02.jpg">
+    
+
+    
+      <meta property="og:image" content="https://i.loli.net/2018/04/18/5ad69eb806d94.jpg">
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-hbs5om8csx9a8yrv5hnhpi2qqdv4ykuslajwbramhqxvleqbfklxgek50hye.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <link rel="stylesheet" href="/css/monokai-sublime.css" rel="stylesheet" id="theme-stylesheet">
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">student zero </a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <h1 class="sidebar-profile-title">workflow: Organising projects for reproducibility</h1>
+        <a href="/#about">
+          <img class="sidebar-profile-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Jixing Liu</h4>
+        
+          <h5 class="sidebar-profile-bio">Reading And Writing</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/studentZero475">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">Twitter</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.r-bloggers.com/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-book"></i>
+      
+      <span class="sidebar-button-desc">R-bloggers</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaOut
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      workflow: Organising projects for reproducibility
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-04-18T00:00:00Z">
+        
+  April 18, 2018
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/computers">computers</a>
+    
+  
+
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <div id="why-reproducible" class="section level1">
+<h1>why reproducible</h1>
+<blockquote>
+<p>The fundamental idea behind a <strong>robust, reproducible analysis</strong> is a clean, repeatable script-based workflow (i.e. the sequence of tasks from the start to the end of a project) that links <strong>raw data</strong> through to <strong>clean data</strong> and to <strong>final analysis outputs</strong>.</p>
+</blockquote>
+<div id="principles-of-a-good-analysis-workflow" class="section level2">
+<h2>principles of a good analysis workflow</h2>
+<ol style="list-style-type: decimal">
+<li>Any cleaning, merging, transforming, etc. of data <strong>should be done in scripts</strong>, not manually.</li>
+<li><strong>Split your workflow (scripts) into logical thematic units</strong>. For example, you might separate your code into scripts that
+<ul>
+<li><ol style="list-style-type: lower-roman">
+<li>load, merge and clean data</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-roman">
+<li>analyse data</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-roman">
+<li>produce outputs like figures and tables</li>
+</ol></li>
+</ul></li>
+<li><p>Eliminate code duplication by <strong>packaging up useful code into custom functions</strong> (Programming: write a function). Make sure to comment your functions thoroughly, explaining their expected inputs and outputs, and what they are doing and why.</p></li>
+<li><p><strong>Document your code and data as comments in your scripts</strong> or by producing separate documentation (see Programming and Reproducible reports).</p></li>
+<li><p>Any intermediary outputs generated by your workflow should be kept separate from raw data. <strong>结果输出应该和原始数据分开</strong></p></li>
+</ol>
+</div>
+</div>
+<div id="file-system-structure" class="section level1">
+<h1>file system structure</h1>
+<ol style="list-style-type: decimal">
+<li>The <code>data</code> folder contains all input data (and metadata) used in the analysis.</li>
+<li>The <code>docs</code> folder contains the manuscript.</li>
+<li>The <code>figs</code> directory contains figures generated by the analysis.</li>
+<li>The <code>output_data</code> folder contains any type of intermediate or output files (e.g. simulation outputs, models, processed datasets, etc.). You might separate this and also have a cleaned-data folder.</li>
+<li>The <code>scripts</code> contains R scripts with function definitions.</li>
+<li>The <code>rmd</code> folder contains RMarkdown and reports files that document the analysis or report on results.</li>
+</ol>
+</div>
+<div id="good-name-principle" class="section level1">
+<h1>good name principle</h1>
+<ol style="list-style-type: decimal">
+<li>machine readable</li>
+</ol>
+<ul>
+<li>Use delimiters to separate and make important metadata information</li>
+<li>Avoid spaces, punctuation, accented characters and case sensitivity.</li>
+<li>“_” to separate metadata to be extracted as strings later on</li>
+<li>“-” instead of spaces or vice versa but do not mix</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>human readable</li>
+</ol>
+<ul>
+<li>Ensure file names also include informative description of file contents</li>
+<li>Adapt the concept of the slug to <strong>link outputs</strong> with <strong>the scripts in which they are generated</strong></li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>easy to order by default</li>
+<li><strong>Starting file names with a number</strong> helps.</li>
+<li>For data, this might be a date allowing chronological ordering.</li>
+<li>Make sure to use ISO 8601 format <strong>(YYYY-MM-DD)</strong> to avoid confusion between differing local dating conventions.</li>
+<li>For scripts, you could use <strong>a number indicating the position of the scripts</strong> <strong>in the analysis sequence</strong> e.g. 01_download-data.R</li>
+</ol>
+<p><img src="/Users/zero/Documents/_14_tmp/jixingBlogdown/GIF/qiehuan.gif" width="30%" style="display: block; margin: auto;" /></p>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="//tags/workflow/">workflow</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/04/algorithms-recursive/" data-tooltip="algorithms: recursive">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/04/algorithms-selection-sort/" data-tooltip="algorithms: selection sort">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/04/workflow-organising-projects-for-reproducibility/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/04/workflow-organising-projects-for-reproducibility/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/04/workflow-organising-projects-for-reproducibility/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2018 Jixing Liu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/04/algorithms-recursive/" data-tooltip="algorithms: recursive">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/04/algorithms-selection-sort/" data-tooltip="algorithms: selection sort">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/04/workflow-organising-projects-for-reproducibility/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/04/workflow-organising-projects-for-reproducibility/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/04/workflow-organising-projects-for-reproducibility/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F04%2Fworkflow-organising-projects-for-reproducibility%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F04%2Fworkflow-organising-projects-for-reproducibility%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F04%2Fworkflow-organising-projects-for-reproducibility%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Jixing Liu</h4>
+    
+      <div id="about-card-bio">Reading And Writing</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Data Scientist
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/04/algorithms-quick-sort/">
+                <h3 class="media-heading">algorithms: quick sort</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">快速排序 和 分而治之（D&amp;C）divde and conquer  D&amp;C 将问题逐步分解，找到最基本的情况为止 快速排序，随机的选择基准值，平均运行时间为**O(n*logn)**  def quicksort(array): if len(array) &lt; 2:# base case, arrays with 0 or 1 element are already &quot;sorted&quot; return array else:# recursive case pivot = array[0]# sub-array of all the elements less than the pivot less = [i for i in array[1:] if i &lt;= pivot]# sub-array of all the elements greater than the pivot greater = [i for i in array[1:] if i &gt; pivot] return quicksort(less) + [pivot] + quicksort(greater) print(quicksort([10, 5, 2, 3]))  ## [2, 3, 5, 10]  </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/04/algorithms-recursive/">
+                <h3 class="media-heading">algorithms: recursive</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">递归  递归指的是调用自己的函数 每个递归都有两个条件  base case: 终止条件 recursive case: 递归条件  所有的函数的调用都遵循 call stack 递归语法的清晰是以内存为代价的   通过递归求阶乘 def fact(n): if n == 1: #base case(终止条件) return 1 else: return n * fact(n-1)#recursive case print(fact(5)) ## 120  </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/04/workflow-organising-projects-for-reproducibility/">
+                <h3 class="media-heading">workflow: Organising projects for reproducibility</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">why reproducible  The fundamental idea behind a robust, reproducible analysis is a clean, repeatable script-based workflow (i.e. the sequence of tasks from the start to the end of a project) that links raw data through to clean data and to final analysis outputs.
+ principles of a good analysis workflow Any cleaning, merging, transforming, etc. of data should be done in scripts, not manually. Split your workflow (scripts) into logical thematic units.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/04/algorithms-selection-sort/">
+                <h3 class="media-heading">algorithms: selection sort</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">选择排序  计算机内存就像一大堆的抽屉， 每个抽屉都有地址 存储多个元素可以使用：数组和链表 数组的元素都在一起 链表的元素是分开的，每个元素都存着下一个元素的地址 数组的读取速度很快 链表的插入和删除速度很快 在同一个数组中，所有的元素类型必须一致   def findSmallest(arr): smallest = arr[0] #初始化：存储最小的值 smallest_index=0 #初始化: 存储最小值的索引 for i in range(1, len(arr)): if arr[i] &lt; smallest: smallest=arr[i] smallest_index=i return smallest_index def selectionSort(arr): #对数据进行排序 newArr=[] for i in range(len(arr)): smallest=findSmallest(arr)#找出数据中最小的元素，并将其加到新的数组中去 newArr.append(arr.pop(smallest)) return newArr print(selectionSort([5,3,6,2])) ## [2, 3, 5, 6]  </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/04/hierarchical-clustering/">
+                <h3 class="media-heading">Hierarchical Clustering</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">What Is Clustering  Clustering refers to a very broad set of techniques for finding subgroups, or clusters, in a data set. When we cluster the observations of a data set, we seek to partition them into distinct groups so that the observations within each group are quite similar to each other, while observations in different groups are quite different from each other. Of course, to make this concrete, we must define what it means for two or more observations to be similar or different.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/04/row-combine-many-table-in-r/">
+                <h3 class="media-heading">Row Combine Many Table In R </h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Q: I has many separate tables that need to be combined into a single file?
+google search “R read many datasets or tables”
+Three steps: Getting a list of files path to read Write a function to read a file Then loop it   step01: list all files path library(here) allfiles = list.files(path = here(&quot;data&quot;), #Use the ⭐here package to indicate the directory the files are in relative to the root directory pattern = &quot;AB.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/04/build-webapp-in-r-using-shiny/">
+                <h3 class="media-heading">Build Webapp In R Using Shiny</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">How to build shiny app from scratch in R?
+You can build web page (online reporting tool) without knowing any web programming languages such as Javascript / PHP / CSS.
+The best part about shiny package is that you can easily integrate R with webpage.
+Suppose you want your web page run machine learning algorithms like random forest, SVM etc and display summary of the model with the flexibility of selecting inputs from user.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/04/run-python-from-r/">
+                <h3 class="media-heading">Run Python From R</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">R is mainly known for data analysis, statistical modeling and visualization. While python is popular for deep learning and natural language processing.
+Python and R were ranked top 2 tools for data science and machine learning. If you really want to boost your career in data science world, these are the languages you need to focus on.
+How To Call Or Run Python From R? RStudio developed a package called reticulate which provides a medium to run Python packages and functions from R.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/04/9-ensembling-the-predictions/">
+                <h3 class="media-heading">9 Ensembling The Predictions</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Load Package And Data load(&quot;../../data/craet_8.Rdata&quot;) library(tidyverse) library(caret) #Set Parallel Processing - Decrease computation time if (!require(&quot;doMC&quot;)) install.packages(&quot;doMC&quot;) library(doMC) registerDoMC(cores = 4)  Train Multiple Models So now we have predictions from multiple individual models.To do this we had to run the train() function once for each model, store the models and pass it to the res
+library(caretEnsemble) # Stacking Algorithms - Run multiple algos in one call. trainControl &lt;- trainControl(method=&quot;repeatedcv&quot;, number=10, repeats=3, savePredictions=TRUE, classProbs=TRUE) algorithmList &lt;- c(&#39;rf&#39;, &#39;adaboost&#39;, &#39;earth&#39;, &#39;svmRadial&#39;) set.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/03/8-how-to-evaluate-performance-of-multiple-machine-learning-algorithms/">
+                <h3 class="media-heading">8 How To Evaluate Performance Of Multiple Machine Learning Algorithms?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Load Package And Data load(&quot;../../data/craet_7.Rdata&quot;) library(tidyverse) library(caret) #Set Parallel Processing - Decrease computation time if (!require(&quot;doMC&quot;)) install.packages(&quot;doMC&quot;) library(doMC) registerDoMC(cores = 4)  Caret provides the resamples() function where you can provide multiple machine learning models and collectively evaluate them Define the training control fitControl &lt;- trainControl( method = &#39;cv&#39;, # k-fold cross validation number = 5, # number of folds savePredictions = &#39;final&#39;, # saves predictions for optimal tuning parameter classProbs = T, # should class probabilities be returned summaryFunction=twoClassSummary # results summary function )   train models set.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         25 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://i.loli.net/2018/02/26/5a9416186c149.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" integrity="sha256-IFHWFEbU2/+wNycDECKgjIRSirRNIDp2acEB5fvdVRU=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js" integrity="sha256-+mpyNVJsNt4rVXCw0F+pAOiB3YxmHgrbJsx4ecPuUaI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js" integrity="sha256-vMxgR/7FtLovVA+IPrR7+xTgIgARH7y9VZQnmmi0HDI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js" integrity="sha256-N0qFUh7/9vLvia87dDndewmsgsyYoNkdA212tPc+2NI=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-kr8dyqj6rb6ortyib7whfo9x9p6td6zo8t1v4fdz4ecx5kwybsdlmk1slygn.min.js"></script>
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = '\/2018\/04\/workflow-organising-projects-for-reproducibility\/';
+          
+            this.page.identifier = '\/2018\/04\/workflow-organising-projects-for-reproducibility\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'jixing';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+    
+  </body>
+</html>
+

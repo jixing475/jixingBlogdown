@@ -1,0 +1,55 @@
+---
+title: Hierarchical Clustering
+author: ZERO
+date: '2018-04-16'
+slug: hierarchical-clustering
+categories:
+  - machine learning
+tags:
+  - clustering
+thumbnailImagePosition: left
+thumbnailImage: /post/2018-04-16-hierarchical-clustering_files/clustering.png
+metaAlignment: center
+coverMeta: out
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE
+)
+```
+
+
+# What Is  Clustering 
+
+> **Clustering** refers to a very broad set of techniques for finding subgroups, or clusters, in a data set.
+When we cluster the observations of a data set, we seek to partition them into distinct groups so that the observations within each group are quite similar to each other, while observations in different groups are quite different from each other. Of course, to make this concrete, we must define what it means for two or more observations to be similar or different. Indeed, this is often a domain-specific consideration that must be made based on knowledge of the data being studied.
+
+# Why Hierarachical Clustering
+
+> For instance, suppose that we have a set of n observations, each with p features. The n observations could correspond to tissue samples for patients with breast cancer, and the p features could correspond to measurements collected for each tissue sample; these could be clinical measurements, such as tumor stage or grade, or they could be gene expression measurements. We may have a reason to believe that there is some heterogeneity among the n tissue samples; for instance, perhaps there are a few different unknown subtypes of breast cancer. Clustering could be used to find these subgroups. This is an unsupervised problem because we are trying to discover structure in this case, distinct clusters on the basis of a data set. The goal in supervised problems, on the other hand, is to try to predict some outcome vector such as survival time or response to drug treatment
+
+
+
+# How do hierarachical clustering: bottom-up
+
+## Key operation: repeatedly combine two **nearest clusters**
+
+## three important question
+
+### 1. how do you represent a cluster of more than one point?
+  - how do you represent the location of each cluster, to tell which pair of cluster is closest?
+  - represent each cluster by its centroid=average of its point
+
+### 2. how do you determine the "nearness" of clusters?
+  - measure cluster distances by distances of centroids
+
+
+### 3. when to stop combining clusters?
+  - pick a number k upfront, and stop when have k clusters
+  - stop when the next merge would creat a cluster with low "cohesion"
+  
+# Eg: stat question
+
+# resuilt

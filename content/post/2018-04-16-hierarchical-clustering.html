@@ -1,0 +1,64 @@
+---
+title: Hierarchical Clustering
+author: ZERO
+date: '2018-04-16'
+slug: hierarchical-clustering
+categories:
+  - machine learning
+tags:
+  - clustering
+thumbnailImagePosition: left
+thumbnailImage: /post/2018-04-16-hierarchical-clustering_files/clustering.png
+metaAlignment: center
+coverMeta: out
+---
+
+
+
+<div id="what-is-clustering" class="section level1">
+<h1>What Is Clustering</h1>
+<blockquote>
+<p><strong>Clustering</strong> refers to a very broad set of techniques for finding subgroups, or clusters, in a data set. When we cluster the observations of a data set, we seek to partition them into distinct groups so that the observations within each group are quite similar to each other, while observations in different groups are quite different from each other. Of course, to make this concrete, we must define what it means for two or more observations to be similar or different. Indeed, this is often a domain-specific consideration that must be made based on knowledge of the data being studied.</p>
+</blockquote>
+</div>
+<div id="why-hierarachical-clustering" class="section level1">
+<h1>Why Hierarachical Clustering</h1>
+<blockquote>
+<p>For instance, suppose that we have a set of n observations, each with p features. The n observations could correspond to tissue samples for patients with breast cancer, and the p features could correspond to measurements collected for each tissue sample; these could be clinical measurements, such as tumor stage or grade, or they could be gene expression measurements. We may have a reason to believe that there is some heterogeneity among the n tissue samples; for instance, perhaps there are a few different unknown subtypes of breast cancer. Clustering could be used to find these subgroups. This is an unsupervised problem because we are trying to discover structure in this case, distinct clusters on the basis of a data set. The goal in supervised problems, on the other hand, is to try to predict some outcome vector such as survival time or response to drug treatment</p>
+</blockquote>
+</div>
+<div id="how-do-hierarachical-clustering-bottom-up" class="section level1">
+<h1>How do hierarachical clustering: bottom-up</h1>
+<div id="key-operation-repeatedly-combine-two-nearest-clusters" class="section level2">
+<h2>Key operation: repeatedly combine two <strong>nearest clusters</strong></h2>
+</div>
+<div id="three-important-question" class="section level2">
+<h2>three important question</h2>
+<div id="how-do-you-represent-a-cluster-of-more-than-one-point" class="section level3">
+<h3>1. how do you represent a cluster of more than one point?</h3>
+<ul>
+<li>how do you represent the location of each cluster, to tell which pair of cluster is closest?</li>
+<li>represent each cluster by its centroid=average of its point</li>
+</ul>
+</div>
+<div id="how-do-you-determine-the-nearness-of-clusters" class="section level3">
+<h3>2. how do you determine the “nearness” of clusters?</h3>
+<ul>
+<li>measure cluster distances by distances of centroids</li>
+</ul>
+</div>
+<div id="when-to-stop-combining-clusters" class="section level3">
+<h3>3. when to stop combining clusters?</h3>
+<ul>
+<li>pick a number k upfront, and stop when have k clusters</li>
+<li>stop when the next merge would creat a cluster with low “cohesion”</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="eg-stat-question" class="section level1">
+<h1>Eg: stat question</h1>
+</div>
+<div id="resuilt" class="section level1">
+<h1>resuilt</h1>
+</div>

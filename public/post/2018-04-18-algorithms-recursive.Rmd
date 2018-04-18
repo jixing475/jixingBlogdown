@@ -1,0 +1,47 @@
+---
+title: 'algorithms: recursive'
+author: ZERO
+date: '2018-04-18'
+slug: algorithms-recursive
+categories:
+  - machine learning
+tags:
+  - recursive
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/04/18/5ad67880b7143.jpg
+metaAlignment: center
+coverMeta: out
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE,
+	engine.path="/Users/zero/anaconda3/envs/PDSH/bin/python"
+)
+```
+
+
+# 递归
+- 递归指的是调用自己的函数
+- 每个递归都有两个条件
+    - base case: 终止条件
+    - recursive case: 递归条件
+- 所有的函数的调用都遵循 call stack
+- 递归语法的清晰是以内存为代价的
+
+```{r out.width="30%", fig.align = "center", fig.margin=TRUE, echo=FALSE, eval=TRUE}
+knitr::include_graphics("https://i.loli.net/2018/04/18/5ad6782dbd45a.jpg")
+```
+
+# 通过递归求阶乘
+```{python }
+def fact(n):
+  if n == 1: #base case(终止条件)
+    return 1
+  else:
+    return n * fact(n-1)#recursive case
+    
+print(fact(5))
+```
+

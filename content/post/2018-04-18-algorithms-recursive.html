@@ -1,0 +1,42 @@
+---
+title: 'algorithms: recursive'
+author: ZERO
+date: '2018-04-18'
+slug: algorithms-recursive
+categories:
+  - machine learning
+tags:
+  - recursive
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/04/18/5ad67880b7143.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+
+
+<div class="section level1">
+<h1>递归</h1>
+<ul>
+<li>递归指的是调用自己的函数</li>
+<li>每个递归都有两个条件
+<ul>
+<li>base case: 终止条件</li>
+<li>recursive case: 递归条件</li>
+</ul></li>
+<li>所有的函数的调用都遵循 call stack</li>
+<li>递归语法的清晰是以内存为代价的</li>
+</ul>
+<p><img src="https://i.loli.net/2018/04/18/5ad6782dbd45a.jpg" width="30%" style="display: block; margin: auto;" /></p>
+</div>
+<div class="section level1">
+<h1>通过递归求阶乘</h1>
+<pre class="python"><code>def fact(n):
+  if n == 1: #base case(终止条件)
+    return 1
+  else:
+    return n * fact(n-1)#recursive case
+    
+print(fact(5))</code></pre>
+<pre><code>## 120</code></pre>
+</div>

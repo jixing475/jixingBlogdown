@@ -1,0 +1,47 @@
+---
+title: 'algorithms: quick sort'
+author: ZERO
+date: '2018-04-18'
+slug: algorithms-quick-sort
+categories:
+  - machine learning
+tags:
+  - sort
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/04/18/5ad684af2080b.jpg
+metaAlignment: center
+coverMeta: out
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE,
+	engine.path="/Users/zero/anaconda3/envs/PDSH/bin/python"
+)
+```
+
+
+# 快速排序 和 分而治之（D&C）divde and conquer
+
+- D&C 将问题逐步分解，找到最基本的情况为止
+- 快速排序，随机的选择基准值，平均运行时间为**O(n*logn)**
+
+```{r out.width="30%", fig.align = "center", fig.margin=TRUE, echo=FALSE, eval=TRUE}
+knitr::include_graphics("https://i.loli.net/2018/04/18/5ad680ee22950.jpg")
+```
+
+```{python}
+def quicksort(array):
+  if len(array) < 2:# base case, arrays with 0 or 1 element are already "sorted"
+    return array
+  else:# recursive case
+    pivot = array[0]# sub-array of all the elements less than the pivot
+    less = [i for i in array[1:] if i <= pivot]# sub-array of all the elements greater than the pivot
+    greater = [i for i in array[1:] if i > pivot]
+    return quicksort(less) + [pivot] + quicksort(greater)
+
+print(quicksort([10, 5, 2, 3]))
+    
+```
+
