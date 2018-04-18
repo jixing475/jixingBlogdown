@@ -281,8 +281,12 @@ read_fun = function(path) {
 <p>step03: read all files</p>
 <p>If using either of for or lapply, the final concatenation step can be done via rbind in do.call</p>
 <p><code>map_dfr</code> looks like, looping through each element of allfiles to read and modify the datasets with the read_fun function and then stacking everything together into a final combined dataset</p>
-<pre class="r"><code>library(purrr)
-( combined_dat = map_dfr(allfiles, read_fun) )</code></pre>
+<pre class="r"><code>library(furrr)
+library(future)
+plan(multiprocess)
+library(tictoc)
+tic()
+( combined_dat = future_map_dfr(allfiles, read_fun, .progress = TRUE) )</code></pre>
 <pre><code>##    date temperature  block    site plot logloc
 ## 1    15           9 Block1 Siteone    5     AB
 ## 2    16           8 Block1 Siteone    5     AB
@@ -321,6 +325,8 @@ read_fun = function(path) {
 ## 35    7          18 Block2 Sitenew    5     AB
 ## 36    9          19 Block2 Sitenew    5     AB
 ## 37   10          10 Block2 Sitenew    5     AB</code></pre>
+<pre class="r"><code>toc() </code></pre>
+<pre><code>## 2.921 sec elapsed</code></pre>
 </div>
 </div>
 

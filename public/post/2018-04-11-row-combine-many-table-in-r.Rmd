@@ -65,7 +65,12 @@ If using either of for or lapply, the final concatenation step can be done via r
 
 `map_dfr` looks like, looping through each element of allfiles to read and modify the datasets with the read_fun function and then stacking everything together into a final combined dataset
 ```{r}
-library(purrr)
-( combined_dat = map_dfr(allfiles, read_fun) )
+library(furrr)
+library(future)
+plan(multiprocess)
+library(tictoc)
+tic()
+( combined_dat = future_map_dfr(allfiles, read_fun, .progress = TRUE) )
+toc() 
 ```
 

@@ -75,12 +75,12 @@ print(fact(5))</code></pre>
     <published>2018-04-18T00:00:00+00:00</published>
     <updated>2018-04-18T00:00:00+00:00</updated>
     <content type="html"><![CDATA[<div id="why-reproducible" class="section level1">
-<h1>why reproducible</h1>
+<h1><strong style="color: darkred;">why reproducible</strong></h1>
 <blockquote>
-<p>The fundamental idea behind a <strong>robust, reproducible analysis</strong> is a clean, repeatable script-based workflow (i.e. the sequence of tasks from the start to the end of a project) that links <strong>raw data</strong> through to <strong>clean data</strong> and to <strong>final analysis outputs</strong>.</p>
+<p>The fundamental idea behind a <strong style="color: darkred;"><strong>robust, reproducible analysis</strong></strong> is a clean, repeatable script-based workflow (i.e. the sequence of tasks from the start to the end of a project) that links <strong>raw data</strong> through to <strong>clean data</strong> and to <strong>final analysis outputs</strong>.</p>
 </blockquote>
 <div id="principles-of-a-good-analysis-workflow" class="section level2">
-<h2>principles of a good analysis workflow</h2>
+<h2><strong style="color: darkred;">principles of a good analysis workflow</strong></h2>
 <ol style="list-style-type: decimal">
 <li>Any cleaning, merging, transforming, etc. of data <strong>should be done in scripts</strong>, not manually.</li>
 <li><strong>Split your workflow (scripts) into logical thematic units</strong>. For example, you might separate your code into scripts that
@@ -102,7 +102,7 @@ print(fact(5))</code></pre>
 </div>
 </div>
 <div id="file-system-structure" class="section level1">
-<h1>file system structure</h1>
+<h1><strong style="color: darkred;">file system structure</strong></h1>
 <ol style="list-style-type: decimal">
 <li>The <code>data</code> folder contains all input data (and metadata) used in the analysis.</li>
 <li>The <code>docs</code> folder contains the manuscript.</li>
@@ -113,7 +113,7 @@ print(fact(5))</code></pre>
 </ol>
 </div>
 <div id="good-name-principle" class="section level1">
-<h1>good name principle</h1>
+<h1><strong style="color: darkred;">good name principle</strong></h1>
 <ol style="list-style-type: decimal">
 <li>machine readable</li>
 </ol>
@@ -137,7 +137,7 @@ print(fact(5))</code></pre>
 <li>Make sure to use ISO 8601 format <strong>(YYYY-MM-DD)</strong> to avoid confusion between differing local dating conventions.</li>
 <li>For scripts, you could use <strong>a number indicating the position of the scripts</strong> <strong>in the analysis sequence</strong> e.g. 01_download-data.R</li>
 </ol>
-<p><img src="/Users/zero/Documents/_14_tmp/jixingBlogdown/GIF/qiehuan.gif" width="30%" style="display: block; margin: auto;" /></p>
+<p><img src="https://media.giphy.com/media/QLuMqcnfCVTDIcOwG8/giphy.gif" width="30%" style="display: block; margin: auto;" /></p>
 </div>
 ]]></content>
   </entry>
@@ -276,8 +276,12 @@ read_fun = function(path) {
 <p>step03: read all files</p>
 <p>If using either of for or lapply, the final concatenation step can be done via rbind in do.call</p>
 <p><code>map_dfr</code> looks like, looping through each element of allfiles to read and modify the datasets with the read_fun function and then stacking everything together into a final combined dataset</p>
-<pre class="r"><code>library(purrr)
-( combined_dat = map_dfr(allfiles, read_fun) )</code></pre>
+<pre class="r"><code>library(furrr)
+library(future)
+plan(multiprocess)
+library(tictoc)
+tic()
+( combined_dat = future_map_dfr(allfiles, read_fun, .progress = TRUE) )</code></pre>
 <pre><code>##    date temperature  block    site plot logloc
 ## 1    15           9 Block1 Siteone    5     AB
 ## 2    16           8 Block1 Siteone    5     AB
@@ -316,6 +320,8 @@ read_fun = function(path) {
 ## 35    7          18 Block2 Sitenew    5     AB
 ## 36    9          19 Block2 Sitenew    5     AB
 ## 37   10          10 Block2 Sitenew    5     AB</code></pre>
+<pre class="r"><code>toc() </code></pre>
+<pre><code>## 2.921 sec elapsed</code></pre>
 </div>
 </div>
 ]]></content>
