@@ -21,9 +21,14 @@ knitr::opts_chunk$set(
 )
 ```
 
-## What is an adverb
+## <strong style="color: darkred;">What is an adverb</strong> 
 
 Read carefully the [purrr documentation](http://purrr.tidyverse.org/reference/index.html#section-adverbs)
+
+```{r out.width="30%", fig.align = "center", fig.margin=TRUE, echo=FALSE, eval=TRUE}
+knitr::include_graphics("https://media.giphy.com/media/8UGoKT4boBkF9MGUb3/giphy.gif")
+```
+
 
 > Adverbs <strong style="color: darkred;">modify the action of a function</strong> ; taking a function as input and <strong style="color: darkred;">returning a function with modified action as output.</strong> 
 
@@ -94,6 +99,7 @@ sys_time <- talky(Sys.time)
 sys_time()
 ```
 
+## <strong style="color: darkred;">the template</strong> 
 ```{r}
 talky <- function(fun, mess){
   function(...){
@@ -142,7 +148,7 @@ log_sqrt(10)
 ```
 
 
-##**refrence**
+**refrence**
 - [colin Fay](https://colinfay.me/purrr-adverb-tidyverse/)
 
 

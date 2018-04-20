@@ -1,0 +1,57 @@
+---
+title: 为什么我的锻炼又失败了
+author: ZERO
+date: '2018-04-20'
+slug: Why did my plan fail again 2018-04-20-
+categories:
+  - Essays
+tags:
+  - PDCA
+thumbnailImagePosition: left
+thumbnailImage: /post/2018-04-20-Why-did-my-plan-fail-again_files/PDCA.jpg
+metaAlignment: center
+coverMeta: out
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE,
+	engine.path="/Users/zero/anaconda3/bin/python"
+)
+```
+
+# <strong style="color: darkred;">妈蛋！</strong> 
+
+<strong style="color: darkred;">健康饮食</strong>  
+
+<strong style="color: darkred;">坚持锻炼 </strong> 
+
+<strong style="color: darkred;">好处多多</strong>  
+
+<strong style="color: darkred;">人尽皆知</strong> 
+
+但要真正做到这两点 真心不容易
+
+今天就好好反思一下 我为什么不能坚持锻炼
+
+## <strong style="color: darkred;">放弃的原因:</strong> 
+	. 指定的计划难度太高
+	. 短期没看到效果就是去了动力
+	. 被各种琐事干扰，无法正常执行
+	. 只要中途断了几次，就会放弃锻炼的习惯
+
+> <strong style="color: darkred;">能让人在短期内取得显著成效的计划，你都要特别小心。因为往往这种计划太过激烈，没人能长期坚持，很快你就会放弃，取得的成效也会随它而去，甚至还有反弹效果</strong> 
+
+
+## <strong style="color: darkred;">解决办法:</strong> 把锻炼变成像刷牙一样的常规活动，集中精力想尽一切办法把它边做常规活动
+
+	. 从小的运动开始, 尽量从小的开始直到你学会了坚持。可以慢慢增加运动量，哪怕你一开始能够多做一些，也一定要忍住，
+	. 安排固定的锻炼时间，这段时间最好能不受到其他事情的干扰
+	. 养成习惯中最重要的一点就是坚持不懈，只要错过几次，你就会开始犯懒。多少次都是因为这个败下阵来，😔
+	. 最好找个搭档，和别人约定一起，会帮助你自律
+	
+```{r out.width="30%", fig.align = "center", fig.margin=TRUE, echo=FALSE, eval=TRUE}
+knitr::include_graphics("https://media.giphy.com/media/8UGoKT4boBkF9MGUb3/giphy.gif")
+```
+	

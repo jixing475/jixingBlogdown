@@ -16,8 +16,9 @@ coverMeta: out
 
 
 <div id="what-is-an-adverb" class="section level2">
-<h2>What is an adverb</h2>
+<h2><strong style="color: darkred;">What is an adverb</strong></h2>
 <p>Read carefully the <a href="http://purrr.tidyverse.org/reference/index.html#section-adverbs">purrr documentation</a></p>
+<p><img src="https://media.giphy.com/media/8UGoKT4boBkF9MGUb3/giphy.gif" width="30%" style="display: block; margin: auto;" /></p>
 <blockquote>
 <p>Adverbs <strong style="color: darkred;">modify the action of a function</strong> ; taking a function as input and <strong style="color: darkred;">returning a function with modified action as output.</strong></p>
 </blockquote>
@@ -65,7 +66,7 @@ sleep_print &lt;- sleepy(Sys.time, 5)
 class(sleep_print)</code></pre>
 <pre><code>## [1] &quot;function&quot;</code></pre>
 <pre class="r"><code>sleep_print()</code></pre>
-<pre><code>## [1] &quot;2018-04-20 08:42:05 CST&quot;</code></pre>
+<pre><code>## [1] &quot;2018-04-20 09:15:36 CST&quot;</code></pre>
 </div>
 <div id="how" class="section level1">
 <h1><strong style="color: darkred;">how?</strong></h1>
@@ -81,7 +82,9 @@ plop(1:10)</code></pre>
 <pre><code>## [1] 5.5</code></pre>
 <pre class="r"><code>sys_time &lt;- talky(Sys.time)
 sys_time()</code></pre>
-<pre><code>## [1] &quot;2018-04-20 08:42:05 CST&quot;</code></pre>
+<pre><code>## [1] &quot;2018-04-20 09:15:36 CST&quot;</code></pre>
+<div id="the-template" class="section level2">
+<h2><strong style="color: darkred;">the template</strong></h2>
 <pre class="r"><code>talky &lt;- function(fun, mess){
   function(...){
     #add some command
@@ -97,7 +100,7 @@ sys_time()</code></pre>
 
 talky_sqrt&lt;- talky(fun = sqrt, mess = &quot;Hey there! You Rock!&quot;)#创建被修饰函数
 talky_sqrt(4)#4 是传递给被修饰的函数的</code></pre>
-<pre><code>## [1] &quot;2018-04-20 08:42:05 CST&quot;
+<pre><code>## [1] &quot;2018-04-20 09:15:36 CST&quot;
 ## [1] &quot;you can add anything&quot;</code></pre>
 <pre><code>## [1] 2</code></pre>
 <div id="run-it-or-not" class="section level3">
@@ -111,8 +114,9 @@ talky_sqrt(4)#4 是传递给被修饰的函数的</code></pre>
   }
 }
 maybe_sqrt &lt;- maybe(fun = sqrt)
-maybe_sqrt(1)
 maybe_sqrt(1)</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>maybe_sqrt(1)</code></pre>
 </div>
 <div id="create-a-log-file-of-a-function" class="section level3">
 <h3>Create a log file of a function</h3>
@@ -125,11 +129,7 @@ maybe_sqrt(1)</code></pre>
 log_sqrt &lt;- log_calls(sqrt, file = &quot;logs&quot;)
 log_sqrt(10)</code></pre>
 <pre><code>## [1] 3.162278</code></pre>
+<p><strong>refrence</strong> - <a href="https://colinfay.me/purrr-adverb-tidyverse/">colin Fay</a></p>
 </div>
-<div id="refrence" class="section level2">
-<h2><strong>refrence</strong></h2>
-<ul>
-<li><a href="https://colinfay.me/purrr-adverb-tidyverse/">colin Fay</a></li>
-</ul>
 </div>
 </div>

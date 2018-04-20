@@ -8,6 +8,11 @@
   </url>
   
   <url>
+    <loc>/2018/04/why-did-my-plan-fail-again-2018-04-20/</loc>
+    <lastmod>2018-04-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2018/04/algorithms-quick-sort/</loc>
     <lastmod>2018-04-18T00:00:00+00:00</lastmod>
   </url>
@@ -178,6 +183,12 @@
   </url>
   
   <url>
+    <loc>/categories/essays/</loc>
+    <lastmod>2018-04-20T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/ggplot2/</loc>
     <lastmod>2018-03-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -198,6 +209,12 @@
   <url>
     <loc>/page/</loc>
     <lastmod>2018-02-01T16:06:06+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/pdca/</loc>
+    <lastmod>2018-04-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
