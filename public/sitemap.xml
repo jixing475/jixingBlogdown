@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/2018/04/purrr-adverb/</loc>
+    <lastmod>2018-04-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2018/04/algorithms-quick-sort/</loc>
     <lastmod>2018-04-18T00:00:00+00:00</lastmod>
   </url>
@@ -162,7 +167,7 @@
   
   <url>
     <loc>/categories/computers/</loc>
-    <lastmod>2018-04-18T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -198,13 +203,19 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2018-04-18T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/program/</loc>
     <lastmod>2018-04-03T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/purrr/</loc>
+    <lastmod>2018-04-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -270,7 +281,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-04-18T00:00:00+00:00</lastmod>
+    <lastmod>2018-04-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

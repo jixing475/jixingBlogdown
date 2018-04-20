@@ -467,6 +467,26 @@
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2018/04/purrr-adverb/">
+                <h3 class="media-heading">purrr: adverb</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">What is an adverb Read carefully the purrr documentation
+ Adverbs modify the action of a function ; taking a function as input and returning a function with modified action as output.
+ In other words, adverbs take a function, and return this function modified. Yes, just an adverb modifies a verb.
+library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&quot;) ## $result ## NULL ## ## $error ## &lt;simpleError in log(x = x, base = base): non-numeric argument to mathematical function&gt; # have a result and error  how to write your own?</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2018/04/algorithms-quick-sort/">
                 <h3 class="media-heading">algorithms: quick sort</h3>
               </a>
@@ -492,7 +512,7 @@
                   Apr 4, 2018
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">递归  递归指的是调用自己的函数 每个递归都有两个条件  base case: 终止条件 recursive case: 递归条件  所有的函数的调用都遵循 call stack 递归语法的清晰是以内存为代价的   通过递归求阶乘 def fact(n): if n == 1: #base case(终止条件) return 1 else: return n * fact(n-1)#recursive case print(fact(5)) ## 120  </div>
+              <div class="media-content hide-xs font-merryweather">递归  递归指的是调用自己的函数 每个递归都有两个条件  base case : 终止条件 recursive case : 递归条件  所有的函数的调用都遵循 call stack 递归语法的清晰是以内存为代价的   通过递归求阶乘 def fact(n): if n == 1: #base case(终止条件) return 1 else: return n * fact(n-1)#recursive case print(fact(5)) ## 120  </div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -626,23 +646,6 @@ library(caretEnsemble) # Stacking Algorithms - Run multiple algos in one call. t
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/03/8-how-to-evaluate-performance-of-multiple-machine-learning-algorithms/">
-                <h3 class="media-heading">8 How To Evaluate Performance Of Multiple Machine Learning Algorithms?</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Mar 3, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Load Package And Data load(&quot;../../data/craet_7.Rdata&quot;) library(tidyverse) library(caret) #Set Parallel Processing - Decrease computation time if (!require(&quot;doMC&quot;)) install.packages(&quot;doMC&quot;) library(doMC) registerDoMC(cores = 4)  Caret provides the resamples() function where you can provide multiple machine learning models and collectively evaluate them Define the training control fitControl &lt;- trainControl( method = &#39;cv&#39;, # k-fold cross validation number = 5, # number of folds savePredictions = &#39;final&#39;, # saves predictions for optimal tuning parameter classProbs = T, # should class probabilities be returned summaryFunction=twoClassSummary # results summary function )   train models set.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -650,7 +653,7 @@ library(caretEnsemble) # Stacking Algorithms - Run multiple algos in one call. t
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         25 posts found
+         26 posts found
       </p>
     </div>
   </div>

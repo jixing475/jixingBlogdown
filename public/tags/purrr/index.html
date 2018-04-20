@@ -16,7 +16,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.32.2 with theme Tranquilpeak 0.4.1-BETA">
-    <title>Rvest</title>
+    <title>Purrr</title>
     <meta name="author" content="Jixing Liu">
     <meta name="keywords" content=", R">
 
@@ -27,8 +27,8 @@
     <meta name="description" content="exploring and playing with data in R and python">
     <meta property="og:description" content="exploring and playing with data in R and python">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Rvest">
-    <meta property="og:url" content="/tags/rvest/">
+    <meta property="og:title" content="Purrr">
+    <meta property="og:url" content="/tags/purrr/">
     <meta property="og:site_name" content="student zero ">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="student zero ">
@@ -97,7 +97,7 @@
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <h1 class="sidebar-profile-title">Rvest</h1>
+        <h1 class="sidebar-profile-title">Purrr</h1>
         <a href="/#about">
           <img class="sidebar-profile-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
         </a>
@@ -217,16 +217,16 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/03/scraping-and-wranging-tables-from-research-articles/">
-          Scraping and Wranging Tables from Research Articles
+        <a class="link-unstyled" href="/2018/04/purrr-adverb/">
+          purrr: adverb
         </a>
       </h1>
       
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-03-27T00:00:00Z">
+      <time itemprop="datePublished" datetime="2018-04-20T00:00:00Z">
         
-  March 27, 2018
+  April 20, 2018
 
       </time>
     
@@ -235,7 +235,7 @@
   
     <span>in</span>
     
-      <a class="category-link" href="/categories/statistics">statistics</a>
+      <a class="category-link" href="/categories/computers">computers</a>
     
   
 
@@ -244,18 +244,20 @@
 
     </div>
     <div class="postShorten-excerpt" itemprop="articleBody">
-      What do you do when you want to use results from the literature to anchor your own analysis? we’ll go through a practical scenario on scraping an html table from a Nature Genetics article into R and wrangling the data into a useful format.
-01. Scraping a html table from a webpage #load packages library(&quot;rvest&quot;) library(&quot;knitr&quot;) library(tidyverse) #scraping web page url &lt;- &quot;https://www.nature.com/articles/ng.2802/tables/2&quot; #====🔥find where is the table lives on this webpage==== table_path=&#39;//*[@id=&quot;content&quot;]/div/div/figure/div[1]/div/div[1]/table&#39; #get the table nature_genetics_table2 &lt;- url %&gt;% read_html() %&gt;% html_nodes(xpath=table_path) %&gt;% html_table(fill=T) %&gt;% .
+      What is an adverb Read carefully the purrr documentation
+ Adverbs modify the action of a function ; taking a function as input and returning a function with modified action as output.
+ In other words, adverbs take a function, and return this function modified. Yes, just an adverb modifies a verb.
+library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&quot;) ## $result ## NULL ## ## $error ## &lt;simpleError in log(x = x, base = base): non-numeric argument to mathematical function&gt; # have a result and error  how to write your own?
       <p>
-        <a href="/2018/03/scraping-and-wranging-tables-from-research-articles/" class="postShorten-excerpt_link link">Continue reading</a>
+        <a href="/2018/04/purrr-adverb/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
     </div>
   </div>
   
-    <a href="/2018/03/scraping-and-wranging-tables-from-research-articles/">
+    <a href="/2018/04/purrr-adverb/">
       <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/27/5aba60b02b557.jpg"/>
+        <img alt="" itemprop="image" src="https://i.loli.net/2018/04/20/5ad936eeb6ee7.jpg"/>
       </div>
     </a>
   

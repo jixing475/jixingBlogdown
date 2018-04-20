@@ -23,10 +23,10 @@ knitr::opts_chunk$set(
 
 
 # 递归
-- 递归指的是调用自己的函数
+- <strong style="color: darkred;">递归指的是调用自己的函数</strong> 
 - 每个递归都有两个条件
-    - base case: 终止条件
-    - recursive case: 递归条件
+    - <strong style="color: darkred;">base case</strong> : 终止条件
+    - <strong style="color: darkred;">recursive case</strong> : 递归条件
 - 所有的函数的调用都遵循 call stack
 - 递归语法的清晰是以内存为代价的
 

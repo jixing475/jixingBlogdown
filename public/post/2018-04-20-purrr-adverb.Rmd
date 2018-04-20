@@ -1,0 +1,148 @@
+---
+title: 'purrr: adverb'
+author: ZERO
+date: '2018-04-20'
+slug: purrr-adverb
+categories:
+  - computers
+tags:
+  - purrr
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/04/20/5ad936eeb6ee7.jpg
+metaAlignment: center
+coverMeta: out
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE,
+	engine.path="/Users/zero/anaconda3/bin/python"
+)
+```
+
+## What is an adverb
+
+Read carefully the [purrr documentation](http://purrr.tidyverse.org/reference/index.html#section-adverbs)
+
+> Adverbs <strong style="color: darkred;">modify the action of a function</strong> ; taking a function as input and <strong style="color: darkred;">returning a function with modified action as output.</strong> 
+
+In other words, adverbs take a function, and return this function modified. Yes, just an adverb modifies a verb.
+```{r}
+library(purrr)
+safe_log <- safely(log)#high-order functions
+safe_log("a")
+# have a result and error
+```
+
+
+# <strong style="color: darkred;">how to write your own?</strong> 
+
+```{r}
+library(attempt)
+
+# Silently only return the errors, and nothing if the function succeeds
+silent_log <- silently(log)
+silent_log(1)
+# Surely make a function always work, without stopping the process
+sure_log <- surely(log)
+sure_log(1)
+
+```
+## <strong style="color: darkred;">with_message and with_warning</strong> 
+```{r}
+as_num_msg <- with_message(as.numeric, msg = "We're performing a numeric conversion")
+as_num_warn <- with_warning(as.numeric, msg = "We're performing a numeric conversion")
+as_num_msg("1")
+```
+
+
+# how to implement this kind of behavior? 
+Let’s take a simple example with sleepy:
+```{r}
+sleepy <- function(fun, sleep){
+  function(...){
+    Sys.sleep(sleep)
+    fun(...)
+  }
+}
+
+sleep_print <- sleepy(Sys.time, 5)
+class(sleep_print)
+
+sleep_print()
+```
+
+# <strong style="color: darkred;">how?</strong> 
+
+First of all, the adverb functon should return another function, so we need to start with?
+```{r}
+talky <- function(fun){
+  function(...){
+    fun(...)
+  }
+}
+```
+
+secondly, with R referential transparency, you can <strong style="color: darkred;">create a variable that is a function:</strong> 
+```{r}
+plop <- mean
+plop(1:10)
+```
+```{r}
+sys_time <- talky(Sys.time)
+sys_time()
+```
+
+```{r}
+talky <- function(fun, mess){
+  function(...){
+    #add some command
+    message(mess)#这里可以添加参数
+    print(Sys.time())
+    
+    print("you can add anything")
+    
+    
+    fun(...)#the function you want modify
+  }
+}
+
+talky_sqrt<- talky(fun = sqrt, mess = "Hey there! You Rock!")#创建被修饰函数
+talky_sqrt(4)#4 是传递给被修饰的函数的
+
+```
+
+### Run it or not ?
+```{r}
+
+maybe <- function(fun){
+  function(...){
+    num <- sample(1:100, 1)
+    if (num > 50) {
+      fun(...)
+    }
+  }
+}
+maybe_sqrt <- maybe(fun = sqrt)
+maybe_sqrt(1)
+maybe_sqrt(1)
+```
+
+### Create a log file of a function 
+```{r}
+log_calls <- function(fun, file){
+  function(...){
+    write(as.character(Sys.time()), file, append = TRUE, sep = "\n")
+    fun(...)
+  }
+}
+log_sqrt <- log_calls(sqrt, file = "logs")
+log_sqrt(10)
+```
+
+
+##**refrence**
+- [colin Fay](https://colinfay.me/purrr-adverb-tidyverse/)
+
+

@@ -1,5 +1,9 @@
 
 
+  
+    
+  
+
 
   
 
@@ -16,7 +20,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.32.2 with theme Tranquilpeak 0.4.1-BETA">
-    <title>Rvest</title>
+    <title>purrr: adverb</title>
     <meta name="author" content="Jixing Liu">
     <meta name="keywords" content=", R">
 
@@ -24,15 +28,24 @@
     
 
     
-    <meta name="description" content="exploring and playing with data in R and python">
-    <meta property="og:description" content="exploring and playing with data in R and python">
+    <meta name="description" content="What is an adverb Read carefully the purrr documentation
+ Adverbs modify the action of a function ; taking a function as input and returning a function with modified action as output.
+ In other words, adverbs take a function, and return this function modified. Yes, just an adverb modifies a verb.
+library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&quot;) ## $result ## NULL ## ## $error ## &lt;simpleError in log(x = x, base = base): non-numeric argument to mathematical function&gt; # have a result and error  how to write your own?">
+    <meta property="og:description" content="What is an adverb Read carefully the purrr documentation
+ Adverbs modify the action of a function ; taking a function as input and returning a function with modified action as output.
+ In other words, adverbs take a function, and return this function modified. Yes, just an adverb modifies a verb.
+library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&quot;) ## $result ## NULL ## ## $error ## &lt;simpleError in log(x = x, base = base): non-numeric argument to mathematical function&gt; # have a result and error  how to write your own?">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Rvest">
-    <meta property="og:url" content="/tags/rvest/">
+    <meta property="og:title" content="purrr: adverb">
+    <meta property="og:url" content="/2018/04/purrr-adverb/">
     <meta property="og:site_name" content="student zero ">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="student zero ">
-    <meta name="twitter:description" content="exploring and playing with data in R and python">
+    <meta name="twitter:description" content="What is an adverb Read carefully the purrr documentation
+ Adverbs modify the action of a function ; taking a function as input and returning a function with modified action as output.
+ In other words, adverbs take a function, and return this function modified. Yes, just an adverb modifies a verb.
+library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&quot;) ## $result ## NULL ## ## $error ## &lt;simpleError in log(x = x, base = base): non-numeric argument to mathematical function&gt; # have a result and error  how to write your own?">
     
       <meta name="twitter:creator" content="@studentZero475">
     
@@ -45,6 +58,8 @@
       <meta property="og:image" content="https://i.loli.net/2018/02/26/5a937bb148b02.jpg">
     
 
+    
+      <meta property="og:image" content="https://i.loli.net/2018/04/20/5ad936eeb6ee7.jpg">
     
     
     
@@ -73,7 +88,7 @@
 <script src="/js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
-<header id="header" data-behavior="1">
+<header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
     <a class="header-title-link" href="/">student zero </a>
@@ -93,11 +108,11 @@
   
 </header>
 
-      <nav id="sidebar" data-behavior="1">
+      <nav id="sidebar" data-behavior="4">
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <h1 class="sidebar-profile-title">Rvest</h1>
+        <h1 class="sidebar-profile-title">purrr: adverb</h1>
         <a href="/#about">
           <img class="sidebar-profile-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
         </a>
@@ -193,40 +208,26 @@
 </nav>
 
       
-        
 
-      
-      <div id="main" data-behavior="1"
+      <div id="main" data-behavior="4"
         class="
-               hasCoverMetaIn
+               hasCoverMetaOut
                ">
-        
-          <section class="postShorten-group main-content-wrap">
-            
-            
-              
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-center">
   
-    
+    <h1 class="post-title" itemprop="headline">
+      purrr: adverb
+    </h1>
   
-
-
   
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/03/scraping-and-wranging-tables-from-research-articles/">
-          Scraping and Wranging Tables from Research Articles
-        </a>
-      </h1>
-      
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-03-27T00:00:00Z">
+      <time itemprop="datePublished" datetime="2018-04-20T00:00:00Z">
         
-  March 27, 2018
+  April 20, 2018
 
       </time>
     
@@ -235,37 +236,229 @@
   
     <span>in</span>
     
-      <a class="category-link" href="/categories/statistics">statistics</a>
+      <a class="category-link" href="/categories/computers">computers</a>
     
   
 
 
   </div>
 
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      What do you do when you want to use results from the literature to anchor your own analysis? we’ll go through a practical scenario on scraping an html table from a Nature Genetics article into R and wrangling the data into a useful format.
-01. Scraping a html table from a webpage #load packages library(&quot;rvest&quot;) library(&quot;knitr&quot;) library(tidyverse) #scraping web page url &lt;- &quot;https://www.nature.com/articles/ng.2802/tables/2&quot; #====🔥find where is the table lives on this webpage==== table_path=&#39;//*[@id=&quot;content&quot;]/div/div/figure/div[1]/div/div[1]/table&#39; #get the table nature_genetics_table2 &lt;- url %&gt;% read_html() %&gt;% html_nodes(xpath=table_path) %&gt;% html_table(fill=T) %&gt;% .
-      <p>
-        <a href="/2018/03/scraping-and-wranging-tables-from-research-articles/" class="postShorten-excerpt_link link">Continue reading</a>
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <div id="what-is-an-adverb" class="section level2">
+<h2>What is an adverb</h2>
+<p>Read carefully the <a href="http://purrr.tidyverse.org/reference/index.html#section-adverbs">purrr documentation</a></p>
+<blockquote>
+<p>Adverbs <strong style="color: darkred;">modify the action of a function</strong> ; taking a function as input and <strong style="color: darkred;">returning a function with modified action as output.</strong></p>
+</blockquote>
+<p>In other words, adverbs take a function, and return this function modified. Yes, just an adverb modifies a verb.</p>
+<pre class="r"><code>library(purrr)
+safe_log &lt;- safely(log)#high-order functions
+safe_log(&quot;a&quot;)</code></pre>
+<pre><code>## $result
+## NULL
+## 
+## $error
+## &lt;simpleError in log(x = x, base = base): non-numeric argument to mathematical function&gt;</code></pre>
+<pre class="r"><code># have a result and error</code></pre>
+</div>
+<div id="how-to-write-your-own" class="section level1">
+<h1><strong style="color: darkred;">how to write your own?</strong></h1>
+<pre class="r"><code>library(attempt)
+
+# Silently only return the errors, and nothing if the function succeeds
+silent_log &lt;- silently(log)
+silent_log(1)
+# Surely make a function always work, without stopping the process
+sure_log &lt;- surely(log)
+sure_log(1)</code></pre>
+<pre><code>## [1] 0</code></pre>
+<div id="with_message-and-with_warning" class="section level2">
+<h2><strong style="color: darkred;">with_message and with_warning</strong></h2>
+<pre class="r"><code>as_num_msg &lt;- with_message(as.numeric, msg = &quot;We&#39;re performing a numeric conversion&quot;)
+as_num_warn &lt;- with_warning(as.numeric, msg = &quot;We&#39;re performing a numeric conversion&quot;)
+as_num_msg(&quot;1&quot;)</code></pre>
+<pre><code>## [1] 1</code></pre>
+</div>
+</div>
+<div id="how-to-implement-this-kind-of-behavior" class="section level1">
+<h1>how to implement this kind of behavior?</h1>
+<p>Let’s take a simple example with sleepy:</p>
+<pre class="r"><code>sleepy &lt;- function(fun, sleep){
+  function(...){
+    Sys.sleep(sleep)
+    fun(...)
+  }
+}
+
+sleep_print &lt;- sleepy(Sys.time, 5)
+class(sleep_print)</code></pre>
+<pre><code>## [1] &quot;function&quot;</code></pre>
+<pre class="r"><code>sleep_print()</code></pre>
+<pre><code>## [1] &quot;2018-04-20 08:42:05 CST&quot;</code></pre>
+</div>
+<div id="how" class="section level1">
+<h1><strong style="color: darkred;">how?</strong></h1>
+<p>First of all, the adverb functon should return another function, so we need to start with?</p>
+<pre class="r"><code>talky &lt;- function(fun){
+  function(...){
+    fun(...)
+  }
+}</code></pre>
+<p>secondly, with R referential transparency, you can <strong style="color: darkred;">create a variable that is a function:</strong></p>
+<pre class="r"><code>plop &lt;- mean
+plop(1:10)</code></pre>
+<pre><code>## [1] 5.5</code></pre>
+<pre class="r"><code>sys_time &lt;- talky(Sys.time)
+sys_time()</code></pre>
+<pre><code>## [1] &quot;2018-04-20 08:42:05 CST&quot;</code></pre>
+<pre class="r"><code>talky &lt;- function(fun, mess){
+  function(...){
+    #add some command
+    message(mess)#这里可以添加参数
+    print(Sys.time())
+    
+    print(&quot;you can add anything&quot;)
+    
+    
+    fun(...)#the function you want modify
+  }
+}
+
+talky_sqrt&lt;- talky(fun = sqrt, mess = &quot;Hey there! You Rock!&quot;)#创建被修饰函数
+talky_sqrt(4)#4 是传递给被修饰的函数的</code></pre>
+<pre><code>## [1] &quot;2018-04-20 08:42:05 CST&quot;
+## [1] &quot;you can add anything&quot;</code></pre>
+<pre><code>## [1] 2</code></pre>
+<div id="run-it-or-not" class="section level3">
+<h3>Run it or not ?</h3>
+<pre class="r"><code>maybe &lt;- function(fun){
+  function(...){
+    num &lt;- sample(1:100, 1)
+    if (num &gt; 50) {
+      fun(...)
+    }
+  }
+}
+maybe_sqrt &lt;- maybe(fun = sqrt)
+maybe_sqrt(1)
+maybe_sqrt(1)</code></pre>
+</div>
+<div id="create-a-log-file-of-a-function" class="section level3">
+<h3>Create a log file of a function</h3>
+<pre class="r"><code>log_calls &lt;- function(fun, file){
+  function(...){
+    write(as.character(Sys.time()), file, append = TRUE, sep = &quot;\n&quot;)
+    fun(...)
+  }
+}
+log_sqrt &lt;- log_calls(sqrt, file = &quot;logs&quot;)
+log_sqrt(10)</code></pre>
+<pre><code>## [1] 3.162278</code></pre>
+</div>
+<div id="refrence" class="section level2">
+<h2><strong>refrence</strong></h2>
+<ul>
+<li><a href="https://colinfay.me/purrr-adverb-tidyverse/">colin Fay</a></li>
+</ul>
+</div>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="//tags/purrr/">purrr</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/04/algorithms-quick-sort/" data-tooltip="algorithms: quick sort">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
         
-      </p>
-    </div>
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/04/purrr-adverb/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/04/purrr-adverb/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/04/purrr-adverb/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
   </div>
-  
-    <a href="/2018/03/scraping-and-wranging-tables-from-research-articles/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/27/5aba60b02b557.jpg"/>
-      </div>
-    </a>
-  
-</article>
+
 
             
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
             
-
-          </section>
-        
+          </div>
+        </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
     &copy; 2018 Jixing Liu. All Rights Reserved
@@ -273,6 +466,100 @@
 </footer>
 
       </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/04/algorithms-quick-sort/" data-tooltip="algorithms: quick sort">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/04/purrr-adverb/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/04/purrr-adverb/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/04/purrr-adverb/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F04%2Fpurrr-adverb%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F04%2Fpurrr-adverb%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F04%2Fpurrr-adverb%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
     </div>
     
     <div id="about">
@@ -545,6 +832,32 @@ $(document).ready(function() {
   });
 });
 </script>
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = '\/2018\/04\/purrr-adverb\/';
+          
+            this.page.identifier = '\/2018\/04\/purrr-adverb\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'jixing';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
 
 
 
