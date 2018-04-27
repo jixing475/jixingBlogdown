@@ -12,13 +12,7 @@ thumbnailImage: https://i.loli.net/2018/04/03/5ac2dcfd3d01f.jpg
 metaAlignment: center
 coverMeta: out
 ---
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(
-	echo = TRUE,#show code and output
-	message = FALSE,
-	warning = FALSE
-)
-```
+
 
 **R** is mainly known for data analysis, statistical modeling and visualization. While **python** is popular for deep learning and natural language processing.
 
@@ -50,7 +44,7 @@ Specify the directory containing a Python virtualenv.
 - [use_condaenv](https://rstudio.github.io/reticulate/reference/use_python.html)
 Specify the name of a Conda environment.
 
-```{r}
+```{r eval=FALSE, include=FALSE}
 py_discover_config()
 use_python("/Users/zero/anaconda3/envs/PDSH/bin/python")
 #use_virtualenv("/Users/zero/anaconda3/envs", required = TRUE)
@@ -93,7 +87,7 @@ py$add
 # ⭐**Access objects created in python from R**
 
 **note: Don't work with Rmd**
-```{r eval=FALSE, include=TRUE}
+```{r eval=FALSE, include=FALSE}
 repl_python()
 #===== python console====
 

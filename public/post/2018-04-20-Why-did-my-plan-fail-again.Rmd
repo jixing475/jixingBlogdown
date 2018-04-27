@@ -20,8 +20,7 @@ knitr::opts_chunk$set(
 	engine.path="/Users/zero/anaconda3/bin/python"
 )
 ```
-
-# <strong style="color: darkred;">妈蛋！</strong> 
+<center><h2>  <strong style="color: darkred;"> 妈蛋！</strong> </h2></center>
 
 <strong style="color: darkred;">健康饮食</strong>  
 

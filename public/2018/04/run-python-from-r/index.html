@@ -251,6 +251,7 @@ How To Call Or Run Python From R? RStudio developed a package called reticulate 
 <p>RStudio developed a package called <strong>reticulate</strong> which provides a medium to run Python packages and functions from R.</p>
 <pre class="r"><code># Load reticulate package
 if (!require(&quot;reticulate&quot;)) install.packages(&quot;reticulate&quot;)</code></pre>
+<pre><code>## Loading required package: reticulate</code></pre>
 </div>
 <div id="python-version-configuration" class="section level1">
 <h1><a href="https://rstudio.github.io/reticulate/articles/versions.html">Python Version Configuration</a></h1>
@@ -262,32 +263,6 @@ if (!require(&quot;reticulate&quot;)) install.packages(&quot;reticulate&quot;)</
 <li><p><a href="https://rstudio.github.io/reticulate/reference/use_python.html">use_virtualenv</a> Specify the directory containing a Python virtualenv.</p></li>
 <li><p><a href="https://rstudio.github.io/reticulate/reference/use_python.html">use_condaenv</a> Specify the name of a Conda environment.</p></li>
 </ul>
-<pre class="r"><code>py_discover_config()</code></pre>
-<pre><code>## python:         /Users/zero/anaconda3/envs/PDSH/bin/python
-## libpython:      /Users/zero/anaconda3/envs/PDSH/lib/libpython3.5m.dylib
-## pythonhome:     /Users/zero/anaconda3/envs/PDSH:/Users/zero/anaconda3/envs/PDSH
-## version:        3.5.4 |Continuum Analytics, Inc.| (default, Aug 14 2017, 12:43:10)  [GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.57)]
-## numpy:          /Users/zero/anaconda3/envs/PDSH/lib/python3.5/site-packages/numpy
-## numpy_version:  1.11.1
-## 
-## python versions found: 
-##  /Users/zero/anaconda3/envs/PDSH/bin/python
-##  /usr/bin/python
-##  /usr/local/bin/python3
-##  /Users/zero/anaconda/bin/python
-##  /Users/zero/anaconda3/bin/python
-##  /Users/zero/anaconda3/envs/circRNA/bin/python
-##  /Users/zero/anaconda3/envs/lifeifei/bin/python
-##  /Users/zero/anaconda3/envs/py27/bin/python
-##  /Users/zero/anaconda3/envs/RvsPython/bin/python
-##  /Users/zero/anaconda3/envs/tfdeeplearning/bin/python
-##  /Users/zero/miniconda2/bin/python
-##  /Users/zero/miniconda3/bin/python</code></pre>
-<pre class="r"><code>use_python(&quot;/Users/zero/anaconda3/envs/PDSH/bin/python&quot;)
-#use_virtualenv(&quot;/Users/zero/anaconda3/envs&quot;, required = TRUE)
-use_condaenv(&quot;PDSH&quot;)
-#==== 这样就可以在 Rmd 文件中直接运行Python代码，便于编译
-#reticulate::source_python(&quot;test.py&quot;)</code></pre>
 </div>
 <div id="import-a-python-module-within-r" class="section level1">
 <h1>Import a python module within R</h1>
@@ -297,7 +272,7 @@ numpy &lt;- import(&quot;numpy&quot;)
 py_module_available(&quot;pandas&quot;)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <pre class="r"><code>os$getcwd()</code></pre>
-<pre><code>## [1] &quot;/Users/zero/Documents/_14_tmp/jixingBlogdown/content/post&quot;</code></pre>
+<pre><code>## [1] &quot;/Users/zero/myrepo/jixingBlogdown/content/post&quot;</code></pre>
 </div>
 <div id="install-python-package-with-conda-in-terminal" class="section level1">
 <h1>Install Python package with conda in terminal</h1>
@@ -334,42 +309,11 @@ numpy$transpose(y) # transpose the above array</code></pre>
 add(1,1)</code></pre>
 <pre><code>## [1] 0</code></pre>
 <pre class="r"><code>py$add</code></pre>
-<pre><code>## &lt;function add at 0x107186488&gt;</code></pre>
+<pre><code>## &lt;function add at 0x1110bc488&gt;</code></pre>
 </div>
 <div id="access-objects-created-in-python-from-r" class="section level1">
 <h1>⭐<strong>Access objects created in python from R</strong></h1>
 <p><strong>note: Don’t work with Rmd</strong></p>
-<pre class="r"><code>repl_python()
-#===== python console====
-
-# Load Pandas package
-import pandas as pd
-
-# Importing Dataset
-travel = pd.read_excel(&quot;data/AIR.xlsx&quot;)
-
-# Number of rows and columns
-travel.shape
-
-# Select random no. of rows 
-travel.sample(n = 10)
-
-# Group By
-travel.groupby(&quot;Year&quot;).AIR.mean()
-
-# Filter
-t = travel.loc[(travel.Month &gt;= 6) &amp; (travel.Year &gt;= 1955),:]
-
-# Return to R
-exit
-
-#==== R console====
-# Access objects created in python from R
-summary(py$t)
-
-# Line chart using ggplot2
-library(ggplot2)
-ggplot(py$t, aes(AIR, Year)) + geom_line()</code></pre>
 </div>
 <div id="access-objects-created-in-r-from-python" class="section level1">
 <h1>⭐<strong>Access objects created in R from Python</strong></h1>
@@ -665,6 +609,24 @@ print(metrics.confusion_matrix(actual, predicted))</code></pre>
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2018/04/how-to-get-genomewide-position-specific-scores/">
+                <h3 class="media-heading">How To Get Genomewide Position-Specific Scores</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">load packages #source(&quot;http://bioconductor.org/biocLite.R&quot;) #biocLite(&quot;GenomicScores&quot;) library(GenomicScores)  Retrieval of genomic scores through annotation packages There are currently four different annotation packages that store genomic scores and can be accessed using the GenomicScores package
+Annotation packages  Description 1. phastCons100way.UCSC.hg19 phastCons scores derived from the alignment of the human genome (hg19) to other 99 vertebrate species. 2. phastCons100way.UCSC.hg38 phastCons scores derived from the alignment of the human genome (hg38) to other 99 vertebrate species.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2018/04/purrr-adverb/">
                 <h3 class="media-heading">purrr: adverb</h3>
               </a>
@@ -693,14 +655,14 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
                   Apr 4, 2018
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">妈蛋！ 健康饮食
+              <div class="media-content hide-xs font-merryweather">  妈蛋！   健康饮食
 坚持锻炼 
 好处多多
 人尽皆知
 但要真正做到这两点 真心不容易
 今天就好好反思一下 我为什么不能坚持锻炼
 放弃的原因: . 指定的计划难度太高 . 短期没看到效果就是去了动力 . 被各种琐事干扰，无法正常执行 . 只要中途断了几次，就会放弃锻炼的习惯  能让人在短期内取得显著成效的计划，你都要特别小心。因为往往这种计划太过激烈，没人能长期坚持，很快你就会放弃，取得的成效也会随它而去，甚至还有反弹效果
-  解决办法: 把锻炼变成像刷牙一样的常规活动，集中精力想尽一切办法把它边做常规活动 . 从小的运动开始, 尽量从小的开始直到你学会了坚持。可以慢慢增加运动量，哪怕你一开始能够多做一些，也一定要忍住， . 安排固定的锻炼时间，这段时间最好能不受到其他事情的干扰 . 养成习惯中最重要的一点就是坚持不懈，只要错过几次，你就会开始犯懒。多少次都是因为这个败下阵来，😔 . 最好找个搭档，和别人约定一起，会帮助你自律   </div>
+  解决办法: 把锻炼变成像刷牙一样的常规活动，集中精力想尽一切办法把它边做常规活动 . 从小的运动开始, 尽量从小的开始直到你学会了坚持。可以慢慢增加运动量，哪怕你一开始能够多做一些，也一定要忍住， . 安排固定的锻炼时间，这段时间最好能不受到其他事情的干扰 . 养成习惯中最重要的一点就是坚持不懈，只要错过几次，你就会开始犯懒。多少次都是因为这个败下阵来，😔 . 最好找个搭档，和别人约定一起，会帮助你自律  </div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -831,25 +793,6 @@ Suppose you want your web page run machine learning algorithms like random fores
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/04/run-python-from-r/">
-                <h3 class="media-heading">Run Python From R</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Apr 4, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">R is mainly known for data analysis, statistical modeling and visualization. While python is popular for deep learning and natural language processing.
-Python and R were ranked top 2 tools for data science and machine learning. If you really want to boost your career in data science world, these are the languages you need to focus on.
-How To Call Or Run Python From R? RStudio developed a package called reticulate which provides a medium to run Python packages and functions from R.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -857,7 +800,7 @@ How To Call Or Run Python From R? RStudio developed a package called reticulate 
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         27 posts found
+         28 posts found
       </p>
     </div>
   </div>

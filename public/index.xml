@@ -2,12 +2,183 @@
   <title>student zero </title>
   <link href="/index.xml" rel="self"/>
   <link href="/"/>
-  <updated>2018-04-20T00:00:00+00:00</updated>
+  <updated>2018-04-27T00:00:00+00:00</updated>
   <id>/</id>
   <author>
     <name>Jixing Liu</name>
   </author>
   <generator>Hugo -- gohugo.io</generator>
+  <entry>
+    <title type="html"><![CDATA[How To Get Genomewide Position-Specific Scores]]></title>
+    <link href="/2018/04/how-to-get-genomewide-position-specific-scores/"/>
+    <id>/2018/04/how-to-get-genomewide-position-specific-scores/</id>
+    <published>2018-04-27T00:00:00+00:00</published>
+    <updated>2018-04-27T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<div id="load-packages" class="section level2">
+<h2>load packages</h2>
+<pre class="r"><code>#source(&quot;http://bioconductor.org/biocLite.R&quot;)
+#biocLite(&quot;GenomicScores&quot;)
+library(GenomicScores)</code></pre>
+</div>
+<div id="retrieval-of-genomic-scores-through-annotation-packages" class="section level2">
+<h2>Retrieval of genomic scores through annotation packages</h2>
+<p>There are currently four different annotation packages that store genomic scores and can be accessed using the <em><a href="http://bioconductor.org/packages/GenomicScores">GenomicScores</a></em> package</p>
+<p><strong style="color: darkred;">Annotation packages </strong> <strong style="color: darkred;">Description</strong> 1. <em><a href="http://bioconductor.org/packages/phastCons100way.UCSC.hg19">phastCons100way.UCSC.hg19</a></em> phastCons scores derived from the alignment of the human genome (hg19) to other 99 vertebrate species. 2. <em><a href="http://bioconductor.org/packages/phastCons100way.UCSC.hg38">phastCons100way.UCSC.hg38</a></em> phastCons scores derived from the alignment of the human genome (hg38) to other 99 vertebrate species. 3. <em><a href="http://bioconductor.org/packages/phastCons7way.UCSC.hg38">phastCons7way.UCSC.hg38</a></em> phastCons scores derived from the alignment of the human genome (hg38) to other 6 mammal species. 4. <em><a href="http://bioconductor.org/packages/fitCons.UCSC.hg19">fitCons.UCSC.hg19</a></em> fitCons scores: fitness consequences of functional annotation for the human genome (hg19).</p>
+<div id="to-retrieve-genomic-scores-for-specific-positions-we-should-use-the-function-scores" class="section level3">
+<h3><strong style="color: darkred;">To retrieve genomic scores for specific positions we should use the function scores()</strong></h3>
+<pre class="r"><code>library(phastCons100way.UCSC.hg19)
+gsco &lt;- phastCons100way.UCSC.hg19
+class(gsco)</code></pre>
+<pre><code>## [1] &quot;GScores&quot;
+## attr(,&quot;package&quot;)
+## [1] &quot;GenomicScores&quot;</code></pre>
+<pre class="r"><code>scores(gsco, GRanges(seqnames=&quot;chr22&quot;,
+                     IRanges(start=50967020:50967021, width=1)))</code></pre>
+<pre><code>## GRanges object with 2 ranges and 1 metadata column:
+##       seqnames               ranges strand |    scores
+##          &lt;Rle&gt;            &lt;IRanges&gt;  &lt;Rle&gt; | &lt;numeric&gt;
+##   [1]    chr22 [50967020, 50967020]      * |         1
+##   [2]    chr22 [50967021, 50967021]      * |         1
+##   -------
+##   seqinfo: 1 sequence from an unspecified genome; no seqlengths</code></pre>
+<pre class="r"><code>gsco</code></pre>
+<pre><code>## GScores object 
+## # organism: Homo sapiens (UCSC)
+## # provider: UCSC
+## # provider version: 09Feb2014
+## # download date: Mar 17, 2017
+## # loaded sequences: chr19_gl000208_random, chr22
+## # maximum abs. error: 0.05</code></pre>
+<pre class="r"><code>#citation(gsco) now cann&#39;t run
+provider(gsco)</code></pre>
+<pre><code>## [1] &quot;UCSC&quot;</code></pre>
+<pre class="r"><code>providerVersion(gsco)</code></pre>
+<pre><code>## [1] &quot;09Feb2014&quot;</code></pre>
+<pre class="r"><code>organism(gsco)</code></pre>
+<pre><code>## [1] &quot;Homo sapiens&quot;</code></pre>
+<pre class="r"><code>seqlevelsStyle(gsco)</code></pre>
+<pre><code>## [1] &quot;UCSC&quot;</code></pre>
+</div>
+</div>
+<div id="retrieval-of-genomic-scores-through-annotationhub-resources" class="section level2">
+<h2>Retrieval of genomic scores through <strong style="color: darkred;">AnnotationHub resources</strong></h2>
+<p>Another way to retrieve genomic scores is by using the <em><a href="http://bioconductor.org/packages/AnnotationHub">AnnotationHub</a></em>, which is a web resource that provides a central location where genomic files (e.g., VCF, bed, wig) and other resources from standard (e.g., UCSC, Ensembl) and distributed sites, can be found. A Bioconductor <em><a href="http://bioconductor.org/packages/AnnotationHub">AnnotationHub</a></em> web resource creates and manages a local cache of files retrieved by the user, helping with quick and reproducible access.</p>
+<p><img src="/post/2018-04-27-how-to-get-genomewide-position-specific-scores_files/Screen Shot 2018-04-27 at 15.35.21.png" width="30%" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>gsco &lt;- getGScores(&quot;phastCons7way.UCSC.hg38&quot;)
+scores(gsco, GRanges(seqnames=&quot;chr22&quot;,IRanges(start=20967020:20967025, width=1)))</code></pre>
+</div>
+<div id="retrieval-of-multiple-scores-per-genomic-position" class="section level2">
+<h2>Retrieval of <strong style="color: darkred;">multiple scores</strong> per genomic position</h2>
+</div>
+<div id="summarization-of-genomic-scores" class="section level2">
+<h2>Summarization of genomic scores</h2>
+<pre class="r"><code>library(dplyr)
+gsco &lt;- phastCons100way.UCSC.hg19
+gr &lt;- GRanges(seqnames=&quot;chr22&quot;, IRanges(start=50967020:50967025, width=1))
+
+#mean
+scores(gsco, gr) %&gt;% 
+  .$scores %&gt;% 
+  mean()</code></pre>
+<pre><code>## [1] 0.8</code></pre>
+<pre class="r"><code>#median
+scores(gsco, gr) %&gt;% 
+  .$scores %&gt;% 
+  median()</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>#min
+scores(gsco, gr) %&gt;% 
+  .$scores %&gt;% 
+  min()</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code>scores(gsco, gr) %&gt;% 
+  .$scores %&gt;% 
+  hist()</code></pre>
+<p><img src="/post/2018-04-27-how-to-get-genomewide-position-specific-scores_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="annotating-variants-with-genomic-scores" class="section level2">
+<h2><strong style="color: darkred;">Annotating variants with genomic scores</strong></h2>
+<p>A typical use case of the <em><a href="http://bioconductor.org/packages/GenomicScores">GenomicScores</a></em> package is in the context of annotating variants with genomic scores, such as phastCons conservation scores. For this purpose, we load the <em><a href="http://bioconductor.org/packages/VariantAnnotaiton">VariantAnnotaiton</a></em> and <em><a href="http://bioconductor.org/packages/TxDb.Hsapiens.UCSC.hg19.knownGene">TxDb.Hsapiens.UCSC.hg19.knownGene</a></em> packages. The former will allow us to read a VCF file and annotate it, and the latter contains the gene annotations from UCSC that will be used in this process.</p>
+<p>Let’s load one of the sample VCF files that form part of the <em><a href="http://bioconductor.org/packages/VariantAnnotation">VariantAnnotation</a></em> package.</p>
+<pre class="r"><code>library(VariantAnnotation)
+library(TxDb.Hsapiens.UCSC.hg19.knownGene)
+fl &lt;- system.file(&quot;extdata&quot;, &quot;chr22.vcf.gz&quot;, package=&quot;VariantAnnotation&quot;)
+vcf &lt;- readVcf(fl, &quot;hg19&quot;)
+seqlevelsStyle(vcf)</code></pre>
+<pre><code>## [1] &quot;NCBI&quot;    &quot;Ensembl&quot;</code></pre>
+<pre class="r"><code>txdb &lt;- TxDb.Hsapiens.UCSC.hg19.knownGene
+seqlevelsStyle(txdb)</code></pre>
+<pre><code>## [1] &quot;UCSC&quot;</code></pre>
+<p>Because the chromosome nomenclature from the VCF file (NCBI) is different from the one with the gene annotations (UCSC) we use the <strong style="color: darkred;">seqlevelsStyle()</strong> function to force our variants having the chromosome nomenclature of the gene annotations.</p>
+<pre class="r"><code>seqlevelsStyle(vcf) &lt;- seqlevelsStyle(txdb)</code></pre>
+<p>We <strong style="color: darkred;">annotate the location of variants</strong> using the function <strong style="color: darkred;">locateVariants()</strong> from the VariantAnnotation package.</p>
+<pre class="r"><code>loc &lt;- locateVariants(vcf, txdb, AllVariants())
+loc[1:3]</code></pre>
+<pre><code>## GRanges object with 3 ranges and 9 metadata columns:
+##    seqnames               ranges strand | LOCATION  LOCSTART    LOCEND
+##       &lt;Rle&gt;            &lt;IRanges&gt;  &lt;Rle&gt; | &lt;factor&gt; &lt;integer&gt; &lt;integer&gt;
+##       chr22 [50300078, 50300078]      - |   intron     10763     10763
+##       chr22 [50300086, 50300086]      - |   intron     10755     10755
+##       chr22 [50300101, 50300101]      - |   intron     10740     10740
+##      QUERYID        TXID         CDSID      GENEID       PRECEDEID
+##    &lt;integer&gt; &lt;character&gt; &lt;IntegerList&gt; &lt;character&gt; &lt;CharacterList&gt;
+##            1       75253                     79087                
+##            2       75253                     79087                
+##            3       75253                     79087                
+##           FOLLOWID
+##    &lt;CharacterList&gt;
+##                   
+##                   
+##                   
+##   -------
+##   seqinfo: 1 sequence from hg19 genome; no seqlengths</code></pre>
+<pre class="r"><code>table(loc$LOCATION)</code></pre>
+<pre><code>## 
+## spliceSite     intron    fiveUTR   threeUTR     coding intergenic 
+##         11      22572        309       1368       2822       2867 
+##   promoter 
+##       2864</code></pre>
+</div>
+<div id="annotate-phastcons-conservation-scores" class="section level2">
+<h2><strong style="color: darkred;">Annotate phastCons conservation scores</strong></h2>
+<p>on the variants and store those annotations as an additional metadata column of the GRanges object. For this specific purpose we should the argument scores.only=TRUE that makes the scores() method to return the genomic scores as a numeric vector instead as a metadata column in the input ranges object.</p>
+<pre class="r"><code>loc$PHASTCONS &lt;- scores(gsco, loc, scores.only=TRUE)
+loc[1:3]</code></pre>
+<pre><code>## GRanges object with 3 ranges and 10 metadata columns:
+##    seqnames               ranges strand | LOCATION  LOCSTART    LOCEND
+##       &lt;Rle&gt;            &lt;IRanges&gt;  &lt;Rle&gt; | &lt;factor&gt; &lt;integer&gt; &lt;integer&gt;
+##       chr22 [50300078, 50300078]      - |   intron     10763     10763
+##       chr22 [50300086, 50300086]      - |   intron     10755     10755
+##       chr22 [50300101, 50300101]      - |   intron     10740     10740
+##      QUERYID        TXID         CDSID      GENEID       PRECEDEID
+##    &lt;integer&gt; &lt;character&gt; &lt;IntegerList&gt; &lt;character&gt; &lt;CharacterList&gt;
+##            1       75253                     79087                
+##            2       75253                     79087                
+##            3       75253                     79087                
+##           FOLLOWID PHASTCONS
+##    &lt;CharacterList&gt; &lt;numeric&gt;
+##                          0.0
+##                          0.1
+##                          0.0
+##   -------
+##   seqinfo: 1 sequence from hg19 genome; no seqlengths</code></pre>
+<p>Using the following code we can examine <strong style="color: darkred;">the distribution of phastCons conservation scores</strong> of variants across the different annotated regions</p>
+<pre class="r"><code>x &lt;- split(loc$PHASTCONS, loc$LOCATION)
+mask &lt;- elementNROWS(x) &gt; 0
+boxplot(x[mask], ylab=&quot;phastCons score&quot;, las=1, cex.axis=1.2, cex.lab=1.5, col=&quot;gray&quot;)
+points(1:length(x[mask])+0.25, 
+       sapply(x[mask], mean, na.rm=TRUE),
+       pch=23, bg=&quot;red&quot;)</code></pre>
+<p><img src="/post/2018-04-27-how-to-get-genomewide-position-specific-scores_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+<div id="links" class="section level2">
+<h2><strong>Links</strong></h2>
+<ul>
+<li><a href="http://bioconductor.org/packages/release/bioc/vignettes/GenomicScores/inst/doc/GenomicScores.html">An introduction to the GenomicScores package</a></li>
+</ul>
+</div>
+]]></content>
+  </entry>
   <entry>
     <title type="html"><![CDATA[purrr: adverb]]></title>
     <link href="/2018/04/purrr-adverb/"/>
@@ -140,8 +311,11 @@ log_sqrt(10)</code></pre>
     <id>/2018/04/why-did-my-plan-fail-again-2018-04-20/</id>
     <published>2018-04-20T00:00:00+00:00</published>
     <updated>2018-04-20T00:00:00+00:00</updated>
-    <content type="html"><![CDATA[<div class="section level1">
-<h1><strong style="color: darkred;">妈蛋！</strong></h1>
+    <content type="html"><![CDATA[<center>
+<h2>
+<strong style="color: darkred;"> 妈蛋！</strong>
+</h2>
+</center>
 <p><strong style="color: darkred;">健康饮食</strong></p>
 <p><strong style="color: darkred;">坚持锻炼 </strong></p>
 <p><strong style="color: darkred;">好处多多</strong></p>
@@ -165,7 +339,6 @@ log_sqrt(10)</code></pre>
 . 养成习惯中最重要的一点就是坚持不懈，只要错过几次，你就会开始犯懒。多少次都是因为这个败下阵来，😔
 . 最好找个搭档，和别人约定一起，会帮助你自律</code></pre>
 <p><img src="https://media.giphy.com/media/8UGoKT4boBkF9MGUb3/giphy.gif" width="30%" style="display: block; margin: auto;" /></p>
-</div>
 </div>
 ]]></content>
   </entry>
@@ -605,6 +778,7 @@ The most commonly used widgets are:</p>
 <p>RStudio developed a package called <strong>reticulate</strong> which provides a medium to run Python packages and functions from R.</p>
 <pre class="r"><code># Load reticulate package
 if (!require(&quot;reticulate&quot;)) install.packages(&quot;reticulate&quot;)</code></pre>
+<pre><code>## Loading required package: reticulate</code></pre>
 </div>
 <div id="python-version-configuration" class="section level1">
 <h1><a href="https://rstudio.github.io/reticulate/articles/versions.html">Python Version Configuration</a></h1>
@@ -616,32 +790,6 @@ if (!require(&quot;reticulate&quot;)) install.packages(&quot;reticulate&quot;)</
 <li><p><a href="https://rstudio.github.io/reticulate/reference/use_python.html">use_virtualenv</a> Specify the directory containing a Python virtualenv.</p></li>
 <li><p><a href="https://rstudio.github.io/reticulate/reference/use_python.html">use_condaenv</a> Specify the name of a Conda environment.</p></li>
 </ul>
-<pre class="r"><code>py_discover_config()</code></pre>
-<pre><code>## python:         /Users/zero/anaconda3/envs/PDSH/bin/python
-## libpython:      /Users/zero/anaconda3/envs/PDSH/lib/libpython3.5m.dylib
-## pythonhome:     /Users/zero/anaconda3/envs/PDSH:/Users/zero/anaconda3/envs/PDSH
-## version:        3.5.4 |Continuum Analytics, Inc.| (default, Aug 14 2017, 12:43:10)  [GCC 4.2.1 Compatible Apple LLVM 6.0 (clang-600.0.57)]
-## numpy:          /Users/zero/anaconda3/envs/PDSH/lib/python3.5/site-packages/numpy
-## numpy_version:  1.11.1
-## 
-## python versions found: 
-##  /Users/zero/anaconda3/envs/PDSH/bin/python
-##  /usr/bin/python
-##  /usr/local/bin/python3
-##  /Users/zero/anaconda/bin/python
-##  /Users/zero/anaconda3/bin/python
-##  /Users/zero/anaconda3/envs/circRNA/bin/python
-##  /Users/zero/anaconda3/envs/lifeifei/bin/python
-##  /Users/zero/anaconda3/envs/py27/bin/python
-##  /Users/zero/anaconda3/envs/RvsPython/bin/python
-##  /Users/zero/anaconda3/envs/tfdeeplearning/bin/python
-##  /Users/zero/miniconda2/bin/python
-##  /Users/zero/miniconda3/bin/python</code></pre>
-<pre class="r"><code>use_python(&quot;/Users/zero/anaconda3/envs/PDSH/bin/python&quot;)
-#use_virtualenv(&quot;/Users/zero/anaconda3/envs&quot;, required = TRUE)
-use_condaenv(&quot;PDSH&quot;)
-#==== 这样就可以在 Rmd 文件中直接运行Python代码，便于编译
-#reticulate::source_python(&quot;test.py&quot;)</code></pre>
 </div>
 <div id="import-a-python-module-within-r" class="section level1">
 <h1>Import a python module within R</h1>
@@ -651,7 +799,7 @@ numpy &lt;- import(&quot;numpy&quot;)
 py_module_available(&quot;pandas&quot;)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <pre class="r"><code>os$getcwd()</code></pre>
-<pre><code>## [1] &quot;/Users/zero/Documents/_14_tmp/jixingBlogdown/content/post&quot;</code></pre>
+<pre><code>## [1] &quot;/Users/zero/myrepo/jixingBlogdown/content/post&quot;</code></pre>
 </div>
 <div id="install-python-package-with-conda-in-terminal" class="section level1">
 <h1>Install Python package with conda in terminal</h1>
@@ -688,42 +836,11 @@ numpy$transpose(y) # transpose the above array</code></pre>
 add(1,1)</code></pre>
 <pre><code>## [1] 0</code></pre>
 <pre class="r"><code>py$add</code></pre>
-<pre><code>## &lt;function add at 0x107186488&gt;</code></pre>
+<pre><code>## &lt;function add at 0x1110bc488&gt;</code></pre>
 </div>
 <div id="access-objects-created-in-python-from-r" class="section level1">
 <h1>⭐<strong>Access objects created in python from R</strong></h1>
 <p><strong>note: Don’t work with Rmd</strong></p>
-<pre class="r"><code>repl_python()
-#===== python console====
-
-# Load Pandas package
-import pandas as pd
-
-# Importing Dataset
-travel = pd.read_excel(&quot;data/AIR.xlsx&quot;)
-
-# Number of rows and columns
-travel.shape
-
-# Select random no. of rows 
-travel.sample(n = 10)
-
-# Group By
-travel.groupby(&quot;Year&quot;).AIR.mean()
-
-# Filter
-t = travel.loc[(travel.Month &gt;= 6) &amp; (travel.Year &gt;= 1955),:]
-
-# Return to R
-exit
-
-#==== R console====
-# Access objects created in python from R
-summary(py$t)
-
-# Line chart using ggplot2
-library(ggplot2)
-ggplot(py$t, aes(AIR, Year)) + geom_line()</code></pre>
 </div>
 <div id="access-objects-created-in-r-from-python" class="section level1">
 <h1>⭐<strong>Access objects created in R from Python</strong></h1>
