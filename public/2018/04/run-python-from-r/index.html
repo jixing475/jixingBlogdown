@@ -265,7 +265,7 @@ if (!require(&quot;reticulate&quot;)) install.packages(&quot;reticulate&quot;)</
 </ul>
 </div>
 <div id="import-a-python-module-within-r" class="section level1">
-<h1>Import a python module within R</h1>
+<h1>🔥 import a python module within R</h1>
 <pre class="r"><code>os &lt;- import(&quot;os&quot;)
 pd &lt;- import(&quot;pandas&quot;)
 numpy &lt;- import(&quot;numpy&quot;)
@@ -273,12 +273,9 @@ py_module_available(&quot;pandas&quot;)</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <pre class="r"><code>os$getcwd()</code></pre>
 <pre><code>## [1] &quot;/Users/zero/myrepo/jixingBlogdown/content/post&quot;</code></pre>
-</div>
-<div id="install-python-package-with-conda-in-terminal" class="section level1">
-<h1>Install Python package with conda in terminal</h1>
-</div>
-<div id="working-with-numpy" class="section level1">
-<h1>working with <strong>numpy</strong></h1>
+<p><strong style="color: darkred;">Install Python package with conda in terminal</strong></p>
+<div id="working-with-numpy" class="section level2">
+<h2>working with <strong>numpy</strong></h2>
 <pre class="r"><code>y &lt;- array(1:4, c(2, 2)) # create a matrix with R
 x &lt;- numpy$array(y) # edit it with python
 numpy$transpose(y) # transpose the above array</code></pre>
@@ -302,18 +299,56 @@ numpy$transpose(y) # transpose the above array</code></pre>
 ## [1,] 2.718282 20.08554
 ## [2,] 7.389056 54.59815</code></pre>
 </div>
+</div>
 <div id="sourcing-python-scripts" class="section level1">
-<h1><strong>Sourcing Python scripts</strong></h1>
+<h1>🔥 <strong style="color: darkred;">Sourcing Python scripts</strong></h1>
+<div id="call-the-python-fuction-in-r" class="section level2">
+<h2><a href="%5B*Access%20objects%20created%20in%20python%20from%20R***:%5D(%5B*Access%20objects%20created%20in%20python%20from%20R**%5D(https://rviews.rstudio.com/2018/04/17/reticulated-shiny/))"><strong>Call the python fuction in R:</strong></a></h2>
 <p>You can source any Python script just as you would source an R script using the source_python() function, then call the fuction in R.</p>
-<pre class="r"><code>source_python(&quot;../../scripts/add.py&quot;)# minus in action
+<pre class="r"><code>#use Python functions
+source_python(&quot;../../scripts/add.py&quot;)# minus in action
 add(1,1)</code></pre>
 <pre><code>## [1] 0</code></pre>
-<pre class="r"><code>py$add</code></pre>
-<pre><code>## &lt;function add at 0x1110bc488&gt;</code></pre>
 </div>
-<div id="access-objects-created-in-python-from-r" class="section level1">
+<div id="access-objects-created-in-python-from-r" class="section level2">
+<h2><a href="%5B*Access%20objects%20created%20in%20python%20from%20R**%5D(https://rviews.rstudio.com/2018/04/17/reticulated-shiny/)"><em>Access objects created in python from R</em>:</a></h2>
+<p>If your Python file doesn’t contain functions, but also creates objects, use <strong style="color: darkred;">py_run_file</strong> instead of <strong style="color: darkred;">source_python</strong></p>
+</div>
+</div>
+<div id="access-objects-created-in-python-from-r-1" class="section level1">
 <h1>⭐<strong>Access objects created in python from R</strong></h1>
-<p><strong>note: Don’t work with Rmd</strong></p>
+<p>with <strong style="color: darkred;">repl_python()</strong> <strong>note: Don’t work with Rmd</strong></p>
+<pre class="r"><code>repl_python()
+#===== python console====
+
+# Load Pandas package
+import pandas as pd
+
+# Importing Dataset
+travel = pd.read_excel(&quot;data/AIR.xlsx&quot;)
+
+# Number of rows and columns
+travel.shape
+
+# Select random no. of rows 
+travel.sample(n = 10)
+
+# Group By
+travel.groupby(&quot;Year&quot;).AIR.mean()
+
+# Filter
+t = travel.loc[(travel.Month &gt;= 6) &amp; (travel.Year &gt;= 1955),:]
+
+# Return to R
+exit
+
+#==== R console====
+# Access objects created in python from R
+summary(py$t)
+
+# Line chart using ggplot2
+library(ggplot2)
+ggplot(py$t, aes(AIR, Year)) + geom_line()</code></pre>
 </div>
 <div id="access-objects-created-in-r-from-python" class="section level1">
 <h1>⭐<strong>Access objects created in R from Python</strong></h1>
@@ -358,6 +393,7 @@ print(metrics.confusion_matrix(actual, predicted))</code></pre>
 <ul>
 <li><p><a href="https://www.diycode.cc/projects/rstudio/reticulate">R Interface to Python</a></p></li>
 <li><p><a href="https://blog.rstudio.com/2018/03/26/reticulate-r-interface-to-python/">reticulate: R interface to Python</a></p></li>
+<li><p><a href="https://rviews.rstudio.com/2018/04/17/reticulated-shiny/"><strong style="color: darkred;">Reticulated Shiny</strong></a></p></li>
 </ul>
 </div>
 </div>

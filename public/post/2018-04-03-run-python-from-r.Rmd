@@ -45,16 +45,16 @@ Specify the directory containing a Python virtualenv.
 Specify the name of a Conda environment.
 
 ```{r eval=FALSE, include=FALSE}
-py_discover_config()
-use_python("/Users/zero/anaconda3/envs/PDSH/bin/python")
+#py_discover_config()
+#use_python("/Users/zero/anaconda3/envs/PDSH/bin/python")
 #use_virtualenv("/Users/zero/anaconda3/envs", required = TRUE)
 use_condaenv("PDSH")
 #==== 这样就可以在 Rmd 文件中直接运行Python代码，便于编译
 #reticulate::source_python("test.py")
 ```
 
-# Import a python module within R
-```{r}
+# 🔥 import a python module within R
+```{r engine.path="/Users/zero/anaconda3/envs/PDSH/bin/python"}
 os <- import("os")
 pd <- import("pandas")
 numpy <- import("numpy")
@@ -62,9 +62,9 @@ py_module_available("pandas")
 os$getcwd()
 ```
 
-# Install Python package with conda in terminal
+<strong style="color: darkred;">Install Python package with conda in terminal</strong> 
 
-# working with **numpy**
+## working with **numpy**
 ```{r}
 y <- array(1:4, c(2, 2)) # create a matrix with R
 x <- numpy$array(y) # edit it with python
@@ -74,20 +74,25 @@ numpy$sqrt(x)
 numpy$exp(x)
 ```
 
-# **Sourcing Python scripts**
+# 🔥 <strong style="color: darkred;">Sourcing Python scripts</strong> 
+
+## [**Call the python fuction in R:**]([*Access objects created in python from R***:]([*Access objects created in python from R**](https://rviews.rstudio.com/2018/04/17/reticulated-shiny/)))
 You can source any Python script just as you would source an R script using the source_python() function, then call the fuction in R.
 ```{r }
+#use Python functions
 source_python("../../scripts/add.py")# minus in action
 add(1,1)
-py$add
 ```
+
+## [*Access objects created in python from R*:]([*Access objects created in python from R**](https://rviews.rstudio.com/2018/04/17/reticulated-shiny/))
+If your Python file doesn’t contain functions, but also creates objects, use <strong style="color: darkred;">py_run_file</strong>  instead of <strong style="color: darkred;">source_python</strong> 
 
 
 
 # ⭐**Access objects created in python from R**
-
+with <strong style="color: darkred;">repl_python()</strong> 
 **note: Don't work with Rmd**
-```{r eval=FALSE, include=FALSE}
+```{r eval=FALSE, include=TRUE}
 repl_python()
 #===== python console====
 
@@ -167,3 +172,5 @@ print(metrics.confusion_matrix(actual, predicted))
 - [R Interface to Python](https://www.diycode.cc/projects/rstudio/reticulate)
 
 - [reticulate: R interface to Python](https://blog.rstudio.com/2018/03/26/reticulate-r-interface-to-python/)
+
+- [<strong style="color: darkred;">Reticulated Shiny</strong> ](https://rviews.rstudio.com/2018/04/17/reticulated-shiny/)
