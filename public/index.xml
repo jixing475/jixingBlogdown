@@ -2,12 +2,105 @@
   <title>student zero </title>
   <link href="/index.xml" rel="self"/>
   <link href="/"/>
-  <updated>2018-05-03T00:00:00+00:00</updated>
+  <updated>2018-05-09T00:00:00+00:00</updated>
   <id>/</id>
   <author>
     <name>Jixing Liu</name>
   </author>
   <generator>Hugo -- gohugo.io</generator>
+  <entry>
+    <title type="html"><![CDATA[LELTS speaking: constructing your answers]]></title>
+    <link href="/2018/05/lelts-speaking-constructing-your-answers/"/>
+    <id>/2018/05/lelts-speaking-constructing-your-answers/</id>
+    <published>2018-05-09T00:00:00+00:00</published>
+    <updated>2018-05-09T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<p><center><h2>  <strong style="color: darkred;"> 四个要注意的问题</strong> </h2></center></p>
+
+<ol>
+<li>流畅性</li>
+<li>丰富多变的词汇</li>
+<li>语法和准确</li>
+<li>发音</li>
+</ol>
+
+<p><center><h2>  <strong style="color: darkred;">答案的基本结构</strong> </h2></center></p>
+
+<p>直接回答 + 连接词 + <strong style="color: darkred;">扩展句子</strong> ：</p>
+
+<ol>
+<li>原因</li>
+<li>细节</li>
+<li>例子</li>
+<li>事情的两面性</li>
+</ol>
+
+<p><center><h2>  <strong style="color: darkred;">常见词语的替代</strong> </h2></center></p>
+
+<ol>
+<li><p>And</p>
+
+<ul>
+<li>in addition to what i have just mentioned earlier</li>
+<li>on the top of that</li>
+<li>as well as this</li>
+<li>second to that</li>
+<li>among other things</li>
+<li>as a further matter
+<br /></li>
+</ul></li>
+
+<li><p>So</p>
+
+<ul>
+<li>this is the reason why</li>
+<li>this wxplains why</li>
+<li>and the result of this is
+<br /></li>
+</ul></li>
+
+<li><p>But</p>
+
+<ul>
+<li>however</li>
+<li>meanwhile</li>
+<li>on the other hand</li>
+<li>in the meantime
+<br /></li>
+</ul></li>
+
+<li><p>I think</p>
+
+<ul>
+<li>i believe</li>
+<li>i reckon</li>
+<li>i&rsquo;m convinced to say that</li>
+<li>i&rsquo;m inclined to believe that</li>
+<li>my view on this matter is
+<br /></li>
+</ul></li>
+
+<li><p>In my opinion</p>
+
+<ul>
+<li>as far as i&rsquo;m concerned</li>
+<li>from what i can see</li>
+<li>come to think of it</li>
+<li>the way i see it
+<br /></li>
+</ul></li>
+
+<li><p>Because</p>
+
+<ul>
+<li>and this is probably because</li>
+<li>i guess the reason for that is</li>
+<li>the reason i feel this way is</li>
+<li>it is mainly due to the fact that
+<br /></li>
+</ul></li>
+</ol>
+]]></content>
+  </entry>
   <entry>
     <title type="html"><![CDATA[R vs python]]></title>
     <link href="/2018/05/r-vs-python-representing-data-in-r-python-equivalent/"/>
