@@ -264,6 +264,24 @@
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2018/05/purrr-use-partial-and-map-instead-of-loop/">
+                <h3 class="media-heading">purrr: Use partial and map instead of loop</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">🐌 I want to …   create three normal distribution with purrr::map as simple as possible
+  🐌 Here’s how to:   library(tidyverse) #rnorm(n=5, mean = mu, sd = sigma) #函数的一般形式 black_box &lt;- partial(rnorm, n=5)# 先把不变的固定下来，生成新的黑箱函数，黑箱函数只需要接受 map 传递的参数即可， 其他的参数已经通过 ·partial· 固定下来了 mu &lt;- list(10, 100, -100)# 参数 x sigma &lt;- list(0.01, 1, 10)# 参数 y map2(mu, sigma, ~ black_box(mean=.x, sd=.y)) %&gt;% do.call(cbind, .) ## [,1] [,2] [,3] ## [1,] 10.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2018/05/iga-three-subgroup-deg-and-enrichment-analysis/">
                 <h3 class="media-heading">IgA-three-subgroup-DEG-and-enrichment-analysis</h3>
               </a>
@@ -433,23 +451,6 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/04/algorithms-selection-sort/">
-                <h3 class="media-heading">algorithms: selection sort</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Apr 4, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">选择排序  计算机内存就像一大堆的抽屉， 每个抽屉都有地址 存储多个元素可以使用：数组和链表 数组的元素都在一起 链表的元素是分开的，每个元素都存着下一个元素的地址 数组的读取速度很快 链表的插入和删除速度很快 在同一个数组中，所有的元素类型必须一致   def findSmallest(arr): smallest = arr[0] #初始化：存储最小的值 smallest_index=0 #初始化: 存储最小值的索引 for i in range(1, len(arr)): if arr[i] &lt; smallest: smallest=arr[i] smallest_index=i return smallest_index def selectionSort(arr): #对数据进行排序 newArr=[] for i in range(len(arr)): smallest=findSmallest(arr)#找出数据中最小的元素，并将其加到新的数组中去 newArr.append(arr.pop(smallest)) return newArr print(selectionSort([5,3,6,2])) ## [2, 3, 5, 6]  </div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -457,7 +458,7 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         31 posts found
+         32 posts found
       </p>
     </div>
   </div>

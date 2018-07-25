@@ -1,0 +1,38 @@
+---
+title: 'purrr: Use partial and map instead of loop'
+author: ZERO
+date: '2018-05-22'
+slug: purrr-use-partial-and-map-instead-of-loop
+categories:
+  - computers
+tags:
+  - purrr
+thumbnailImagePosition: left
+thumbnailImage: /post/2018-05-22-purrr-use-partial-and-map-instead-of-loop_files/IMG_4733.JPG
+metaAlignment: center
+coverMeta: out
+---
+
+
+<center><h2>  <strong style="color: darkblue;">🐌 I want to …</strong>  </h2></center>
+
+create three normal distribution with `purrr::map` as simple as possible 
+
+<center><h2>  <strong style="color: darkgreen;">🐌 Here’s how to:</strong>  </h2></center>
+```{r}
+library(tidyverse)
+#rnorm(n=5, mean = mu, sd = sigma) #函数的一般形式
+
+black_box <- partial(rnorm, n=5)# 先把不变的固定下来，生成新的黑箱函数，黑箱函数只需要接受 map 传递的参数即可， 其他的参数已经通过 ·partial· 固定下来了
+
+mu <- list(10, 100, -100)# 参数 x
+sigma <- list(0.01, 1, 10)# 参数 y
+
+map2(mu, sigma, ~ black_box(mean=.x, sd=.y)) %>% 
+  do.call(cbind, .)
+```
+
+
+ <center><h2>  <strong style="color: darkred;">🐌 Ok, but why?</strong> </h2></center> 
+ 
+这个方法特别适合用于拥有<strong style="color: darkred;">复杂参数的函数</strong> ， 比如机器学习的算法中，eg：线性回归

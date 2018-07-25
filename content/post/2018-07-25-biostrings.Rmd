@@ -1,0 +1,242 @@
+---
+title: "\U0001F4E6 BioStrings"
+author: ZERO
+date: '2018-07-25'
+slug: biostrings
+categories:
+  - bioinformatics
+tags:
+  - fasta
+  - sequence
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE,
+	engine.path="/Users/zero/anaconda3/bin/python"
+)
+```
+
+# Init
+```{r message=FALSE, warning=FALSE, include=FALSE}
+library("Biostrings")
+library(tidyverse)
+library(ggpubr)
+here <- here::here
+select <- dplyr::select
+```
+
+# DNA
+```{r}
+# DNA
+x <- DNAString("actttGtag")
+is(x)
+#转录 
+x %>% complement() %>% RNAString() -> rna
+# 反向互补
+x.r <- reverseComplement(x)
+x.r
+
+d <- DNAString("TTGAAAA-CTC-N")
+d
+#subset
+subseq(x, start =1, end = 5)
+#碱基置换
+chartr(old = "A", new = "C", x)
+#DNA_BASES
+DNA_BASES
+#IUPAC_CODE_MAP
+IUPAC_CODE_MAP
+```
+
+# RNA
+```{r}
+x <- RNAString("acuuuGuag")
+is(x)
+# 逆转录 
+x %>% complement() %>% DNAString()
+# 翻译
+codons(x)
+translate(x)
+
+#dna -> rna:T <-> U
+DNAString("actttGtag") %>% RNAString()
+#rna -> dna:U <-> T
+rna %>% DNAString()
+```
+
+# AA: Amino acid 
+```{r}
+x <- AAString("actttGtag")
+is(x)
+```
+
+#reads
+```{r}
+# all kmer
+reads <- mkAllStrings(c("A", "C", "G", "T"), 6)
+is(reads)
+all6mer <- DNAStringSet(reads)
+all6mer[1]
+all6mer[[1]]
+```
+
+
+# frequence
+```{r}
+x <- DNAString("actttGtag")
+x.freq <- alphabetFrequency(x)
+is(x.freq)
+x.freq
+x.freq <- alphabetFrequency(x, baseOnly = T)
+x.freq
+# any 2 kmer freq
+dinucleotideFrequency(x)
+# any 3 kmer freq
+trinucleotideFrequency(x)
+# any 4 kmer freq
+oligonucleotideFrequency(x, 4)
+# 计算相对于序列组的���特定位置���的碱基频率
+nucleotideFrequencyAt(as(reads, "DNAStringSet"), 1)
+  dinucleotideFrequency(as(reads, "DNAStringSet"))
+
+# A C T 加起来一共7个 G两个
+x.freq <- letterFrequency(x, c("ACT", "G"))
+is(x.freq)  
+x.freq  
+# 3 kmer slide window
+x.freq <- letterFrequencyInSlidingView(x, 3, c("ACT", "G"), OR = 0)
+is(x.freq)
+x.freq
+
+```
+
+# match
+```{r}
+#countPattern
+x <- DNAString("ACGTGTACCCGTAGT")
+countPattern("ACGT", x)
+countPattern("ACGT", x, max.mismatch = 1)
+countPattern("NNGT", x, fixed = FALSE)
+vcountPattern("AAA", reads) %>% head()#计算多个碱基序列中的每一个
+#获得与模式匹配的位置
+match <- matchPattern("NNGT", x, fixed = FALSE)
+is(match)
+match
+#特定模式与匹配位置的进行比较时,您可以看到那些位置不匹配
+mismatch("CCGT", match)
+#获取多个碱基序列组中每一个的匹配位置
+vmatch <- vmatchPattern("AAA", reads)
+is(vmatch)
+vmatch
+vmatch[[2]]
+#获得与相同长度的多个图案匹配的位置
+v <- c("AAA", "GGG", "CCC")
+dictionary <- DNAStringSet(v)
+pdict <- PDict(dictionary)
+is(pdict)
+pdict
+y <- DNAString("AAAGCGAGAAACTCGAGGGTCGATGGCCCC")
+pdmatch <- matchPDict(pdict, y)
+is(pdmatch)
+pdmatch
+#当左右图案匹配时将其删除,提取中间的序列，零宽断言
+trimLRPatterns(Lpattern = "CAA", Rpattern = "CCC", y) 
+#通过夹住左右图案来搜索匹配的部分序列，
+matchLRPatterns(Lpattern = "AAA", Rpattern = "CCC", max.gaplength = 10,y)#max.gaplength: the max distance between the left and right parts of the pattern
+
+#用引物模拟PCR产物
+matchProbePair(Fprobe = "GAG", 
+               Rprobe = "GGG", 
+               subject = y)#y: A DNAString object target sequence
+
+```
+
+![](/Users/zero/myrepo/jixingBlogdown/static/post/2018-07-25-biostrings_files/primer_design.png)
+![](/Users/zero/myrepo/jixingBlogdown/static/post/2018-07-25-biostrings_files/引物设计.png)
+```{r out.width="30%", fig.align = "center", fig.margin=TRUE, echo=FALSE, eval=TRUE}
+knitr::include_graphics("/Users/zero/myrepo/jixingBlogdown/static/post/2018-07-25-biostrings_files/primer_design.png")
+knitr::include_graphics("/Users/zero/myrepo/jixingBlogdown/static/post/2018-07-25-biostrings_files/引物设计.png")
+```
+
+#Palindromes 回文序列
+```{r}
+y <- DNAString("AAAGCGAGAAACTCGAGGGTCGATGGCCCC")
+p <- findPalindromes(y, min.armlength = 4, max.looplength = 10)
+is(p)
+p
+r <- y %>% complement %>% findPalindromes(., min.armlength = 4, max.looplength = 10)
+is(r)
+r
+```
+
+![](/Users/zero/myrepo/jixingBlogdown/static/post/2018-07-25-biostrings_files/回文序列.png)
+```{r out.width="30%", fig.align = "center", fig.margin=TRUE, echo=FALSE, eval=TRUE}
+knitr::include_graphics("/Users/zero/myrepo/jixingBlogdown/static/post/2018-07-25-biostrings_files/回文序列.png")
+```
+
+# alignment
+```{r}
+#全局比对
+pairwiseAlignment(x, y, type = "global")
+#局部比对
+pairwiseAlignment(x, y, type = "local")
+```
+
+# fasta
+```{r}
+fasta <- readDNAStringSet("/Users/zero/myrepo/jixingBlogdown/data/sequence_numb_human_primer_inter_range.fasta", format = "fasta")
+is(fasta)
+fasta
+names(fasta)
+length(fasta)
+width(fasta)
+fasta
+fastq <- readDNAStringSet("/Users/zero/myrepo/jixingBlogdown/data/test.fastq", format = "fastq")
+fastq
+#fa2fq
+writeXStringSet(fasta, file="test.fastq", format = "fastq")
+#fq2fa
+writeXStringSet(fastq, file = "test.fa", format = "fasta")
+```
+
+
+#BSgenome
+```{r}
+library(BSgenome)
+ls("package:BSgenome")
+available.genomes()
+installed.genomes()
+library("BSgenome.Mmusculus.UCSC.mm10")
+ls("package:BSgenome.Mmusculus.UCSC.mm10")
+Mmusculus
+is(Mmusculus)
+seqinfo(Mmusculus)
+seqnames(Mmusculus)
+seqlevels(Mmusculus)
+seqlengths(Mmusculus)
+isCircular(Mmusculus)
+mseqnames(Mmusculus)
+genome(Mmusculus)
+Mmusculus[["chr19"]]
+Mmusculus[[seqnames(Mmusculus)[19]]]
+Mmusculus$chr19
+
+mm9.chr19 <- BSgenome.Mmusculus.UCSC.mm10::Mmusculus$chr19
+
+is(mm9.chr19)
+mm9.chr19
+countPattern("CACGTG", mm9.chr19)
+masknames(Mmusculus)
+
+available.SNPs()
+
+```
+
+
+##**Links**
+- [BioStrings](https://rpubs.com/yuifu/1941)
+
+
