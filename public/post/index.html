@@ -214,6 +214,63 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="/2018/07/biostrings/">
+          📦 BioStrings
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-07-25T00:00:00Z">
+        
+  July 25, 2018
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/bioinformatics">bioinformatics</a>
+    
+  
+
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      Init  DNA # DNA x &lt;- DNAString(&quot;actttGtag&quot;) is(x) ## [1] &quot;DNAString&quot; &quot;XString&quot; &quot;XRaw&quot; &quot;XVector&quot; &quot;Vector&quot; &quot;Annotated&quot; #转录 x %&gt;% complement() %&gt;% RNAString() -&gt; rna # 反向互补 x.r &lt;- reverseComplement(x) x.r ## 9-letter &quot;DNAString&quot; instance ## seq: CTACAAAGT d &lt;- DNAString(&quot;TTGAAAA-CTC-N&quot;) d ## 13-letter &quot;DNAString&quot; instance ## seq: TTGAAAA-CTC-N #subset subseq(x, start =1, end = 5) ## 5-letter &quot;DNAString&quot; instance ## seq: ACTTT #碱基置换 chartr(old = &quot;A&quot;, new = &quot;C&quot;, x) ## 9-letter &quot;DNAString&quot; instance ## seq: CCTTTGTCG #DNA_BASES DNA_BASES ## [1] &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;T&quot; #IUPAC_CODE_MAP IUPAC_CODE_MAP ## A C G T M R W S Y K ## &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;T&quot; &quot;AC&quot; &quot;AG&quot; &quot;AT&quot; &quot;CG&quot; &quot;CT&quot; &quot;GT&quot; ## V H D B N ## &quot;ACG&quot; &quot;ACT&quot; &quot;AGT&quot; &quot;CGT&quot; &quot;ACGT&quot;  RNA x &lt;- RNAString(&quot;acuuuGuag&quot;) is(x) ## [1] &quot;RNAString&quot; &quot;XString&quot; &quot;XRaw&quot; &quot;XVector&quot; &quot;Vector&quot; &quot;Annotated&quot; # 逆转录 x %&gt;% complement() %&gt;% DNAString() ## 9-letter &quot;DNAString&quot; instance ## seq: TGAAACATC # 翻译 codons(x) ## Views on a 9-letter RNAString subject ## subject: ACUUUGUAG ## views: ## start end width ## [1] 1 3 3 [ACU] ## [2] 4 6 3 [UUG] ## [3] 7 9 3 [UAG] translate(x) ## 3-letter &quot;AAString&quot; instance ## seq: TL* #dna -&gt; rna:T &lt;-&gt; U DNAString(&quot;actttGtag&quot;) %&gt;% RNAString() ## 9-letter &quot;RNAString&quot; instance ## seq: ACUUUGUAG #rna -&gt; dna:U &lt;-&gt; T rna %&gt;% DNAString() ## 9-letter &quot;DNAString&quot; instance ## seq: TGAAACATC  AA: Amino acid x &lt;- AAString(&quot;actttGtag&quot;) is(x) ## [1] &quot;AAString&quot; &quot;XString&quot; &quot;XRaw&quot; &quot;XVector&quot; &quot;Vector&quot; &quot;Annotated&quot;  reads # all kmer reads &lt;- mkAllStrings(c(&quot;A&quot;, &quot;C&quot;, &quot;G&quot;, &quot;T&quot;), 6) is(reads) ## [1] &quot;character&quot; &quot;vector&quot; &quot;data.
+      <p>
+        <a href="/2018/07/biostrings/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="/2018/07/biostrings/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="/post/2018-07-25-biostrings_files/IMG_4516.PNG"/>
+      </div>
+    </a>
+  
+</article>
+
+          
+            
+  
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
         <a class="link-unstyled" href="/2018/05/purrr-use-partial-and-map-instead-of-loop/">
           purrr: Use partial and map instead of loop
         </a>
@@ -555,70 +612,6 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
 </article>
 
           
-            
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/04/why-did-my-plan-fail-again-2018-04-20/">
-          为什么我的锻炼又失败了
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-04-20T00:00:00Z">
-        
-  April 20, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/essays">Essays</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-        妈蛋！   健康饮食
-坚持锻炼 
-好处多多
-人尽皆知
-但要真正做到这两点 真心不容易
-今天就好好反思一下 我为什么不能坚持锻炼
-放弃的原因: . 指定的计划难度太高 . 短期没看到效果就是去了动力 . 被各种琐事干扰，无法正常执行 . 只要中途断了几次，就会放弃锻炼的习惯  能让人在短期内取得显著成效的计划，你都要特别小心。因为往往这种计划太过激烈，没人能长期坚持，很快你就会放弃，取得的成效也会随它而去，甚至还有反弹效果
-  解决办法: 把锻炼变成像刷牙一样的常规活动，集中精力想尽一切办法把它边做常规活动 . 从小的运动开始, 尽量从小的开始直到你学会了坚持。可以慢慢增加运动量，哪怕你一开始能够多做一些，也一定要忍住， . 安排固定的锻炼时间，这段时间最好能不受到其他事情的干扰 . 养成习惯中最重要的一点就是坚持不懈，只要错过几次，你就会开始犯懒。多少次都是因为这个败下阵来，😔 . 最好找个搭档，和别人约定一起，会帮助你自律  
-      <p>
-        <a href="/2018/04/why-did-my-plan-fail-again-2018-04-20/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/04/why-did-my-plan-fail-again-2018-04-20/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="/post/2018-04-20-Why-did-my-plan-fail-again_files/PDCA.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-          
           
   <div class="pagination-bar">
     <ul class="pagination">
@@ -693,6 +686,23 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
       <div class="no-result text-color-light text-center">no post found</div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/07/biostrings/">
+                <h3 class="media-heading">📦 BioStrings</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Init  DNA # DNA x &lt;- DNAString(&quot;actttGtag&quot;) is(x) ## [1] &quot;DNAString&quot; &quot;XString&quot; &quot;XRaw&quot; &quot;XVector&quot; &quot;Vector&quot; &quot;Annotated&quot; #转录 x %&gt;% complement() %&gt;% RNAString() -&gt; rna # 反向互补 x.r &lt;- reverseComplement(x) x.r ## 9-letter &quot;DNAString&quot; instance ## seq: CTACAAAGT d &lt;- DNAString(&quot;TTGAAAA-CTC-N&quot;) d ## 13-letter &quot;DNAString&quot; instance ## seq: TTGAAAA-CTC-N #subset subseq(x, start =1, end = 5) ## 5-letter &quot;DNAString&quot; instance ## seq: ACTTT #碱基置换 chartr(old = &quot;A&quot;, new = &quot;C&quot;, x) ## 9-letter &quot;DNAString&quot; instance ## seq: CCTTTGTCG #DNA_BASES DNA_BASES ## [1] &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;T&quot; #IUPAC_CODE_MAP IUPAC_CODE_MAP ## A C G T M R W S Y K ## &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;T&quot; &quot;AC&quot; &quot;AG&quot; &quot;AT&quot; &quot;CG&quot; &quot;CT&quot; &quot;GT&quot; ## V H D B N ## &quot;ACG&quot; &quot;ACT&quot; &quot;AGT&quot; &quot;CGT&quot; &quot;ACGT&quot;  RNA x &lt;- RNAString(&quot;acuuuGuag&quot;) is(x) ## [1] &quot;RNAString&quot; &quot;XString&quot; &quot;XRaw&quot; &quot;XVector&quot; &quot;Vector&quot; &quot;Annotated&quot; # 逆转录 x %&gt;% complement() %&gt;% DNAString() ## 9-letter &quot;DNAString&quot; instance ## seq: TGAAACATC # 翻译 codons(x) ## Views on a 9-letter RNAString subject ## subject: ACUUUGUAG ## views: ## start end width ## [1] 1 3 3 [ACU] ## [2] 4 6 3 [UUG] ## [3] 7 9 3 [UAG] translate(x) ## 3-letter &quot;AAString&quot; instance ## seq: TL* #dna -&gt; rna:T &lt;-&gt; U DNAString(&quot;actttGtag&quot;) %&gt;% RNAString() ## 9-letter &quot;RNAString&quot; instance ## seq: ACUUUGUAG #rna -&gt; dna:U &lt;-&gt; T rna %&gt;% DNAString() ## 9-letter &quot;DNAString&quot; instance ## seq: TGAAACATC  AA: Amino acid x &lt;- AAString(&quot;actttGtag&quot;) is(x) ## [1] &quot;AAString&quot; &quot;XString&quot; &quot;XRaw&quot; &quot;XVector&quot; &quot;Vector&quot; &quot;Annotated&quot;  reads # all kmer reads &lt;- mkAllStrings(c(&quot;A&quot;, &quot;C&quot;, &quot;G&quot;, &quot;T&quot;), 6) is(reads) ## [1] &quot;character&quot; &quot;vector&quot; &quot;data.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -866,24 +876,6 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/04/workflow-organising-projects-for-reproducibility/">
-                <h3 class="media-heading">workflow: Organising projects for reproducibility</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Apr 4, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">why reproducible  The fundamental idea behind a robust, reproducible analysis is a clean, repeatable script-based workflow (i.e. the sequence of tasks from the start to the end of a project) that links raw data through to clean data and to final analysis outputs.
- principles of a good analysis workflow Any cleaning, merging, transforming, etc. of data should be done in scripts, not manually. Split your workflow (scripts) into logical thematic units.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -891,7 +883,7 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         32 posts found
+         33 posts found
       </p>
     </div>
   </div>

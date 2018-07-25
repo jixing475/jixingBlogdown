@@ -214,6 +214,66 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="/2018/04/build-webapp-in-r-using-shiny/">
+          Build Webapp In R Using Shiny
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-04-09T00:00:00Z">
+        
+  April 9, 2018
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/computers">computers</a>
+    
+  
+
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      How to build shiny app from scratch in R?
+You can build web page (online reporting tool) without knowing any web programming languages such as Javascript / PHP / CSS.
+The best part about shiny package is that you can easily integrate R with webpage.
+Suppose you want your web page run machine learning algorithms like random forest, SVM etc and display summary of the model with the flexibility of selecting inputs from user.
+      <p>
+        <a href="/2018/04/build-webapp-in-r-using-shiny/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="/2018/04/build-webapp-in-r-using-shiny/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="https://i.loli.net/2018/04/09/5acac87d4a416.jpg"/>
+      </div>
+    </a>
+  
+</article>
+
+          
+            
+  
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
         <a class="link-unstyled" href="/2018/04/run-python-from-r/">
           Run Python From R
         </a>
@@ -554,65 +614,6 @@ Step 2: Keeping priority to the most important variables, iterate through by bui
 </article>
 
           
-            
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/03/4-how-to-visualize-the-importance-of-variables-using-featureplot/">
-          4 How To Visualize The Importance Of Variables Using featurePlot
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-03-27T00:00:00Z">
-        
-  March 27, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/machine-learning">machine learning</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      Load Package And Data load(&quot;../../data/craet_3-3.Rdata&quot;) library(tidyverse) library(caret)  Q: How The Predictors Influence The Y 选择重要的变量: 通过观察在Y的分组下各个变量的分布情况
-一般有 箱线图 和 密度图
- box-plot featurePlot(x = trainData[, 1:18], y = trainData$Purchase, plot = &quot;box&quot;,#&quot;density&quot; strip=strip.custom(par.strip.text=list(cex=.7)), scales = list(x = list(relation=&quot;free&quot;), y = list(relation=&quot;free&quot;)))  Density featurePlot(x = trainData[, 1:18], y = trainData$Purchase, plot = &quot;density&quot;, strip=strip.custom(par.strip.text=list(cex=.7)), scales = list(x = list(relation=&quot;free&quot;), y = list(relation=&quot;free&quot;))) save.image(&quot;../../data/craet_4.Rdata&quot;)  
-      <p>
-        <a href="/2018/03/4-how-to-visualize-the-importance-of-variables-using-featureplot/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/03/4-how-to-visualize-the-importance-of-variables-using-featureplot/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/27/5ab98e69022d0.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-          
           
   <div class="pagination-bar">
     <ul class="pagination">
@@ -694,6 +695,23 @@ Step 2: Keeping priority to the most important variables, iterate through by bui
       <div class="no-result text-color-light text-center">no post found</div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/07/biostrings/">
+                <h3 class="media-heading">📦 BioStrings</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Init  DNA # DNA x &lt;- DNAString(&quot;actttGtag&quot;) is(x) ## [1] &quot;DNAString&quot; &quot;XString&quot; &quot;XRaw&quot; &quot;XVector&quot; &quot;Vector&quot; &quot;Annotated&quot; #转录 x %&gt;% complement() %&gt;% RNAString() -&gt; rna # 反向互补 x.r &lt;- reverseComplement(x) x.r ## 9-letter &quot;DNAString&quot; instance ## seq: CTACAAAGT d &lt;- DNAString(&quot;TTGAAAA-CTC-N&quot;) d ## 13-letter &quot;DNAString&quot; instance ## seq: TTGAAAA-CTC-N #subset subseq(x, start =1, end = 5) ## 5-letter &quot;DNAString&quot; instance ## seq: ACTTT #碱基置换 chartr(old = &quot;A&quot;, new = &quot;C&quot;, x) ## 9-letter &quot;DNAString&quot; instance ## seq: CCTTTGTCG #DNA_BASES DNA_BASES ## [1] &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;T&quot; #IUPAC_CODE_MAP IUPAC_CODE_MAP ## A C G T M R W S Y K ## &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;T&quot; &quot;AC&quot; &quot;AG&quot; &quot;AT&quot; &quot;CG&quot; &quot;CT&quot; &quot;GT&quot; ## V H D B N ## &quot;ACG&quot; &quot;ACT&quot; &quot;AGT&quot; &quot;CGT&quot; &quot;ACGT&quot;  RNA x &lt;- RNAString(&quot;acuuuGuag&quot;) is(x) ## [1] &quot;RNAString&quot; &quot;XString&quot; &quot;XRaw&quot; &quot;XVector&quot; &quot;Vector&quot; &quot;Annotated&quot; # 逆转录 x %&gt;% complement() %&gt;% DNAString() ## 9-letter &quot;DNAString&quot; instance ## seq: TGAAACATC # 翻译 codons(x) ## Views on a 9-letter RNAString subject ## subject: ACUUUGUAG ## views: ## start end width ## [1] 1 3 3 [ACU] ## [2] 4 6 3 [UUG] ## [3] 7 9 3 [UAG] translate(x) ## 3-letter &quot;AAString&quot; instance ## seq: TL* #dna -&gt; rna:T &lt;-&gt; U DNAString(&quot;actttGtag&quot;) %&gt;% RNAString() ## 9-letter &quot;RNAString&quot; instance ## seq: ACUUUGUAG #rna -&gt; dna:U &lt;-&gt; T rna %&gt;% DNAString() ## 9-letter &quot;DNAString&quot; instance ## seq: TGAAACATC  AA: Amino acid x &lt;- AAString(&quot;actttGtag&quot;) is(x) ## [1] &quot;AAString&quot; &quot;XString&quot; &quot;XRaw&quot; &quot;XVector&quot; &quot;Vector&quot; &quot;Annotated&quot;  reads # all kmer reads &lt;- mkAllStrings(c(&quot;A&quot;, &quot;C&quot;, &quot;G&quot;, &quot;T&quot;), 6) is(reads) ## [1] &quot;character&quot; &quot;vector&quot; &quot;data.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -867,24 +885,6 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/04/workflow-organising-projects-for-reproducibility/">
-                <h3 class="media-heading">workflow: Organising projects for reproducibility</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Apr 4, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">why reproducible  The fundamental idea behind a robust, reproducible analysis is a clean, repeatable script-based workflow (i.e. the sequence of tasks from the start to the end of a project) that links raw data through to clean data and to final analysis outputs.
- principles of a good analysis workflow Any cleaning, merging, transforming, etc. of data should be done in scripts, not manually. Split your workflow (scripts) into logical thematic units.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -892,7 +892,7 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         32 posts found
+         33 posts found
       </p>
     </div>
   </div>
