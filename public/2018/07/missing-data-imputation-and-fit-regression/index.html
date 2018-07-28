@@ -1,0 +1,853 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+
+  
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.32.2 with theme Tranquilpeak 0.4.1-BETA">
+    <title>Missing data imputation and fit regression</title>
+    <meta name="author" content="Jixing Liu">
+    <meta name="keywords" content=", R">
+
+    <link rel="icon" href="img/R_py.png">
+    
+
+    
+    <meta name="description" content="Mind map  Goal impute missing data fit regression  library(tidyverse) library(AER) library(naniar) library(mice)  Steps Step 01. missing data wages_data &lt;- read_csv(&quot;/Users/zero/myrepo/jixingBlogdown/data/Mroz.csv&quot;) wages_data &lt;- wages_data %&gt;% select(wage, educ, fatheduc, motheduc, inlf, hours, kidslt6, kidsge6, age, huswage, mtr, unem, city, exper) %&gt;% mutate_at(vars(kidslt6, kidsge6, hours, educ, age, wage, huswage, mtr, motheduc, fatheduc, unem, exper), as.numeric) %&gt;% mutate_at(vars(city, inlf), as.character) wages_data &lt;- wages_data %&gt;% mutate(wage = ifelse(is.na(wage), 0, wage)) vis_miss(wages_data) wages_mis &lt;- ampute(wages_data)$amp vis_miss(wages_mis)  Step 02.">
+    <meta property="og:description" content="Mind map  Goal impute missing data fit regression  library(tidyverse) library(AER) library(naniar) library(mice)  Steps Step 01. missing data wages_data &lt;- read_csv(&quot;/Users/zero/myrepo/jixingBlogdown/data/Mroz.csv&quot;) wages_data &lt;- wages_data %&gt;% select(wage, educ, fatheduc, motheduc, inlf, hours, kidslt6, kidsge6, age, huswage, mtr, unem, city, exper) %&gt;% mutate_at(vars(kidslt6, kidsge6, hours, educ, age, wage, huswage, mtr, motheduc, fatheduc, unem, exper), as.numeric) %&gt;% mutate_at(vars(city, inlf), as.character) wages_data &lt;- wages_data %&gt;% mutate(wage = ifelse(is.na(wage), 0, wage)) vis_miss(wages_data) wages_mis &lt;- ampute(wages_data)$amp vis_miss(wages_mis)  Step 02.">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Missing data imputation and fit regression">
+    <meta property="og:url" content="/2018/07/missing-data-imputation-and-fit-regression/">
+    <meta property="og:site_name" content="student zero ">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="student zero ">
+    <meta name="twitter:description" content="Mind map  Goal impute missing data fit regression  library(tidyverse) library(AER) library(naniar) library(mice)  Steps Step 01. missing data wages_data &lt;- read_csv(&quot;/Users/zero/myrepo/jixingBlogdown/data/Mroz.csv&quot;) wages_data &lt;- wages_data %&gt;% select(wage, educ, fatheduc, motheduc, inlf, hours, kidslt6, kidsge6, age, huswage, mtr, unem, city, exper) %&gt;% mutate_at(vars(kidslt6, kidsge6, hours, educ, age, wage, huswage, mtr, motheduc, fatheduc, unem, exper), as.numeric) %&gt;% mutate_at(vars(city, inlf), as.character) wages_data &lt;- wages_data %&gt;% mutate(wage = ifelse(is.na(wage), 0, wage)) vis_miss(wages_data) wages_mis &lt;- ampute(wages_data)$amp vis_miss(wages_mis)  Step 02.">
+    
+      <meta name="twitter:creator" content="@studentZero475">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="https://i.loli.net/2018/02/26/5a937bb148b02.jpg">
+    
+
+    
+      <meta property="og:image" content="/post/2018-07-28-missing-data-imputation-and-fit-regression_files/purplecastlecat_2018-Jun-29.jpg">
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-hbs5om8csx9a8yrv5hnhpi2qqdv4ykuslajwbramhqxvleqbfklxgek50hye.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <link rel="stylesheet" href="/css/monokai-sublime.css" rel="stylesheet" id="theme-stylesheet">
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">student zero </a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <h1 class="sidebar-profile-title">Missing data imputation and fit regression</h1>
+        <a href="/#about">
+          <img class="sidebar-profile-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Jixing Liu</h4>
+        
+          <h5 class="sidebar-profile-bio">Reading And Writing</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/studentZero475">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">Twitter</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.r-bloggers.com/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-book"></i>
+      
+      <span class="sidebar-button-desc">R-bloggers</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaOut
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      Missing data imputation and fit regression
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-07-28T00:00:00Z">
+        
+  July 28, 2018
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/datavis-and-dataclean">datavis and dataclean</a>
+    
+  
+
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <div id="mind-map" class="section level1">
+<h1>Mind map</h1>
+<p><img src="/Users/zero/myrepo/jixingBlogdown/img/missing-data.png" width="30%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="goal" class="section level1">
+<h1>Goal</h1>
+<ol style="list-style-type: decimal">
+<li>impute missing data</li>
+<li>fit regression</li>
+</ol>
+<pre class="r"><code>library(tidyverse)
+library(AER)
+library(naniar)
+library(mice)</code></pre>
+</div>
+<div id="steps" class="section level1">
+<h1>Steps</h1>
+<div id="step-01.-missing-data" class="section level2">
+<h2><strong style="color: darkred;">Step 01. missing data</strong></h2>
+<pre class="r"><code>wages_data &lt;- read_csv(&quot;/Users/zero/myrepo/jixingBlogdown/data/Mroz.csv&quot;)
+wages_data &lt;- wages_data %&gt;% 
+    select(wage, educ, fatheduc, motheduc, inlf, hours, 
+               kidslt6, kidsge6, age, huswage, 
+               mtr, unem, city, exper) %&gt;% 
+    mutate_at(vars(kidslt6, kidsge6, hours, educ, age, wage, huswage, mtr,
+                    motheduc, fatheduc, unem, exper), as.numeric) %&gt;% 
+    mutate_at(vars(city, inlf), as.character)
+
+wages_data &lt;- wages_data %&gt;% 
+    mutate(wage = ifelse(is.na(wage), 0, wage))
+vis_miss(wages_data)</code></pre>
+<p><img src="/post/2018-07-28-missing-data-imputation-and-fit-regression_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code>wages_mis &lt;- ampute(wages_data)$amp
+vis_miss(wages_mis)</code></pre>
+<p><img src="/post/2018-07-28-missing-data-imputation-and-fit-regression_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+</div>
+<div id="step-02.-impute-data" class="section level2">
+<h2><strong style="color: darkred;">Step 02. impute data</strong></h2>
+<pre class="r"><code>imp_wages &lt;- mice::parlmice(data = wages_mis, m = 10, maxit = 20, cl.type = &quot;FORK&quot;)
+imp_wages_df &lt;- mice::complete(imp_wages, &quot;long&quot;)
+
+ihs &lt;- function(x){
+    log(x + sqrt(x**2 + 1))
+}
+imp_wages_df &lt;- imp_wages_df %&gt;% 
+    group_by(.imp) %&gt;% 
+    mutate(ihs_wage = ihs(wage),
+           exper2 = exper**2)</code></pre>
+</div>
+<div id="step-03.-nest" class="section level2">
+<h2><strong style="color: darkred;">Step 03. nest</strong></h2>
+<pre class="r"><code>(imp_wages &lt;- imp_wages_df %&gt;% 
+    group_by(.imp) %&gt;% 
+    nest())</code></pre>
+<pre><code>## # A tibble: 10 x 2
+##     .imp data               
+##    &lt;int&gt; &lt;list&gt;             
+##  1     1 &lt;tibble [753 × 17]&gt;
+##  2     2 &lt;tibble [753 × 17]&gt;
+##  3     3 &lt;tibble [753 × 17]&gt;
+##  4     4 &lt;tibble [753 × 17]&gt;
+##  5     5 &lt;tibble [753 × 17]&gt;
+##  6     6 &lt;tibble [753 × 17]&gt;
+##  7     7 &lt;tibble [753 × 17]&gt;
+##  8     8 &lt;tibble [753 × 17]&gt;
+##  9     9 &lt;tibble [753 × 17]&gt;
+## 10    10 &lt;tibble [753 × 17]&gt;</code></pre>
+</div>
+<div id="step-04.-fit" class="section level2">
+<h2><strong style="color: darkred;">Step 04. fit</strong></h2>
+<pre class="r"><code>imp_wages_reg = imp_wages %&gt;% 
+    mutate(lin_reg = map(data, 
+                         ~lm(ihs_wage ~ educ + inlf + hours + 
+                                 kidslt6 + kidsge6 + age + huswage + 
+                                 mtr + unem + city + exper + exper2, 
+                             data = .)))</code></pre>
+</div>
+<div id="step-05.-pool" class="section level2">
+<h2><strong style="color: darkred;">Step 05. pool</strong></h2>
+<pre class="r"><code>pool_lin_reg &lt;- pool(imp_wages_reg$lin_reg)</code></pre>
+</div>
+<div id="step-06.-summary" class="section level2">
+<h2><strong style="color: darkred;">Step 06. summary</strong></h2>
+<pre class="r"><code>summary(pool_lin_reg)</code></pre>
+<pre><code>##                  estimate    std.error  statistic       df      p.value
+## (Intercept)  9.806097e-01 3.331488e-01  2.9434584 531.8338 3.361903e-03
+## educ         4.196313e-02 8.966193e-03  4.6801499 198.8067 3.492741e-06
+## inlf         1.851410e+00 5.175918e-02 35.7696823 543.3328 0.000000e+00
+## hours       -6.611646e-05 3.075999e-05 -2.1494306 506.2138 3.197021e-02
+## kidslt6     -2.933034e-02 3.755389e-02 -0.7810201 432.9037 4.350761e-01
+## kidsge6      2.995198e-03 1.503667e-02  0.1991928 230.5606 8.421745e-01
+## age         -1.077289e-03 2.807791e-03 -0.3836787 318.8536 7.013426e-01
+## huswage     -2.184247e-02 6.476193e-03 -3.3727335 198.1600 7.886052e-04
+## mtr         -1.989917e+00 3.284191e-01 -6.0590777 413.1404 2.323195e-09
+## unem         2.961937e-03 5.436213e-03  0.5448530 647.4285 5.860423e-01
+## city         8.497050e-03 3.676616e-02  0.2311106 631.3654 8.173019e-01
+## exper        1.623188e-02 6.279752e-03  2.5847968 571.5035 9.961271e-03
+## exper2      -2.260148e-04 2.071695e-04 -1.0909654 305.6766 2.756939e-01</code></pre>
+</div>
+<div id="links" class="section level2">
+<h2><strong>Links</strong></h2>
+<ul>
+<li><a href="http://www.brodrigues.co/blog/2018-07-01-tidy_ive/">refrence</a></li>
+</ul>
+</div>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="//tags/missing-data/">missing data</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/07/biostrings/" data-tooltip="📦 BioStrings">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/07/missing-data-imputation-and-fit-regression/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/07/missing-data-imputation-and-fit-regression/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/07/missing-data-imputation-and-fit-regression/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2018 Jixing Liu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/07/biostrings/" data-tooltip="📦 BioStrings">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/07/missing-data-imputation-and-fit-regression/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/07/missing-data-imputation-and-fit-regression/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/07/missing-data-imputation-and-fit-regression/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F07%2Fmissing-data-imputation-and-fit-regression%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F07%2Fmissing-data-imputation-and-fit-regression%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F07%2Fmissing-data-imputation-and-fit-regression%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Jixing Liu</h4>
+    
+      <div id="about-card-bio">Reading And Writing</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Data Scientist
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/07/missing-data-imputation-and-fit-regression/">
+                <h3 class="media-heading">Missing data imputation and fit regression</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Mind map  Goal impute missing data fit regression  library(tidyverse) library(AER) library(naniar) library(mice)  Steps Step 01. missing data wages_data &lt;- read_csv(&quot;/Users/zero/myrepo/jixingBlogdown/data/Mroz.csv&quot;) wages_data &lt;- wages_data %&gt;% select(wage, educ, fatheduc, motheduc, inlf, hours, kidslt6, kidsge6, age, huswage, mtr, unem, city, exper) %&gt;% mutate_at(vars(kidslt6, kidsge6, hours, educ, age, wage, huswage, mtr, motheduc, fatheduc, unem, exper), as.numeric) %&gt;% mutate_at(vars(city, inlf), as.character) wages_data &lt;- wages_data %&gt;% mutate(wage = ifelse(is.na(wage), 0, wage)) vis_miss(wages_data) wages_mis &lt;- ampute(wages_data)$amp vis_miss(wages_mis)  Step 02.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/07/biostrings/">
+                <h3 class="media-heading">📦 BioStrings</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Init  DNA # DNA x &lt;- DNAString(&quot;actttGtag&quot;) is(x) ## [1] &quot;DNAString&quot; &quot;XString&quot; &quot;XRaw&quot; &quot;XVector&quot; &quot;Vector&quot; &quot;Annotated&quot; #转录 x %&gt;% complement() %&gt;% RNAString() -&gt; rna # 反向互补 x.r &lt;- reverseComplement(x) x.r ## 9-letter &quot;DNAString&quot; instance ## seq: CTACAAAGT d &lt;- DNAString(&quot;TTGAAAA-CTC-N&quot;) d ## 13-letter &quot;DNAString&quot; instance ## seq: TTGAAAA-CTC-N #subset subseq(x, start =1, end = 5) ## 5-letter &quot;DNAString&quot; instance ## seq: ACTTT #碱基置换 chartr(old = &quot;A&quot;, new = &quot;C&quot;, x) ## 9-letter &quot;DNAString&quot; instance ## seq: CCTTTGTCG #DNA_BASES DNA_BASES ## [1] &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;T&quot; #IUPAC_CODE_MAP IUPAC_CODE_MAP ## A C G T M R W S Y K ## &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;T&quot; &quot;AC&quot; &quot;AG&quot; &quot;AT&quot; &quot;CG&quot; &quot;CT&quot; &quot;GT&quot; ## V H D B N ## &quot;ACG&quot; &quot;ACT&quot; &quot;AGT&quot; &quot;CGT&quot; &quot;ACGT&quot;  RNA x &lt;- RNAString(&quot;acuuuGuag&quot;) is(x) ## [1] &quot;RNAString&quot; &quot;XString&quot; &quot;XRaw&quot; &quot;XVector&quot; &quot;Vector&quot; &quot;Annotated&quot; # 逆转录 x %&gt;% complement() %&gt;% DNAString() ## 9-letter &quot;DNAString&quot; instance ## seq: TGAAACATC # 翻译 codons(x) ## Views on a 9-letter RNAString subject ## subject: ACUUUGUAG ## views: ## start end width ## [1] 1 3 3 [ACU] ## [2] 4 6 3 [UUG] ## [3] 7 9 3 [UAG] translate(x) ## 3-letter &quot;AAString&quot; instance ## seq: TL* #dna -&gt; rna:T &lt;-&gt; U DNAString(&quot;actttGtag&quot;) %&gt;% RNAString() ## 9-letter &quot;RNAString&quot; instance ## seq: ACUUUGUAG #rna -&gt; dna:U &lt;-&gt; T rna %&gt;% DNAString() ## 9-letter &quot;DNAString&quot; instance ## seq: TGAAACATC  AA: Amino acid x &lt;- AAString(&quot;actttGtag&quot;) is(x) ## [1] &quot;AAString&quot; &quot;XString&quot; &quot;XRaw&quot; &quot;XVector&quot; &quot;Vector&quot; &quot;Annotated&quot;  reads # all kmer reads &lt;- mkAllStrings(c(&quot;A&quot;, &quot;C&quot;, &quot;G&quot;, &quot;T&quot;), 6) is(reads) ## [1] &quot;character&quot; &quot;vector&quot; &quot;data.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/05/purrr-use-partial-and-map-instead-of-loop/">
+                <h3 class="media-heading">purrr: Use partial and map instead of loop</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">🐌 I want to …   create three normal distribution with purrr::map as simple as possible
+  🐌 Here’s how to:   library(tidyverse) #rnorm(n=5, mean = mu, sd = sigma) #函数的一般形式 black_box &lt;- partial(rnorm, n=5)# 先把不变的固定下来，生成新的黑箱函数，黑箱函数只需要接受 map 传递的参数即可， 其他的参数已经通过 ·partial· 固定下来了 mu &lt;- list(10, 100, -100)# 参数 x sigma &lt;- list(0.01, 1, 10)# 参数 y map2(mu, sigma, ~ black_box(mean=.x, sd=.y)) %&gt;% do.call(cbind, .) ## [,1] [,2] [,3] ## [1,] 10.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/05/iga-three-subgroup-deg-and-enrichment-analysis/">
+                <h3 class="media-heading">IgA-three-subgroup-DEG-and-enrichment-analysis</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Enrichment analysis is a statistical procedure used to identify biological terms which are over-represented in a given gene set. These include signaling pathways , molecular functions, diseases, and a wide variety of other biological terms obtained by integrating prior knowledge of gene function from multiple resources.
+Enrichr links : links to Enrichr containing the results of enrichment analyses generated by analyzing the up-regulated and down-regulated genes from a differential expression analysis.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/05/lelts-speaking-constructing-your-answers/">
+                <h3 class="media-heading">LELTS speaking: constructing your answers</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">四个要注意的问题 
+ 流畅性 丰富多变的词汇 语法和准确 发音   答案的基本结构 
+直接回答 + 连接词 + 扩展句子 ：
+ 原因 细节 例子 事情的两面性   常见词语的替代 
+ And
+ in addition to what i have just mentioned earlier on the top of that as well as this second to that among other things as a further matter   So
+ this is the reason why this wxplains why and the result of this is   But</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/05/r-vs-python-representing-data-in-r-python-equivalent/">
+                <h3 class="media-heading">R vs python</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Representing Data in R &ndash; Python equivalent import pandas as pd import numpy as np  # 'characters' is equivalent to string firstName = 'jeff' print((type(firstName), firstName))  &lt;type 'str'&gt; jeff  # 'numeric' is equivalent to float heightCM = 188.2 print((type(heightCM), heightCM))  &lt;type 'float'&gt; 188.2  # integer is equivalent to integer numberSons = 1 print((type(numberSons), numberSons))  &lt;type 'int'&gt; 1  # 'logical' is equivalent to Boolean teachingCoursera = True print((type(teachingCoursera), teachingCoursera))  &lt;type 'bool'&gt; True  # 'vectors' is equivalent to numpy array or Python list (I will use array everywhere for consistency) heights = np.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/04/how-to-get-genomewide-position-specific-scores/">
+                <h3 class="media-heading">How To Get Genomewide Position-Specific Scores</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">load packages #source(&quot;http://bioconductor.org/biocLite.R&quot;) #biocLite(&quot;GenomicScores&quot;) library(GenomicScores)  Retrieval of genomic scores through annotation packages There are currently four different annotation packages that store genomic scores and can be accessed using the GenomicScores package
+Annotation packages  Description 1. phastCons100way.UCSC.hg19 phastCons scores derived from the alignment of the human genome (hg19) to other 99 vertebrate species. 2. phastCons100way.UCSC.hg38 phastCons scores derived from the alignment of the human genome (hg38) to other 99 vertebrate species.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/04/purrr-adverb/">
+                <h3 class="media-heading">purrr: adverb</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">What is an adverb Read carefully the purrr documentation
+ Adverbs modify the action of a function ; taking a function as input and returning a function with modified action as output.
+ In other words, adverbs take a function, and return this function modified. Yes, just an adverb modifies a verb.
+library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&quot;) ## $result ## NULL ## ## $error ## &lt;simpleError in log(x = x, base = base): non-numeric argument to mathematical function&gt; # have a result and error  how to write your own?</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/04/why-did-my-plan-fail-again-2018-04-20/">
+                <h3 class="media-heading">为什么我的锻炼又失败了</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">  妈蛋！   健康饮食
+坚持锻炼 
+好处多多
+人尽皆知
+但要真正做到这两点 真心不容易
+今天就好好反思一下 我为什么不能坚持锻炼
+放弃的原因: . 指定的计划难度太高 . 短期没看到效果就是去了动力 . 被各种琐事干扰，无法正常执行 . 只要中途断了几次，就会放弃锻炼的习惯  能让人在短期内取得显著成效的计划，你都要特别小心。因为往往这种计划太过激烈，没人能长期坚持，很快你就会放弃，取得的成效也会随它而去，甚至还有反弹效果
+  解决办法: 把锻炼变成像刷牙一样的常规活动，集中精力想尽一切办法把它边做常规活动 . 从小的运动开始, 尽量从小的开始直到你学会了坚持。可以慢慢增加运动量，哪怕你一开始能够多做一些，也一定要忍住， . 安排固定的锻炼时间，这段时间最好能不受到其他事情的干扰 . 养成习惯中最重要的一点就是坚持不懈，只要错过几次，你就会开始犯懒。多少次都是因为这个败下阵来，😔 . 最好找个搭档，和别人约定一起，会帮助你自律  </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/04/algorithms-quick-sort/">
+                <h3 class="media-heading">algorithms: quick sort</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">快速排序 和 分而治之（D&amp;C）divde and conquer  D&amp;C 将问题逐步分解，找到最基本的情况为止 快速排序，随机的选择基准值，平均运行时间为**O(n*logn)**  def quicksort(array): if len(array) &lt; 2:# base case, arrays with 0 or 1 element are already &quot;sorted&quot; return array else:# recursive case pivot = array[0]# sub-array of all the elements less than the pivot less = [i for i in array[1:] if i &lt;= pivot]# sub-array of all the elements greater than the pivot greater = [i for i in array[1:] if i &gt; pivot] return quicksort(less) + [pivot] + quicksort(greater) print(quicksort([10, 5, 2, 3]))  ## [2, 3, 5, 10]  </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         34 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://i.loli.net/2018/02/26/5a9416186c149.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" integrity="sha256-IFHWFEbU2/+wNycDECKgjIRSirRNIDp2acEB5fvdVRU=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js" integrity="sha256-+mpyNVJsNt4rVXCw0F+pAOiB3YxmHgrbJsx4ecPuUaI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js" integrity="sha256-vMxgR/7FtLovVA+IPrR7+xTgIgARH7y9VZQnmmi0HDI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js" integrity="sha256-N0qFUh7/9vLvia87dDndewmsgsyYoNkdA212tPc+2NI=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-kr8dyqj6rb6ortyib7whfo9x9p6td6zo8t1v4fdz4ecx5kwybsdlmk1slygn.min.js"></script>
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = '\/2018\/07\/missing-data-imputation-and-fit-regression\/';
+          
+            this.page.identifier = '\/2018\/07\/missing-data-imputation-and-fit-regression\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'jixing';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+    
+  </body>
+</html>
+

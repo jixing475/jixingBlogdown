@@ -1,0 +1,123 @@
+---
+title: Missing data imputation and fit regression
+author: ZERO
+date: '2018-07-28'
+slug: missing-data-imputation-and-fit-regression
+categories:
+  - datavis and dataclean
+tags:
+  - missing data
+thumbnailImagePosition: left
+thumbnailImage: /post/2018-07-28-missing-data-imputation-and-fit-regression_files/purplecastlecat_2018-Jun-29.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+
+
+<div id="mind-map" class="section level1">
+<h1>Mind map</h1>
+<p><img src="/Users/zero/myrepo/jixingBlogdown/img/missing-data.png" width="30%" style="display: block; margin: auto;" /></p>
+</div>
+<div id="goal" class="section level1">
+<h1>Goal</h1>
+<ol style="list-style-type: decimal">
+<li>impute missing data</li>
+<li>fit regression</li>
+</ol>
+<pre class="r"><code>library(tidyverse)
+library(AER)
+library(naniar)
+library(mice)</code></pre>
+</div>
+<div id="steps" class="section level1">
+<h1>Steps</h1>
+<div id="step-01.-missing-data" class="section level2">
+<h2><strong style="color: darkred;">Step 01. missing data</strong></h2>
+<pre class="r"><code>wages_data &lt;- read_csv(&quot;/Users/zero/myrepo/jixingBlogdown/data/Mroz.csv&quot;)
+wages_data &lt;- wages_data %&gt;% 
+    select(wage, educ, fatheduc, motheduc, inlf, hours, 
+               kidslt6, kidsge6, age, huswage, 
+               mtr, unem, city, exper) %&gt;% 
+    mutate_at(vars(kidslt6, kidsge6, hours, educ, age, wage, huswage, mtr,
+                    motheduc, fatheduc, unem, exper), as.numeric) %&gt;% 
+    mutate_at(vars(city, inlf), as.character)
+
+wages_data &lt;- wages_data %&gt;% 
+    mutate(wage = ifelse(is.na(wage), 0, wage))
+vis_miss(wages_data)</code></pre>
+<p><img src="/post/2018-07-28-missing-data-imputation-and-fit-regression_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code>wages_mis &lt;- ampute(wages_data)$amp
+vis_miss(wages_mis)</code></pre>
+<p><img src="/post/2018-07-28-missing-data-imputation-and-fit-regression_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+</div>
+<div id="step-02.-impute-data" class="section level2">
+<h2><strong style="color: darkred;">Step 02. impute data</strong></h2>
+<pre class="r"><code>imp_wages &lt;- mice::parlmice(data = wages_mis, m = 10, maxit = 20, cl.type = &quot;FORK&quot;)
+imp_wages_df &lt;- mice::complete(imp_wages, &quot;long&quot;)
+
+ihs &lt;- function(x){
+    log(x + sqrt(x**2 + 1))
+}
+imp_wages_df &lt;- imp_wages_df %&gt;% 
+    group_by(.imp) %&gt;% 
+    mutate(ihs_wage = ihs(wage),
+           exper2 = exper**2)</code></pre>
+</div>
+<div id="step-03.-nest" class="section level2">
+<h2><strong style="color: darkred;">Step 03. nest</strong></h2>
+<pre class="r"><code>(imp_wages &lt;- imp_wages_df %&gt;% 
+    group_by(.imp) %&gt;% 
+    nest())</code></pre>
+<pre><code>## # A tibble: 10 x 2
+##     .imp data               
+##    &lt;int&gt; &lt;list&gt;             
+##  1     1 &lt;tibble [753 × 17]&gt;
+##  2     2 &lt;tibble [753 × 17]&gt;
+##  3     3 &lt;tibble [753 × 17]&gt;
+##  4     4 &lt;tibble [753 × 17]&gt;
+##  5     5 &lt;tibble [753 × 17]&gt;
+##  6     6 &lt;tibble [753 × 17]&gt;
+##  7     7 &lt;tibble [753 × 17]&gt;
+##  8     8 &lt;tibble [753 × 17]&gt;
+##  9     9 &lt;tibble [753 × 17]&gt;
+## 10    10 &lt;tibble [753 × 17]&gt;</code></pre>
+</div>
+<div id="step-04.-fit" class="section level2">
+<h2><strong style="color: darkred;">Step 04. fit</strong></h2>
+<pre class="r"><code>imp_wages_reg = imp_wages %&gt;% 
+    mutate(lin_reg = map(data, 
+                         ~lm(ihs_wage ~ educ + inlf + hours + 
+                                 kidslt6 + kidsge6 + age + huswage + 
+                                 mtr + unem + city + exper + exper2, 
+                             data = .)))</code></pre>
+</div>
+<div id="step-05.-pool" class="section level2">
+<h2><strong style="color: darkred;">Step 05. pool</strong></h2>
+<pre class="r"><code>pool_lin_reg &lt;- pool(imp_wages_reg$lin_reg)</code></pre>
+</div>
+<div id="step-06.-summary" class="section level2">
+<h2><strong style="color: darkred;">Step 06. summary</strong></h2>
+<pre class="r"><code>summary(pool_lin_reg)</code></pre>
+<pre><code>##                  estimate    std.error  statistic       df      p.value
+## (Intercept)  9.806097e-01 3.331488e-01  2.9434584 531.8338 3.361903e-03
+## educ         4.196313e-02 8.966193e-03  4.6801499 198.8067 3.492741e-06
+## inlf         1.851410e+00 5.175918e-02 35.7696823 543.3328 0.000000e+00
+## hours       -6.611646e-05 3.075999e-05 -2.1494306 506.2138 3.197021e-02
+## kidslt6     -2.933034e-02 3.755389e-02 -0.7810201 432.9037 4.350761e-01
+## kidsge6      2.995198e-03 1.503667e-02  0.1991928 230.5606 8.421745e-01
+## age         -1.077289e-03 2.807791e-03 -0.3836787 318.8536 7.013426e-01
+## huswage     -2.184247e-02 6.476193e-03 -3.3727335 198.1600 7.886052e-04
+## mtr         -1.989917e+00 3.284191e-01 -6.0590777 413.1404 2.323195e-09
+## unem         2.961937e-03 5.436213e-03  0.5448530 647.4285 5.860423e-01
+## city         8.497050e-03 3.676616e-02  0.2311106 631.3654 8.173019e-01
+## exper        1.623188e-02 6.279752e-03  2.5847968 571.5035 9.961271e-03
+## exper2      -2.260148e-04 2.071695e-04 -1.0909654 305.6766 2.756939e-01</code></pre>
+</div>
+<div id="links" class="section level2">
+<h2><strong>Links</strong></h2>
+<ul>
+<li><a href="http://www.brodrigues.co/blog/2018-07-01-tidy_ive/">refrence</a></li>
+</ul>
+</div>
+</div>

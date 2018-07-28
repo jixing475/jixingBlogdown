@@ -441,6 +441,23 @@ Annotation packages  Description 1. phastCons100way.UCSC.hg19 phastCons scores d
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2018/07/missing-data-imputation-and-fit-regression/">
+                <h3 class="media-heading">Missing data imputation and fit regression</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Mind map  Goal impute missing data fit regression  library(tidyverse) library(AER) library(naniar) library(mice)  Steps Step 01. missing data wages_data &lt;- read_csv(&quot;/Users/zero/myrepo/jixingBlogdown/data/Mroz.csv&quot;) wages_data &lt;- wages_data %&gt;% select(wage, educ, fatheduc, motheduc, inlf, hours, kidslt6, kidsge6, age, huswage, mtr, unem, city, exper) %&gt;% mutate_at(vars(kidslt6, kidsge6, hours, educ, age, wage, huswage, mtr, motheduc, fatheduc, unem, exper), as.numeric) %&gt;% mutate_at(vars(city, inlf), as.character) wages_data &lt;- wages_data %&gt;% mutate(wage = ifelse(is.na(wage), 0, wage)) vis_miss(wages_data) wages_mis &lt;- ampute(wages_data)$amp vis_miss(wages_mis)  Step 02.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2018/07/biostrings/">
                 <h3 class="media-heading">📦 BioStrings</h3>
               </a>
@@ -610,23 +627,6 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/04/algorithms-recursive/">
-                <h3 class="media-heading">algorithms: recursive</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Apr 4, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">递归  递归指的是调用自己的函数 每个递归都有两个条件  base case : 终止条件 recursive case : 递归条件  所有的函数的调用都遵循 call stack 递归语法的清晰是以内存为代价的   通过递归求阶乘 def fact(n): if n == 1: #base case(终止条件) return 1 else: return n * fact(n-1)#recursive case print(fact(5)) ## 120  </div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -634,7 +634,7 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         33 posts found
+         34 posts found
       </p>
     </div>
   </div>

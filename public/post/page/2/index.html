@@ -214,6 +214,66 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="/2018/04/purrr-adverb/">
+          purrr: adverb
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-04-20T00:00:00Z">
+        
+  April 20, 2018
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/computers">computers</a>
+    
+  
+
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      What is an adverb Read carefully the purrr documentation
+ Adverbs modify the action of a function ; taking a function as input and returning a function with modified action as output.
+ In other words, adverbs take a function, and return this function modified. Yes, just an adverb modifies a verb.
+library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&quot;) ## $result ## NULL ## ## $error ## &lt;simpleError in log(x = x, base = base): non-numeric argument to mathematical function&gt; # have a result and error  how to write your own?
+      <p>
+        <a href="/2018/04/purrr-adverb/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="/2018/04/purrr-adverb/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="https://i.loli.net/2018/04/20/5ad936eeb6ee7.jpg"/>
+      </div>
+    </a>
+  
+</article>
+
+          
+            
+  
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
         <a class="link-unstyled" href="/2018/04/why-did-my-plan-fail-again-2018-04-20/">
           为什么我的锻炼又失败了
         </a>
@@ -551,65 +611,6 @@
 </article>
 
           
-            
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/04/row-combine-many-table-in-r/">
-          Row Combine Many Table In R 
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-04-11T00:00:00Z">
-        
-  April 11, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/computers">computers</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      Q: I has many separate tables that need to be combined into a single file?
-google search “R read many datasets or tables”
-Three steps: Getting a list of files path to read Write a function to read a file Then loop it   step01: list all files path library(here) allfiles = list.files(path = here(&quot;data&quot;), #Use the ⭐here package to indicate the directory the files are in relative to the root directory pattern = &quot;AB.
-      <p>
-        <a href="/2018/04/row-combine-many-table-in-r/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/04/row-combine-many-table-in-r/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="/post/2018-04-11-row-combine-many-table-in-r_files/IMG_7012.PNG"/>
-      </div>
-    </a>
-  
-</article>
-
-          
           
   <div class="pagination-bar">
     <ul class="pagination">
@@ -691,6 +692,23 @@ Three steps: Getting a list of files path to read Write a function to read a fil
       <div class="no-result text-color-light text-center">no post found</div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/07/missing-data-imputation-and-fit-regression/">
+                <h3 class="media-heading">Missing data imputation and fit regression</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Mind map  Goal impute missing data fit regression  library(tidyverse) library(AER) library(naniar) library(mice)  Steps Step 01. missing data wages_data &lt;- read_csv(&quot;/Users/zero/myrepo/jixingBlogdown/data/Mroz.csv&quot;) wages_data &lt;- wages_data %&gt;% select(wage, educ, fatheduc, motheduc, inlf, hours, kidslt6, kidsge6, age, huswage, mtr, unem, city, exper) %&gt;% mutate_at(vars(kidslt6, kidsge6, hours, educ, age, wage, huswage, mtr, motheduc, fatheduc, unem, exper), as.numeric) %&gt;% mutate_at(vars(city, inlf), as.character) wages_data &lt;- wages_data %&gt;% mutate(wage = ifelse(is.na(wage), 0, wage)) vis_miss(wages_data) wages_mis &lt;- ampute(wages_data)$amp vis_miss(wages_mis)  Step 02.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -864,23 +882,6 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/04/algorithms-recursive/">
-                <h3 class="media-heading">algorithms: recursive</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Apr 4, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">递归  递归指的是调用自己的函数 每个递归都有两个条件  base case : 终止条件 recursive case : 递归条件  所有的函数的调用都遵循 call stack 递归语法的清晰是以内存为代价的   通过递归求阶乘 def fact(n): if n == 1: #base case(终止条件) return 1 else: return n * fact(n-1)#recursive case print(fact(5)) ## 120  </div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -888,7 +889,7 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         33 posts found
+         34 posts found
       </p>
     </div>
   </div>
