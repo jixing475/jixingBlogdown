@@ -24,10 +24,7 @@ here <- here::here
 ```
 
 # Mind map
-```{r out.width="30%", fig.align = "center", fig.margin=TRUE, echo=FALSE, eval=TRUE}
-knitr::include_graphics("/Users/zero/myrepo/jixingBlogdown/img/missing-data.png")
-```
-
+![](/Users/zero/myrepo/jixingBlogdown/static/post/2018-07-28-missing-data-imputation-and-fit-regression_files/missing-data.png)
 
 # Goal
 1. impute missing data

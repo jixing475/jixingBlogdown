@@ -334,7 +334,7 @@
                   Jul 7, 2018
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">Mind map  Goal impute missing data fit regression  library(tidyverse) library(AER) library(naniar) library(mice)  Steps Step 01. missing data wages_data &lt;- read_csv(&quot;/Users/zero/myrepo/jixingBlogdown/data/Mroz.csv&quot;) wages_data &lt;- wages_data %&gt;% select(wage, educ, fatheduc, motheduc, inlf, hours, kidslt6, kidsge6, age, huswage, mtr, unem, city, exper) %&gt;% mutate_at(vars(kidslt6, kidsge6, hours, educ, age, wage, huswage, mtr, motheduc, fatheduc, unem, exper), as.numeric) %&gt;% mutate_at(vars(city, inlf), as.character) wages_data &lt;- wages_data %&gt;% mutate(wage = ifelse(is.na(wage), 0, wage)) vis_miss(wages_data) wages_mis &lt;- ampute(wages_data)$amp vis_miss(wages_mis)  Step 02.</div>
+              <div class="media-content hide-xs font-merryweather">Mind map   Goal impute missing data fit regression  library(tidyverse) library(AER) library(naniar) library(mice)  Steps Step 01. missing data wages_data &lt;- read_csv(&quot;/Users/zero/myrepo/jixingBlogdown/data/Mroz.csv&quot;) wages_data &lt;- wages_data %&gt;% select(wage, educ, fatheduc, motheduc, inlf, hours, kidslt6, kidsge6, age, huswage, mtr, unem, city, exper) %&gt;% mutate_at(vars(kidslt6, kidsge6, hours, educ, age, wage, huswage, mtr, motheduc, fatheduc, unem, exper), as.numeric) %&gt;% mutate_at(vars(city, inlf), as.character) wages_data &lt;- wages_data %&gt;% mutate(wage = ifelse(is.na(wage), 0, wage)) vis_miss(wages_data) wages_mis &lt;- ampute(wages_data)$amp vis_miss(wages_mis)  Step 02.</div>
             </div>
             <div style="clear:both;"></div>
             <hr>

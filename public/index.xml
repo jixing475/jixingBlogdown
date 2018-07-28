@@ -16,7 +16,10 @@
     <updated>2018-07-28T00:00:00+00:00</updated>
     <content type="html"><![CDATA[<div id="mind-map" class="section level1">
 <h1>Mind map</h1>
-<p><img src="/Users/zero/myrepo/jixingBlogdown/img/missing-data.png" width="30%" style="display: block; margin: auto;" /></p>
+<div class="figure">
+<img src="/Users/zero/myrepo/jixingBlogdown/static/post/2018-07-28-missing-data-imputation-and-fit-regression_files/missing-data.png" />
+
+</div>
 </div>
 <div id="goal" class="section level1">
 <h1>Goal</h1>
@@ -45,10 +48,10 @@ wages_data &lt;- wages_data %&gt;%
 wages_data &lt;- wages_data %&gt;% 
     mutate(wage = ifelse(is.na(wage), 0, wage))
 vis_miss(wages_data)</code></pre>
-<p><img src="/post/2018-07-28-missing-data-imputation-and-fit-regression_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><img src="/post/2018-07-28-missing-data-imputation-and-fit-regression_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <pre class="r"><code>wages_mis &lt;- ampute(wages_data)$amp
 vis_miss(wages_mis)</code></pre>
-<p><img src="/post/2018-07-28-missing-data-imputation-and-fit-regression_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<p><img src="/post/2018-07-28-missing-data-imputation-and-fit-regression_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
 </div>
 <div id="step-02.-impute-data" class="section level2">
 <h2><strong style="color: darkred;">Step 02. impute data</strong></h2>
@@ -99,19 +102,19 @@ imp_wages_df &lt;- imp_wages_df %&gt;%
 <h2><strong style="color: darkred;">Step 06. summary</strong></h2>
 <pre class="r"><code>summary(pool_lin_reg)</code></pre>
 <pre><code>##                  estimate    std.error  statistic       df      p.value
-## (Intercept)  9.806097e-01 3.331488e-01  2.9434584 531.8338 3.361903e-03
-## educ         4.196313e-02 8.966193e-03  4.6801499 198.8067 3.492741e-06
-## inlf         1.851410e+00 5.175918e-02 35.7696823 543.3328 0.000000e+00
-## hours       -6.611646e-05 3.075999e-05 -2.1494306 506.2138 3.197021e-02
-## kidslt6     -2.933034e-02 3.755389e-02 -0.7810201 432.9037 4.350761e-01
-## kidsge6      2.995198e-03 1.503667e-02  0.1991928 230.5606 8.421745e-01
-## age         -1.077289e-03 2.807791e-03 -0.3836787 318.8536 7.013426e-01
-## huswage     -2.184247e-02 6.476193e-03 -3.3727335 198.1600 7.886052e-04
-## mtr         -1.989917e+00 3.284191e-01 -6.0590777 413.1404 2.323195e-09
-## unem         2.961937e-03 5.436213e-03  0.5448530 647.4285 5.860423e-01
-## city         8.497050e-03 3.676616e-02  0.2311106 631.3654 8.173019e-01
-## exper        1.623188e-02 6.279752e-03  2.5847968 571.5035 9.961271e-03
-## exper2      -2.260148e-04 2.071695e-04 -1.0909654 305.6766 2.756939e-01</code></pre>
+## (Intercept)  8.280975e-01 3.831775e-01  2.1611327 119.9914 3.102080e-02
+## educ         4.294149e-02 8.802512e-03  4.8783222 382.2726 1.323325e-06
+## inlf         1.836153e+00 5.209373e-02 35.2470955 705.6619 0.000000e+00
+## hours       -4.122369e-05 3.299107e-05 -1.2495410 283.7272 2.118815e-01
+## kidslt6     -8.104203e-03 4.041130e-02 -0.2005430 310.0612 8.411137e-01
+## kidsge6      1.738855e-03 1.626527e-02  0.1069060 123.5410 9.148940e-01
+## age         -9.533023e-04 2.956498e-03 -0.3224431 241.8566 7.472125e-01
+## huswage     -2.044921e-02 7.077568e-03 -2.8892989 147.1498 3.979419e-03
+## mtr         -1.810842e+00 3.732495e-01 -4.8515600 141.0950 1.508407e-06
+## unem         3.399622e-03 5.652387e-03  0.6014489 515.1085 5.477342e-01
+## city         7.105462e-03 4.132513e-02  0.1719405 167.7577 8.635336e-01
+## exper        1.768567e-02 6.656315e-03  2.6569755 322.1042 8.062814e-03
+## exper2      -3.199814e-04 2.117654e-04 -1.5110183 296.2319 1.312314e-01</code></pre>
 </div>
 <div id="links" class="section level2">
 <h2><strong>Links</strong></h2>
