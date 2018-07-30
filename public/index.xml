@@ -2,12 +2,291 @@
   <title>student zero </title>
   <link href="/index.xml" rel="self"/>
   <link href="/"/>
-  <updated>2018-07-28T00:00:00+00:00</updated>
+  <updated>2018-07-30T00:00:00+00:00</updated>
   <id>/</id>
   <author>
     <name>Jixing Liu</name>
   </author>
   <generator>Hugo -- gohugo.io</generator>
+  <entry>
+    <title type="html"><![CDATA[Survival Analysis]]></title>
+    <link href="/2018/07/survival-analysis/"/>
+    <id>/2018/07/survival-analysis/</id>
+    <published>2018-07-30T00:00:00+00:00</published>
+    <updated>2018-07-30T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<div id="survival-analysis-basics" class="section level1">
+<h1>1.Survival Analysis Basics</h1>
+<div id="basic-concept" class="section level2">
+<h2>Basic concept</h2>
+<div id="censoringright-censoring" class="section level3">
+<h3>Censoring:right censoring</h3>
+<div class="figure">
+<img src="https://i.loli.net/2018/07/30/5b5eb82099e7b.jpg" />
+
+</div>
+</div>
+<div id="survival-and-hazard-functions" class="section level3">
+<h3>Survival and hazard functions</h3>
+<div class="figure">
+<img src="https://i.loli.net/2018/07/30/5b5eba8a7005c.jpg" />
+
+</div>
+</div>
+<div id="log-rank-test-kaplan-meier-survival-estimate" class="section level3">
+<h3>Log-rank test: Kaplan-Meier survival estimate</h3>
+<p><strong style="color: darkred;">null hypothesis</strong> is that there is no difference in survival between the two groups</p>
+<ol style="list-style-type: decimal">
+<li><strong style="color: darkred;">Non-parametric test</strong> , so no assumptions about the survival distributions</li>
+<li>Log rank statistic is approximately distributed as a <strong style="color: darkred;">chi-square test statistic</strong>.</li>
+</ol>
+</div>
+</div>
+<div id="survival-analysis-in-r" class="section level2">
+<h2><strong style="color: darkred;">Survival analysis in R</strong></h2>
+<pre class="r"><code>#data
+library(&quot;survival&quot;)
+library(&quot;survminer&quot;)
+data(&quot;lung&quot;)
+#survival fit
+fit &lt;- survfit(Surv(time, status) ~ sex, data = lung)
+#summary
+summary(fit)$table</code></pre>
+<pre><code>##       records n.max n.start events   *rmean *se(rmean) median 0.95LCL
+## sex=1     138   138     138    112 325.0663   22.59845    270     212
+## sex=2      90    90      90     53 458.2757   33.78530    426     348
+##       0.95UCL
+## sex=1     310
+## sex=2     550</code></pre>
+<pre class="r"><code>d &lt;- data.frame(time = fit$time,
+                  n.risk = fit$n.risk,
+                  n.event = fit$n.event,
+                  n.censor = fit$n.censor,
+                  surv = fit$surv,
+                  upper = fit$upper,
+                  lower = fit$lower
+                  )
+head(d)</code></pre>
+<pre><code>##   time n.risk n.event n.censor      surv     upper     lower
+## 1   11    138       3        0 0.9782609 1.0000000 0.9542301
+## 2   12    135       1        0 0.9710145 0.9994124 0.9434235
+## 3   13    134       2        0 0.9565217 0.9911586 0.9230952
+## 4   15    132       1        0 0.9492754 0.9866017 0.9133612
+## 5   26    131       1        0 0.9420290 0.9818365 0.9038355
+## 6   30    130       1        0 0.9347826 0.9768989 0.8944820</code></pre>
+<pre class="r"><code>#Visualize survival curves
+ggsurvplot(
+   fit,                     # survfit object with calculated statistics.
+   pval = TRUE,             # show p-value of log-rank test.
+   conf.int = TRUE,         # show confidence intervals for 
+                            # point estimaes of survival curves.
+   conf.int.style = &quot;step&quot;,  # customize style of confidence intervals
+   xlab = &quot;Time in days&quot;,   # customize X axis label.
+   break.time.by = 200,     # break X axis in time intervals by 200.
+   ggtheme = theme_light(), # customize plot and risk table with a theme.
+   risk.table = &quot;abs_pct&quot;,  # absolute number and percentage at risk.
+  risk.table.y.text.col = T,# colour risk table text annotations.
+  risk.table.y.text = FALSE,# show bars instead of names in text annotations
+                            # in legend of risk table.
+  ncensor.plot = TRUE,      # plot the number of censored subjects at time t
+  surv.median.line = &quot;hv&quot;,  # add the median survival pointer.
+  legend.labs = 
+    c(&quot;Male&quot;, &quot;Female&quot;),    # change legend labels.
+  palette = 
+    c(&quot;#E7B800&quot;, &quot;#2E9FDF&quot;) # custom color palettes.
+)</code></pre>
+<p><img src="/post/2018-07-30-survival-analysis_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<pre class="r"><code>#Visualize cumulative events curves
+ggsurvplot(fit,
+          conf.int = TRUE,
+          risk.table.col = &quot;strata&quot;, # Change risk table color by groups
+          ggtheme = theme_bw(), # Change ggplot2 theme
+          palette = c(&quot;#E7B800&quot;, &quot;#2E9FDF&quot;),
+          fun = &quot;cumhaz&quot;)</code></pre>
+<p><img src="/post/2018-07-30-survival-analysis_files/figure-html/unnamed-chunk-1-2.png" width="672" /></p>
+<pre class="r"><code>#Log-rank test
+surv_diff &lt;- survdiff(Surv(time, status) ~ sex, data = lung)
+surv_diff</code></pre>
+<pre><code>## Call:
+## survdiff(formula = Surv(time, status) ~ sex, data = lung)
+## 
+##         N Observed Expected (O-E)^2/E (O-E)^2/V
+## sex=1 138      112     91.6      4.55      10.3
+## sex=2  90       53     73.4      5.68      10.3
+## 
+##  Chisq= 10.3  on 1 degrees of freedom, p= 0.001</code></pre>
+</div>
+</div>
+<div id="cox-proportional-hazards-model" class="section level1">
+<h1>2.Cox Proportional Hazards Model</h1>
+<div id="concept" class="section level2">
+<h2>Concept</h2>
+<ol style="list-style-type: decimal">
+<li>Kaplan-Meier curves and log-rank tests - are examples of univariate analysis.</li>
+<li>Additionally, Kaplan-Meier curves and logrank tests are useful only when the predictor variable is categorical (e.g.: treatment A vs treatment B; males vs females). They don’t work easily for quantitative predictors such as gene expression, weight, or age.</li>
+<li>Cox proportional hazards regression analysis, which works for both quantitative predictor variables and for categorical variables. <img src="https://i.loli.net/2018/07/30/5b5ec1fa8aa1d.jpg" alt="Basics of the Cox proportional hazards model" /></li>
+</ol>
+</div>
+<div id="compute-the-cox-model-in-r" class="section level2">
+<h2>Compute the Cox model in R</h2>
+<pre class="r"><code>#data
+
+#fit
+res.cox &lt;- coxph(Surv(time, status) ~ sex, data = lung)
+#summary
+summary(res.cox)</code></pre>
+<pre><code>## Call:
+## coxph(formula = Surv(time, status) ~ sex, data = lung)
+## 
+##   n= 228, number of events= 165 
+## 
+##        coef exp(coef) se(coef)      z Pr(&gt;|z|)   
+## sex -0.5310    0.5880   0.1672 -3.176  0.00149 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+##     exp(coef) exp(-coef) lower .95 upper .95
+## sex     0.588      1.701    0.4237     0.816
+## 
+## Concordance= 0.579  (se = 0.022 )
+## Rsquare= 0.046   (max possible= 0.999 )
+## Likelihood ratio test= 10.63  on 1 df,   p=0.001
+## Wald test            = 10.09  on 1 df,   p=0.001
+## Score (logrank) test = 10.33  on 1 df,   p=0.001</code></pre>
+<pre class="r"><code>covariates &lt;- c(&quot;age&quot;, &quot;sex&quot;,  &quot;ph.karno&quot;, &quot;ph.ecog&quot;, &quot;wt.loss&quot;)
+univ_formulas &lt;- sapply(covariates,
+                        function(x) as.formula(paste(&#39;Surv(time, status)~&#39;, x)))
+univ_models &lt;- lapply( univ_formulas, function(x){coxph(x, data = lung)})
+# Extract data 
+univ_results &lt;- lapply(univ_models,
+                       function(x){ 
+                          x &lt;- summary(x)
+                          p.value&lt;-signif(x$wald[&quot;pvalue&quot;], digits=2)
+                          wald.test&lt;-signif(x$wald[&quot;test&quot;], digits=2)
+                          beta&lt;-signif(x$coef[1], digits=2);#coeficient beta
+                          HR &lt;-signif(x$coef[2], digits=2);#exp(beta)
+                          HR.confint.lower &lt;- signif(x$conf.int[,&quot;lower .95&quot;], 2)
+                          HR.confint.upper &lt;- signif(x$conf.int[,&quot;upper .95&quot;],2)
+                          HR &lt;- paste0(HR, &quot; (&quot;, 
+                                       HR.confint.lower, &quot;-&quot;, HR.confint.upper, &quot;)&quot;)
+                          res&lt;-c(beta, HR, wald.test, p.value)
+                          names(res)&lt;-c(&quot;beta&quot;, &quot;HR (95% CI for HR)&quot;, &quot;wald.test&quot;, 
+                                        &quot;p.value&quot;)
+                          return(res)
+                          #return(exp(cbind(coef(x),confint(x))))
+                         })
+res &lt;- t(as.data.frame(univ_results, check.names = FALSE))
+as.data.frame(res)</code></pre>
+<pre><code>##            beta HR (95% CI for HR) wald.test p.value
+## age       0.019            1 (1-1)       4.1   0.042
+## sex       -0.53   0.59 (0.42-0.82)        10  0.0015
+## ph.karno -0.016      0.98 (0.97-1)       7.9   0.005
+## ph.ecog    0.48        1.6 (1.3-2)        18 2.7e-05
+## wt.loss  0.0013         1 (0.99-1)      0.05    0.83</code></pre>
+</div>
+<div id="multivariate-cox-regression-analysis" class="section level2">
+<h2>Multivariate Cox regression analysis</h2>
+<pre class="r"><code>#fit
+res.cox &lt;- coxph(Surv(time, status) ~ age + sex + ph.ecog, data =  lung)
+summary(res.cox)</code></pre>
+<pre><code>## Call:
+## coxph(formula = Surv(time, status) ~ age + sex + ph.ecog, data = lung)
+## 
+##   n= 227, number of events= 164 
+##    (1 observation deleted due to missingness)
+## 
+##              coef exp(coef)  se(coef)      z Pr(&gt;|z|)    
+## age      0.011067  1.011128  0.009267  1.194 0.232416    
+## sex     -0.552612  0.575445  0.167739 -3.294 0.000986 ***
+## ph.ecog  0.463728  1.589991  0.113577  4.083 4.45e-05 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+##         exp(coef) exp(-coef) lower .95 upper .95
+## age        1.0111     0.9890    0.9929    1.0297
+## sex        0.5754     1.7378    0.4142    0.7994
+## ph.ecog    1.5900     0.6289    1.2727    1.9864
+## 
+## Concordance= 0.637  (se = 0.026 )
+## Rsquare= 0.126   (max possible= 0.999 )
+## Likelihood ratio test= 30.5  on 3 df,   p=1e-06
+## Wald test            = 29.93  on 3 df,   p=1e-06
+## Score (logrank) test = 30.5  on 3 df,   p=1e-06</code></pre>
+<pre class="r"><code>sex_df &lt;- with(lung,
+               data.frame(sex = c(1, 2), 
+                          age = rep(mean(age, na.rm = TRUE), 2),
+                          ph.ecog = c(1, 1)
+                          )
+               )
+sex_df</code></pre>
+<pre><code>##   sex      age ph.ecog
+## 1   1 62.44737       1
+## 2   2 62.44737       1</code></pre>
+<pre class="r"><code># Survival curves
+fit &lt;- survfit(res.cox, newdata = sex_df)
+ggsurvplot(fit, data=lung, conf.int = TRUE, legend.labs=c(&quot;Sex=1&quot;, &quot;Sex=2&quot;),
+           ggtheme = theme_minimal())</code></pre>
+<p><img src="/post/2018-07-30-survival-analysis_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+</div>
+<div id="cox-model-assumptions" class="section level1">
+<h1>3.Cox Model Assumptions</h1>
+<div id="the-schoenfeld-residuals-are-independent-of-time-non-significant-relationship-between-residuals-and-time" class="section level2">
+<h2>1. the Schoenfeld residuals are independent of time, non-significant relationship between residuals and time</h2>
+<pre class="r"><code>#From the output down, the test is not statistically significant for each of the covariates
+res.cox &lt;- coxph(Surv(time, status) ~ age + sex + wt.loss, data =  lung)
+res.cox</code></pre>
+<pre><code>## Call:
+## coxph(formula = Surv(time, status) ~ age + sex + wt.loss, data = lung)
+## 
+##             coef exp(coef) se(coef)     z      p
+## age      0.02009   1.02029  0.00966  2.08 0.0377
+## sex     -0.52103   0.59391  0.17435 -2.99 0.0028
+## wt.loss  0.00076   1.00076  0.00619  0.12 0.9024
+## 
+## Likelihood ratio test=14.67  on 3 df, p=0.002
+## n= 214, number of events= 152 
+##    (14 observations deleted due to missingness)</code></pre>
+<pre class="r"><code>test.ph &lt;- cox.zph(res.cox)
+test.ph</code></pre>
+<pre><code>##             rho chisq     p
+## age     -0.0483 0.378 0.538
+## sex      0.1265 2.349 0.125
+## wt.loss  0.0126 0.024 0.877
+## GLOBAL       NA 2.846 0.416</code></pre>
+<pre class="r"><code>ggcoxzph(test.ph)</code></pre>
+<p><img src="/post/2018-07-30-survival-analysis_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="influential-observations" class="section level2">
+<h2>2. influential observations</h2>
+<p>hat(y) - y <img src="https://i.loli.net/2018/07/30/5b5eccd5046f4.jpg" /> 1. Positive values correspond to individuals that “died too soon” compared to expected survival times. 2. Negative values correspond to individual that “lived too long”. 3. Very large or small values are outliers, which are poorly predicted by the model.</p>
+<pre class="r"><code>#type: the type of residuals to present on Y axis. Allowed values include one of c(“martingale”, “deviance”, “score”, “schoenfeld”, “dfbeta”, “dfbetas”, “scaledsch”, “partial”)
+ggcoxdiagnostics(res.cox, type = &quot;dfbeta&quot;,
+                 linear.predictions = FALSE, ggtheme = theme_bw())</code></pre>
+<p><img src="/post/2018-07-30-survival-analysis_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>ggcoxdiagnostics(res.cox, type = &quot;deviance&quot;,
+                 linear.predictions = FALSE, ggtheme = theme_bw())</code></pre>
+<p><img src="/post/2018-07-30-survival-analysis_files/figure-html/unnamed-chunk-5-2.png" width="672" /></p>
+</div>
+<div id="non-linearity" class="section level2">
+<h2>3.non linearity</h2>
+<p><strong style="color: darkred;">we assume that continuous covariates have a linear form. However, this assumption should be checked</strong> Martingale residuals may present any value in the range <strong style="color: darkred;">(-INF, +1)</strong> : <img src="https://i.loli.net/2018/07/30/5b5eccd5046f4.jpg" /> 1. A value of martinguale residuals near 1 represents individuals that “died too soon”, 2. and large negative values correspond to individuals that “lived too long”.</p>
+<p>The function ggcoxfunctional() displays graphs of continuous covariates against martingale residuals of null cox proportional hazards model. This might help to properly <strong style="color: darkred;">choose the functional form of continuous variable in the Cox model</strong> . Fitted lines with lowess function should be linear to satisfy the Cox proportional hazards model assumptions.</p>
+<pre class="r"><code>#It appears that, nonlinearity is slightly here.
+ggcoxfunctional(Surv(time, status) ~ age + log(age) + sqrt(age), data = lung)</code></pre>
+<p><img src="/post/2018-07-30-survival-analysis_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>#比较 变量age 在 线性age 和非线性 log(age) or sqrt(age) 下 残差分布模式图，基本一致，所以线性假设满足</code></pre>
+</div>
+<div id="reference" class="section level2">
+<h2><strong>reference</strong></h2>
+<ul>
+<li><a href="http://www.sthda.com/english/wiki/wiki.php?title=survival-analysis-basics">survival analysis</a></li>
+<li><a href="http://www.sthda.com/english/wiki/wiki.php?title=survival-analysis">cox</a></li>
+<li><a href="http://www.sthda.com/english/wiki/cox-model-assumptions">assumptions</a></li>
+</ul>
+</div>
+</div>
+]]></content>
+  </entry>
   <entry>
     <title type="html"><![CDATA[Missing data imputation and fit regression]]></title>
     <link href="/2018/07/missing-data-imputation-and-fit-regression/"/>
@@ -101,20 +380,20 @@ imp_wages_df &lt;- imp_wages_df %&gt;%
 <div id="step-06.-summary" class="section level2">
 <h2><strong style="color: darkred;">Step 06. summary</strong></h2>
 <pre class="r"><code>summary(pool_lin_reg)</code></pre>
-<pre><code>##                  estimate    std.error  statistic       df      p.value
-## (Intercept)  8.280975e-01 3.831775e-01  2.1611327 119.9914 3.102080e-02
-## educ         4.294149e-02 8.802512e-03  4.8783222 382.2726 1.323325e-06
-## inlf         1.836153e+00 5.209373e-02 35.2470955 705.6619 0.000000e+00
-## hours       -4.122369e-05 3.299107e-05 -1.2495410 283.7272 2.118815e-01
-## kidslt6     -8.104203e-03 4.041130e-02 -0.2005430 310.0612 8.411137e-01
-## kidsge6      1.738855e-03 1.626527e-02  0.1069060 123.5410 9.148940e-01
-## age         -9.533023e-04 2.956498e-03 -0.3224431 241.8566 7.472125e-01
-## huswage     -2.044921e-02 7.077568e-03 -2.8892989 147.1498 3.979419e-03
-## mtr         -1.810842e+00 3.732495e-01 -4.8515600 141.0950 1.508407e-06
-## unem         3.399622e-03 5.652387e-03  0.6014489 515.1085 5.477342e-01
-## city         7.105462e-03 4.132513e-02  0.1719405 167.7577 8.635336e-01
-## exper        1.768567e-02 6.656315e-03  2.6569755 322.1042 8.062814e-03
-## exper2      -3.199814e-04 2.117654e-04 -1.5110183 296.2319 1.312314e-01</code></pre>
+<pre><code>##                  estimate    std.error   statistic       df      p.value
+## (Intercept)  1.012423e+00 3.461251e-01  2.92501944 400.7382 3.557091e-03
+## educ         4.539668e-02 8.424241e-03  5.38881542 656.8772 9.735809e-08
+## inlf         1.866331e+00 5.583397e-02 33.42644968 231.0175 0.000000e+00
+## hours       -6.421963e-05 3.382794e-05 -1.89841948 135.1251 5.805680e-02
+## kidslt6     -5.544361e-03 3.795262e-02 -0.14608637 609.2085 8.838958e-01
+## kidsge6     -5.237696e-03 1.509400e-02 -0.34700510 301.2112 7.286930e-01
+## age          2.382734e-04 2.760765e-03  0.08630701 549.0705 9.312473e-01
+## huswage     -2.568072e-02 6.643815e-03 -3.86535757 319.0680 1.213720e-04
+## mtr         -2.089116e+00 3.418482e-01 -6.11123791 434.8243 1.650737e-09
+## unem         1.802800e-03 5.595457e-03  0.32218990 573.9496 7.474062e-01
+## city         1.423946e-02 3.801650e-02  0.37456010 432.9497 7.081025e-01
+## exper        1.279662e-02 6.353684e-03  2.01404701 579.9830 4.439128e-02
+## exper2      -1.819858e-04 1.987354e-04 -0.91571864 691.7068 3.601336e-01</code></pre>
 </div>
 <div id="links" class="section level2">
 <h2><strong>Links</strong></h2>

@@ -511,6 +511,24 @@ print(fact(5))</code></pre>
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2018/07/survival-analysis/">
+                <h3 class="media-heading">Survival Analysis</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">1.Survival Analysis Basics Basic concept Censoring:right censoring   Survival and hazard functions   Log-rank test: Kaplan-Meier survival estimate null hypothesis is that there is no difference in survival between the two groups
+Non-parametric test , so no assumptions about the survival distributions Log rank statistic is approximately distributed as a chi-square test statistic.    Survival analysis in R #data library(&quot;survival&quot;) library(&quot;survminer&quot;) data(&quot;lung&quot;) #survival fit fit &lt;- survfit(Surv(time, status) ~ sex, data = lung) #summary summary(fit)$table ## records n.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2018/07/missing-data-imputation-and-fit-regression/">
                 <h3 class="media-heading">Missing data imputation and fit regression</h3>
               </a>
@@ -680,23 +698,6 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/04/algorithms-quick-sort/">
-                <h3 class="media-heading">algorithms: quick sort</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Apr 4, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">快速排序 和 分而治之（D&amp;C）divde and conquer  D&amp;C 将问题逐步分解，找到最基本的情况为止 快速排序，随机的选择基准值，平均运行时间为**O(n*logn)**  def quicksort(array): if len(array) &lt; 2:# base case, arrays with 0 or 1 element are already &quot;sorted&quot; return array else:# recursive case pivot = array[0]# sub-array of all the elements less than the pivot less = [i for i in array[1:] if i &lt;= pivot]# sub-array of all the elements greater than the pivot greater = [i for i in array[1:] if i &gt; pivot] return quicksort(less) + [pivot] + quicksort(greater) print(quicksort([10, 5, 2, 3]))  ## [2, 3, 5, 10]  </div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -704,7 +705,7 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         34 posts found
+         35 posts found
       </p>
     </div>
   </div>

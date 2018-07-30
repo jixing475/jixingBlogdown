@@ -325,20 +325,20 @@ imp_wages_df &lt;- imp_wages_df %&gt;%
 <div id="step-06.-summary" class="section level2">
 <h2><strong style="color: darkred;">Step 06. summary</strong></h2>
 <pre class="r"><code>summary(pool_lin_reg)</code></pre>
-<pre><code>##                  estimate    std.error  statistic       df      p.value
-## (Intercept)  8.280975e-01 3.831775e-01  2.1611327 119.9914 3.102080e-02
-## educ         4.294149e-02 8.802512e-03  4.8783222 382.2726 1.323325e-06
-## inlf         1.836153e+00 5.209373e-02 35.2470955 705.6619 0.000000e+00
-## hours       -4.122369e-05 3.299107e-05 -1.2495410 283.7272 2.118815e-01
-## kidslt6     -8.104203e-03 4.041130e-02 -0.2005430 310.0612 8.411137e-01
-## kidsge6      1.738855e-03 1.626527e-02  0.1069060 123.5410 9.148940e-01
-## age         -9.533023e-04 2.956498e-03 -0.3224431 241.8566 7.472125e-01
-## huswage     -2.044921e-02 7.077568e-03 -2.8892989 147.1498 3.979419e-03
-## mtr         -1.810842e+00 3.732495e-01 -4.8515600 141.0950 1.508407e-06
-## unem         3.399622e-03 5.652387e-03  0.6014489 515.1085 5.477342e-01
-## city         7.105462e-03 4.132513e-02  0.1719405 167.7577 8.635336e-01
-## exper        1.768567e-02 6.656315e-03  2.6569755 322.1042 8.062814e-03
-## exper2      -3.199814e-04 2.117654e-04 -1.5110183 296.2319 1.312314e-01</code></pre>
+<pre><code>##                  estimate    std.error   statistic       df      p.value
+## (Intercept)  1.012423e+00 3.461251e-01  2.92501944 400.7382 3.557091e-03
+## educ         4.539668e-02 8.424241e-03  5.38881542 656.8772 9.735809e-08
+## inlf         1.866331e+00 5.583397e-02 33.42644968 231.0175 0.000000e+00
+## hours       -6.421963e-05 3.382794e-05 -1.89841948 135.1251 5.805680e-02
+## kidslt6     -5.544361e-03 3.795262e-02 -0.14608637 609.2085 8.838958e-01
+## kidsge6     -5.237696e-03 1.509400e-02 -0.34700510 301.2112 7.286930e-01
+## age          2.382734e-04 2.760765e-03  0.08630701 549.0705 9.312473e-01
+## huswage     -2.568072e-02 6.643815e-03 -3.86535757 319.0680 1.213720e-04
+## mtr         -2.089116e+00 3.418482e-01 -6.11123791 434.8243 1.650737e-09
+## unem         1.802800e-03 5.595457e-03  0.32218990 573.9496 7.474062e-01
+## city         1.423946e-02 3.801650e-02  0.37456010 432.9497 7.081025e-01
+## exper        1.279662e-02 6.353684e-03  2.01404701 579.9830 4.439128e-02
+## exper2      -1.819858e-04 1.987354e-04 -0.91571864 691.7068 3.601336e-01</code></pre>
 </div>
 <div id="links" class="section level2">
 <h2><strong>Links</strong></h2>
@@ -371,7 +371,7 @@ imp_wages_df &lt;- imp_wages_df %&gt;%
         <ul class="post-actions post-action-nav">
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/07/survival-analysis/" data-tooltip="Survival Analysis">
               
                 <i class="fa fa-angle-left"></i>
                 <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -455,7 +455,7 @@ imp_wages_df &lt;- imp_wages_df %&gt;%
         <ul class="post-actions post-action-nav">
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/07/survival-analysis/" data-tooltip="Survival Analysis">
               
                 <i class="fa fa-angle-left"></i>
                 <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -591,6 +591,24 @@ imp_wages_df &lt;- imp_wages_df %&gt;%
       <div class="no-result text-color-light text-center">no post found</div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/07/survival-analysis/">
+                <h3 class="media-heading">Survival Analysis</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">1.Survival Analysis Basics Basic concept Censoring:right censoring   Survival and hazard functions   Log-rank test: Kaplan-Meier survival estimate null hypothesis is that there is no difference in survival between the two groups
+Non-parametric test , so no assumptions about the survival distributions Log rank statistic is approximately distributed as a chi-square test statistic.    Survival analysis in R #data library(&quot;survival&quot;) library(&quot;survminer&quot;) data(&quot;lung&quot;) #survival fit fit &lt;- survfit(Surv(time, status) ~ sex, data = lung) #summary summary(fit)$table ## records n.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -764,23 +782,6 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/04/algorithms-quick-sort/">
-                <h3 class="media-heading">algorithms: quick sort</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Apr 4, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">快速排序 和 分而治之（D&amp;C）divde and conquer  D&amp;C 将问题逐步分解，找到最基本的情况为止 快速排序，随机的选择基准值，平均运行时间为**O(n*logn)**  def quicksort(array): if len(array) &lt; 2:# base case, arrays with 0 or 1 element are already &quot;sorted&quot; return array else:# recursive case pivot = array[0]# sub-array of all the elements less than the pivot less = [i for i in array[1:] if i &lt;= pivot]# sub-array of all the elements greater than the pivot greater = [i for i in array[1:] if i &gt; pivot] return quicksort(less) + [pivot] + quicksort(greater) print(quicksort([10, 5, 2, 3]))  ## [2, 3, 5, 10]  </div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -788,7 +789,7 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         34 posts found
+         35 posts found
       </p>
     </div>
   </div>
