@@ -2,12 +2,24 @@
   <title>student zero </title>
   <link href="/index.xml" rel="self"/>
   <link href="/"/>
-  <updated>2018-08-02T00:00:00+00:00</updated>
+  <updated>2018-08-06T00:00:00+00:00</updated>
   <id>/</id>
   <author>
     <name>Jixing Liu</name>
   </author>
   <generator>Hugo -- gohugo.io</generator>
+  <entry>
+    <title type="html"><![CDATA[python basic 001]]></title>
+    <link href="/2018/08/python-basic-001/"/>
+    <id>/2018/08/python-basic-001/</id>
+    <published>2018-08-06T00:00:00+00:00</published>
+    <updated>2018-08-06T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<div class="figure">
+<img src="https://i.loli.net/2018/08/06/5b6796e73e478.jpg" />
+
+</div>
+]]></content>
+  </entry>
   <entry>
     <title type="html"><![CDATA[游泳健身了解一下！]]></title>
     <link href="/2018/08/%E6%B8%B8%E6%B3%B3%E5%81%A5%E8%BA%AB%E4%BA%86%E8%A7%A3%E4%B8%80%E4%B8%8B/"/>

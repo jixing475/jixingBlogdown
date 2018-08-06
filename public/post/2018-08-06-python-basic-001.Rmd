@@ -1,0 +1,26 @@
+---
+title: python basic 001
+author: ZERO
+date: '2018-08-06'
+slug: python-basic-001
+categories:
+  - computers
+tags:
+  - python
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/08/06/5b67971d63ab4.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE,
+	engine.path="/Users/zero/anaconda3/bin/python"
+)
+```
+
+
+![](https://i.loli.net/2018/08/06/5b6796e73e478.jpg)

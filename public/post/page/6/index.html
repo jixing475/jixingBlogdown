@@ -16,7 +16,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.32.2 with theme Tranquilpeak 0.4.1-BETA">
-    <title>Missing Data</title>
+    <title>Posts</title>
     <meta name="author" content="Jixing Liu">
     <meta name="keywords" content=", R">
 
@@ -27,8 +27,8 @@
     <meta name="description" content="exploring and playing with data in R and python">
     <meta property="og:description" content="exploring and playing with data in R and python">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Missing Data">
-    <meta property="og:url" content="/tags/missing-data/">
+    <meta property="og:title" content="Posts">
+    <meta property="og:url" content="/post/">
     <meta property="og:site_name" content="student zero ">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="student zero ">
@@ -97,7 +97,7 @@
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <h1 class="sidebar-profile-title">Missing Data</h1>
+        <h1 class="sidebar-profile-title">Posts</h1>
         <a href="/#about">
           <img class="sidebar-profile-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
         </a>
@@ -193,78 +193,79 @@
 </nav>
 
       
-        
 
-      
       <div id="main" data-behavior="1"
         class="
                hasCoverMetaIn
                ">
-        
-          <section class="postShorten-group main-content-wrap">
+        <section class="postShorten-group main-content-wrap">
+          
+          
             
-            
-              
   
+    
+      
+        
+      
     
   
 
 
   
 
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
   <div class="postShorten-wrap">
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/07/missing-data-imputation-and-fit-regression/">
-          Missing data imputation and fit regression
+        <a class="link-unstyled" href="/2018/03/hello-world/">
+          Hello world
         </a>
       </h1>
       
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-07-28T00:00:00Z">
+      <time itemprop="datePublished" datetime="2018-03-15T00:00:00Z">
         
-  July 28, 2018
+  March 15, 2018
 
       </time>
     
     
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/datavis-and-dataclean">datavis and dataclean</a>
-    
-  
-
 
   </div>
 
     </div>
     <div class="postShorten-excerpt" itemprop="articleBody">
-      Mind map   Goal impute missing data fit regression  library(tidyverse) library(AER) library(naniar) library(mice)  Steps Step 01. missing data wages_data &lt;- read_csv(&quot;/Users/zero/myrepo/jixingBlogdown/data/Mroz.csv&quot;) wages_data &lt;- wages_data %&gt;% select(wage, educ, fatheduc, motheduc, inlf, hours, kidslt6, kidsge6, age, huswage, mtr, unem, city, exper) %&gt;% mutate_at(vars(kidslt6, kidsge6, hours, educ, age, wage, huswage, mtr, motheduc, fatheduc, unem, exper), as.numeric) %&gt;% mutate_at(vars(city, inlf), as.character) wages_data &lt;- wages_data %&gt;% mutate(wage = ifelse(is.na(wage), 0, wage)) vis_miss(wages_data) wages_mis &lt;- ampute(wages_data)$amp vis_miss(wages_mis)  Step 02.
+      Just say hello world!
       <p>
-        <a href="/2018/07/missing-data-imputation-and-fit-regression/" class="postShorten-excerpt_link link">Continue reading</a>
+        <a href="/2018/03/hello-world/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
     </div>
   </div>
   
-    <a href="/2018/07/missing-data-imputation-and-fit-regression/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="/post/2018-07-28-missing-data-imputation-and-fit-regression_files/purplecastlecat_2018-Jun-29.jpg"/>
-      </div>
-    </a>
-  
 </article>
 
-            
-            
+          
+          
+  <div class="pagination-bar">
+    <ul class="pagination">
+      
+        <li class="pagination-prev">
+          <a class="btn btn--default btn--small" href="/post/page/5/">
+            <i class="fa fa-angle-left text-base icon-mr"></i>
+            <span>NEWER POSTS</span>
+          </a>
+        </li>
+      
+      
+      <li class="pagination-number">page 6 of 6</li>
+    </ul>
+  </div>
 
-          </section>
-        
+
+        </section>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
     &copy; 2018 Jixing Liu. All Rights Reserved
