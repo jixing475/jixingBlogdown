@@ -20,21 +20,21 @@
     <meta name="author" content="Jixing Liu">
     <meta name="keywords" content=", R">
 
-    <link rel="icon" href="img/favicon.png">
+    <link rel="icon" href="img/R_py.png">
     
 
     
-    <meta name="description" content="exploring and playing with data in R">
-    <meta property="og:description" content="exploring and playing with data in R">
+    <meta name="description" content="exploring and playing with data in R and python">
+    <meta property="og:description" content="exploring and playing with data in R and python">
     <meta property="og:type" content="blog">
     <meta property="og:title" content="T Sne">
     <meta property="og:url" content="/tags/t-sne/">
     <meta property="og:site_name" content="student zero ">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="student zero ">
-    <meta name="twitter:description" content="exploring and playing with data in R">
+    <meta name="twitter:description" content="exploring and playing with data in R and python">
     
-      <meta name="twitter:creator" content="@ShirinGlander">
+      <meta name="twitter:creator" content="@studentZero475">
     
     
 
@@ -69,7 +69,11 @@
 
   <body>
     <div id="blog">
-      <header id="header" data-behavior="1">
+      <link rel="stylesheet" href="/css/monokai-sublime.css" rel="stylesheet" id="theme-stylesheet">
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<header id="header" data-behavior="1">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
     <a class="header-title-link" href="/">student zero </a>
@@ -99,7 +103,7 @@
         </a>
         <h4 class="sidebar-profile-name">Jixing Liu</h4>
         
-          <h5 class="sidebar-profile-bio">Biologist turned Bioinformatician turned Data Scientist</h5>
+          <h5 class="sidebar-profile-bio">Reading And Writing</h5>
         
       </div>
     
@@ -147,7 +151,7 @@
 
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="/page/about/">
+      <a class="sidebar-button-link " href="/#about">
     
       <i class="sidebar-button-icon fa fa-lg fa-question"></i>
       
@@ -161,11 +165,11 @@
       
   <li class="sidebar-button">
     
-      <a class="sidebar-button-link " href="https://stackoverflow.com/users/6623620/shirin-glander">
+      <a class="sidebar-button-link " href="https://twitter.com/studentZero475">
     
-      <i class="sidebar-button-icon fa fa-lg fa-stack-overflow"></i>
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
       
-      <span class="sidebar-button-desc">Stack Overflow</span>
+      <span class="sidebar-button-desc">Twitter</span>
     </a>
   </li>
 
@@ -213,16 +217,16 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2017/09/data-science-fraud-detection/">
-          Data Science for Fraud Detection
+        <a class="link-unstyled" href="/2018/08/t-sne/">
+          t-SNE
         </a>
       </h1>
       
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2017-09-06T00:00:00Z">
+      <time itemprop="datePublished" datetime="2018-08-07T00:00:00Z">
         
-  September 6, 2017
+  August 7, 2018
 
       </time>
     
@@ -240,18 +244,27 @@
 
     </div>
     <div class="postShorten-excerpt" itemprop="articleBody">
-      I have written the following post about Data Science for Fraud Detection at my company codecentric&rsquo;s blog:
- Fraud can be defined as “the crime of getting money by deceiving people” (Cambridge Dictionary); it is as old as humanity: whenever two parties exchange goods or conduct business there is the potential for one party scamming the other. With an ever increasing use of the internet for shopping, banking, filing insurance claims, etc.
+      note  许多真实世界的数据集具有较低的内在维度，但是它们嵌入在高维空间中，人类因为受限于三维可视化，而不易发现这些内在的结构
+t分布式随机邻域嵌入（t-SNE）：t-distributed stochastic neighbor embedding (t-SNE)， 是一种非常流行的非线性降为的方法，它和 PCA的不同之处在于：
+PCA的本质是在降维之后尽量保存矩阵的最大变异性，而实际上我们经常是想保存原本的结构，换句话说，就是降维前各个点相对距离结构在降维之后要继续保留下来
+ 过程 我们这里用 3维代替高维， 2维代替低维 那么3维的点经过 映射之后 在2维的空间 要保存原有的相对距离结构
+这个过程本质 神经网络深度学习问题，是找到最佳的映射矩阵（最好的 w1 w2 组合方式），使得映射后，数据结构得以保存 那么怎么来衡量数据结构保存的效果？
+那就看比较原始数据下的距离矩阵 和 映射后的距离矩阵 的差 这样的话问题就转化为： 求熵最小化的问题？
+那么这里有个问题，高维度的距离矩阵怎么和低维的距离矩阵进行比较呢 ？ 这就是 t-SNE 的特殊的地方：它把距离问题转换为概率问题，距离越近的i,j两点，pij越大， 以i为中心的t分布，描述 i 与所有点的距离，
+之所以不用正态分布，是因为t分布是长尾 的，这样的分布在尾部的数据点之间（距离较远的点）的惩罚不是区分的很严格，
+换句话说就是 映射后 近变远 的惩罚系数 &gt; 远变近的惩罚系数，
+这个过程可以想象成 一个弹簧产生形变，映射由远变进就是压缩，会产生斥力，映射由近变远，就会拉伸，产生引力 ，形变就好像是熵，是映射前和映射后的差距，产生的单位力（力/形变长度） 的绝对值就好像是惩罚系数，拉伸的形变产生的单位引力 &gt; 压缩的形变产生的单位斥力 ，
+这就很好的解决了数据点映射后的拥挤问题，就好像点与点之间有一定的斥力（为了纠正远变近的情况），但是这个斥力系数又小于点与点之间的引力（为了纠正近变远的情况，单位引力大于单位斥力是因为我们更在乎点与点之间相似的机构 ， 可以想象最后每个点会在所有合力的情况下达到一个平衡， 如下图：  
       <p>
-        <a href="/2017/09/data-science-fraud-detection/" class="postShorten-excerpt_link link">Continue reading</a>
+        <a href="/2018/08/t-sne/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
     </div>
   </div>
   
-    <a href="/2017/09/data-science-fraud-detection/">
+    <a href="/2018/08/t-sne/">
       <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://shiring.github.io/netlify_images/r_mse_gklfsi.png"/>
+        <img alt="" itemprop="image" src="https://i.loli.net/2018/08/07/5b68cda2c6c88.jpg"/>
       </div>
     </a>
   
@@ -281,7 +294,7 @@
     
     <h4 id="about-card-name">Jixing Liu</h4>
     
-      <div id="about-card-bio">Biologist turned Bioinformatician turned Data Scientist</div>
+      <div id="about-card-bio">Reading And Writing</div>
     
     
       <div id="about-card-job">
@@ -322,19 +335,25 @@
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2018/02/why-should-i-trust-you/">
-                <h3 class="media-heading">Why should I trust you 🤖?</h3>
+              <a class="link-unstyled" href="/2018/08/t-sne/">
+                <h3 class="media-heading">t-SNE</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
-                  Feb 2, 2018
+                  Aug 8, 2018
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">传统的机器学习工作流程主要集中在模型训练和优化上; 最好的模型通常是通过像精度或者错误这样的性能度量来选择的，而且如果它通过了这些性能标准的某些阈值，我们倾向于假设一个模型是足够好的。在机器学习的许多应用中，用户会使用一个模型来帮助做决定， 例如：一位医生不会对病人进行手术，仅仅因为这个模型说不应该进行手术？
-由于复杂的机器学习模型本质上是黑盒子，而且太复杂，机器学习模型做出的分类决定通常很难被人类的大脑所理解，但是能够理解和解释这些模型对于提高模型质量，提高信任度和透明度以及减少偏见非常重要，因为人类往往具有良好的直觉和因果推理，这些都是难以在数据评估指标中捕获。
-因此，我们希望能够形象的理解它们的工作原理：为什么一个模型将具有特定标签的案例进行准确分类。eg: 为什么一个乳腺肿块样本被归类为“恶性”而不是“良性，仅仅因为它长得丑吗？
- Local Interpretable Model-Agnostic Explanations (LIME) is an attempt to make these complex models at least partly understandable. The method has been published in “Why Should I Trust You?” Explaining the Predictions of Any Classifier. By Marco Tulio Ribeiro, Sameer Singh and Carlos Guestrin from the University of Washington in Seattle
- How LIME works  lime is able to explain all models for which we can obtain prediction probabilities (in R, that is every model that works with predict(type = “prob”)).</div>
+              <div class="media-content hide-xs font-merryweather">note  许多真实世界的数据集具有较低的内在维度，但是它们嵌入在高维空间中，人类因为受限于三维可视化，而不易发现这些内在的结构
+t分布式随机邻域嵌入（t-SNE）：t-distributed stochastic neighbor embedding (t-SNE)， 是一种非常流行的非线性降为的方法，它和 PCA的不同之处在于：
+PCA的本质是在降维之后尽量保存矩阵的最大变异性，而实际上我们经常是想保存原本的结构，换句话说，就是降维前各个点相对距离结构在降维之后要继续保留下来
+ 过程 我们这里用 3维代替高维， 2维代替低维 那么3维的点经过 映射之后 在2维的空间 要保存原有的相对距离结构
+这个过程本质 神经网络深度学习问题，是找到最佳的映射矩阵（最好的 w1 w2 组合方式），使得映射后，数据结构得以保存 那么怎么来衡量数据结构保存的效果？
+那就看比较原始数据下的距离矩阵 和 映射后的距离矩阵 的差 这样的话问题就转化为： 求熵最小化的问题？
+那么这里有个问题，高维度的距离矩阵怎么和低维的距离矩阵进行比较呢 ？ 这就是 t-SNE 的特殊的地方：它把距离问题转换为概率问题，距离越近的i,j两点，pij越大， 以i为中心的t分布，描述 i 与所有点的距离，
+之所以不用正态分布，是因为t分布是长尾 的，这样的分布在尾部的数据点之间（距离较远的点）的惩罚不是区分的很严格，
+换句话说就是 映射后 近变远 的惩罚系数 &gt; 远变近的惩罚系数，
+这个过程可以想象成 一个弹簧产生形变，映射由远变进就是压缩，会产生斥力，映射由近变远，就会拉伸，产生引力 ，形变就好像是熵，是映射前和映射后的差距，产生的单位力（力/形变长度） 的绝对值就好像是惩罚系数，拉伸的形变产生的单位引力 &gt; 压缩的形变产生的单位斥力 ，
+这就很好的解决了数据点映射后的拥挤问题，就好像点与点之间有一定的斥力（为了纠正远变近的情况），但是这个斥力系数又小于点与点之间的引力（为了纠正近变远的情况，单位引力大于单位斥力是因为我们更在乎点与点之间相似的机构 ， 可以想象最后每个点会在所有合力的情况下达到一个平衡， 如下图：  </div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -343,18 +362,15 @@
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2018/02/deep_learning_keras_tensorflow_18_04/">
-                <h3 class="media-heading">April 12th &amp; 13th in Hamburg: Workshop on Deep Learning with Keras and TensorFlow in R</h3>
+              <a class="link-unstyled" href="/2018/08/python-basic-001/">
+                <h3 class="media-heading">python basic 001</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
-                  Feb 2, 2018
+                  Aug 8, 2018
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">Registration is now open for my 1.5-day workshop on deep learning with Keras and TensorFlow using R.
-It will take place on April 12th and 13th in Hamburg, Germany.
-You can read about one participant’s experience in my last workshop:
- Big Data – a buzz word you can find everywhere these days, from nerdy blogs to scientific research papers and even in the news. But how does Big Data Analysis work, exactly?</div>
+              <div class="media-content hide-xs font-merryweather"> </div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -363,17 +379,15 @@ You can read about one participant’s experience in my last workshop:
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2018/02/m3_2018/">
-                <h3 class="media-heading">Announcing my talk about explainability of machine learning models at Minds Mastering Machines conference</h3>
+              <a class="link-unstyled" href="/2018/08/%E6%B8%B8%E6%B3%B3%E5%81%A5%E8%BA%AB%E4%BA%86%E8%A7%A3%E4%B8%80%E4%B8%8B/">
+                <h3 class="media-heading">游泳健身了解一下！</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
-                  Feb 2, 2018
+                  Aug 8, 2018
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">On Wednesday, April 25th 2018 I am going to talk about explainability of machine learning models at the Minds Mastering Machines conference in Cologne. The conference will be in German, though.
-  ERKLÄRBARKEIT VON MACHINE LEARNING: WIE KÖNNEN WIR VERTRAUEN IN KOMPLEXE MODELLE SCHAFFEN?
-  Mit Machine-Learning getroffene Entscheidungen sind inhärent schwierig – wenn nicht gar unmöglich – nachzuvollziehen. Die Komplexität einiger der besten Modelle, wie Neuronale Netzwerke, ist genau das, was sie so erfolgreich macht.</div>
+              <div class="media-content hide-xs font-merryweather">出地铁口路上，不远处，灯光昏暗，映衬着一个消瘦的身影，深色的T-shirt，牛仔短裤，卷卷的头发，是一位小姐姐，等等不好，眼睛似乎发现了我，糟糕：是心动的感觉，正打算从旁低头走过，突然一张传单甩在眼前，紧接着飘来熟悉的声音：“游泳健身了解一下”。</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -382,18 +396,16 @@ You can read about one participant’s experience in my last workshop:
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2018/02/herr_mies_wills_wissen/">
-                <h3 class="media-heading">I talk about machine learning with Daniel Mies (Podcast in German, though)</h3>
+              <a class="link-unstyled" href="/2018/07/survival-analysis/">
+                <h3 class="media-heading">Survival Analysis</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
-                  Feb 2, 2018
+                  Jul 7, 2018
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">For those of you out there who speak German:
-I was interviewed for a tech podcast where I talked about machine learning, neural nets, why I love R and Rstudio and how I became a Data Scientist.
-You can download and listen to the podcast here: https://mies.me/2018/01/31/hmww17-machine-learning-mit-dr-shirin-glander/
-  In der aktuellen Episode gibt Dr. Shirin Glander (Twitter, Homepage) uns ein paar Einblicke in das Thema Machine Learning. Wir klären zunächst, was Machine Learning ist und welche Möglichkeiten es bietet bevor wir etwas mehr in die Tiefe gehen.</div>
+              <div class="media-content hide-xs font-merryweather">1.Survival Analysis Basics Basic concept Censoring:right censoring   Survival and hazard functions   Log-rank test: Kaplan-Meier survival estimate null hypothesis is that there is no difference in survival between the two groups
+Non-parametric test , so no assumptions about the survival distributions Log rank statistic is approximately distributed as a chi-square test statistic.    Survival analysis in R #data library(&quot;survival&quot;) library(&quot;survminer&quot;) data(&quot;lung&quot;) #survival fit fit &lt;- survfit(Surv(time, status) ~ sex, data = lung) #summary summary(fit)$table ## records n.</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -402,16 +414,15 @@ You can download and listen to the podcast here: https://mies.me/2018/01/31/hmww
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2018/01/jax2018/">
-                <h3 class="media-heading">JAX 2018 talk announcement: Deep Learning - a Primer</h3>
+              <a class="link-unstyled" href="/2018/07/missing-data-imputation-and-fit-regression/">
+                <h3 class="media-heading">Missing data imputation and fit regression</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
-                  Jan 1, 2018
+                  Jul 7, 2018
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">I am happy to announce that on Tuesday, April 24th 2018 Uwe Friedrichsen and I will give a talk about Deep Learning - a Primer at the JAX conference in Mainz, Germany.
- Deep Learning is one of the “hot” topics in the AI area – a lot of hype, a lot of inflated expectation, but also quite some impressive success stories. As some AI experts already predict that Deep Learning will become “Software 2.</div>
+              <div class="media-content hide-xs font-merryweather">Mind map   Goal impute missing data fit regression  library(tidyverse) library(AER) library(naniar) library(mice)  Steps Step 01. missing data wages_data &lt;- read_csv(&quot;/Users/zero/myrepo/jixingBlogdown/data/Mroz.csv&quot;) wages_data &lt;- wages_data %&gt;% select(wage, educ, fatheduc, motheduc, inlf, hours, kidslt6, kidsge6, age, huswage, mtr, unem, city, exper) %&gt;% mutate_at(vars(kidslt6, kidsge6, hours, educ, age, wage, huswage, mtr, motheduc, fatheduc, unem, exper), as.numeric) %&gt;% mutate_at(vars(city, inlf), as.character) wages_data &lt;- wages_data %&gt;% mutate(wage = ifelse(is.na(wage), 0, wage)) vis_miss(wages_data) wages_mis &lt;- ampute(wages_data)$amp vis_miss(wages_mis)  Step 02.</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -420,18 +431,15 @@ You can download and listen to the podcast here: https://mies.me/2018/01/31/hmww
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2018/01/twimlai94/">
-                <h3 class="media-heading">Sketchnotes from TWiML&amp;AI #94: Neuroevolution: Evolving Novel Neural Network Architectures with Kenneth Stanley</h3>
+              <a class="link-unstyled" href="/2018/07/biostrings/">
+                <h3 class="media-heading">📦 BioStrings</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
-                  Jan 1, 2018
+                  Jul 7, 2018
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">These are my sketchnotes for Sam Charrington’s podcast This Week in Machine Learning and AI about Neuroevolution: Evolving Novel Neural Network Architectures with Kenneth Stanley:
-Sketchnotes from TWiMLAI talk #94: Neuroevolution: Evolving Novel Neural Network Architectures with Kenneth Stanley
- You can listen to the podcast here.
- Kenneth studied under TWiML Talk #47 guest Risto Miikkulainen at UT Austin, and joined Uber AI Labs after Geometric Intelligence , the company he co-founded with Gary Marcus and others, was acquired in late 2016.</div>
+              <div class="media-content hide-xs font-merryweather">Init  DNA # DNA x &lt;- DNAString(&quot;actttGtag&quot;) is(x) ## [1] &quot;DNAString&quot; &quot;XString&quot; &quot;XRaw&quot; &quot;XVector&quot; &quot;Vector&quot; &quot;Annotated&quot; #转录 x %&gt;% complement() %&gt;% RNAString() -&gt; rna # 反向互补 x.r &lt;- reverseComplement(x) x.r ## 9-letter &quot;DNAString&quot; instance ## seq: CTACAAAGT d &lt;- DNAString(&quot;TTGAAAA-CTC-N&quot;) d ## 13-letter &quot;DNAString&quot; instance ## seq: TTGAAAA-CTC-N #subset subseq(x, start =1, end = 5) ## 5-letter &quot;DNAString&quot; instance ## seq: ACTTT #碱基置换 chartr(old = &quot;A&quot;, new = &quot;C&quot;, x) ## 9-letter &quot;DNAString&quot; instance ## seq: CCTTTGTCG #DNA_BASES DNA_BASES ## [1] &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;T&quot; #IUPAC_CODE_MAP IUPAC_CODE_MAP ## A C G T M R W S Y K ## &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;T&quot; &quot;AC&quot; &quot;AG&quot; &quot;AT&quot; &quot;CG&quot; &quot;CT&quot; &quot;GT&quot; ## V H D B N ## &quot;ACG&quot; &quot;ACT&quot; &quot;AGT&quot; &quot;CGT&quot; &quot;ACGT&quot;  RNA x &lt;- RNAString(&quot;acuuuGuag&quot;) is(x) ## [1] &quot;RNAString&quot; &quot;XString&quot; &quot;XRaw&quot; &quot;XVector&quot; &quot;Vector&quot; &quot;Annotated&quot; # 逆转录 x %&gt;% complement() %&gt;% DNAString() ## 9-letter &quot;DNAString&quot; instance ## seq: TGAAACATC # 翻译 codons(x) ## Views on a 9-letter RNAString subject ## subject: ACUUUGUAG ## views: ## start end width ## [1] 1 3 3 [ACU] ## [2] 4 6 3 [UUG] ## [3] 7 9 3 [UAG] translate(x) ## 3-letter &quot;AAString&quot; instance ## seq: TL* #dna -&gt; rna:T &lt;-&gt; U DNAString(&quot;actttGtag&quot;) %&gt;% RNAString() ## 9-letter &quot;RNAString&quot; instance ## seq: ACUUUGUAG #rna -&gt; dna:U &lt;-&gt; T rna %&gt;% DNAString() ## 9-letter &quot;DNAString&quot; instance ## seq: TGAAACATC  AA: Amino acid x &lt;- AAString(&quot;actttGtag&quot;) is(x) ## [1] &quot;AAString&quot; &quot;XString&quot; &quot;XRaw&quot; &quot;XVector&quot; &quot;Vector&quot; &quot;Annotated&quot;  reads # all kmer reads &lt;- mkAllStrings(c(&quot;A&quot;, &quot;C&quot;, &quot;G&quot;, &quot;T&quot;), 6) is(reads) ## [1] &quot;character&quot; &quot;vector&quot; &quot;data.</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -440,17 +448,16 @@ Sketchnotes from TWiMLAI talk #94: Neuroevolution: Evolving Novel Neural Network
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2018/01/meetup_march18/">
-                <h3 class="media-heading">Join MünsteR for our next meetup on obtaining functional implications of gene expression data with R</h3>
+              <a class="link-unstyled" href="/2018/05/purrr-use-partial-and-map-instead-of-loop/">
+                <h3 class="media-heading">purrr: Use partial and map instead of loop</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
-                  Jan 1, 2018
+                  May 5, 2018
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">In our next MünsteR R-user group meetup on March 5th, 2018 Frank Rühle will talk about bioinformatics and how to analyse genome data.
-You can RSVP here: http://meetu.ps/e/DDY1B/w54bW/f
- Next-Generation sequencing and array-based technologies provided a plethora of gene expression data in the public genomics databases. But how to get meaningful information and functional implications out of this vast amount of data? Various R-packages have been published by the Bioconductor user community for distinct kinds of analysis strategies.</div>
+              <div class="media-content hide-xs font-merryweather">🐌 I want to …   create three normal distribution with purrr::map as simple as possible
+  🐌 Here’s how to:   library(tidyverse) #rnorm(n=5, mean = mu, sd = sigma) #函数的一般形式 black_box &lt;- partial(rnorm, n=5)# 先把不变的固定下来，生成新的黑箱函数，黑箱函数只需要接受 map 传递的参数即可， 其他的参数已经通过 ·partial· 固定下来了 mu &lt;- list(10, 100, -100)# 参数 x sigma &lt;- list(0.01, 1, 10)# 参数 y map2(mu, sigma, ~ black_box(mean=.x, sd=.y)) %&gt;% do.call(cbind, .) ## [,1] [,2] [,3] ## [1,] 10.</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -459,18 +466,16 @@ You can RSVP here: http://meetu.ps/e/DDY1B/w54bW/f
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2018/01/twimlai92/">
-                <h3 class="media-heading">Sketchnotes from TWiML&amp;AI #92: Learning State Representations with Yael Niv</h3>
+              <a class="link-unstyled" href="/2018/05/iga-three-subgroup-deg-and-enrichment-analysis/">
+                <h3 class="media-heading">IgA-three-subgroup-DEG-and-enrichment-analysis</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
-                  Jan 1, 2018
+                  May 5, 2018
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">These are my sketchnotes for Sam Charrington’s podcast This Week in Machine Learning and AI about Learning State Representations with Yael Niv: https://twimlai.com/twiml-talk-92-learning-state-representations-yael-niv/
-Sketchnotes from TWiMLAI talk #92: Learning State Representations with Yael Niv
- You can listen to the podcast here.
- In this interview Yael and I explore the relationship between neuroscience and machine learning. In particular, we discusses the importance of state representations in human learning, some of her experimental results in this area, and how a better understanding of representation learning can lead to insights into machine learning problems such as reinforcement and transfer learning.</div>
+              <div class="media-content hide-xs font-merryweather">Enrichment analysis is a statistical procedure used to identify biological terms which are over-represented in a given gene set. These include signaling pathways , molecular functions, diseases, and a wide variety of other biological terms obtained by integrating prior knowledge of gene function from multiple resources.
+Enrichr links : links to Enrichr containing the results of enrichment analyses generated by analyzing the up-regulated and down-regulated genes from a differential expression analysis.</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -479,16 +484,21 @@ Sketchnotes from TWiMLAI talk #92: Learning State Representations with Yael Niv
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2018/01/plumber/">
-                <h3 class="media-heading">How to make your machine learning model available as an API with the plumber package</h3>
+              <a class="link-unstyled" href="/2018/05/lelts-speaking-constructing-your-answers/">
+                <h3 class="media-heading">LELTS speaking: constructing your answers</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
-                  Jan 1, 2018
+                  May 5, 2018
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">The plumber package for R makes it easy to expose existing R code as a webservice via an API (https://www.rplumber.io/, Trestle Technology, LLC 2017).
-You take an existing R script and make it accessible with plumber by simply adding a few lines of comments. If you have worked with Roxygen before, e.g. when building a package, you will already be familiar with the core concepts. If not, here are the most important things to know:</div>
+              <div class="media-content hide-xs font-merryweather">四个要注意的问题 
+ 流畅性 丰富多变的词汇 语法和准确 发音   答案的基本结构 
+直接回答 + 连接词 + 扩展句子 ：
+ 原因 细节 例子 事情的两面性   常见词语的替代 
+ And
+ in addition to what i have just mentioned earlier on the top of that as well as this second to that among other things as a further matter   So
+ this is the reason why this wxplains why and the result of this is   But</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -497,18 +507,15 @@ You take an existing R script and make it accessible with plumber by simply addi
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2018/01/twimlai91/">
-                <h3 class="media-heading">Sketchnotes from TWiML&amp;AI #91: Philosophy of Intelligence with Matthew Crosby</h3>
+              <a class="link-unstyled" href="/2018/05/r-vs-python-representing-data-in-r-python-equivalent/">
+                <h3 class="media-heading">R vs python</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
-                  Jan 1, 2018
+                  May 5, 2018
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">These are my sketchnotes for Sam Charrington’s podcast This Week in Machine Learning and AI about Philosophy of Intelligence with Matthew Crosby: https://twimlai.com/twiml-talk-92-learning-state-representations-yael-niv/
-Sketchnotes from TWiMLAI talk #92: Philosophy of Intelligence with Matthew Crosby
- You can listen to the podcast here.
- This week on the podcast we’re featuring a series of conversations from the NIPs conference in Long Beach, California. I attended a bunch of talks and learned a ton, organized an impromptu roundtable on Building AI Products, and met a bunch of great people, including some former TWiML Talk guests.</div>
+              <div class="media-content hide-xs font-merryweather">Representing Data in R &ndash; Python equivalent import pandas as pd import numpy as np  # 'characters' is equivalent to string firstName = 'jeff' print((type(firstName), firstName))  &lt;type 'str'&gt; jeff  # 'numeric' is equivalent to float heightCM = 188.2 print((type(heightCM), heightCM))  &lt;type 'float'&gt; 188.2  # integer is equivalent to integer numberSons = 1 print((type(numberSons), numberSons))  &lt;type 'int'&gt; 1  # 'logical' is equivalent to Boolean teachingCoursera = True print((type(teachingCoursera), teachingCoursera))  &lt;type 'bool'&gt; True  # 'vectors' is equivalent to numpy array or Python list (I will use array everywhere for consistency) heights = np.</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -521,7 +528,7 @@ Sketchnotes from TWiMLAI talk #92: Philosophy of Intelligence with Matthew Crosb
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         27 posts found
+         38 posts found
       </p>
     </div>
   </div>

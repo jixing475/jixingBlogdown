@@ -20,7 +20,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.32.2 with theme Tranquilpeak 0.4.1-BETA">
-    <title>purrr: adverb</title>
+    <title>t-SNE</title>
     <meta name="author" content="Jixing Liu">
     <meta name="keywords" content=", R">
 
@@ -28,24 +28,45 @@
     
 
     
-    <meta name="description" content="What is an adverb Read carefully the purrr documentation
- Adverbs modify the action of a function ; taking a function as input and returning a function with modified action as output.
- In other words, adverbs take a function, and return this function modified. Yes, just an adverb modifies a verb.
-library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&quot;) ## $result ## NULL ## ## $error ## &lt;simpleError in log(x = x, base = base): non-numeric argument to mathematical function&gt; # have a result and error  how to write your own?">
-    <meta property="og:description" content="What is an adverb Read carefully the purrr documentation
- Adverbs modify the action of a function ; taking a function as input and returning a function with modified action as output.
- In other words, adverbs take a function, and return this function modified. Yes, just an adverb modifies a verb.
-library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&quot;) ## $result ## NULL ## ## $error ## &lt;simpleError in log(x = x, base = base): non-numeric argument to mathematical function&gt; # have a result and error  how to write your own?">
+    <meta name="description" content="note  许多真实世界的数据集具有较低的内在维度，但是它们嵌入在高维空间中，人类因为受限于三维可视化，而不易发现这些内在的结构
+t分布式随机邻域嵌入（t-SNE）：t-distributed stochastic neighbor embedding (t-SNE)， 是一种非常流行的非线性降为的方法，它和 PCA的不同之处在于：
+PCA的本质是在降维之后尽量保存矩阵的最大变异性，而实际上我们经常是想保存原本的结构，换句话说，就是降维前各个点相对距离结构在降维之后要继续保留下来
+ 过程 我们这里用 3维代替高维， 2维代替低维 那么3维的点经过 映射之后 在2维的空间 要保存原有的相对距离结构
+这个过程本质 神经网络深度学习问题，是找到最佳的映射矩阵（最好的 w1 w2 组合方式），使得映射后，数据结构得以保存 那么怎么来衡量数据结构保存的效果？
+那就看比较原始数据下的距离矩阵 和 映射后的距离矩阵 的差 这样的话问题就转化为： 求熵最小化的问题？
+那么这里有个问题，高维度的距离矩阵怎么和低维的距离矩阵进行比较呢 ？ 这就是 t-SNE 的特殊的地方：它把距离问题转换为概率问题，距离越近的i,j两点，pij越大， 以i为中心的t分布，描述 i 与所有点的距离，
+之所以不用正态分布，是因为t分布是长尾 的，这样的分布在尾部的数据点之间（距离较远的点）的惩罚不是区分的很严格，
+换句话说就是 映射后 近变远 的惩罚系数 &gt; 远变近的惩罚系数，
+这个过程可以想象成 一个弹簧产生形变，映射由远变进就是压缩，会产生斥力，映射由近变远，就会拉伸，产生引力 ，形变就好像是熵，是映射前和映射后的差距，产生的单位力（力/形变长度） 的绝对值就好像是惩罚系数，拉伸的形变产生的单位引力 &gt; 压缩的形变产生的单位斥力 ，
+这就很好的解决了数据点映射后的拥挤问题，就好像点与点之间有一定的斥力（为了纠正远变近的情况），但是这个斥力系数又小于点与点之间的引力（为了纠正近变远的情况，单位引力大于单位斥力是因为我们更在乎点与点之间相似的机构 ， 可以想象最后每个点会在所有合力的情况下达到一个平衡， 如下图：  ">
+    <meta property="og:description" content="note  许多真实世界的数据集具有较低的内在维度，但是它们嵌入在高维空间中，人类因为受限于三维可视化，而不易发现这些内在的结构
+t分布式随机邻域嵌入（t-SNE）：t-distributed stochastic neighbor embedding (t-SNE)， 是一种非常流行的非线性降为的方法，它和 PCA的不同之处在于：
+PCA的本质是在降维之后尽量保存矩阵的最大变异性，而实际上我们经常是想保存原本的结构，换句话说，就是降维前各个点相对距离结构在降维之后要继续保留下来
+ 过程 我们这里用 3维代替高维， 2维代替低维 那么3维的点经过 映射之后 在2维的空间 要保存原有的相对距离结构
+这个过程本质 神经网络深度学习问题，是找到最佳的映射矩阵（最好的 w1 w2 组合方式），使得映射后，数据结构得以保存 那么怎么来衡量数据结构保存的效果？
+那就看比较原始数据下的距离矩阵 和 映射后的距离矩阵 的差 这样的话问题就转化为： 求熵最小化的问题？
+那么这里有个问题，高维度的距离矩阵怎么和低维的距离矩阵进行比较呢 ？ 这就是 t-SNE 的特殊的地方：它把距离问题转换为概率问题，距离越近的i,j两点，pij越大， 以i为中心的t分布，描述 i 与所有点的距离，
+之所以不用正态分布，是因为t分布是长尾 的，这样的分布在尾部的数据点之间（距离较远的点）的惩罚不是区分的很严格，
+换句话说就是 映射后 近变远 的惩罚系数 &gt; 远变近的惩罚系数，
+这个过程可以想象成 一个弹簧产生形变，映射由远变进就是压缩，会产生斥力，映射由近变远，就会拉伸，产生引力 ，形变就好像是熵，是映射前和映射后的差距，产生的单位力（力/形变长度） 的绝对值就好像是惩罚系数，拉伸的形变产生的单位引力 &gt; 压缩的形变产生的单位斥力 ，
+这就很好的解决了数据点映射后的拥挤问题，就好像点与点之间有一定的斥力（为了纠正远变近的情况），但是这个斥力系数又小于点与点之间的引力（为了纠正近变远的情况，单位引力大于单位斥力是因为我们更在乎点与点之间相似的机构 ， 可以想象最后每个点会在所有合力的情况下达到一个平衡， 如下图：  ">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="purrr: adverb">
-    <meta property="og:url" content="/2018/04/purrr-adverb/">
+    <meta property="og:title" content="t-SNE">
+    <meta property="og:url" content="/2018/08/t-sne/">
     <meta property="og:site_name" content="student zero ">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="student zero ">
-    <meta name="twitter:description" content="What is an adverb Read carefully the purrr documentation
- Adverbs modify the action of a function ; taking a function as input and returning a function with modified action as output.
- In other words, adverbs take a function, and return this function modified. Yes, just an adverb modifies a verb.
-library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&quot;) ## $result ## NULL ## ## $error ## &lt;simpleError in log(x = x, base = base): non-numeric argument to mathematical function&gt; # have a result and error  how to write your own?">
+    <meta name="twitter:description" content="note  许多真实世界的数据集具有较低的内在维度，但是它们嵌入在高维空间中，人类因为受限于三维可视化，而不易发现这些内在的结构
+t分布式随机邻域嵌入（t-SNE）：t-distributed stochastic neighbor embedding (t-SNE)， 是一种非常流行的非线性降为的方法，它和 PCA的不同之处在于：
+PCA的本质是在降维之后尽量保存矩阵的最大变异性，而实际上我们经常是想保存原本的结构，换句话说，就是降维前各个点相对距离结构在降维之后要继续保留下来
+ 过程 我们这里用 3维代替高维， 2维代替低维 那么3维的点经过 映射之后 在2维的空间 要保存原有的相对距离结构
+这个过程本质 神经网络深度学习问题，是找到最佳的映射矩阵（最好的 w1 w2 组合方式），使得映射后，数据结构得以保存 那么怎么来衡量数据结构保存的效果？
+那就看比较原始数据下的距离矩阵 和 映射后的距离矩阵 的差 这样的话问题就转化为： 求熵最小化的问题？
+那么这里有个问题，高维度的距离矩阵怎么和低维的距离矩阵进行比较呢 ？ 这就是 t-SNE 的特殊的地方：它把距离问题转换为概率问题，距离越近的i,j两点，pij越大， 以i为中心的t分布，描述 i 与所有点的距离，
+之所以不用正态分布，是因为t分布是长尾 的，这样的分布在尾部的数据点之间（距离较远的点）的惩罚不是区分的很严格，
+换句话说就是 映射后 近变远 的惩罚系数 &gt; 远变近的惩罚系数，
+这个过程可以想象成 一个弹簧产生形变，映射由远变进就是压缩，会产生斥力，映射由近变远，就会拉伸，产生引力 ，形变就好像是熵，是映射前和映射后的差距，产生的单位力（力/形变长度） 的绝对值就好像是惩罚系数，拉伸的形变产生的单位引力 &gt; 压缩的形变产生的单位斥力 ，
+这就很好的解决了数据点映射后的拥挤问题，就好像点与点之间有一定的斥力（为了纠正远变近的情况），但是这个斥力系数又小于点与点之间的引力（为了纠正近变远的情况，单位引力大于单位斥力是因为我们更在乎点与点之间相似的机构 ， 可以想象最后每个点会在所有合力的情况下达到一个平衡， 如下图：  ">
     
       <meta name="twitter:creator" content="@studentZero475">
     
@@ -59,7 +80,7 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
     
 
     
-      <meta property="og:image" content="https://i.loli.net/2018/04/20/5ad936eeb6ee7.jpg">
+      <meta property="og:image" content="https://i.loli.net/2018/08/07/5b68cda2c6c88.jpg">
     
     
     
@@ -112,7 +133,7 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <h1 class="sidebar-profile-title">purrr: adverb</h1>
+        <h1 class="sidebar-profile-title">t-SNE</h1>
         <a href="/#about">
           <img class="sidebar-profile-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
         </a>
@@ -219,15 +240,15 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
             <div class="post-header main-content-wrap text-center">
   
     <h1 class="post-title" itemprop="headline">
-      purrr: adverb
+      t-SNE
     </h1>
   
   
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-04-20T00:00:00Z">
+      <time itemprop="datePublished" datetime="2018-08-07T00:00:00Z">
         
-  April 20, 2018
+  August 7, 2018
 
       </time>
     
@@ -236,7 +257,7 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
   
     <span>in</span>
     
-      <a class="category-link" href="/categories/computers">computers</a>
+      <a class="category-link" href="/categories/machine-learning">machine learning</a>
     
   
 
@@ -247,123 +268,26 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <div id="what-is-an-adverb" class="section level2">
-<h2><strong style="color: darkred;">What is an adverb</strong></h2>
-<p>Read carefully the <a href="http://purrr.tidyverse.org/reference/index.html#section-adverbs">purrr documentation</a></p>
-<p><img src="https://media.giphy.com/media/8UGoKT4boBkF9MGUb3/giphy.gif" width="30%" style="display: block; margin: auto;" /></p>
-<blockquote>
-<p>Adverbs <strong style="color: darkred;">modify the action of a function</strong> ; taking a function as input and <strong style="color: darkred;">returning a function with modified action as output.</strong></p>
-</blockquote>
-<p>In other words, adverbs take a function, and return this function modified. Yes, just an adverb modifies a verb.</p>
-<pre class="r"><code>library(purrr)
-safe_log &lt;- safely(log)#high-order functions
-safe_log(&quot;a&quot;)</code></pre>
-<pre><code>## $result
-## NULL
-## 
-## $error
-## &lt;simpleError in log(x = x, base = base): non-numeric argument to mathematical function&gt;</code></pre>
-<pre class="r"><code># have a result and error</code></pre>
-</div>
-<div id="how-to-write-your-own" class="section level1">
-<h1><strong style="color: darkred;">how to write your own?</strong></h1>
-<pre class="r"><code>library(attempt)
+              <div id="note" class="section level2">
+<h2>note</h2>
+<div class="figure">
+<img src="https://i.loli.net/2018/08/07/5b68cda2c6c88.jpg" />
 
-# Silently only return the errors, and nothing if the function succeeds
-silent_log &lt;- silently(log)
-silent_log(1)
-# Surely make a function always work, without stopping the process
-sure_log &lt;- surely(log)
-sure_log(1)</code></pre>
-<pre><code>## [1] 0</code></pre>
-<div id="with_message-and-with_warning" class="section level2">
-<h2><strong style="color: darkred;">with_message and with_warning</strong></h2>
-<pre class="r"><code>as_num_msg &lt;- with_message(as.numeric, msg = &quot;We&#39;re performing a numeric conversion&quot;)
-as_num_warn &lt;- with_warning(as.numeric, msg = &quot;We&#39;re performing a numeric conversion&quot;)
-as_num_msg(&quot;1&quot;)</code></pre>
-<pre><code>## [1] 1</code></pre>
 </div>
+<p>许多真实世界的数据集具有较低的内在维度，但是它们嵌入在高维空间中，人类因为受限于三维可视化，而不易发现这些内在的结构</p>
+<p>t分布式随机邻域嵌入（t-SNE）：t-distributed stochastic neighbor embedding (t-SNE)， 是一种非常流行的非线性降为的方法，它和 PCA的不同之处在于：</p>
+<p>PCA的本质是在降维之后尽量保存矩阵的最大变异性，而实际上我们经常是想保存原本的结构，换句话说，就是降维前各个点相对距离结构在降维之后要继续保留下来</p>
 </div>
-<div id="how-to-implement-this-kind-of-behavior" class="section level1">
-<h1>how to implement this kind of behavior?</h1>
-<p>Let’s take a simple example with sleepy:</p>
-<pre class="r"><code>sleepy &lt;- function(fun, sleep){
-  function(...){
-    Sys.sleep(sleep)
-    fun(...)
-  }
-}
-
-sleep_print &lt;- sleepy(Sys.time, 5)
-class(sleep_print)</code></pre>
-<pre><code>## [1] &quot;function&quot;</code></pre>
-<pre class="r"><code>sleep_print()</code></pre>
-<pre><code>## [1] &quot;2018-04-20 09:15:36 CST&quot;</code></pre>
-</div>
-<div id="how" class="section level1">
-<h1><strong style="color: darkred;">how?</strong></h1>
-<p>First of all, the adverb functon should return another function, so we need to start with?</p>
-<pre class="r"><code>talky &lt;- function(fun){
-  function(...){
-    fun(...)
-  }
-}</code></pre>
-<p>secondly, with R referential transparency, you can <strong style="color: darkred;">create a variable that is a function:</strong></p>
-<pre class="r"><code>plop &lt;- mean
-plop(1:10)</code></pre>
-<pre><code>## [1] 5.5</code></pre>
-<pre class="r"><code>sys_time &lt;- talky(Sys.time)
-sys_time()</code></pre>
-<pre><code>## [1] &quot;2018-04-20 09:15:36 CST&quot;</code></pre>
-<div id="the-template" class="section level2">
-<h2><strong style="color: darkred;">the template</strong></h2>
-<pre class="r"><code>talky &lt;- function(fun, mess){
-  function(...){
-    #add some command
-    message(mess)#这里可以添加参数
-    print(Sys.time())
-    
-    print(&quot;you can add anything&quot;)
-    
-    
-    fun(...)#the function you want modify
-  }
-}
-
-talky_sqrt&lt;- talky(fun = sqrt, mess = &quot;Hey there! You Rock!&quot;)#创建被修饰函数
-talky_sqrt(4)#4 是传递给被修饰的函数的</code></pre>
-<pre><code>## [1] &quot;2018-04-20 09:15:36 CST&quot;
-## [1] &quot;you can add anything&quot;</code></pre>
-<pre><code>## [1] 2</code></pre>
-<div id="run-it-or-not" class="section level3">
-<h3>Run it or not ?</h3>
-<pre class="r"><code>maybe &lt;- function(fun){
-  function(...){
-    num &lt;- sample(1:100, 1)
-    if (num &gt; 50) {
-      fun(...)
-    }
-  }
-}
-maybe_sqrt &lt;- maybe(fun = sqrt)
-maybe_sqrt(1)</code></pre>
-<pre><code>## [1] 1</code></pre>
-<pre class="r"><code>maybe_sqrt(1)</code></pre>
-</div>
-<div id="create-a-log-file-of-a-function" class="section level3">
-<h3>Create a log file of a function</h3>
-<pre class="r"><code>log_calls &lt;- function(fun, file){
-  function(...){
-    write(as.character(Sys.time()), file, append = TRUE, sep = &quot;\n&quot;)
-    fun(...)
-  }
-}
-log_sqrt &lt;- log_calls(sqrt, file = &quot;logs&quot;)
-log_sqrt(10)</code></pre>
-<pre><code>## [1] 3.162278</code></pre>
-<p><strong>refrence</strong> - <a href="https://colinfay.me/purrr-adverb-tidyverse/">colin Fay</a></p>
-</div>
-</div>
+<div class="section level2">
+<h2>过程</h2>
+<p>我们这里用 3维代替高维， 2维代替低维 那么3维的点经过 映射之后 在2维的空间 要保存原有的相对距离结构</p>
+<p>这个过程本质 神经网络深度学习问题，是找到最佳的映射矩阵（最好的 w1 w2 组合方式），使得映射后，数据结构得以保存 <strong style="color: darkred;">那么怎么来衡量数据结构保存的效果？</strong></p>
+<p>那就看比较原始数据下的距离矩阵 和 映射后的距离矩阵 的差 这样的话问题就转化为： 求熵最小化的问题？</p>
+<p>那么这里有个问题，<strong style="color: darkred;">高维度的距离矩阵怎么和低维的距离矩阵进行比较呢</strong> ？ 这就是 t-SNE 的特殊的地方：它把距离问题转换为概率问题，距离越近的i,j两点，pij越大， 以i为中心的t分布，描述 i 与所有点的距离，</p>
+<p>之所以不用正态分布，是因为<strong style="color: darkred;">t分布是长尾</strong> 的，这样的分布在尾部的数据点之间（距离较远的点）的惩罚不是区分的很严格，</p>
+<p>换句话说就是 映射后 <strong style="color: darkred;">近变远</strong> 的惩罚系数 <strong style="color: darkred;">&gt;</strong> 远变近的惩罚系数，</p>
+<p>这个过程可以想象成 一个弹簧产生形变，<strong style="color: darkred;">映射由远变进就是压缩，会产生斥力，映射由近变远，就会拉伸，产生引力</strong> ，形变就好像是熵，是映射前和映射后的差距，产生的<strong style="color: darkred;">单位力（力/形变长度）</strong> 的绝对值就好像是惩罚系数，<strong style="color: darkred;">拉伸的形变产生的单位引力 &gt; 压缩的形变产生的单位斥力</strong> ，</p>
+<p>这就很好的解决了数据点映射后的拥挤问题，就好像点与点之间有一定的斥力（为了纠正远变近的情况），但是这个斥力系数又小于点与点之间的引力（为了纠正近变远的情况，<strong style="color: darkred;">单位引力大于单位斥力是因为我们更在乎点与点之间相似的机构</strong> ， 可以想象最后每个点会在所有合力的情况下达到一个平衡， 如下图： <img src="https://i.loli.net/2018/08/07/5b68d420282ec.jpg" /></p>
 </div>
 
               
@@ -377,7 +301,7 @@ log_sqrt(10)</code></pre>
                   <div class="post-footer-tags">
                     <span class="text-color-light text-small">TAGGED IN</span><br/>
                     
-  <a class="tag tag--primary tag--small" href="//tags/purrr/">purrr</a>
+  <a class="tag tag--primary tag--small" href="//tags/t-sne/">t-sne</a>
 
                   </div>
                 
@@ -389,7 +313,7 @@ log_sqrt(10)</code></pre>
         <ul class="post-actions post-action-nav">
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/04/how-to-get-genomewide-position-specific-scores/" data-tooltip="How To Get Genomewide Position-Specific Scores">
+                <a class="post-action-btn btn btn--disabled">
               
                 <i class="fa fa-angle-left"></i>
                 <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -397,7 +321,7 @@ log_sqrt(10)</code></pre>
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/04/why-did-my-plan-fail-again-2018-04-20/" data-tooltip="为什么我的锻炼又失败了">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/08/python-basic-001/" data-tooltip="python basic 001">
               
                 <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                 <i class="fa fa-angle-right"></i>
@@ -414,19 +338,19 @@ log_sqrt(10)</code></pre>
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/04/purrr-adverb/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/08/t-sne/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/04/purrr-adverb/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/08/t-sne/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/04/purrr-adverb/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/08/t-sne/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -473,7 +397,7 @@ log_sqrt(10)</code></pre>
         <ul class="post-actions post-action-nav">
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/04/how-to-get-genomewide-position-specific-scores/" data-tooltip="How To Get Genomewide Position-Specific Scores">
+                <a class="post-action-btn btn btn--disabled">
               
                 <i class="fa fa-angle-left"></i>
                 <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -481,7 +405,7 @@ log_sqrt(10)</code></pre>
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/04/why-did-my-plan-fail-again-2018-04-20/" data-tooltip="为什么我的锻炼又失败了">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/08/python-basic-001/" data-tooltip="python basic 001">
               
                 <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                 <i class="fa fa-angle-right"></i>
@@ -498,19 +422,19 @@ log_sqrt(10)</code></pre>
         </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/04/purrr-adverb/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/08/t-sne/">
               <i class="fa fa-facebook-official"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/04/purrr-adverb/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/08/t-sne/">
               <i class="fa fa-twitter"></i>
             </a>
           </li>
         
           <li class="post-action hide-xs">
-            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/04/purrr-adverb/">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/08/t-sne/">
               <i class="fa fa-google-plus"></i>
             </a>
           </li>
@@ -540,19 +464,19 @@ log_sqrt(10)</code></pre>
   <ul class="share-options">
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F04%2Fpurrr-adverb%2F">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F08%2Ft-sne%2F">
           <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F04%2Fpurrr-adverb%2F">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F08%2Ft-sne%2F">
           <i class="fa fa-twitter"></i><span>Share on Twitter</span>
         </a>
       </li>
     
       <li class="share-option">
-        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F04%2Fpurrr-adverb%2F">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F08%2Ft-sne%2F">
           <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
         </a>
       </li>
@@ -844,9 +768,9 @@ $(document).ready(function() {
     
       <script>
         var disqus_config = function () {
-          this.page.url = '\/2018\/04\/purrr-adverb\/';
+          this.page.url = '\/2018\/08\/t-sne\/';
           
-            this.page.identifier = '\/2018\/04\/purrr-adverb\/'
+            this.page.identifier = '\/2018\/08\/t-sne\/'
           
         };
         (function() {
