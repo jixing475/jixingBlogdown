@@ -55,3 +55,8 @@ PCA的本质是在降维之后尽量保存矩阵的最大变异性，而实际�
 
 这就很好的解决了数据点映射后的拥挤问题，就好像点与点之间有一定的斥力（为了纠正远变近的情况），但是这个斥力系数又小于点与点之间的引力（为了纠正近变远的情况，<strong style="color: darkred;">单位引力大于单位斥力是因为我们更在乎点与点之间相似的机构</strong> ， 可以想象最后每个点会在所有合力的情况下达到一个平衡， 如下图：
 ![](https://i.loli.net/2018/08/07/5b68d420282ec.jpg)
+
+
+
+¬##**Links**
+- [tsne](https://www.oreilly.com/learning/an-illustrated-introduction-to-the-t-sne-algorithm)

@@ -1,0 +1,31 @@
+---
+title: 'python: Dynamic typing and two type copy '
+author: ZERO
+date: '2018-08-07'
+slug: python-dynamic-typing-and-two-type-copy
+categories:
+  - computers
+tags:
+  - python
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/08/07/5b690bfab7e31.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE,
+	engine.path="/Users/zero/anaconda3/bin/python"
+)
+```
+
+## python {.tabset}
+
+### Dynamic typing 
+![](https://i.loli.net/2018/08/07/5b690ba4579be.jpg)
+
+### shallow and deep copy
+![](https://i.loli.net/2018/08/07/5b690bbd43f41.jpg)

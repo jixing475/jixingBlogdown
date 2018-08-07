@@ -9,6 +9,31 @@
   </author>
   <generator>Hugo -- gohugo.io</generator>
   <entry>
+    <title type="html"><![CDATA[python: Dynamic typing and two type copy ]]></title>
+    <link href="/2018/08/python-dynamic-typing-and-two-type-copy/"/>
+    <id>/2018/08/python-dynamic-typing-and-two-type-copy/</id>
+    <published>2018-08-07T00:00:00+00:00</published>
+    <updated>2018-08-07T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<div id="python" class="section level2 tabset">
+<h2>python</h2>
+<div id="dynamic-typing" class="section level3">
+<h3>Dynamic typing</h3>
+<div class="figure">
+<img src="https://i.loli.net/2018/08/07/5b690ba4579be.jpg" />
+
+</div>
+</div>
+<div id="shallow-and-deep-copy" class="section level3">
+<h3>shallow and deep copy</h3>
+<div class="figure">
+<img src="https://i.loli.net/2018/08/07/5b690bbd43f41.jpg" />
+
+</div>
+</div>
+</div>
+]]></content>
+  </entry>
+  <entry>
     <title type="html"><![CDATA[t-SNE]]></title>
     <link href="/2018/08/t-sne/"/>
     <id>/2018/08/t-sne/</id>
@@ -34,6 +59,7 @@
 <p>换句话说就是 映射后 <strong style="color: darkred;">近变远</strong> 的惩罚系数 <strong style="color: darkred;">&gt;</strong> 远变近的惩罚系数，</p>
 <p>这个过程可以想象成 一个弹簧产生形变，<strong style="color: darkred;">映射由远变进就是压缩，会产生斥力，映射由近变远，就会拉伸，产生引力</strong> ，形变就好像是熵，是映射前和映射后的差距，产生的<strong style="color: darkred;">单位力（力/形变长度）</strong> 的绝对值就好像是惩罚系数，<strong style="color: darkred;">拉伸的形变产生的单位引力 &gt; 压缩的形变产生的单位斥力</strong> ，</p>
 <p>这就很好的解决了数据点映射后的拥挤问题，就好像点与点之间有一定的斥力（为了纠正远变近的情况），但是这个斥力系数又小于点与点之间的引力（为了纠正近变远的情况，<strong style="color: darkred;">单位引力大于单位斥力是因为我们更在乎点与点之间相似的机构</strong> ， 可以想象最后每个点会在所有合力的情况下达到一个平衡， 如下图： <img src="https://i.loli.net/2018/08/07/5b68d420282ec.jpg" /></p>
+<p>¬##<strong>Links</strong> - <a href="https://www.oreilly.com/learning/an-illustrated-introduction-to-the-t-sne-algorithm">tsne</a></p>
 </div>
 ]]></content>
   </entry>
