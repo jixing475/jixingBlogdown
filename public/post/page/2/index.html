@@ -214,6 +214,63 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="/2018/07/biostrings/">
+          📦 BioStrings
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-07-25T00:00:00Z">
+        
+  July 25, 2018
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/bioinformatics">bioinformatics</a>
+    
+  
+
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      Init  DNA # DNA x &lt;- DNAString(&quot;actttGtag&quot;) is(x) ## [1] &quot;DNAString&quot; &quot;XString&quot; &quot;XRaw&quot; &quot;XVector&quot; &quot;Vector&quot; &quot;Annotated&quot; #转录 x %&gt;% complement() %&gt;% RNAString() -&gt; rna # 反向互补 x.r &lt;- reverseComplement(x) x.r ## 9-letter &quot;DNAString&quot; instance ## seq: CTACAAAGT d &lt;- DNAString(&quot;TTGAAAA-CTC-N&quot;) d ## 13-letter &quot;DNAString&quot; instance ## seq: TTGAAAA-CTC-N #subset subseq(x, start =1, end = 5) ## 5-letter &quot;DNAString&quot; instance ## seq: ACTTT #碱基置换 chartr(old = &quot;A&quot;, new = &quot;C&quot;, x) ## 9-letter &quot;DNAString&quot; instance ## seq: CCTTTGTCG #DNA_BASES DNA_BASES ## [1] &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;T&quot; #IUPAC_CODE_MAP IUPAC_CODE_MAP ## A C G T M R W S Y K ## &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;T&quot; &quot;AC&quot; &quot;AG&quot; &quot;AT&quot; &quot;CG&quot; &quot;CT&quot; &quot;GT&quot; ## V H D B N ## &quot;ACG&quot; &quot;ACT&quot; &quot;AGT&quot; &quot;CGT&quot; &quot;ACGT&quot;  RNA x &lt;- RNAString(&quot;acuuuGuag&quot;) is(x) ## [1] &quot;RNAString&quot; &quot;XString&quot; &quot;XRaw&quot; &quot;XVector&quot; &quot;Vector&quot; &quot;Annotated&quot; # 逆转录 x %&gt;% complement() %&gt;% DNAString() ## 9-letter &quot;DNAString&quot; instance ## seq: TGAAACATC # 翻译 codons(x) ## Views on a 9-letter RNAString subject ## subject: ACUUUGUAG ## views: ## start end width ## [1] 1 3 3 [ACU] ## [2] 4 6 3 [UUG] ## [3] 7 9 3 [UAG] translate(x) ## 3-letter &quot;AAString&quot; instance ## seq: TL* #dna -&gt; rna:T &lt;-&gt; U DNAString(&quot;actttGtag&quot;) %&gt;% RNAString() ## 9-letter &quot;RNAString&quot; instance ## seq: ACUUUGUAG #rna -&gt; dna:U &lt;-&gt; T rna %&gt;% DNAString() ## 9-letter &quot;DNAString&quot; instance ## seq: TGAAACATC  AA: Amino acid x &lt;- AAString(&quot;actttGtag&quot;) is(x) ## [1] &quot;AAString&quot; &quot;XString&quot; &quot;XRaw&quot; &quot;XVector&quot; &quot;Vector&quot; &quot;Annotated&quot;  reads # all kmer reads &lt;- mkAllStrings(c(&quot;A&quot;, &quot;C&quot;, &quot;G&quot;, &quot;T&quot;), 6) is(reads) ## [1] &quot;character&quot; &quot;vector&quot; &quot;data.
+      <p>
+        <a href="/2018/07/biostrings/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="/2018/07/biostrings/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="/post/2018-07-25-biostrings_files/IMG_4516.PNG"/>
+      </div>
+    </a>
+  
+</article>
+
+          
+            
+  
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
         <a class="link-unstyled" href="/2018/05/purrr-use-partial-and-map-instead-of-loop/">
           purrr: Use partial and map instead of loop
         </a>
@@ -555,70 +612,6 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
 </article>
 
           
-            
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/04/why-did-my-plan-fail-again-2018-04-20/">
-          为什么我的锻炼又失败了
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-04-20T00:00:00Z">
-        
-  April 20, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/essays">Essays</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-        妈蛋！   健康饮食
-坚持锻炼 
-好处多多
-人尽皆知
-但要真正做到这两点 真心不容易
-今天就好好反思一下 我为什么不能坚持锻炼
-放弃的原因: . 指定的计划难度太高 . 短期没看到效果就是去了动力 . 被各种琐事干扰，无法正常执行 . 只要中途断了几次，就会放弃锻炼的习惯  能让人在短期内取得显著成效的计划，你都要特别小心。因为往往这种计划太过激烈，没人能长期坚持，很快你就会放弃，取得的成效也会随它而去，甚至还有反弹效果
-  解决办法: 把锻炼变成像刷牙一样的常规活动，集中精力想尽一切办法把它边做常规活动 . 从小的运动开始, 尽量从小的开始直到你学会了坚持。可以慢慢增加运动量，哪怕你一开始能够多做一些，也一定要忍住， . 安排固定的锻炼时间，这段时间最好能不受到其他事情的干扰 . 养成习惯中最重要的一点就是坚持不懈，只要错过几次，你就会开始犯懒。多少次都是因为这个败下阵来，😔 . 最好找个搭档，和别人约定一起，会帮助你自律  
-      <p>
-        <a href="/2018/04/why-did-my-plan-fail-again-2018-04-20/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/04/why-did-my-plan-fail-again-2018-04-20/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="/post/2018-04-20-Why-did-my-plan-fail-again_files/PDCA.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-          
           
   <div class="pagination-bar">
     <ul class="pagination">
@@ -700,6 +693,33 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
       <div class="no-result text-color-light text-center">no post found</div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/08/wuzhi-zhi-mu/">
+                <h3 class="media-heading">如果没有今天，明天还会有昨天吗？- “无知之幕”</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">几天看了一本书叫 如果没有今天，明天还会有昨天吗？
+这本书的灵魂就是，如何从思想实验的角度来认识哲学。
+所谓的思想实验就是，用想象力去进行的实验，因为所做的都是在现实中做不到的实验。
+无知之幕 公平是所有人都想要的。关于公平的种种设计中，美国哲学家罗尔斯所提出的“无知之幕”，是其中最为知名的一种设计。
+所谓的无知之幕就是指： 如果不让政策制定者知道自己在这个社会中处于什么位置、从事什么样的职业、有什么样的爱好和背景，那么他们才会尽力制定出最照顾弱者利益的社会制度，由此就能实现公平。
+举个例子： 地球上70亿人，假设有两种情况： 1.第一种情况是，所有人每天都赚10块钱，最弱的人也能赚到10块。 2.第二种情况，最弱的那个人赚9块钱，其他人每个人都赚100块钱。 那么按照“无知之幕”的原则，我们应该选择第一种情况。这样不知道自己处在什么样的位置，就会选择大家都赚9块
+但是 诺齐克提出的“张伯伦论证” 的思想实验却认为，“无知之幕”并不能保证完全的公平。
+举例： 假如一支 NBA 球队，所有球员的总收入相同，其他种种条件也都齐全，那这就是一个公平的状况。在球队签约张伯伦这样的高薪大牌球星后，虽然球队内收入的分配状况发生了变化，但由于大家都同意这一决定，因此新的分配状况同样是公平的。
+哲学家诺齐克认为，不应当总想着靠政策制定者去设计出一套公平的制度，而是应该把一切都交给市场，只要所有的选择都是自由的 ，那无论最终出现什么结果，都可以称之为公平。
+这让我想起我们国家之前提出的共同富裕概念，计划经济就是在这种情况下诞生的，结果大家也就看到，这样的公平并没有给大家带来生活的进步，而最终的自由市场经济带来了经济提升，但是也带来少部分人富裕的不公平，随之而来的就是各种资源的聚集，阶层分化越来越严重，看来偏向任何一块都不是明智之举？
+ </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -868,29 +888,6 @@ Enrichr links : links to Enrichr containing the results of enrichment analyses g
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/05/lelts-speaking-constructing-your-answers/">
-                <h3 class="media-heading">LELTS speaking: constructing your answers</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  May 5, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">四个要注意的问题 
- 流畅性 丰富多变的词汇 语法和准确 发音   答案的基本结构 
-直接回答 + 连接词 + 扩展句子 ：
- 原因 细节 例子 事情的两面性   常见词语的替代 
- And
- in addition to what i have just mentioned earlier on the top of that as well as this second to that among other things as a further matter   So
- this is the reason why this wxplains why and the result of this is   But</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -898,7 +895,7 @@ Enrichr links : links to Enrichr containing the results of enrichment analyses g
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         39 posts found
+         40 posts found
       </p>
     </div>
   </div>

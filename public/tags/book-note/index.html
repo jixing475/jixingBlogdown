@@ -16,7 +16,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.32.2 with theme Tranquilpeak 0.4.1-BETA">
-    <title>Purrr</title>
+    <title>Book Note</title>
     <meta name="author" content="Jixing Liu">
     <meta name="keywords" content=", R">
 
@@ -27,8 +27,8 @@
     <meta name="description" content="exploring and playing with data in R and python">
     <meta property="og:description" content="exploring and playing with data in R and python">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Purrr">
-    <meta property="og:url" content="/tags/purrr/">
+    <meta property="og:title" content="Book Note">
+    <meta property="og:url" content="/tags/book-note/">
     <meta property="og:site_name" content="student zero ">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="student zero ">
@@ -97,7 +97,7 @@
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <h1 class="sidebar-profile-title">Purrr</h1>
+        <h1 class="sidebar-profile-title">Book Note</h1>
         <a href="/#about">
           <img class="sidebar-profile-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
         </a>
@@ -217,16 +217,16 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/05/purrr-use-partial-and-map-instead-of-loop/">
-          purrr: Use partial and map instead of loop
+        <a class="link-unstyled" href="/2018/08/wuzhi-zhi-mu/">
+          如果没有今天，明天还会有昨天吗？- “无知之幕”
         </a>
       </h1>
       
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-05-22T00:00:00Z">
+      <time itemprop="datePublished" datetime="2018-08-08T00:00:00Z">
         
-  May 22, 2018
+  August 8, 2018
 
       </time>
     
@@ -235,7 +235,7 @@
   
     <span>in</span>
     
-      <a class="category-link" href="/categories/computers">computers</a>
+      <a class="category-link" href="/categories/life">life</a>
     
   
 
@@ -244,78 +244,27 @@
 
     </div>
     <div class="postShorten-excerpt" itemprop="articleBody">
-      🐌 I want to …   create three normal distribution with purrr::map as simple as possible
-  🐌 Here’s how to:   library(tidyverse) #rnorm(n=5, mean = mu, sd = sigma) #函数的一般形式 black_box &lt;- partial(rnorm, n=5)# 先把不变的固定下来，生成新的黑箱函数，黑箱函数只需要接受 map 传递的参数即可， 其他的参数已经通过 ·partial· 固定下来了 mu &lt;- list(10, 100, -100)# 参数 x sigma &lt;- list(0.01, 1, 10)# 参数 y map2(mu, sigma, ~ black_box(mean=.x, sd=.y)) %&gt;% do.call(cbind, .) ## [,1] [,2] [,3] ## [1,] 10.
+      几天看了一本书叫 如果没有今天，明天还会有昨天吗？
+这本书的灵魂就是，如何从思想实验的角度来认识哲学。
+所谓的思想实验就是，用想象力去进行的实验，因为所做的都是在现实中做不到的实验。
+无知之幕 公平是所有人都想要的。关于公平的种种设计中，美国哲学家罗尔斯所提出的“无知之幕”，是其中最为知名的一种设计。
+所谓的无知之幕就是指： 如果不让政策制定者知道自己在这个社会中处于什么位置、从事什么样的职业、有什么样的爱好和背景，那么他们才会尽力制定出最照顾弱者利益的社会制度，由此就能实现公平。
+举个例子： 地球上70亿人，假设有两种情况： 1.第一种情况是，所有人每天都赚10块钱，最弱的人也能赚到10块。 2.第二种情况，最弱的那个人赚9块钱，其他人每个人都赚100块钱。 那么按照“无知之幕”的原则，我们应该选择第一种情况。这样不知道自己处在什么样的位置，就会选择大家都赚9块
+但是 诺齐克提出的“张伯伦论证” 的思想实验却认为，“无知之幕”并不能保证完全的公平。
+举例： 假如一支 NBA 球队，所有球员的总收入相同，其他种种条件也都齐全，那这就是一个公平的状况。在球队签约张伯伦这样的高薪大牌球星后，虽然球队内收入的分配状况发生了变化，但由于大家都同意这一决定，因此新的分配状况同样是公平的。
+哲学家诺齐克认为，不应当总想着靠政策制定者去设计出一套公平的制度，而是应该把一切都交给市场，只要所有的选择都是自由的 ，那无论最终出现什么结果，都可以称之为公平。
+这让我想起我们国家之前提出的共同富裕概念，计划经济就是在这种情况下诞生的，结果大家也就看到，这样的公平并没有给大家带来生活的进步，而最终的自由市场经济带来了经济提升，但是也带来少部分人富裕的不公平，随之而来的就是各种资源的聚集，阶层分化越来越严重，看来偏向任何一块都不是明智之举？
+ 
       <p>
-        <a href="/2018/05/purrr-use-partial-and-map-instead-of-loop/" class="postShorten-excerpt_link link">Continue reading</a>
+        <a href="/2018/08/wuzhi-zhi-mu/" class="postShorten-excerpt_link link">Continue reading</a>
         
       </p>
     </div>
   </div>
   
-    <a href="/2018/05/purrr-use-partial-and-map-instead-of-loop/">
+    <a href="/2018/08/wuzhi-zhi-mu/">
       <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="/post/2018-05-22-purrr-use-partial-and-map-instead-of-loop_files/IMG_4733.JPG"/>
-      </div>
-    </a>
-  
-</article>
-
-            
-              
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/04/purrr-adverb/">
-          purrr: adverb
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-04-20T00:00:00Z">
-        
-  April 20, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/computers">computers</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      What is an adverb Read carefully the purrr documentation
- Adverbs modify the action of a function ; taking a function as input and returning a function with modified action as output.
- In other words, adverbs take a function, and return this function modified. Yes, just an adverb modifies a verb.
-library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&quot;) ## $result ## NULL ## ## $error ## &lt;simpleError in log(x = x, base = base): non-numeric argument to mathematical function&gt; # have a result and error  how to write your own?
-      <p>
-        <a href="/2018/04/purrr-adverb/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/04/purrr-adverb/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/04/20/5ad936eeb6ee7.jpg"/>
+        <img alt="" itemprop="image" src="https://i.loli.net/2018/08/08/5b6a2e69a0d6f.jpg"/>
       </div>
     </a>
   
