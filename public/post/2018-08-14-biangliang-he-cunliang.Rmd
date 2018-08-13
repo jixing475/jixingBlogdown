@@ -1,0 +1,9 @@
+---
+title: 变量与存量
+author: ZERO
+date: '2018-08-14'
+slug: biangliang he cunliang
+categories: []
+tags: []
+---
+

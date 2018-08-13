@@ -170,7 +170,7 @@ canonifyurls = true
   # If false it will flat categories.
   hierarchicalCategories = false
 
-  description = "exploring and playing with data in R and python"
+  description = "Exploring and playing with data in R and python"
 
   # Customization
   # Define the behavior of the sidebar

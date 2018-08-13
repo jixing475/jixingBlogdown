@@ -2,12 +2,30 @@
   <title>student zero </title>
   <link href="/index.xml" rel="self"/>
   <link href="/"/>
-  <updated>2018-08-13T00:00:00+00:00</updated>
+  <updated>2018-08-14T00:00:00+00:00</updated>
   <id>/</id>
   <author>
     <name>Jixing Liu</name>
   </author>
   <generator>Hugo -- gohugo.io</generator>
+  <entry>
+    <title type="html"><![CDATA[变量与存量]]></title>
+    <link href="/2018/08/bianliang-he-cunliang/"/>
+    <id>/2018/08/bianliang-he-cunliang/</id>
+    <published>2018-08-14T00:00:00+00:00</published>
+    <updated>2018-08-14T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<!--more-->
+<p>《刀塔传奇》的制作人王信文说：变量大于存量，这话怎么理解？</p>
+<p>最近，在美团点评进入打车领域向滴滴宣战之后，王信文问了一个朋友美团点评做打车的逻辑是什么。 对方的回答是：没有人为了出行而出行，出行总要有个目的，比如去餐厅、酒店、电影院。美团点评做打车优势不在于打车上，而是在大众点评上找到目的地之后，可以直接打车，免去了输入目的地和切换APP的过程。美团点评省了这两步，就比滴滴有效率优势。这个效率优势看起来不大，也许是10%，也许是20%，但在长期作战中就会非常有用。这让王信文意识到，在持久作战过程中，<strong style="color: darkred;">比的和看的不是过去的实力存量，而是变量</strong> 。</p>
+<ol style="list-style-type: decimal">
+<li>要赢得长跑，一时的领先不重要，重要的是速度。长跑比的是耐力和持久。</li>
+<li>决定公司估值的，最重要的不是账上有多少现金，而是获得现金流的能力。</li>
+<li>在找工作选公司，公司有多少钱不是最重要的指标，公司的发展速度才重要。</li>
+<li>找男朋友，他现在有多少钱不是最重要的，重要的是他赚钱的能力。</li>
+</ol>
+<p>所以对于“变量大于存量”的启发是：把“变量”作为最重要的目标，而不那么在意“存量”，要努力去寻找变量，“因为最终变量会决定存量”。</p>
+]]></content>
+  </entry>
   <entry>
     <title type="html"><![CDATA[MCMC]]></title>
     <link href="/2018/08/mcmc/"/>
