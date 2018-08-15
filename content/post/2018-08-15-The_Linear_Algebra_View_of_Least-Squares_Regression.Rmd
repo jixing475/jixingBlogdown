@@ -1,0 +1,29 @@
+---
+title: 线性代数角度理解最小二乘回归
+author: ZERO
+date: '2018-08-15'
+slug: The_Linear_Algebra_View_of_Least-Squares_Regression
+categories:
+  - Math
+tags:
+  - OLS
+keywords:
+  - tech
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/08/15/5b73e5ca968a9.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE,
+	engine.path="/Users/zero/anaconda3/bin/python"
+)
+```
+
+<!--more-->
+
+![](https://i.loli.net/2018/08/15/5b73e56210883.jpg)

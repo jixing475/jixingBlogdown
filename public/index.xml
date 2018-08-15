@@ -2,12 +2,25 @@
   <title>student zero </title>
   <link href="/index.xml" rel="self"/>
   <link href="/"/>
-  <updated>2018-08-14T00:00:00+00:00</updated>
+  <updated>2018-08-15T00:00:00+00:00</updated>
   <id>/</id>
   <author>
     <name>Jixing Liu</name>
   </author>
   <generator>Hugo -- gohugo.io</generator>
+  <entry>
+    <title type="html"><![CDATA[线性代数角度理解最小二乘回归]]></title>
+    <link href="/2018/08/the_linear_algebra_view_of_least-squares_regression/"/>
+    <id>/2018/08/the_linear_algebra_view_of_least-squares_regression/</id>
+    <published>2018-08-15T00:00:00+00:00</published>
+    <updated>2018-08-15T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<!--more-->
+<div class="figure">
+<img src="https://i.loli.net/2018/08/15/5b73e56210883.jpg" />
+
+</div>
+]]></content>
+  </entry>
   <entry>
     <title type="html"><![CDATA[变量与存量]]></title>
     <link href="/2018/08/bianliang-he-cunliang/"/>
