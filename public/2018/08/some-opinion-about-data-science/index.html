@@ -1,5 +1,9 @@
 
 
+  
+    
+  
+
 
   
 
@@ -16,23 +20,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.32.2 with theme Tranquilpeak 0.4.1-BETA">
-    <title>Bioinformatics</title>
+    <title>Some Opinion For Data Scientist</title>
     <meta name="author" content="Jixing Liu">
-    <meta name="keywords" content=", R">
+    <meta name="keywords" content="tech, R">
 
     <link rel="icon" href="img/R_py.png">
     
 
     
-    <meta name="description" content="Exploring and playing with data in R and python">
-    <meta property="og:description" content="Exploring and playing with data in R and python">
+    <meta name="description" content="Some View From Hadley    Pragmatically, if you’re a data scientist, learning the basics of SQL is really important.    You should also have a minimal reading knowledge of R and Python, because so many data science teams use both .    Then I think you’re better off specializing in one of these two and getting really good at it, rather than spreading yourself too thin and being mediocre at several languages.">
+    <meta property="og:description" content="Some View From Hadley    Pragmatically, if you’re a data scientist, learning the basics of SQL is really important.    You should also have a minimal reading knowledge of R and Python, because so many data science teams use both .    Then I think you’re better off specializing in one of these two and getting really good at it, rather than spreading yourself too thin and being mediocre at several languages.">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Bioinformatics">
-    <meta property="og:url" content="/categories/bioinformatics/">
+    <meta property="og:title" content="Some Opinion For Data Scientist">
+    <meta property="og:url" content="/2018/08/some-opinion-about-data-science/">
     <meta property="og:site_name" content="student zero ">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="student zero ">
-    <meta name="twitter:description" content="Exploring and playing with data in R and python">
+    <meta name="twitter:description" content="Some View From Hadley    Pragmatically, if you’re a data scientist, learning the basics of SQL is really important.    You should also have a minimal reading knowledge of R and Python, because so many data science teams use both .    Then I think you’re better off specializing in one of these two and getting really good at it, rather than spreading yourself too thin and being mediocre at several languages.">
     
       <meta name="twitter:creator" content="@studentZero475">
     
@@ -45,6 +49,8 @@
       <meta property="og:image" content="https://i.loli.net/2018/02/26/5a937bb148b02.jpg">
     
 
+    
+      <meta property="og:image" content="https://i.loli.net/2018/08/19/5b797846cd01f.jpg">
     
     
     
@@ -73,7 +79,7 @@
 <script src="/js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
-<header id="header" data-behavior="1">
+<header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
     <a class="header-title-link" href="/">student zero </a>
@@ -93,11 +99,11 @@
   
 </header>
 
-      <nav id="sidebar" data-behavior="1">
+      <nav id="sidebar" data-behavior="4">
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <h1 class="sidebar-profile-title">Bioinformatics</h1>
+        <h1 class="sidebar-profile-title">Some Opinion For Data Scientist</h1>
         <a href="/#about">
           <img class="sidebar-profile-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
         </a>
@@ -193,40 +199,26 @@
 </nav>
 
       
-        
 
-      
-      <div id="main" data-behavior="1"
+      <div id="main" data-behavior="4"
         class="
-               hasCoverMetaIn
+               hasCoverMetaOut
                ">
-        
-          <section class="postShorten-group main-content-wrap">
-            
-            
-              
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-center">
   
-    
+    <h1 class="post-title" itemprop="headline">
+      Some Opinion For Data Scientist
+    </h1>
   
-
-
   
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/07/biostrings/">
-          📦 BioStrings
-        </a>
-      </h1>
-      
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-07-25T00:00:00Z">
+      <time itemprop="datePublished" datetime="2018-08-19T00:00:00Z">
         
-  July 25, 2018
+  August 19, 2018
 
       </time>
     
@@ -235,152 +227,139 @@
   
     <span>in</span>
     
-      <a class="category-link" href="/categories/bioinformatics">bioinformatics</a>
+      <a class="category-link" href="/categories/computers">computers</a>
     
   
 
 
   </div>
 
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      Init  DNA # DNA x &lt;- DNAString(&quot;actttGtag&quot;) is(x) ## [1] &quot;DNAString&quot; &quot;XString&quot; &quot;XRaw&quot; &quot;XVector&quot; &quot;Vector&quot; &quot;Annotated&quot; #转录 x %&gt;% complement() %&gt;% RNAString() -&gt; rna # 反向互补 x.r &lt;- reverseComplement(x) x.r ## 9-letter &quot;DNAString&quot; instance ## seq: CTACAAAGT d &lt;- DNAString(&quot;TTGAAAA-CTC-N&quot;) d ## 13-letter &quot;DNAString&quot; instance ## seq: TTGAAAA-CTC-N #subset subseq(x, start =1, end = 5) ## 5-letter &quot;DNAString&quot; instance ## seq: ACTTT #碱基置换 chartr(old = &quot;A&quot;, new = &quot;C&quot;, x) ## 9-letter &quot;DNAString&quot; instance ## seq: CCTTTGTCG #DNA_BASES DNA_BASES ## [1] &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;T&quot; #IUPAC_CODE_MAP IUPAC_CODE_MAP ## A C G T M R W S Y K ## &quot;A&quot; &quot;C&quot; &quot;G&quot; &quot;T&quot; &quot;AC&quot; &quot;AG&quot; &quot;AT&quot; &quot;CG&quot; &quot;CT&quot; &quot;GT&quot; ## V H D B N ## &quot;ACG&quot; &quot;ACT&quot; &quot;AGT&quot; &quot;CGT&quot; &quot;ACGT&quot;  RNA x &lt;- RNAString(&quot;acuuuGuag&quot;) is(x) ## [1] &quot;RNAString&quot; &quot;XString&quot; &quot;XRaw&quot; &quot;XVector&quot; &quot;Vector&quot; &quot;Annotated&quot; # 逆转录 x %&gt;% complement() %&gt;% DNAString() ## 9-letter &quot;DNAString&quot; instance ## seq: TGAAACATC # 翻译 codons(x) ## Views on a 9-letter RNAString subject ## subject: ACUUUGUAG ## views: ## start end width ## [1] 1 3 3 [ACU] ## [2] 4 6 3 [UUG] ## [3] 7 9 3 [UAG] translate(x) ## 3-letter &quot;AAString&quot; instance ## seq: TL* #dna -&gt; rna:T &lt;-&gt; U DNAString(&quot;actttGtag&quot;) %&gt;% RNAString() ## 9-letter &quot;RNAString&quot; instance ## seq: ACUUUGUAG #rna -&gt; dna:U &lt;-&gt; T rna %&gt;% DNAString() ## 9-letter &quot;DNAString&quot; instance ## seq: TGAAACATC  AA: Amino acid x &lt;- AAString(&quot;actttGtag&quot;) is(x) ## [1] &quot;AAString&quot; &quot;XString&quot; &quot;XRaw&quot; &quot;XVector&quot; &quot;Vector&quot; &quot;Annotated&quot;  reads # all kmer reads &lt;- mkAllStrings(c(&quot;A&quot;, &quot;C&quot;, &quot;G&quot;, &quot;T&quot;), 6) is(reads) ## [1] &quot;character&quot; &quot;vector&quot; &quot;data.
-      <p>
-        <a href="/2018/07/biostrings/" class="postShorten-excerpt_link link">Continue reading</a>
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <!--more-->
+<center>
+<h2>
+<strong style="color: darkred;">Some View From Hadley</strong>
+</h2>
+</center>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>Pragmatically, if you’re a data scientist, learning the basics of SQL is really important.</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="2" style="list-style-type: decimal">
+<li>You should also have a minimal reading knowledge of R and Python, <strong style="color: darkred;">because so many data science teams use both</strong> .</li>
+</ol>
+</blockquote>
+<blockquote>
+<ol start="3" style="list-style-type: decimal">
+<li>Then I think you’re better off <strong style="color: darkred;">specializing in one of these two</strong> and getting really good at it, rather than spreading yourself too thin and being mediocre at several languages.</li>
+</ol>
+</blockquote>
+<p>The second book that you chose is <strong style="color: darkred;">The Algorithm Design Manual</strong> . Algorithms are a big part of computer science knowledge. Can you explain why you think it’s still important to learn about them, when most of them have been implemented for data scientists by people like you?</p>
+<blockquote>
+<p>To me, this book is an illustration of the power of names. Today, <strong style="color: darkred;">in the era of Google, if you know the name of something, you can find out about it with a simple search. But if you don’t know of what you’re looking for, it suddenly becomes much harder to find it.</strong> Having in the back of your head the names of common algorithms that help you solve problems is really powerful. When you identify a new problem, it helps you to come up with ideas, for example to use breadth-first search, or a binary tree, etc.</p>
+</blockquote>
+<blockquote>
+<p><strong style="color: darkred;">Knowing how to write clearly helps you to write code clearly, and also helps you writing good documentation and explain the intent of what you’re doing.</strong> Even very good code will only ever tell you how something has been implemented; it won’t tell you why a particular technique has been chosen. Writing well and describing things well is very valuable to a good programmer, and even more to a data scientist. It doesn’t matter how wonderful your data analysis is, if you can’t explain to somebody else what you’ve done, why it makes sense, and what to take away from it.</p>
+</blockquote>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="//tags/r/">R</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/08/the_linear_algebra_view_of_least-squares_regression/" data-tooltip="线性代数角度理解最小二乘回归">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
         
-      </p>
-    </div>
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/08/some-opinion-about-data-science/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/08/some-opinion-about-data-science/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/08/some-opinion-about-data-science/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
   </div>
-  
-    <a href="/2018/07/biostrings/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="/post/2018-07-25-biostrings_files/IMG_4516.PNG"/>
-      </div>
-    </a>
-  
-</article>
+
 
             
               
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/05/iga-three-subgroup-deg-and-enrichment-analysis/">
-          IgA-three-subgroup-DEG-and-enrichment-analysis
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-05-16T00:00:00Z">
-        
-  May 16, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/bioinformatics">bioinformatics</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      Enrichment analysis is a statistical procedure used to identify biological terms which are over-represented in a given gene set. These include signaling pathways , molecular functions, diseases, and a wide variety of other biological terms obtained by integrating prior knowledge of gene function from multiple resources.
-Enrichr links : links to Enrichr containing the results of enrichment analyses generated by analyzing the up-regulated and down-regulated genes from a differential expression analysis.
-      <p>
-        <a href="/2018/05/iga-three-subgroup-deg-and-enrichment-analysis/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/05/iga-three-subgroup-deg-and-enrichment-analysis/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="/post/2018-05-16-iga-three-subgroup-deg-and-enrichment-analysis_files/Screen%20Shot%202018-05-16%20at%2010.27.40.png"/>
-      </div>
-    </a>
-  
-</article>
-
-            
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
               
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/04/how-to-get-genomewide-position-specific-scores/">
-          How To Get Genomewide Position-Specific Scores
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-04-27T00:00:00Z">
-        
-  April 27, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/bioinformatics">bioinformatics</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      load packages #source(&quot;http://bioconductor.org/biocLite.R&quot;) #biocLite(&quot;GenomicScores&quot;) library(GenomicScores)  Retrieval of genomic scores through annotation packages There are currently four different annotation packages that store genomic scores and can be accessed using the GenomicScores package
-Annotation packages  Description 1. phastCons100way.UCSC.hg19 phastCons scores derived from the alignment of the human genome (hg19) to other 99 vertebrate species. 2. phastCons100way.UCSC.hg38 phastCons scores derived from the alignment of the human genome (hg38) to other 99 vertebrate species.
-      <p>
-        <a href="/2018/04/how-to-get-genomewide-position-specific-scores/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/04/how-to-get-genomewide-position-specific-scores/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="/post/2018-04-27-how-to-get-genomewide-position-specific-scores_files/download.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
             
-            
-
-          </section>
-        
+          </div>
+        </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
     &copy; 2018 Jixing Liu. All Rights Reserved
@@ -388,6 +367,100 @@ Annotation packages  Description 1. phastCons100way.UCSC.hg19 phastCons scores d
 </footer>
 
       </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/08/the_linear_algebra_view_of_least-squares_regression/" data-tooltip="线性代数角度理解最小二乘回归">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/08/some-opinion-about-data-science/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/08/some-opinion-about-data-science/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/08/some-opinion-about-data-science/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F08%2Fsome-opinion-about-data-science%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F08%2Fsome-opinion-about-data-science%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F08%2Fsome-opinion-about-data-science%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
     </div>
     
     <div id="about">
@@ -686,6 +759,32 @@ $(document).ready(function() {
   });
 });
 </script>
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = '\/2018\/08\/some-opinion-about-data-science\/';
+          
+            this.page.identifier = '\/2018\/08\/some-opinion-about-data-science\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'jixing';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
 
 
 

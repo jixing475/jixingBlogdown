@@ -566,6 +566,23 @@ apply(trainData[, 1:10], 2, FUN=function(x){c(&#39;min&#39;=min(x), &#39;max&#39
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2018/08/some-opinion-about-data-science/">
+                <h3 class="media-heading">Some Opinion For Data Scientist</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Some View From Hadley    Pragmatically, if you’re a data scientist, learning the basics of SQL is really important.    You should also have a minimal reading knowledge of R and Python, because so many data science teams use both .    Then I think you’re better off specializing in one of these two and getting really good at it, rather than spreading yourself too thin and being mediocre at several languages.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2018/08/the_linear_algebra_view_of_least-squares_regression/">
                 <h3 class="media-heading">线性代数角度理解最小二乘回归</h3>
               </a>
@@ -754,23 +771,6 @@ Non-parametric test , so no assumptions about the survival distributions Log ran
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/07/missing-data-imputation-and-fit-regression/">
-                <h3 class="media-heading">Missing data imputation and fit regression</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Mind map   Goal impute missing data fit regression  library(tidyverse) library(AER) library(naniar) library(mice)  Steps Step 01. missing data wages_data &lt;- read_csv(&quot;/Users/zero/myrepo/jixingBlogdown/data/Mroz.csv&quot;) wages_data &lt;- wages_data %&gt;% select(wage, educ, fatheduc, motheduc, inlf, hours, kidslt6, kidsge6, age, huswage, mtr, unem, city, exper) %&gt;% mutate_at(vars(kidslt6, kidsge6, hours, educ, age, wage, huswage, mtr, motheduc, fatheduc, unem, exper), as.numeric) %&gt;% mutate_at(vars(city, inlf), as.character) wages_data &lt;- wages_data %&gt;% mutate(wage = ifelse(is.na(wage), 0, wage)) vis_miss(wages_data) wages_mis &lt;- ampute(wages_data)$amp vis_miss(wages_mis)  Step 02.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -778,7 +778,7 @@ Non-parametric test , so no assumptions about the survival distributions Log ran
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         43 posts found
+         44 posts found
       </p>
     </div>
   </div>
