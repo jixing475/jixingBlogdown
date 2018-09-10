@@ -1,0 +1,1084 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+
+  
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.32.2 with theme Tranquilpeak 0.4.1-BETA">
+    <title>Scientific studies, confounding, and Simpson&#39;s paradox</title>
+    <meta name="author" content="Jixing Liu">
+    <meta name="keywords" content=", R">
+
+    <link rel="icon" href="img/R_py.png">
+    
+
+    
+    <meta name="description" content="class: center, middle
+Scientific studies Scientific studies  Observational  Collect data in a way that does not interfere with how the data arise (“observe”) Only establish an association  Experimental  Randomly assign subjects to treatments Establish causal connections   .question[ Design a study comparing average energy levels of people who do and do not exercise – both as an observational study and as an experiment.]
+ Study: Bfast cereal keeps girls slim Girls who ate breakfast of any type had a lower average body mass index, a common obesity gauge, than those who said they didn’t.">
+    <meta property="og:description" content="class: center, middle
+Scientific studies Scientific studies  Observational  Collect data in a way that does not interfere with how the data arise (“observe”) Only establish an association  Experimental  Randomly assign subjects to treatments Establish causal connections   .question[ Design a study comparing average energy levels of people who do and do not exercise – both as an observational study and as an experiment.]
+ Study: Bfast cereal keeps girls slim Girls who ate breakfast of any type had a lower average body mass index, a common obesity gauge, than those who said they didn’t.">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Scientific studies, confounding, and Simpson&#39;s paradox">
+    <meta property="og:url" content="/1/01/scientific-studies-confounding-and-simpsons-paradox/">
+    <meta property="og:site_name" content="student zero ">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="student zero ">
+    <meta name="twitter:description" content="class: center, middle
+Scientific studies Scientific studies  Observational  Collect data in a way that does not interfere with how the data arise (“observe”) Only establish an association  Experimental  Randomly assign subjects to treatments Establish causal connections   .question[ Design a study comparing average energy levels of people who do and do not exercise – both as an observational study and as an experiment.]
+ Study: Bfast cereal keeps girls slim Girls who ate breakfast of any type had a lower average body mass index, a common obesity gauge, than those who said they didn’t.">
+    
+      <meta name="twitter:creator" content="@studentZero475">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="https://i.loli.net/2018/02/26/5a937bb148b02.jpg">
+    
+
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-hbs5om8csx9a8yrv5hnhpi2qqdv4ykuslajwbramhqxvleqbfklxgek50hye.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <link rel="stylesheet" href="/css/monokai-sublime.css" rel="stylesheet" id="theme-stylesheet">
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">student zero </a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <h1 class="sidebar-profile-title">Scientific studies, confounding, and Simpson&#39;s paradox</h1>
+        <a href="/#about">
+          <img class="sidebar-profile-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Jixing Liu</h4>
+        
+          <h5 class="sidebar-profile-bio">Reading And Writing</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/studentZero475">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">Twitter</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.r-bloggers.com/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-book"></i>
+      
+      <span class="sidebar-button-desc">R-bloggers</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Scientific studies, confounding, and Simpson&#39;s paradox
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="0001-01-01T00:00:00Z">
+        
+  January 1, 1
+
+      </time>
+    
+    
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <link href="/rmarkdown-libs/font-awesome/css/all.css" rel="stylesheet" />
+<link href="/rmarkdown-libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+
+
+<p>class: center, middle</p>
+<div id="scientific-studies" class="section level1">
+<h1>Scientific studies</h1>
+<hr />
+<div id="scientific-studies-1" class="section level2">
+<h2>Scientific studies</h2>
+<ul>
+<li>Observational
+<ul>
+<li>Collect data in a way that does not interfere with how the data arise (“observe”)</li>
+<li>Only establish an association</li>
+</ul></li>
+<li>Experimental
+<ul>
+<li>Randomly assign subjects to treatments</li>
+<li>Establish causal connections</li>
+</ul></li>
+</ul>
+<p>.question[ Design a study comparing average energy levels of people who do and do not exercise – both as an observational study and as an experiment.]</p>
+<hr />
+</div>
+<div id="study-bfast-cereal-keeps-girls-slim" class="section level2">
+<h2>Study: Bfast cereal keeps girls slim</h2>
+<p>Girls who ate breakfast of any type had a lower average body mass index, a common obesity gauge, than those who said they didn’t. The index was even lower for girls who said they ate cereal for breakfast, according to findings of the study conducted by the Maryland Medical Research Institute with funding from the National Institutes of Health (NIH) and cereal-maker General Mills.</p>
+<p>[…]</p>
+<p>The results were gleaned from a larger NIH survey of 2,379 girls in California, Ohio, and Maryland who were tracked between the ages of 9 and 19.</p>
+<p>[…]</p>
+<p>As part of the survey, the girls were asked once a year what they had eaten during the previous three days.</p>
+<p>[…]</p>
+<p>.question[ What is the explanatory and what is the response variable?]</p>
+<hr />
+<div id="possible-explanations" class="section level3">
+<h3>3 possible explanations</h3>
+<p>–</p>
+<ol style="list-style-type: decimal">
+<li>Eating breakfast causes girls to be slimmer</li>
+</ol>
+<p>–</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Being slim causes girls to eat breakfast</li>
+</ol>
+<p>–</p>
+<ol start="3" style="list-style-type: decimal">
+<li>A third variable is responsible for both – a <strong>confounding</strong> variable: an extraneous variable that affects both the explanatory and the response variable, and that make it seem like there is a relationship between them</li>
+</ol>
+<hr />
+</div>
+</div>
+<div id="correlation-causation" class="section level2">
+<h2>Correlation != causation</h2>
+<div class="figure">
+<img src="https://i.loli.net/2018/08/23/5b7e54304dacf.jpg" />
+
+</div>
+<p><br><br><br></p>
+<p>Randall Munroe CC BY-NC 2.5 <a href="http://xkcd.com/552/" class="uri">http://xkcd.com/552/</a></p>
+<hr />
+</div>
+<div id="studies-and-conclusions" class="section level2">
+<h2>Studies and conclusions</h2>
+<div class="figure">
+<img src="https://i.loli.net/2018/08/23/5b7e5440266f3.jpg" />
+
+</div>
+<hr />
+<p>class: center, middle</p>
+</div>
+</div>
+<div id="conditional-probability" class="section level1">
+<h1>Conditional probability</h1>
+<hr />
+<div id="conditional-probability-1" class="section level2">
+<h2>Conditional probability</h2>
+<p><strong>Notation</strong>: <span class="math inline">\(P(A | B)\)</span>: Probability of event A given event B</p>
+<ul>
+<li><p>What is the probability that it be unseasonably warm tomorrow?</p></li>
+<li><p>What is the probability that it be unseasonably warm tomorrow, given that it it was unseasonably warm tomorrow?</p></li>
+</ul>
+<hr />
+<p>.question[ A January 2018 SurveyUSA poll asked 500 randomly selected Californians whether they are familiar with the DREAM act. The distribution of the responses by age category are shown below.</p>
+<p>What percent of <strong>all respondents</strong> are very familiar with the DREAM act?<br />
+] <br> .pull-left[ | | 18 - 49 | 50+ | Total | |————|———|—–|——-| | Very | 90 | 32 | 122 | | Somewhat | 125 | 86 | 211 | | Not very | 56 | 33 | 89 | | Not at all | 36 | 24 | 60 | | Not sure | 9 | 9 | 18 | | Total | 316 | 184 | 500 |] – .pull-right[ <span class="math inline">\(P(Very) = \frac{122}{500} = 0.244\)</span>]</p>
+<p><br></p>
+<p>Source: <a href="http://www.surveyusa.com/client/PollReport.aspx?g=783743b0-efc1-4b67-9201-58352a8f61f1">SurveyUSA News Poll 23754</a></p>
+<hr />
+<p>.question[ A January 2018 SurveyUSA poll asked 500 randomly selected Californians whether they are familiar with the DREAM act. The distribution of the responses by age category are shown below.</p>
+<p>What percent of <strong>respondents who are 18 - 49 years old</strong> are very familiar with the DREAM act? ] <br> .pull-left[ | | 18 - 49 | 50+ | Total | |————|———|—–|——-| | Very | 90 | 32 | 122 | | Somewhat | 125 | 86 | 211 | | Not very | 56 | 33 | 89 | | Not at all | 36 | 24 | 60 | | Not sure | 9 | 9 | 18 | | Total | 316 | 184 | 500 |] – .pull-right[ <span class="math inline">\(P(Very~|~18-49) = \frac{90}{316} = 0.285\)</span>]</p>
+<hr />
+<p>.question[ A January 2018 SurveyUSA poll asked 500 randomly selected Californians whether they are familiar with the DREAM act. The distribution of the responses by age category are shown below.</p>
+<p>What percent of <strong>respondents who are 50+ years old</strong> are very familiar with the DREAM act? ] <br> .pull-left[ | | 18 - 49 | 50+ | Total | |————|———|—–|——-| | Very | 90 | 32 | 122 | | Somewhat | 125 | 86 | 211 | | Not very | 56 | 33 | 89 | | Not at all | 36 | 24 | 60 | | Not sure | 9 | 9 | 18 | | Total | 316 | 184 | 500 |] – .pull-right[ <span class="math inline">\(P(Very~|~50+) = \frac{32}{184} = 0.173\)</span>]</p>
+<hr />
+<p>.question[ Given that</p>
+<ul>
+<li><span class="math inline">\(P(Very) = \frac{122}{500} = 0.244\)</span></li>
+<li><span class="math inline">\(P(Very~|~18-49) = \frac{90}{316} = 0.285\)</span></li>
+<li><span class="math inline">\(P(Very~|~50+) = \frac{32}{184} = 0.173\)</span></li>
+</ul>
+<p>does there appear to be a relationship between age and familiarity with the DREAM act? Explain your reasoning. ]</p>
+<p>–</p>
+<p><br></p>
+<p>.question[ Could there be another variable that explains this relationship?]</p>
+<hr />
+</div>
+<div id="independence" class="section level2">
+<h2>Independence</h2>
+<p>.question[ Inspired by the previous example and how we used the conditional probabilities to make conclusions, come up with a definition of independent events. If easier, you can keep the context limited to the example (independence/dependence of familiarity with the DREAM act and age), but try to push yourself to make a more general statement.]</p>
+<hr />
+<p>class: center, middle</p>
+</div>
+</div>
+<div id="simpsons-paradox" class="section level1">
+<h1>Simpson’s paradox</h1>
+<hr />
+<div id="relationships-between-variables" class="section level2">
+<h2>Relationships between variables</h2>
+<ul>
+<li><p>Bivariate relationship: Fitness -&gt; Heart health</p></li>
+<li><p>Multivariate relationship: Calories + Age + Fitness -&gt; Heart health</p></li>
+</ul>
+<hr />
+</div>
+<div id="simpsons-paradox-1" class="section level2">
+<h2>Simpson’s paradox</h2>
+<ul>
+<li><p>Not considering an important variable when studying a relationship can result in what we call a <strong>Simpson’s paradox</strong>, which illustrates the effect the omission of an explanatory variable can have on the measure of association between another explanatory variable and a response variable.</p></li>
+<li><p>In other words, the inclusion of a third variable in the analysis can change the apparent relationship between the other two variables.</p></li>
+</ul>
+<div class="figure">
+<img src="https://i.loli.net/2018/08/23/5b7e5448c3198.jpg" />
+
+</div>
+<hr />
+</div>
+<div id="berkeley-admission-data" class="section level2">
+<h2>Berkeley admission data</h2>
+<ul>
+<li><p>Study carried out by the graduate Division of the University of California, Berkeley in the early 70’s to evaluate whether there was a sex bias in graduate admissions</p></li>
+<li><p>The data come from six departments. For confidentiality we’ll call them A-F.</p></li>
+<li><p>We have information on whether the applicant was male or female and whether they were admitted or rejected.</p></li>
+<li><p>First, we will evaluate whether the percentage of males admitted is indeed higher than females, overall. Next, we will calculate the same percentage for each department.</p></li>
+</ul>
+<hr />
+</div>
+<div id="data" class="section level2">
+<h2>Data</h2>
+<pre class="r"><code>ucb_admit &lt;- read_csv(&quot;/Users/zero/myrepo/jixingBlogdown/data/ucb-admit.csv&quot;)
+ucb_admit</code></pre>
+<pre><code>## # A tibble: 4,526 x 3
+##    Admit    Gender Dept 
+##    &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;
+##  1 Admitted Male   A    
+##  2 Admitted Male   A    
+##  3 Admitted Male   A    
+##  4 Admitted Male   A    
+##  5 Admitted Male   A    
+##  6 Admitted Male   A    
+##  7 Admitted Male   A    
+##  8 Admitted Male   A    
+##  9 Admitted Male   A    
+## 10 Admitted Male   A    
+## # ... with 4,516 more rows</code></pre>
+<hr />
+</div>
+<div id="glimpse-at-the-data" class="section level2">
+<h2>Glimpse at the data</h2>
+<pre class="r"><code>glimpse(ucb_admit)</code></pre>
+<pre><code>## Observations: 4,526
+## Variables: 3
+## $ Admit  &lt;chr&gt; &quot;Admitted&quot;, &quot;Admitted&quot;, &quot;Admitted&quot;, &quot;Admitted&quot;, &quot;Admitt...
+## $ Gender &lt;chr&gt; &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;, &quot;Male&quot;,...
+## $ Dept   &lt;chr&gt; &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, &quot;A&quot;, ...</code></pre>
+<hr />
+</div>
+<div id="overall-gender-distribution" class="section level2">
+<h2>Overall gender distribution</h2>
+<p>.question[ What can you say about the overall gender distribution? Hint: Calculate the following probabilities: <span class="math inline">\(P(Admit | Male)\)</span> and <span class="math inline">\(P(Admit | Female)\)</span>.]</p>
+<pre class="r"><code>ucb_admit %&gt;%
+  count(Gender, Admit)</code></pre>
+<pre><code>## # A tibble: 4 x 3
+##   Gender Admit        n
+##   &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt;
+## 1 Female Admitted   557
+## 2 Female Rejected  1278
+## 3 Male   Admitted  1198
+## 4 Male   Rejected  1493</code></pre>
+<hr />
+</div>
+<div id="overall-gender-distribution-1" class="section level2">
+<h2>Overall gender distribution</h2>
+<p>.question[ What type of visualization would be appropriate for representing these data?]</p>
+<pre class="r"><code>ucb_admit %&gt;%
+  count(Gender, Admit) %&gt;%
+  group_by(Gender) %&gt;%
+  mutate(prop_admit = n / sum(n))</code></pre>
+<pre><code>## # A tibble: 4 x 4
+## # Groups:   Gender [2]
+##   Gender Admit        n prop_admit
+##   &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt;      &lt;dbl&gt;
+## 1 Female Admitted   557      0.304
+## 2 Female Rejected  1278      0.696
+## 3 Male   Admitted  1198      0.445
+## 4 Male   Rejected  1493      0.555</code></pre>
+<hr />
+</div>
+<div id="overall-gender-distribution-2" class="section level2">
+<h2>Overall gender distribution</h2>
+<pre class="r"><code>ggplot(ucb_admit, mapping = aes(x = Gender, fill = Admit)) +
+  geom_bar(position = &quot;fill&quot;) + 
+  labs(y = &quot;&quot;, title = &quot;Admit by gender&quot;)</code></pre>
+<p><img src="/post/2018-08-23-try-xaringan_files/figure-html/unnamed-chunk-5-1.png" width="1500" /></p>
+<hr />
+</div>
+<div id="gender-distribution-by-department" class="section level2">
+<h2>Gender distribution, by department</h2>
+<p>.question[ What can you say about the by department gender distribution?]</p>
+<pre class="r"><code>ucb_admit %&gt;%
+  count(Dept, Gender, Admit)     # ---&gt;</code></pre>
+<pre><code>## # A tibble: 24 x 4
+##    Dept  Gender Admit        n
+##    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt;
+##  1 A     Female Admitted    89
+##  2 A     Female Rejected    19
+##  3 A     Male   Admitted   512
+##  4 A     Male   Rejected   313
+##  5 B     Female Admitted    17
+##  6 B     Female Rejected     8
+##  7 B     Male   Admitted   353
+##  8 B     Male   Rejected   207
+##  9 C     Female Admitted   202
+## 10 C     Female Rejected   391
+## # ... with 14 more rows</code></pre>
+<hr />
+<p>.small[</p>
+<pre class="r"><code>ucb_admit %&gt;%
+  count(Dept, Gender, Admit) %&gt;%
+  print(n = 24)</code></pre>
+<pre><code>## # A tibble: 24 x 4
+##    Dept  Gender Admit        n
+##    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt;
+##  1 A     Female Admitted    89
+##  2 A     Female Rejected    19
+##  3 A     Male   Admitted   512
+##  4 A     Male   Rejected   313
+##  5 B     Female Admitted    17
+##  6 B     Female Rejected     8
+##  7 B     Male   Admitted   353
+##  8 B     Male   Rejected   207
+##  9 C     Female Admitted   202
+## 10 C     Female Rejected   391
+## 11 C     Male   Admitted   120
+## 12 C     Male   Rejected   205
+## 13 D     Female Admitted   131
+## 14 D     Female Rejected   244
+## 15 D     Male   Admitted   138
+## 16 D     Male   Rejected   279
+## 17 E     Female Admitted    94
+## 18 E     Female Rejected   299
+## 19 E     Male   Admitted    53
+## 20 E     Male   Rejected   138
+## 21 F     Female Admitted    24
+## 22 F     Female Rejected   317
+## 23 F     Male   Admitted    22
+## 24 F     Male   Rejected   351</code></pre>
+<p>]</p>
+<hr />
+</div>
+<div id="gender-distribution-by-department-1" class="section level2">
+<h2>Gender distribution, by department</h2>
+<p>.question[ What type of visualization would be appropriate for representing these data?]</p>
+<p>.small[</p>
+<pre class="r"><code>ucb_admit %&gt;%
+  count(Dept, Gender, Admit) %&gt;%
+  group_by(Dept, Gender) %&gt;%
+  mutate(Perc_Admit = n / sum(n)) %&gt;%
+  filter(Admit == &quot;Admitted&quot;)</code></pre>
+<pre><code>## # A tibble: 12 x 5
+## # Groups:   Dept, Gender [12]
+##    Dept  Gender Admit        n Perc_Admit
+##    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt;      &lt;dbl&gt;
+##  1 A     Female Admitted    89     0.824 
+##  2 A     Male   Admitted   512     0.621 
+##  3 B     Female Admitted    17     0.68  
+##  4 B     Male   Admitted   353     0.630 
+##  5 C     Female Admitted   202     0.341 
+##  6 C     Male   Admitted   120     0.369 
+##  7 D     Female Admitted   131     0.349 
+##  8 D     Male   Admitted   138     0.331 
+##  9 E     Female Admitted    94     0.239 
+## 10 E     Male   Admitted    53     0.277 
+## 11 F     Female Admitted    24     0.0704
+## 12 F     Male   Admitted    22     0.0590</code></pre>
+<p>]</p>
+<hr />
+</div>
+<div id="gender-distribution-by-department-2" class="section level2">
+<h2>Gender distribution, by department</h2>
+<pre class="r"><code>ggplot(ucb_admit, mapping = aes(x = Gender, fill = Admit)) +
+  geom_bar(position = &quot;fill&quot;) +
+  facet_grid(. ~ Dept) +
+  labs(x = &quot;Gender&quot;, y = &quot;&quot;, fill = &quot;Admission&quot;,
+       title = &quot;Admit by gender by department&quot;)</code></pre>
+<p><img src="/post/2018-08-23-try-xaringan_files/figure-html/unnamed-chunk-9-1.png" width="2400" /></p>
+<hr />
+<p>class: center, middle</p>
+</div>
+</div>
+<div id="what-else-do-i-need-to-know-from-this-weeks-reading" class="section level1">
+<h1>What else do I need to know from this week’s reading?</h1>
+<hr />
+<div id="short-answer" class="section level2">
+<h2>Short answer</h2>
+<p>Everything 😜</p>
+<hr />
+</div>
+<div id="long-answer" class="section level2">
+<h2>Long answer</h2>
+<p>Be able to identify</p>
+<ul>
+<li><p>whether a study is observational or experiment, and further features of the study design</p></li>
+<li><p>sources of bias in a study</p></li>
+<li><p>misrepresentations in summaries of study results (in popular media or in scientific literature)</p></li>
+</ul>
+<hr />
+</div>
+<div id="any-questions" class="section level2">
+<h2>Any questions?</h2>
+<p>on the reading, or otherwise?</p>
+</div>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/hello-world/" data-tooltip="Hello world">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/1/01/scientific-studies-confounding-and-simpsons-paradox/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/1/01/scientific-studies-confounding-and-simpsons-paradox/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/1/01/scientific-studies-confounding-and-simpsons-paradox/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2018 Jixing Liu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/03/hello-world/" data-tooltip="Hello world">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/1/01/scientific-studies-confounding-and-simpsons-paradox/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/1/01/scientific-studies-confounding-and-simpsons-paradox/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/1/01/scientific-studies-confounding-and-simpsons-paradox/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F1%2F01%2Fscientific-studies-confounding-and-simpsons-paradox%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F1%2F01%2Fscientific-studies-confounding-and-simpsons-paradox%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F1%2F01%2Fscientific-studies-confounding-and-simpsons-paradox%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Jixing Liu</h4>
+    
+      <div id="about-card-bio">Reading And Writing</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Data Scientist
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/08/some-opinion-about-data-science/">
+                <h3 class="media-heading">Some Opinion For Data Scientist</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Some View From Hadley    Pragmatically, if you’re a data scientist, learning the basics of SQL is really important.    You should also have a minimal reading knowledge of R and Python, because so many data science teams use both .    Then I think you’re better off specializing in one of these two and getting really good at it, rather than spreading yourself too thin and being mediocre at several languages.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/08/the_linear_algebra_view_of_least-squares_regression/">
+                <h3 class="media-heading">线性代数角度理解最小二乘回归</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">  </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/08/bianliang-he-cunliang/">
+                <h3 class="media-heading">变量与存量</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">《刀塔传奇》的制作人王信文说：变量大于存量，这话怎么理解？
+最近，在美团点评进入打车领域向滴滴宣战之后，王信文问了一个朋友美团点评做打车的逻辑是什么。 对方的回答是：没有人为了出行而出行，出行总要有个目的，比如去餐厅、酒店、电影院。美团点评做打车优势不在于打车上，而是在大众点评上找到目的地之后，可以直接打车，免去了输入目的地和切换APP的过程。美团点评省了这两步，就比滴滴有效率优势。这个效率优势看起来不大，也许是10%，也许是20%，但在长期作战中就会非常有用。这让王信文意识到，在持久作战过程中，比的和看的不是过去的实力存量，而是变量 。
+要赢得长跑，一时的领先不重要，重要的是速度。长跑比的是耐力和持久。 决定公司估值的，最重要的不是账上有多少现金，而是获得现金流的能力。 在找工作选公司，公司有多少钱不是最重要的指标，公司的发展速度才重要。 找男朋友，他现在有多少钱不是最重要的，重要的是他赚钱的能力。  所以对于“变量大于存量”的启发是：把“变量”作为最重要的目标，而不那么在意“存量”，要努力去寻找变量，“因为最终变量会决定存量”。</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/08/mcmc/">
+                <h3 class="media-heading">MCMC</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"> “MCMC 就是一种通过在概率空间 中随机采样 来近似感兴趣参数的后验分布 的方法”
+ Concept 感兴趣的参数 只是用来抽象我们感兴趣的现象的一些数字。通常我们会使用统计的方法来估计这些参数。例如，如果我们想了解成年人的身高，那么我们需要的参数可能就是以英寸为单位的平均身高。
+分布 就是参数的各个可能值和我们能观察到每个参数的可能性的数学表示。分布描述了我们对参数的确信度。因此，上面的钟形曲线可以表明我们非常确定参数的值接近于零，同时我们认为真实值高于或低于该值的可能性是相等的。
+在得到任何数据之前，通过以往的知识，对参数确信度的描述分布被称为先验分布 。
+从总体出发估计样本（观察数据）通过概率（probability）体现，从样本出发估计总体通过统计推论（infer）解释 。一般样本有具体的数值，而总体通过参数表示。
+似然分布 以参数值范围的形式总结了数据可以告诉我们什么，而参数范围值中的每个参数解释了我们正在观察的数据的可能性，属于从总体（参数值范围中的每个参数）出发估计现有样本的可能性。估计最大似然分布的参数值就是回答了这个问题：什么样的参数值能使分布最有可能观察到我们观察得到的数据？在没有先验信息的情况下，我们可能会就此打住，无法进行下去了。
+贝叶斯分析 的关键是将先验信息和似然分布结合起来去确定后验分布（可以把它看作一种先验和可能性分布的平均值）。这告诉我们，在有先验数据的情况下，哪些参数值能够最大化观察到我们指定数据的可能性，缩小了似然分布的参数值范围
+先验分布较短且较为分散，所以它代表了一组关于平均人体身高真实值 “不太确定” 的概率。 同时，可能性分布在相对较窄的范围内就可以总结数据，因此它代表了对真实参数值 “更确定” 的概率。当先验和可能性结合在一起时，数据（可能性分布表示）弱化了个体在巨人中长大的可能性，纠正了先验分布。 尽管那个人仍然认为人的平均身高比数据告诉他的稍高一些，但是他最相信的还是数据。
+ MCMC 回到最初的问题：我们试图估计我们感兴趣参数的后验分布，即人均身高μ ：
+我们知道后验分布在先验分布和似然分布范围内，但是，我们很难直接计算它，MCMC 方法考虑选择一个随机参数值。然后模拟会继续生成随机值（这是蒙特卡罗的一部分），但要根据一些规则来确定什么是一个好的参数值。这个诀窍就是，对于一对参数值，基于先验信息，通过计算每个值在解释数据时的可能性有多大，来计算哪个参数值更好。如果随机生成的参数值比最后一个参数值更好，则以一定的概率值将其添加到参数值链中（这是马尔科夫链部分）
+对于单个参数 ，MCMC 方法是沿 x 轴开始随机采样：由于随机样本受到固定概率 的影响，经过一段时间之后，它们往往会在我们感兴趣参数概率最高的区域收敛 ，在数据收敛之后，MCMC 抽样产生一组来自后验分布的样本点 。 在这些点周围绘制直方图，并计算任何您喜欢的统计数据。
+根据 MCMC 模拟生成的样本集计算出的任何统计量就是我们对该真实后验分布统计量的最佳预测。
+MCMC 方法也可以用来估计多个参数的后验分布（比如说人的身高和体重）。
+对于 n 个参数，存在 n 维空间中的高概率区域，这些区域中的某些参数值组可以更好地解释观察到的数据。 因此，我认为 MCMC 是一种在概率空间内进行随机采样来接近后验分布的方法
+ </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/08/wuzhi-zhi-mu/">
+                <h3 class="media-heading">如果没有今天，明天还会有昨天吗？- “无知之幕”</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">几天看了一本书叫 如果没有今天，明天还会有昨天吗？
+这本书的灵魂就是，如何从思想实验的角度来认识哲学。
+所谓的思想实验就是，用想象力去进行的实验，因为所做的都是在现实中做不到的实验。
+无知之幕 公平是所有人都想要的。关于公平的种种设计中，美国哲学家罗尔斯所提出的“无知之幕”，是其中最为知名的一种设计。
+所谓的无知之幕就是指： 如果不让政策制定者知道自己在这个社会中处于什么位置、从事什么样的职业、有什么样的爱好和背景，那么他们才会尽力制定出最照顾弱者利益的社会制度，由此就能实现公平。
+举个例子： 地球上70亿人，假设有两种情况： 1.第一种情况是，所有人每天都赚10块钱，最弱的人也能赚到10块。 2.第二种情况，最弱的那个人赚9块钱，其他人每个人都赚100块钱。 那么按照“无知之幕”的原则，我们应该选择第一种情况。这样不知道自己处在什么样的位置，就会选择大家都赚9块
+但是 诺齐克提出的“张伯伦论证” 的思想实验却认为，“无知之幕”并不能保证完全的公平。
+举例： 假如一支 NBA 球队，所有球员的总收入相同，其他种种条件也都齐全，那这就是一个公平的状况。在球队签约张伯伦这样的高薪大牌球星后，虽然球队内收入的分配状况发生了变化，但由于大家都同意这一决定，因此新的分配状况同样是公平的。
+哲学家诺齐克认为，不应当总想着靠政策制定者去设计出一套公平的制度，而是应该把一切都交给市场，只要所有的选择都是自由的 ，那无论最终出现什么结果，都可以称之为公平。
+这让我想起我们国家之前提出的共同富裕概念，计划经济就是在这种情况下诞生的，结果大家也就看到，这样的公平并没有给大家带来生活的进步，而最终的自由市场经济带来了经济提升，但是也带来少部分人富裕的不公平，随之而来的就是各种资源的聚集，阶层分化越来越严重，看来偏向任何一块都不是明智之举？
+ </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/08/python-dynamic-typing-and-two-type-copy/">
+                <h3 class="media-heading">python: Dynamic typing and two type copy </h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">python Dynamic typing   shallow and deep copy    </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/08/t-sne/">
+                <h3 class="media-heading">t-SNE</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">note  许多真实世界的数据集具有较低的内在维度，但是它们嵌入在高维空间中，人类因为受限于三维可视化，而不易发现这些内在的结构
+t分布式随机邻域嵌入（t-SNE）：t-distributed stochastic neighbor embedding (t-SNE)， 是一种非常流行的非线性降为的方法，它和 PCA的不同之处在于：
+PCA的本质是在降维之后尽量保存矩阵的最大变异性，而实际上我们经常是想保存原本的结构，换句话说，就是降维前各个点相对距离结构在降维之后要继续保留下来
+ 过程 我们这里用 3维代替高维， 2维代替低维 那么3维的点经过 映射之后 在2维的空间 要保存原有的相对距离结构
+这个过程本质 神经网络深度学习问题，是找到最佳的映射矩阵（最好的 w1 w2 组合方式），使得映射后，数据结构得以保存 那么怎么来衡量数据结构保存的效果？
+那就看比较原始数据下的距离矩阵 和 映射后的距离矩阵 的差 这样的话问题就转化为： 求熵最小化的问题？
+那么这里有个问题，高维度的距离矩阵怎么和低维的距离矩阵进行比较呢 ？ 这就是 t-SNE 的特殊的地方：它把距离问题转换为概率问题，距离越近的i,j两点，pij越大， 以i为中心的t分布，描述 i 与所有点的距离，
+之所以不用正态分布，是因为t分布是长尾 的，这样的分布在尾部的数据点之间（距离较远的点）的惩罚不是区分的很严格，
+换句话说就是 映射后 近变远 的惩罚系数 &gt; 远变近的惩罚系数，
+这个过程可以想象成 一个弹簧产生形变，映射由远变进就是压缩，会产生斥力，映射由近变远，就会拉伸，产生引力 ，形变就好像是熵，是映射前和映射后的差距，产生的单位力（力/形变长度） 的绝对值就好像是惩罚系数，拉伸的形变产生的单位引力 &gt; 压缩的形变产生的单位斥力 ，
+这就很好的解决了数据点映射后的拥挤问题，就好像点与点之间有一定的斥力（为了纠正远变近的情况），但是这个斥力系数又小于点与点之间的引力, 这样在纠正同样误差的时候我们会优先纠正近的变成远的, 体现在单位引力大于单位斥力（为了纠正近变远的情况，单位引力大于单位斥力是因为我们更在乎点与点之间相似的机构 ， 可以想象最后每个点会在所有合力的情况下达到一个平衡， 如下图：  Links  tsne   </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/08/python-basic-001/">
+                <h3 class="media-heading">python basic 001</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"> </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/08/%E6%B8%B8%E6%B3%B3%E5%81%A5%E8%BA%AB%E4%BA%86%E8%A7%A3%E4%B8%80%E4%B8%8B/">
+                <h3 class="media-heading">游泳健身了解一下！</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">出地铁口路上，不远处，灯光昏暗，映衬着一个消瘦的身影，深色的T-shirt，牛仔短裤，卷卷的头发，是一位小姐姐，等等不好，眼睛似乎发现了我，糟糕：是心动的感觉，正打算从旁低头走过，突然一张传单甩在眼前，紧接着飘来熟悉的声音：“游泳健身了解一下”。</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/07/survival-analysis/">
+                <h3 class="media-heading">Survival Analysis</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">1.Survival Analysis Basics Basic concept Censoring:right censoring   Survival and hazard functions   Log-rank test: Kaplan-Meier survival estimate null hypothesis is that there is no difference in survival between the two groups
+Non-parametric test , so no assumptions about the survival distributions Log rank statistic is approximately distributed as a chi-square test statistic.    Survival analysis in R #data library(&quot;survival&quot;) library(&quot;survminer&quot;) data(&quot;lung&quot;) #survival fit fit &lt;- survfit(Surv(time, status) ~ sex, data = lung) #summary summary(fit)$table ## records n.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         45 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://i.loli.net/2018/02/26/5a9416186c149.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" integrity="sha256-IFHWFEbU2/+wNycDECKgjIRSirRNIDp2acEB5fvdVRU=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js" integrity="sha256-+mpyNVJsNt4rVXCw0F+pAOiB3YxmHgrbJsx4ecPuUaI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js" integrity="sha256-vMxgR/7FtLovVA+IPrR7+xTgIgARH7y9VZQnmmi0HDI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js" integrity="sha256-N0qFUh7/9vLvia87dDndewmsgsyYoNkdA212tPc+2NI=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-kr8dyqj6rb6ortyib7whfo9x9p6td6zo8t1v4fdz4ecx5kwybsdlmk1slygn.min.js"></script>
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = '\/1\/01\/scientific-studies-confounding-and-simpsons-paradox\/';
+          
+            this.page.identifier = '\/1\/01\/scientific-studies-confounding-and-simpsons-paradox\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'jixing';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+    
+  </body>
+</html>
+

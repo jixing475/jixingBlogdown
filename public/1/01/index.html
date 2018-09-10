@@ -1,14 +1,558 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Scientific studies, confounding, and Simpson’s paradox</title>
+    <meta charset="utf-8">
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/Users/zero/myrepo/jixingBlogdown/xaringan/slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Scientific studies, confounding, and Simpson’s paradox
+
+---
 
 
 
 
-<p>Working in Data Science, I often feel like I have to justify using R over Python for most tasks. And while I do use Python for running scripts in production, I am much more comfortable with the R environment. Basically, whenever I can, I use R for prototyping, testing and teaching. But because personal gut-feeling preference isn’t a very good reason to give to (scientifically minded) people, I’ve thought a lot about the pros and cons of using R. And this is what I came up with why I prefer R…</p>
-<p><em>Disclaimer:</em> I have “grown up” with R and I’m much more familiar with it, so I admit that I am quite biased in my assessment. If you think I’m not doing other languages justice, I’ll be happy to hear your pros and cons!</p>
-<p>First of, <a href="https://www.r-project.org/">R</a> is an <a href="https://cran.r-project.org/">open-source, cross-platform</a> language, so it’s free to use by any- and everybody. Of course, so are other languages, like Python. It is also a very established language, so that there are lots and lots of packages for basically every type of analysis you can think of. You find packages for statistics, machine learning, visualization, data wrangling, spatial analysis, bioinformatics and more. But, same as with Python, where we also have lots of package options, this plethora of packages can sometimes make it a bit confusing: you would often need to test and compare several similar packages in order to find the best one. Most of the packages are of very high quality. And when a package is on <a href="https://cran.r-project.org/web/packages/available_packages_by_name.html">CRAN</a> or <a href="https://www.bioconductor.org/">Bioconductor</a> (as most are), you can be sure that it has been checked, that you will get proper documentation and that you won’t have problems with installation, dependencies, etc. R’s graphics capabilities are superior to any other I know. Especially <a href="http://ggplot2.org/">ggplot2</a> with all its <a href="http://www.ggplot2-exts.org/">extensions</a> provides a structured, yet powerful set of tools for producing <a href="http://www.r-graph-gallery.com/portfolio/ggplot2-package/">high-quality publication-ready graphs and figures</a>. Moreover, ggplot2 integrates with the <a href="https://www.tidyverse.org/">tidyverse</a> and <a href="https://cran.r-project.org/web/packages/broom/vignettes/broom.html">broom</a>, which has made data wrangling and analysis much more convenient and structured.</p>
-<p>The suite of tools around <a href="https://www.rstudio.com/">RStudio</a> make it perfect for data analysis and for teaching. You can provide easy instructions for installation and <a href="http://rmarkdown.rstudio.com/">RMarkdown</a> files for your students to follow along. Everybody is going to use the same system. In Python, you are always dealing with complications like version 2 vs version 3, Spyder vs Jupyter Notebook, pip vs conda, etc. <a href="https://www.rstudio.com/products/rpackages/">Everything around RStudio</a> is very well maintained and comes with extensive documentation and detailed tutorials. You find add-ins for <a href="https://support.rstudio.com/hc/en-us/articles/200532077-Version-Control-with-Git-and-SVN">version control</a>, <a href="http://shiny.rstudio.com/">Shiny</a> apps, writing books or other documents (bookdown) and you can even build your blog (as this one is) with blogdown from within RStudio! You can even write presentations directly in RMarkdown, including code + output and everything, as LaTeX beamer presentations, ioslides, HTML5, etc.!</p>
-<p>If you are looking for advanced functionality, it is very likely that somebody has already written a package for you. For example, there are packages that allow you to access Spark, H2O, elasticsearch, Tensor Flow, Keras, tesseract, etc. with no hassle at all. And you can even run bash, Python, or code from other languages from within R!</p>
-<p>There is a big - and very active - community! This is one of the things I most enjoy about working with R. You can find many high-quality <a href="https://cran.r-project.org/manuals.html">manuals</a>, <a href="https://cran.r-project.org/other-docs.html">resources</a> and tutorials for all kinds of topics. Most of them provided free of charge by people who often dedicate their spare time to help others. The same goes for asking questions on <a href="https://stackoverflow.com/questions/tagged/r">Stack Overflow</a>, putting up issues on <a href="https://github.com/">Github</a> or <a href="https://groups.google.com/forum/#!forum/r-help-archive">Google groups</a>: usually you will get several answers within a short period of time (from my experience minutes to hours). What other community is so supportive and so helpful!? But for most things, you wouldn’t even need to ask for help because many of the packages come with absolutely amazing vignettes, that describe the functions and workflows in a detailed, yet easy to understand way. If that’s not enough, you will very likely find additional tutorials on R-bloggers, a site maintained by Tal Galili, that collects hundreds of R-blogs.</p>
-<p>There are several <a href="https://www.r-project.org/conferences.html">R Conferences</a>, like the <a href="https://user2018.r-project.org/">useR</a>, <a href="https://ropensci.org/community/events.html">rOpenSci Unconference</a> and many <a href="https://jumpingrivers.github.io/meetingsR/r-user-groups.html">R-user groups</a> all around the globe.</p>
-<p>I can’t stress enough how much I appreciate all the people who are involved in the R-community; who write packages, tutorials, blogs, who share information, provide support and who think about how to make data analysis easy, more convenient and - dare I say - fun! A few notable groups within the R community are the maintainers of RStudio, rOpenSci,</p>
-<p>The main drawbacks I experience with R are that scripts tends to be harder to deploy than Python (<a href="https://www.microsoft.com/en-us/cloud-platform/r-server">R-server</a> might be a solution, but I don’t know enough about it to really judge). Dealing with memory, space and security issues is often difficult in R. But there has already been a vast improvement over the last months/years, so I’m sure we will see development there in the future…</p>
 
+
+class: center, middle
+
+# Scientific studies
+
+---
+
+## Scientific studies
+
+- Observational
+    - Collect data in a way that does not interfere with how the data arise ("observe")
+    - Only establish an association
+
+- Experimental
+    - Randomly assign subjects to treatments
+    - Establish causal connections
+
+.question[
+Design a study comparing average energy levels of people who do and do not exercise -- both as an observational study and as an experiment.
+]
+
+---
+
+## Study: Bfast cereal keeps girls slim
+
+Girls who ate breakfast of any type had a lower average body mass index, a common obesity gauge, than those who said they didn't. The index was even lower for girls who said they ate cereal for breakfast, according to findings of the study conducted by the Maryland Medical Research Institute with funding from the National Institutes of Health (NIH) and cereal-maker General Mills.
+ 
+[...]
+ 
+The results were gleaned from a larger NIH survey of 2,379 girls in California, Ohio, and Maryland who were tracked between the ages of 9 and 19.
+ 
+[...]
+ 
+As part of the survey, the girls were asked once a year what they had eaten during the previous three days.
+ 
+[...]
+
+.question[
+What is the explanatory and what is the response variable?
+]
+
+---
+
+### 3 possible explanations
+
+--
+
+1. Eating breakfast causes girls to be slimmer 
+
+--
+
+2. Being slim causes girls to eat breakfast
+
+--
+
+3. A third variable is responsible for both -- a **confounding** variable: an extraneous variable that affects both the explanatory and the response variable, and that make it seem like there is a relationship between them
+
+---
+
+## Correlation != causation
+
+![](https://i.loli.net/2018/08/23/5b7e54304dacf.jpg)
+
+&lt;br&gt;&lt;br&gt;&lt;br&gt;
+
+Randall Munroe CC BY-NC 2.5 http://xkcd.com/552/
+
+---
+
+## Studies and conclusions
+
+![](https://i.loli.net/2018/08/23/5b7e5440266f3.jpg)
+
+---
+
+class: center, middle
+
+# Conditional probability
+
+---
+
+## Conditional probability
+
+**Notation**: `\(P(A | B)\)`: Probability of event A given event B
+
+- What is the probability that it be unseasonably warm tomorrow?
+
+- What is the probability that it be unseasonably warm tomorrow, given that it it was unseasonably warm tomorrow?
+
+---
+
+.question[
+A January 2018 SurveyUSA poll asked 500 randomly selected Californians whether they are familiar with the DREAM act. The distribution of the responses by age category are shown below.
+
+What percent of **all respondents** are very familiar with the DREAM act?  
+]
+&lt;br&gt;
+.pull-left[
+|            | 18 - 49 | 50+ | Total |
+|------------|---------|-----|-------|
+| Very       | 90      | 32  | 122   |
+| Somewhat   | 125     | 86  | 211   |
+| Not very   | 56      | 33  | 89    |
+| Not at all | 36      | 24  | 60    |
+| Not sure   | 9       | 9   | 18    |
+| Total      | 316     | 184 | 500   |
+]
+--
+.pull-right[
+`\(P(Very) = \frac{122}{500} = 0.244\)`
+]
+
+&lt;br&gt;
+
+Source: [SurveyUSA News Poll 23754](http://www.surveyusa.com/client/PollReport.aspx?g=783743b0-efc1-4b67-9201-58352a8f61f1)
+
+---
+
+.question[
+A January 2018 SurveyUSA poll asked 500 randomly selected Californians whether they are familiar with the DREAM act. The distribution of the responses by age category are shown below.
+
+What percent of **respondents who are 18 - 49 years old** are very familiar with the DREAM act?
+]
+&lt;br&gt;
+.pull-left[
+|            | 18 - 49 | 50+ | Total |
+|------------|---------|-----|-------|
+| Very       | 90      | 32  | 122   |
+| Somewhat   | 125     | 86  | 211   |
+| Not very   | 56      | 33  | 89    |
+| Not at all | 36      | 24  | 60    |
+| Not sure   | 9       | 9   | 18    |
+| Total      | 316     | 184 | 500   |
+]
+--
+.pull-right[
+`\(P(Very~|~18-49) = \frac{90}{316} = 0.285\)`
+]
+
+---
+
+.question[
+A January 2018 SurveyUSA poll asked 500 randomly selected Californians whether they are familiar with the DREAM act. The distribution of the responses by age category are shown below.
+
+What percent of **respondents who are 50+ years old** are very familiar with the DREAM act?
+]
+&lt;br&gt;
+.pull-left[
+|            | 18 - 49 | 50+ | Total |
+|------------|---------|-----|-------|
+| Very       | 90      | 32  | 122   |
+| Somewhat   | 125     | 86  | 211   |
+| Not very   | 56      | 33  | 89    |
+| Not at all | 36      | 24  | 60    |
+| Not sure   | 9       | 9   | 18    |
+| Total      | 316     | 184 | 500   |
+]
+--
+.pull-right[
+`\(P(Very~|~50+) = \frac{32}{184} = 0.173\)`
+]
+
+---
+
+.question[
+Given that
+
+- `\(P(Very) = \frac{122}{500} = 0.244\)`
+- `\(P(Very~|~18-49) = \frac{90}{316} = 0.285\)`
+- `\(P(Very~|~50+) = \frac{32}{184} = 0.173\)`
+
+does there appear to be a relationship between age and familiarity with the DREAM act? Explain your reasoning.
+]
+
+--
+
+&lt;br&gt;
+
+.question[
+Could there be another variable that explains this relationship?
+]
+
+---
+
+## Independence
+
+.question[
+Inspired by the previous example and how we used the conditional probabilities to make conclusions, come up with a definition of independent events. If easier, you can keep the context limited to the example (independence/dependence of familiarity with the DREAM act and age), but try to push yourself to make a more general statement.
+]
+
+---
+
+class: center, middle
+
+# Simpson's paradox
+
+---
+
+## Relationships between variables
+
+- Bivariate relationship: Fitness -&gt; Heart health
+
+- Multivariate relationship: Calories + Age + Fitness -&gt; Heart health
+
+---
+
+## Simpson's paradox
+
+- Not considering an important variable when studying a relationship can result in what we call a **Simpson's paradox**, which illustrates the effect the omission of an explanatory variable can have on the measure of association between another explanatory variable and a response variable. 
+
+- In other words, the inclusion of a third variable in the analysis can change the apparent relationship between the other two variables. 
+
+![](https://i.loli.net/2018/08/23/5b7e5448c3198.jpg)
+
+---
+
+## Berkeley admission data
+
+- Study carried out by the graduate Division of the University of California, Berkeley in the early 70’s to evaluate whether there was a sex bias in graduate admissions
+
+- The data come from six departments. For confidentiality we'll call them A-F. 
+
+- We have information on whether the applicant was male or female and whether they were admitted or rejected. 
+
+- First, we will evaluate whether the percentage of males admitted is indeed higher than females, overall. Next, we will calculate the same percentage for each department.
+
+---
+
+## Data
+
+
+```r
+ucb_admit &lt;- read_csv("/Users/zero/myrepo/jixingBlogdown/data/ucb-admit.csv")
+ucb_admit
+```
+
+```
+## # A tibble: 4,526 x 3
+##    Admit    Gender Dept 
+##    &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;
+##  1 Admitted Male   A    
+##  2 Admitted Male   A    
+##  3 Admitted Male   A    
+##  4 Admitted Male   A    
+##  5 Admitted Male   A    
+##  6 Admitted Male   A    
+##  7 Admitted Male   A    
+##  8 Admitted Male   A    
+##  9 Admitted Male   A    
+## 10 Admitted Male   A    
+## # ... with 4,516 more rows
+```
+
+---
+
+## Glimpse at the data
+
+
+```r
+glimpse(ucb_admit)
+```
+
+```
+## Observations: 4,526
+## Variables: 3
+## $ Admit  &lt;chr&gt; "Admitted", "Admitted", "Admitted", "Admitted", "Admitt...
+## $ Gender &lt;chr&gt; "Male", "Male", "Male", "Male", "Male", "Male", "Male",...
+## $ Dept   &lt;chr&gt; "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", "A", ...
+```
+
+---
+
+## Overall gender distribution
+
+.question[
+What can you say about the overall gender distribution? Hint: Calculate the following probabilities: `\(P(Admit | Male)\)` and `\(P(Admit | Female)\)`.
+]
+
+
+```r
+ucb_admit %&gt;%
+  count(Gender, Admit)
+```
+
+```
+## # A tibble: 4 x 3
+##   Gender Admit        n
+##   &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt;
+## 1 Female Admitted   557
+## 2 Female Rejected  1278
+## 3 Male   Admitted  1198
+## 4 Male   Rejected  1493
+```
+
+---
+
+## Overall gender distribution
+
+.question[
+What type of visualization would be appropriate for representing these data?
+]
+
+
+```r
+ucb_admit %&gt;%
+  count(Gender, Admit) %&gt;%
+  group_by(Gender) %&gt;%
+  mutate(prop_admit = n / sum(n))
+```
+
+```
+## # A tibble: 4 x 4
+## # Groups:   Gender [2]
+##   Gender Admit        n prop_admit
+##   &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt;      &lt;dbl&gt;
+## 1 Female Admitted   557      0.304
+## 2 Female Rejected  1278      0.696
+## 3 Male   Admitted  1198      0.445
+## 4 Male   Rejected  1493      0.555
+```
+
+---
+
+## Overall gender distribution
+
+
+```r
+ggplot(ucb_admit, mapping = aes(x = Gender, fill = Admit)) +
+  geom_bar(position = "fill") + 
+  labs(y = "", title = "Admit by gender")
+```
+
+![](2018-08-23-try-xaringan_files/figure-html/unnamed-chunk-5-1.png)&lt;!-- --&gt;
+
+---
+
+## Gender distribution, by department
+
+.question[
+What can you say about the by department gender distribution?
+]
+
+
+```r
+ucb_admit %&gt;%
+  count(Dept, Gender, Admit)     # ---&gt;
+```
+
+```
+## # A tibble: 24 x 4
+##    Dept  Gender Admit        n
+##    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt;
+##  1 A     Female Admitted    89
+##  2 A     Female Rejected    19
+##  3 A     Male   Admitted   512
+##  4 A     Male   Rejected   313
+##  5 B     Female Admitted    17
+##  6 B     Female Rejected     8
+##  7 B     Male   Admitted   353
+##  8 B     Male   Rejected   207
+##  9 C     Female Admitted   202
+## 10 C     Female Rejected   391
+## # ... with 14 more rows
+```
+
+---
+
+.small[
+
+```r
+ucb_admit %&gt;%
+  count(Dept, Gender, Admit) %&gt;%
+  print(n = 24)
+```
+
+```
+## # A tibble: 24 x 4
+##    Dept  Gender Admit        n
+##    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt;
+##  1 A     Female Admitted    89
+##  2 A     Female Rejected    19
+##  3 A     Male   Admitted   512
+##  4 A     Male   Rejected   313
+##  5 B     Female Admitted    17
+##  6 B     Female Rejected     8
+##  7 B     Male   Admitted   353
+##  8 B     Male   Rejected   207
+##  9 C     Female Admitted   202
+## 10 C     Female Rejected   391
+## 11 C     Male   Admitted   120
+## 12 C     Male   Rejected   205
+## 13 D     Female Admitted   131
+## 14 D     Female Rejected   244
+## 15 D     Male   Admitted   138
+## 16 D     Male   Rejected   279
+## 17 E     Female Admitted    94
+## 18 E     Female Rejected   299
+## 19 E     Male   Admitted    53
+## 20 E     Male   Rejected   138
+## 21 F     Female Admitted    24
+## 22 F     Female Rejected   317
+## 23 F     Male   Admitted    22
+## 24 F     Male   Rejected   351
+```
+]
+
+---
+
+## Gender distribution, by department
+
+.question[
+What type of visualization would be appropriate for representing these data?
+]
+
+.small[
+
+```r
+ucb_admit %&gt;%
+  count(Dept, Gender, Admit) %&gt;%
+  group_by(Dept, Gender) %&gt;%
+  mutate(Perc_Admit = n / sum(n)) %&gt;%
+  filter(Admit == "Admitted")
+```
+
+```
+## # A tibble: 12 x 5
+## # Groups:   Dept, Gender [12]
+##    Dept  Gender Admit        n Perc_Admit
+##    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt;    &lt;int&gt;      &lt;dbl&gt;
+##  1 A     Female Admitted    89     0.824 
+##  2 A     Male   Admitted   512     0.621 
+##  3 B     Female Admitted    17     0.68  
+##  4 B     Male   Admitted   353     0.630 
+##  5 C     Female Admitted   202     0.341 
+##  6 C     Male   Admitted   120     0.369 
+##  7 D     Female Admitted   131     0.349 
+##  8 D     Male   Admitted   138     0.331 
+##  9 E     Female Admitted    94     0.239 
+## 10 E     Male   Admitted    53     0.277 
+## 11 F     Female Admitted    24     0.0704
+## 12 F     Male   Admitted    22     0.0590
+```
+]
+
+---
+
+## Gender distribution, by department
+
+
+```r
+ggplot(ucb_admit, mapping = aes(x = Gender, fill = Admit)) +
+  geom_bar(position = "fill") +
+  facet_grid(. ~ Dept) +
+  labs(x = "Gender", y = "", fill = "Admission",
+       title = "Admit by gender by department")
+```
+
+![](2018-08-23-try-xaringan_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+
+---
+
+class: center, middle
+
+# What else do I need to know from this week's reading?
+
+---
+
+## Short answer
+
+Everything 😜
+
+---
+
+## Long answer
+
+Be able to identify
+
+- whether a study is observational or experiment, and further features of the study design
+
+- sources of bias in a study
+
+- misrepresentations in summaries of study results (in popular media or in scientific literature)
+
+---
+
+## Any questions?
+
+
+on the reading, or otherwise?
+    </textarea>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function() {
+  var d = document, s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})();</script>
+
+<script>
+(function() {
+  var i, text, code, codes = document.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  
+        continue;
+      }
+    }
+    i++;
+  }
+})();
+</script>
+
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
