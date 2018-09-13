@@ -214,6 +214,64 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="/2018/03/scraping-and-wranging-tables-from-research-articles/">
+          Scraping and Wranging Tables from Research Articles
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-03-27T00:00:00Z">
+        
+  March 27, 2018
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/statistics">statistics</a>
+    
+  
+
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      What do you do when you want to use results from the literature to anchor your own analysis? we’ll go through a practical scenario on scraping an html table from a Nature Genetics article into R and wrangling the data into a useful format.
+01. Scraping a html table from a webpage #load packages library(&quot;rvest&quot;) library(&quot;knitr&quot;) library(tidyverse) #scraping web page url &lt;- &quot;https://www.nature.com/articles/ng.2802/tables/2&quot; #====🔥find where is the table lives on this webpage==== table_path=&#39;//*[@id=&quot;content&quot;]/div/div/figure/div[1]/div/div[1]/table&#39; #get the table nature_genetics_table2 &lt;- url %&gt;% read_html() %&gt;% html_nodes(xpath=table_path) %&gt;% html_table(fill=T) %&gt;% .
+      <p>
+        <a href="/2018/03/scraping-and-wranging-tables-from-research-articles/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="/2018/03/scraping-and-wranging-tables-from-research-articles/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/27/5aba60b02b557.jpg"/>
+      </div>
+    </a>
+  
+</article>
+
+          
+            
+  
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
         <a class="link-unstyled" href="/2018/03/how-to-create-dummy-variables-and-normalization/">
           3.3 How To Create Dummy Variables And Normalization
         </a>
@@ -564,63 +622,6 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
 </article>
 
           
-            
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/03/how-to-use-the-ncbis-new-api-keys/">
-          HOW TO USE THE NCBI&#39;S NEW API KEYS
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-03-19T00:00:00Z">
-        
-  March 19, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/computers">computers</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      The NCBI is one of the most important sources of biological data. The centre provides access to information on 28 million scholarly articles through PubMed and 250 million DNA sequences through GenBank. More importantly, records in the [50 public databases] (https://www.ncbi.nlm.nih.gov/guide/all/#databases) maintained by the NCBI are strongly cross-referenced. As a result, it is possible to pinpoint searches using almost 2 million taxonomic names or a controlled vocabulary with 270,000 terms.
-      <p>
-        <a href="/2018/03/how-to-use-the-ncbis-new-api-keys/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/03/how-to-use-the-ncbis-new-api-keys/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/21/5ab1c0c655826.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-          
           
   <div class="pagination-bar">
     <ul class="pagination">
@@ -702,6 +703,23 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
       <div class="no-result text-color-light text-center">no post found</div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/09/npl-use-python-part-01/">
+                <h3 class="media-heading">NPL use python part 01</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -895,23 +913,6 @@ PCA的本质是在降维之后尽量保存矩阵的最大变异性，而实际�
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/08/%E6%B8%B8%E6%B3%B3%E5%81%A5%E8%BA%AB%E4%BA%86%E8%A7%A3%E4%B8%80%E4%B8%8B/">
-                <h3 class="media-heading">游泳健身了解一下！</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">出地铁口路上，不远处，灯光昏暗，映衬着一个消瘦的身影，深色的T-shirt，牛仔短裤，卷卷的头发，是一位小姐姐，等等不好，眼睛似乎发现了我，糟糕：是心动的感觉，正打算从旁低头走过，突然一张传单甩在眼前，紧接着飘来熟悉的声音：“游泳健身了解一下”。</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -919,7 +920,7 @@ PCA的本质是在降维之后尽量保存矩阵的最大变异性，而实际�
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         45 posts found
+         46 posts found
       </p>
     </div>
   </div>

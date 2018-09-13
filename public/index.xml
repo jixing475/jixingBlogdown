@@ -2,12 +2,616 @@
   <title>student zero </title>
   <link href="/index.xml" rel="self"/>
   <link href="/"/>
-  <updated>2018-09-10T00:00:00+00:00</updated>
+  <updated>2018-09-13T00:00:00+00:00</updated>
   <id>/</id>
   <author>
     <name>Jixing Liu</name>
   </author>
   <generator>Hugo -- gohugo.io</generator>
+  <entry>
+    <title type="html"><![CDATA[NPL use python part 01]]></title>
+    <link href="/2018/09/npl-use-python-part-01/"/>
+    <id>/2018/09/npl-use-python-part-01/</id>
+    <published>2018-09-13T00:00:00+00:00</published>
+    <updated>2018-09-13T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<p></p>
+
+<h1 id="working-with-text">Working With Text</h1>
+
+<pre><code class="language-python">text1 = &quot;Ethics are built right into the ideals and objectives of the United Nations &quot;
+
+len(text1) # The length of text1
+</code></pre>
+
+<pre><code>76
+</code></pre>
+
+<pre><code class="language-python">text2 = text1.split(' ')  # Return a list of the words in text2, separating by ' '.
+
+len(text2)
+</code></pre>
+
+<pre><code>14
+</code></pre>
+
+<pre><code class="language-python">text2
+</code></pre>
+
+<pre><code>['Ethics',
+ 'are',
+ 'built',
+ 'right',
+ 'into',
+ 'the',
+ 'ideals',
+ 'and',
+ 'objectives',
+ 'of',
+ 'the',
+ 'United',
+ 'Nations',
+ '']
+</code></pre>
+
+<p><br>
+在列表中找到特定的单词：通过增加条件判断</p>
+
+<pre><code class="language-python">[w 
+ for w in text2 if len(w) &gt; 3] # Words that are greater than 3 letters long in text2
+</code></pre>
+
+<pre><code>['Ethics',
+ 'built',
+ 'right',
+ 'into',
+ 'ideals',
+ 'objectives',
+ 'United',
+ 'Nations']
+</code></pre>
+
+<pre><code class="language-python">[w for w in text2 if w.istitle()] # Capitalized words in text2
+</code></pre>
+
+<pre><code>['Ethics', 'United', 'Nations']
+</code></pre>
+
+<pre><code class="language-python">[w for w in text2 if w.endswith('s')] # Words in text2 that end in 's'
+</code></pre>
+
+<pre><code>['Ethics', 'ideals', 'objectives', 'Nations']
+</code></pre>
+
+<p><br></p>
+
+<h2 id="find-unique-words-using-set">Find unique words using <code>set()</code>.</h2>
+
+<pre><code class="language-python">text3 = 'To be or not to be'
+text4 = text3.split(' ')
+
+len(text4)
+</code></pre>
+
+<pre><code>6
+</code></pre>
+
+<pre><code class="language-python">len(set(text4))
+</code></pre>
+
+<pre><code>5
+</code></pre>
+
+<pre><code class="language-python">set(text4)
+</code></pre>
+
+<pre><code>{'To', 'be', 'not', 'or', 'to'}
+</code></pre>
+
+<pre><code class="language-python">len(set([w.lower() for w in text4])) # .lower converts the string to lowercase.
+</code></pre>
+
+<pre><code>4
+</code></pre>
+
+<pre><code class="language-python">set([w.lower() for w in text4])
+</code></pre>
+
+<pre><code>{'be', 'not', 'or', 'to'}
+</code></pre>
+
+<h2 id="processing-free-text">Processing free-text</h2>
+
+<pre><code class="language-python">text5 = '&quot;Ethics are built right into the ideals and objectives of the United Nations&quot; \
+#UNSG @ NY Society for Ethical Culture bit.ly/2guVelr'
+text6 = text5.split(' ')
+
+text6
+</code></pre>
+
+<pre><code>['&quot;Ethics',
+ 'are',
+ 'built',
+ 'right',
+ 'into',
+ 'the',
+ 'ideals',
+ 'and',
+ 'objectives',
+ 'of',
+ 'the',
+ 'United',
+ 'Nations&quot;',
+ '#UNSG',
+ '@',
+ 'NY',
+ 'Society',
+ 'for',
+ 'Ethical',
+ 'Culture',
+ 'bit.ly/2guVelr']
+</code></pre>
+
+<p><br></p>
+
+<h3 id="finding-hastags">Finding hastags:</h3>
+
+<pre><code class="language-python">[w for w in text6 
+     if w.startswith('#')]
+</code></pre>
+
+<pre><code>['#UNSG']
+</code></pre>
+
+<p><br></p>
+
+<h3 id="finding-callouts">Finding callouts:</h3>
+
+<pre><code class="language-python">[w for w in text6 if w.startswith('@')]
+</code></pre>
+
+<pre><code>['@']
+</code></pre>
+
+<pre><code class="language-python">text7 = '@UN @UN_Women &quot;Ethics are built right into the ideals and objectives of the United Nations&quot; \
+#UNSG @ NY Society for Ethical Culture bit.ly/2guVelr'
+text8 = text7.split(' ')
+</code></pre>
+
+<p><br></p>
+
+<h3 id="use-regular-expressions-to-help-us-with-more-complex-parsing">Use regular expressions to help us with more complex parsing.</h3>
+
+<p>For example <code>'@[A-Za-z0-9_]+'</code> will return all words that:
+* start with <code>'@'</code> and are followed by at least one:
+* capital letter (<code>'A-Z'</code>)
+* lowercase letter (<code>'a-z'</code>)
+* number (<code>'0-9'</code>)
+* or underscore (<code>'_'</code>)</p>
+
+<pre><code class="language-python">import re # import re - a module that provides support for regular expressions
+
+[w for w in text8 if re.search('@[A-Za-z0-9_]+', w)]
+</code></pre>
+
+<pre><code>['@UN', '@UN_Women']
+</code></pre>
+
+<h2 id="regex-with-pandas">Regex with pandas</h2>
+
+<pre><code class="language-python">import pandas as pd
+
+time_sentences = [&quot;Monday: The doctor's appointment is at 2:45pm.&quot;, 
+                  &quot;Tuesday: The dentist's appointment is at 11:30 am.&quot;,
+                  &quot;Wednesday: At 7:00pm, there is a basketball game!&quot;,
+                  &quot;Thursday: Be back home by 11:15 pm at the latest.&quot;,
+                  &quot;Friday: Take the train at 08:10 am, arrive at 09:00am.&quot;]
+
+df = pd.DataFrame(time_sentences, columns=['text'])
+df
+</code></pre>
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>text</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Monday: The doctor's appointment is at 2:45pm.</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Tuesday: The dentist's appointment is at 11:30...</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Wednesday: At 7:00pm, there is a basketball game!</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Thursday: Be back home by 11:15 pm at the latest.</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Friday: Take the train at 08:10 am, arrive at ...</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<pre><code class="language-python"># find the number of characters for each string in df['text']
+df['text']
+</code></pre>
+
+<pre><code>0       Monday: The doctor's appointment is at 2:45pm.
+1    Tuesday: The dentist's appointment is at 11:30...
+2    Wednesday: At 7:00pm, there is a basketball game!
+3    Thursday: Be back home by 11:15 pm at the latest.
+4    Friday: Take the train at 08:10 am, arrive at ...
+Name: text, dtype: object
+</code></pre>
+
+<pre><code class="language-python"># find the number of characters for each string in df['text']
+df['text'].str
+</code></pre>
+
+<pre><code>&lt;pandas.core.strings.StringMethods at 0x11a34eb38&gt;
+</code></pre>
+
+<pre><code class="language-python">print(type(df['text'])) 
+</code></pre>
+
+<pre><code>&lt;class 'pandas.core.series.Series'&gt;
+</code></pre>
+
+<pre><code class="language-python">df['text'].str.len()
+</code></pre>
+
+<pre><code>0    46
+1    50
+2    49
+3    49
+4    54
+Name: text, dtype: int64
+</code></pre>
+
+<pre><code class="language-python"># find the number of tokens for each string in df['text']
+df['text'].str.split()
+</code></pre>
+
+<pre><code>0    [Monday:, The, doctor's, appointment, is, at, ...
+1    [Tuesday:, The, dentist's, appointment, is, at...
+2    [Wednesday:, At, 7:00pm,, there, is, a, basket...
+3    [Thursday:, Be, back, home, by, 11:15, pm, at,...
+4    [Friday:, Take, the, train, at, 08:10, am,, ar...
+Name: text, dtype: object
+</code></pre>
+
+<pre><code class="language-python"># find the number of tokens for each string in df['text']
+#str.split each to a list
+df['text'].str.split().str.len()
+</code></pre>
+
+<pre><code>0     7
+1     8
+2     8
+3    10
+4    10
+Name: text, dtype: int64
+</code></pre>
+
+<h4 id="contain">contain</h4>
+
+<pre><code class="language-python"># find which entries contain the word 'appointment'
+df['text'].str.contains('appointment')
+</code></pre>
+
+<pre><code>0     True
+1     True
+2    False
+3    False
+4    False
+Name: text, dtype: bool
+</code></pre>
+
+<h4 id="count-match-occurs-times">count match occurs times</h4>
+
+<pre><code class="language-python"># find how many times a digit occurs in each string
+df['text'].str.count(r'[0-9]')
+</code></pre>
+
+<pre><code>0    3
+1    4
+2    3
+3    4
+4    8
+Name: text, dtype: int64
+</code></pre>
+
+<h4 id="regex-matches-at-most-1-times-防止贪婪-0次或者1次">regex ?: matches at most 1 times, 防止贪婪 0次或者1次</h4>
+
+<pre><code class="language-python"># group and find the hours and minutes
+df['text'].str.findall(r'(\d?\d):(\d\d)')
+</code></pre>
+
+<pre><code>0               [(2, 45)]
+1              [(11, 30)]
+2               [(7, 00)]
+3              [(11, 15)]
+4    [(08, 10), (09, 00)]
+Name: text, dtype: object
+</code></pre>
+
+<pre><code class="language-python"># replace weekdays with '???'
+#\w is equal the [A-z0-9_]
+# \b determine the edge of word
+df['text'].str.replace(r'\w+day\b', '???')
+df['text'].str.replace(r'[A-z0-9_]+day\b', '???')
+</code></pre>
+
+<pre><code>0          ???: The doctor's appointment is at 2:45pm.
+1       ???: The dentist's appointment is at 11:30 am.
+2          ???: At 7:00pm, there is a basketball game!
+3         ???: Be back home by 11:15 pm at the latest.
+4    ???: Take the train at 08:10 am, arrive at 09:...
+Name: text, dtype: object
+</code></pre>
+
+<pre><code class="language-python"># create new columns from first match of extracted groups
+df['text'].str.extract(r'(\d?\d):(\d\d)')
+</code></pre>
+
+<pre><code>/Users/zero/anaconda3/lib/python3.6/site-packages/ipykernel/__main__.py:2: FutureWarning: currently extract(expand=None) means expand=False (return Index/Series/DataFrame) but in a future version of pandas this will be changed to expand=True (return DataFrame)
+  from ipykernel import kernelapp as app
+</code></pre>
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2</td>
+      <td>45</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>11</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7</td>
+      <td>00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>11</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>08</td>
+      <td>10</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<pre><code class="language-python"># extract the entire time, the hours, the minutes, and the period
+df['text'].str.extractall(r'((\d?\d):(\d\d) ?([ap]m))')
+</code></pre>
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>match</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <th>0</th>
+      <td>2:45pm</td>
+      <td>2</td>
+      <td>45</td>
+      <td>pm</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <th>0</th>
+      <td>11:30 am</td>
+      <td>11</td>
+      <td>30</td>
+      <td>am</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <th>0</th>
+      <td>7:00pm</td>
+      <td>7</td>
+      <td>00</td>
+      <td>pm</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <th>0</th>
+      <td>11:15 pm</td>
+      <td>11</td>
+      <td>15</td>
+      <td>pm</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">4</th>
+      <th>0</th>
+      <td>08:10 am</td>
+      <td>08</td>
+      <td>10</td>
+      <td>am</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>09:00am</td>
+      <td>09</td>
+      <td>00</td>
+      <td>am</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<pre><code class="language-python"># extract the entire time, the hours, the minutes, and the period with group names
+df['text'].str.extractall(r'(?P&lt;time&gt;(?P&lt;hour&gt;\d?\d):(?P&lt;minute&gt;\d\d) ?(?P&lt;period&gt;[ap]m))')
+</code></pre>
+
+<div>
+<style>
+    .dataframe thead tr:only-child th {
+        text-align: right;
+    }
+
+    .dataframe thead th {
+        text-align: left;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th></th>
+      <th>time</th>
+      <th>hour</th>
+      <th>minute</th>
+      <th>period</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>match</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <th>0</th>
+      <td>2:45pm</td>
+      <td>2</td>
+      <td>45</td>
+      <td>pm</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <th>0</th>
+      <td>11:30 am</td>
+      <td>11</td>
+      <td>30</td>
+      <td>am</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <th>0</th>
+      <td>7:00pm</td>
+      <td>7</td>
+      <td>00</td>
+      <td>pm</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <th>0</th>
+      <td>11:15 pm</td>
+      <td>11</td>
+      <td>15</td>
+      <td>pm</td>
+    </tr>
+    <tr>
+      <th rowspan="2" valign="top">4</th>
+      <th>0</th>
+      <td>08:10 am</td>
+      <td>08</td>
+      <td>10</td>
+      <td>am</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>09:00am</td>
+      <td>09</td>
+      <td>00</td>
+      <td>am</td>
+    </tr>
+  </tbody
+</table>
+</div>]]></content>
+  </entry>
   <entry>
     <title type="html"><![CDATA[数据科学家会不会被机器取?]]></title>
     <link href="/2018/09/will_data_scientists_be_replaced_by_machines_2018-09-10/"/>
