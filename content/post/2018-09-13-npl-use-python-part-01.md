@@ -1,12 +1,12 @@
 ---
-title: NPL use python part 01
+title: NLP use python part 01
 author: ZERO
 date: '2018-09-13'
 slug: npl-use-python-part-01
 categories:
   - datavis and dataclean
 tags:
-  - NPL
+  - NLP
 keywords:
   - tech
 thumbnailImagePosition: left

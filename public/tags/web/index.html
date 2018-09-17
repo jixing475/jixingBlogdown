@@ -325,8 +325,42 @@
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2018/09/nlp-part-03-sentiment-analysis/">
+                <h3 class="media-heading">NLP part 03 sentiment analysis</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Case Study: Sentiment Analysis Data Prep import pandas as pd import numpy as np # Read in the data df = pd.read_csv(&#39;/Users/zero/Desktop/NLP/raw-data/Amazon_Unlocked_Mobile.csv&#39;) # 对数据进行采样以加快计算速度 # Comment out this line to match with lecture df = df.sample(frac=0.1, random_state=10) df.head()   .dataframe thead tr:only-child th { text-align: right; } .dataframe thead th { text-align: left; } .dataframe tbody tr th { vertical-align: top; }   &lt;tr style=&quot;text-align: right;&quot;&gt; &lt;th&gt;&lt;/th&gt; &lt;th&gt;Product Name&lt;/th&gt; &lt;th&gt;Brand Name&lt;/th&gt; &lt;th&gt;Price&lt;/th&gt; &lt;th&gt;Rating&lt;/th&gt; &lt;th&gt;Reviews&lt;/th&gt; &lt;th&gt;Review Votes&lt;/th&gt; &lt;/tr&gt;   &lt;tr&gt; &lt;th&gt;394349&lt;/th&gt; &lt;td&gt;Sony XPERIA Z2 D6503 FACTORY UNLOCKED Internat.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/09/nlp-part-03-sentiment-analysis/">
+                <h3 class="media-heading">NLP part 03 sentiment analysis</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2018/09/npl-use-python-part-01/">
-                <h3 class="media-heading">NPL use python part 01</h3>
+                <h3 class="media-heading">NLP use python part 01</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
@@ -487,50 +521,6 @@ MCMC 方法也可以用来估计多个参数的后验分布（比如说人的身
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/08/t-sne/">
-                <h3 class="media-heading">t-SNE</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">note  许多真实世界的数据集具有较低的内在维度，但是它们嵌入在高维空间中，人类因为受限于三维可视化，而不易发现这些内在的结构
-t分布式随机邻域嵌入（t-SNE）：t-distributed stochastic neighbor embedding (t-SNE)， 是一种非常流行的非线性降为的方法，它和 PCA的不同之处在于：
-PCA的本质是在降维之后尽量保存矩阵的最大变异性，而实际上我们经常是想保存原本的结构，换句话说，就是降维前各个点相对距离结构在降维之后要继续保留下来
- 过程 我们这里用 3维代替高维， 2维代替低维 那么3维的点经过 映射之后 在2维的空间 要保存原有的相对距离结构
-这个过程本质 神经网络深度学习问题，是找到最佳的映射矩阵（最好的 w1 w2 组合方式），使得映射后，数据结构得以保存 那么怎么来衡量数据结构保存的效果？
-那就看比较原始数据下的距离矩阵 和 映射后的距离矩阵 的差 这样的话问题就转化为： 求熵最小化的问题？
-那么这里有个问题，高维度的距离矩阵怎么和低维的距离矩阵进行比较呢 ？ 这就是 t-SNE 的特殊的地方：它把距离问题转换为概率问题，距离越近的i,j两点，pij越大， 以i为中心的t分布，描述 i 与所有点的距离，
-之所以不用正态分布，是因为t分布是长尾 的，这样的分布在尾部的数据点之间（距离较远的点）的惩罚不是区分的很严格，
-换句话说就是 映射后 近变远 的惩罚系数 &gt; 远变近的惩罚系数，
-这个过程可以想象成 一个弹簧产生形变，映射由远变进就是压缩，会产生斥力，映射由近变远，就会拉伸，产生引力 ，形变就好像是熵，是映射前和映射后的差距，产生的单位力（力/形变长度） 的绝对值就好像是惩罚系数，拉伸的形变产生的单位引力 &gt; 压缩的形变产生的单位斥力 ，
-这就很好的解决了数据点映射后的拥挤问题，就好像点与点之间有一定的斥力（为了纠正远变近的情况），但是这个斥力系数又小于点与点之间的引力, 这样在纠正同样误差的时候我们会优先纠正近的变成远的, 体现在单位引力大于单位斥力（为了纠正近变远的情况，单位引力大于单位斥力是因为我们更在乎点与点之间相似的机构 ， 可以想象最后每个点会在所有合力的情况下达到一个平衡， 如下图：  Links  tsne   </div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/08/python-basic-001/">
-                <h3 class="media-heading">python basic 001</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"> </div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -538,7 +528,7 @@ PCA的本质是在降维之后尽量保存矩阵的最大变异性，而实际�
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         46 posts found
+         48 posts found
       </p>
     </div>
   </div>
