@@ -339,6 +339,24 @@ MCMC 方法也可以用来估计多个参数的后验分布（比如说人的身
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2018/09/nlp-part04-word-count-use-r/">
+                <h3 class="media-heading">NLP part04 word count use R</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">What Is Clean Data Each variable is a column Each observation is a row Each type of observational unit is a table   A table with one-token-per-row.  A token is a meaningful unit of text, such as a word, that we are interested in using for analysis, and tokenization is the process of splitting text into tokens.
+ text &lt;- c( &quot;Because I could not stop for Death -&quot;, &quot;He kindly stopped for me -&quot;, &quot;The Carriage held but just Ourselves -&quot;, &quot;and Immortality&quot; ) text ## [1] &quot;Because I could not stop for Death -&quot; ## [2] &quot;He kindly stopped for me -&quot; ## [3] &quot;The Carriage held but just Ourselves -&quot; ## [4] &quot;and Immortality&quot; library(dplyr) text_df &lt;- data_frame(line = 1:4, text = text) text_df ## # A tibble: 4 x 2 ## line text ## &lt;int&gt; &lt;chr&gt; ## 1 1 Because I could not stop for Death - ## 2 2 He kindly stopped for me - ## 3 3 The Carriage held but just Ourselves - ## 4 4 and Immortality library(tidytext) text_df %&gt;% unnest_tokens(word, text) ## # A tibble: 20 x 2 ## line word ## &lt;int&gt; &lt;chr&gt; ## 1 1 because ## 2 1 i ## 3 1 could ## 4 1 not ## 5 1 stop ## 6 1 for ## 7 1 death ## 8 2 he ## 9 2 kindly ## 10 2 stopped ## 11 2 for ## 12 2 me ## 13 3 the ## 14 3 carriage ## 15 3 held ## 16 3 but ## 17 3 just ## 18 3 ourselves ## 19 4 and ## 20 4 immortality For tidy text mining, the token that is stored in each row is most often a single word, but can also be an n-gram, sentence, or paragraph</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2018/09/nlp-part-03-sentiment-analysis/">
                 <h3 class="media-heading">NLP part 03 sentiment analysis</h3>
               </a>
@@ -518,23 +536,6 @@ MCMC 方法也可以用来估计多个参数的后验分布（比如说人的身
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/08/python-dynamic-typing-and-two-type-copy/">
-                <h3 class="media-heading">python: Dynamic typing and two type copy </h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">python Dynamic typing   shallow and deep copy    </div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -542,7 +543,7 @@ MCMC 方法也可以用来估计多个参数的后验分布（比如说人的身
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         48 posts found
+         49 posts found
       </p>
     </div>
   </div>

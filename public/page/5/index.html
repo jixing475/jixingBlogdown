@@ -214,6 +214,63 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="/2018/04/hierarchical-clustering/">
+          Hierarchical Clustering
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-04-16T00:00:00Z">
+        
+  April 16, 2018
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/machine-learning">machine learning</a>
+    
+  
+
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      What Is Clustering  Clustering refers to a very broad set of techniques for finding subgroups, or clusters, in a data set. When we cluster the observations of a data set, we seek to partition them into distinct groups so that the observations within each group are quite similar to each other, while observations in different groups are quite different from each other. Of course, to make this concrete, we must define what it means for two or more observations to be similar or different.
+      <p>
+        <a href="/2018/04/hierarchical-clustering/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="/2018/04/hierarchical-clustering/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="/post/2018-04-16-hierarchical-clustering_files/clustering.png"/>
+      </div>
+    </a>
+  
+</article>
+
+          
+            
+  
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
         <a class="link-unstyled" href="/2018/04/row-combine-many-table-in-r/">
           Row Combine Many Table In R 
         </a>
@@ -553,65 +610,6 @@ Cross validation method can be one amongst:  ‘boot’: Bootstrap sampling �
 </article>
 
           
-            
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/03/6-training-and-tuning-the-model/">
-          6 Training and Tuning the model
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-03-29T00:00:00Z">
-        
-  March 29, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/machine-learning">machine learning</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      Load Package And Data  Training 1. How to train the model and interpret the results? Once you have chosen an algorithm, building the model is fairly easy using the train() function
-train() does multiple other things like:
-Cross validating the model Tune the hyper parameters for optimal model performance Choose the optimal model based on a given evaluation metric Preprocess the predictors (what we did so far using preProcess())   2.
-      <p>
-        <a href="/2018/03/6-training-and-tuning-the-model/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/03/6-training-and-tuning-the-model/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/29/5abc3100c85c2.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-          
           
   <div class="pagination-bar">
     <ul class="pagination">
@@ -693,6 +691,24 @@ Cross validating the model Tune the hyper parameters for optimal model performan
       <div class="no-result text-color-light text-center">no post found</div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/09/nlp-part04-word-count-use-r/">
+                <h3 class="media-heading">NLP part04 word count use R</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">What Is Clean Data Each variable is a column Each observation is a row Each type of observational unit is a table   A table with one-token-per-row.  A token is a meaningful unit of text, such as a word, that we are interested in using for analysis, and tokenization is the process of splitting text into tokens.
+ text &lt;- c( &quot;Because I could not stop for Death -&quot;, &quot;He kindly stopped for me -&quot;, &quot;The Carriage held but just Ourselves -&quot;, &quot;and Immortality&quot; ) text ## [1] &quot;Because I could not stop for Death -&quot; ## [2] &quot;He kindly stopped for me -&quot; ## [3] &quot;The Carriage held but just Ourselves -&quot; ## [4] &quot;and Immortality&quot; library(dplyr) text_df &lt;- data_frame(line = 1:4, text = text) text_df ## # A tibble: 4 x 2 ## line text ## &lt;int&gt; &lt;chr&gt; ## 1 1 Because I could not stop for Death - ## 2 2 He kindly stopped for me - ## 3 3 The Carriage held but just Ourselves - ## 4 4 and Immortality library(tidytext) text_df %&gt;% unnest_tokens(word, text) ## # A tibble: 20 x 2 ## line word ## &lt;int&gt; &lt;chr&gt; ## 1 1 because ## 2 1 i ## 3 1 could ## 4 1 not ## 5 1 stop ## 6 1 for ## 7 1 death ## 8 2 he ## 9 2 kindly ## 10 2 stopped ## 11 2 for ## 12 2 me ## 13 3 the ## 14 3 carriage ## 15 3 held ## 16 3 but ## 17 3 just ## 18 3 ourselves ## 19 4 and ## 20 4 immortality For tidy text mining, the token that is stored in each row is most often a single word, but can also be an n-gram, sentence, or paragraph</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -876,23 +892,6 @@ MCMC 方法也可以用来估计多个参数的后验分布（比如说人的身
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/08/python-dynamic-typing-and-two-type-copy/">
-                <h3 class="media-heading">python: Dynamic typing and two type copy </h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">python Dynamic typing   shallow and deep copy    </div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -900,7 +899,7 @@ MCMC 方法也可以用来估计多个参数的后验分布（比如说人的身
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         48 posts found
+         49 posts found
       </p>
     </div>
   </div>

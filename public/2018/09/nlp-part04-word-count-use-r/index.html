@@ -1,0 +1,994 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+
+  
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.32.2 with theme Tranquilpeak 0.4.1-BETA">
+    <title>NLP part04 word count use R</title>
+    <meta name="author" content="Jixing Liu">
+    <meta name="keywords" content="tech, R">
+
+    <link rel="icon" href="img/R_py.png">
+    
+
+    
+    <meta name="description" content="What Is Clean Data Each variable is a column Each observation is a row Each type of observational unit is a table   A table with one-token-per-row.  A token is a meaningful unit of text, such as a word, that we are interested in using for analysis, and tokenization is the process of splitting text into tokens.
+ text &lt;- c( &quot;Because I could not stop for Death -&quot;, &quot;He kindly stopped for me -&quot;, &quot;The Carriage held but just Ourselves -&quot;, &quot;and Immortality&quot; ) text ## [1] &quot;Because I could not stop for Death -&quot; ## [2] &quot;He kindly stopped for me -&quot; ## [3] &quot;The Carriage held but just Ourselves -&quot; ## [4] &quot;and Immortality&quot; library(dplyr) text_df &lt;- data_frame(line = 1:4, text = text) text_df ## # A tibble: 4 x 2 ## line text ## &lt;int&gt; &lt;chr&gt; ## 1 1 Because I could not stop for Death - ## 2 2 He kindly stopped for me - ## 3 3 The Carriage held but just Ourselves - ## 4 4 and Immortality library(tidytext) text_df %&gt;% unnest_tokens(word, text) ## # A tibble: 20 x 2 ## line word ## &lt;int&gt; &lt;chr&gt; ## 1 1 because ## 2 1 i ## 3 1 could ## 4 1 not ## 5 1 stop ## 6 1 for ## 7 1 death ## 8 2 he ## 9 2 kindly ## 10 2 stopped ## 11 2 for ## 12 2 me ## 13 3 the ## 14 3 carriage ## 15 3 held ## 16 3 but ## 17 3 just ## 18 3 ourselves ## 19 4 and ## 20 4 immortality For tidy text mining, the token that is stored in each row is most often a single word, but can also be an n-gram, sentence, or paragraph">
+    <meta property="og:description" content="What Is Clean Data Each variable is a column Each observation is a row Each type of observational unit is a table   A table with one-token-per-row.  A token is a meaningful unit of text, such as a word, that we are interested in using for analysis, and tokenization is the process of splitting text into tokens.
+ text &lt;- c( &quot;Because I could not stop for Death -&quot;, &quot;He kindly stopped for me -&quot;, &quot;The Carriage held but just Ourselves -&quot;, &quot;and Immortality&quot; ) text ## [1] &quot;Because I could not stop for Death -&quot; ## [2] &quot;He kindly stopped for me -&quot; ## [3] &quot;The Carriage held but just Ourselves -&quot; ## [4] &quot;and Immortality&quot; library(dplyr) text_df &lt;- data_frame(line = 1:4, text = text) text_df ## # A tibble: 4 x 2 ## line text ## &lt;int&gt; &lt;chr&gt; ## 1 1 Because I could not stop for Death - ## 2 2 He kindly stopped for me - ## 3 3 The Carriage held but just Ourselves - ## 4 4 and Immortality library(tidytext) text_df %&gt;% unnest_tokens(word, text) ## # A tibble: 20 x 2 ## line word ## &lt;int&gt; &lt;chr&gt; ## 1 1 because ## 2 1 i ## 3 1 could ## 4 1 not ## 5 1 stop ## 6 1 for ## 7 1 death ## 8 2 he ## 9 2 kindly ## 10 2 stopped ## 11 2 for ## 12 2 me ## 13 3 the ## 14 3 carriage ## 15 3 held ## 16 3 but ## 17 3 just ## 18 3 ourselves ## 19 4 and ## 20 4 immortality For tidy text mining, the token that is stored in each row is most often a single word, but can also be an n-gram, sentence, or paragraph">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="NLP part04 word count use R">
+    <meta property="og:url" content="/2018/09/nlp-part04-word-count-use-r/">
+    <meta property="og:site_name" content="student zero ">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="student zero ">
+    <meta name="twitter:description" content="What Is Clean Data Each variable is a column Each observation is a row Each type of observational unit is a table   A table with one-token-per-row.  A token is a meaningful unit of text, such as a word, that we are interested in using for analysis, and tokenization is the process of splitting text into tokens.
+ text &lt;- c( &quot;Because I could not stop for Death -&quot;, &quot;He kindly stopped for me -&quot;, &quot;The Carriage held but just Ourselves -&quot;, &quot;and Immortality&quot; ) text ## [1] &quot;Because I could not stop for Death -&quot; ## [2] &quot;He kindly stopped for me -&quot; ## [3] &quot;The Carriage held but just Ourselves -&quot; ## [4] &quot;and Immortality&quot; library(dplyr) text_df &lt;- data_frame(line = 1:4, text = text) text_df ## # A tibble: 4 x 2 ## line text ## &lt;int&gt; &lt;chr&gt; ## 1 1 Because I could not stop for Death - ## 2 2 He kindly stopped for me - ## 3 3 The Carriage held but just Ourselves - ## 4 4 and Immortality library(tidytext) text_df %&gt;% unnest_tokens(word, text) ## # A tibble: 20 x 2 ## line word ## &lt;int&gt; &lt;chr&gt; ## 1 1 because ## 2 1 i ## 3 1 could ## 4 1 not ## 5 1 stop ## 6 1 for ## 7 1 death ## 8 2 he ## 9 2 kindly ## 10 2 stopped ## 11 2 for ## 12 2 me ## 13 3 the ## 14 3 carriage ## 15 3 held ## 16 3 but ## 17 3 just ## 18 3 ourselves ## 19 4 and ## 20 4 immortality For tidy text mining, the token that is stored in each row is most often a single word, but can also be an n-gram, sentence, or paragraph">
+    
+      <meta name="twitter:creator" content="@studentZero475">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="https://i.loli.net/2018/02/26/5a937bb148b02.jpg">
+    
+
+    
+      <meta property="og:image" content="https://i.loli.net/2018/08/13/5b70bd4dc9763.jpg">
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-hbs5om8csx9a8yrv5hnhpi2qqdv4ykuslajwbramhqxvleqbfklxgek50hye.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <link rel="stylesheet" href="/css/monokai-sublime.css" rel="stylesheet" id="theme-stylesheet">
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">student zero </a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <h1 class="sidebar-profile-title">NLP part04 word count use R</h1>
+        <a href="/#about">
+          <img class="sidebar-profile-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Jixing Liu</h4>
+        
+          <h5 class="sidebar-profile-bio">Reading And Writing</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/studentZero475">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">Twitter</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.r-bloggers.com/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-book"></i>
+      
+      <span class="sidebar-button-desc">R-bloggers</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaOut
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      NLP part04 word count use R
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-09-20T00:00:00Z">
+        
+  September 20, 2018
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/machine-learning">machine learning</a>
+    
+  
+
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <!--more-->
+<div id="what-is-clean-data" class="section level2">
+<h2>What Is Clean Data</h2>
+<ol style="list-style-type: decimal">
+<li>Each variable is a column</li>
+<li>Each observation is a row</li>
+<li>Each type of observational unit is a table</li>
+</ol>
+</div>
+<div id="a-table-with-one-token-per-row." class="section level2">
+<h2>A table with one-token-per-row.</h2>
+<blockquote>
+<p>A <strong style="color: darkred;">token</strong> is a meaningful unit of text, such as a word, that we are interested in using for analysis, and tokenization is the process of splitting text into tokens.</p>
+</blockquote>
+<pre class="r"><code>text &lt;- c(
+  &quot;Because I could not stop for Death -&quot;,
+  &quot;He kindly stopped for me -&quot;,
+  &quot;The Carriage held but just Ourselves -&quot;,
+  &quot;and Immortality&quot;
+)
+text</code></pre>
+<pre><code>## [1] &quot;Because I could not stop for Death -&quot;  
+## [2] &quot;He kindly stopped for me -&quot;            
+## [3] &quot;The Carriage held but just Ourselves -&quot;
+## [4] &quot;and Immortality&quot;</code></pre>
+<pre class="r"><code>library(dplyr)
+text_df &lt;- data_frame(line = 1:4, text = text)
+text_df</code></pre>
+<pre><code>## # A tibble: 4 x 2
+##    line text                                  
+##   &lt;int&gt; &lt;chr&gt;                                 
+## 1     1 Because I could not stop for Death -  
+## 2     2 He kindly stopped for me -            
+## 3     3 The Carriage held but just Ourselves -
+## 4     4 and Immortality</code></pre>
+<pre class="r"><code>library(tidytext)
+text_df %&gt;%
+  unnest_tokens(word, text)</code></pre>
+<pre><code>## # A tibble: 20 x 2
+##     line word       
+##    &lt;int&gt; &lt;chr&gt;      
+##  1     1 because    
+##  2     1 i          
+##  3     1 could      
+##  4     1 not        
+##  5     1 stop       
+##  6     1 for        
+##  7     1 death      
+##  8     2 he         
+##  9     2 kindly     
+## 10     2 stopped    
+## 11     2 for        
+## 12     2 me         
+## 13     3 the        
+## 14     3 carriage   
+## 15     3 held       
+## 16     3 but        
+## 17     3 just       
+## 18     3 ourselves  
+## 19     4 and        
+## 20     4 immortality</code></pre>
+<p>For tidy text mining, the token that is stored in each row is most often a single word, but can also be an n-gram, sentence, or paragraph</p>
+<p>A workflow where importing, filtering, and processing is done using dplyr and other tidy tools, after which the data is converted into a document-term matrix for machine learning applications</p>
+<p>This function uses the tokenizers package to separate each line of text in the original data frame into tokens. The default tokenizing is for words, but other options include characters, n-grams, sentences, lines, paragraphs, or separation around a regex pattern</p>
+<div class="figure">
+<img src="https://www.tidytextmining.com/images/tidyflow-ch-1.png" />
+
+</div>
+<pre class="r"><code>library(janeaustenr)
+library(dplyr)
+library(stringr)
+original_books &lt;- austen_books() %&gt;%
+  group_by(book) %&gt;%
+  mutate(linenumber = row_number(),
+         chapter = cumsum(str_detect(
+           text, regex(&quot;^chapter [\\divxlc]&quot;,
+                       ignore_case = TRUE)
+         ))) %&gt;%
+  ungroup()
+original_books</code></pre>
+<pre><code>## # A tibble: 73,422 x 4
+##    text                  book                linenumber chapter
+##    &lt;chr&gt;                 &lt;fct&gt;                    &lt;int&gt;   &lt;int&gt;
+##  1 SENSE AND SENSIBILITY Sense &amp; Sensibility          1       0
+##  2 &quot;&quot;                    Sense &amp; Sensibility          2       0
+##  3 by Jane Austen        Sense &amp; Sensibility          3       0
+##  4 &quot;&quot;                    Sense &amp; Sensibility          4       0
+##  5 (1811)                Sense &amp; Sensibility          5       0
+##  6 &quot;&quot;                    Sense &amp; Sensibility          6       0
+##  7 &quot;&quot;                    Sense &amp; Sensibility          7       0
+##  8 &quot;&quot;                    Sense &amp; Sensibility          8       0
+##  9 &quot;&quot;                    Sense &amp; Sensibility          9       0
+## 10 CHAPTER 1             Sense &amp; Sensibility         10       1
+## # ... with 73,412 more rows</code></pre>
+<pre class="r"><code>library(tidytext)
+tidy_books &lt;- original_books %&gt;%
+  unnest_tokens(word, text)
+tidy_books</code></pre>
+<pre><code>## # A tibble: 725,055 x 4
+##    book                linenumber chapter word       
+##    &lt;fct&gt;                    &lt;int&gt;   &lt;int&gt; &lt;chr&gt;      
+##  1 Sense &amp; Sensibility          1       0 sense      
+##  2 Sense &amp; Sensibility          1       0 and        
+##  3 Sense &amp; Sensibility          1       0 sensibility
+##  4 Sense &amp; Sensibility          3       0 by         
+##  5 Sense &amp; Sensibility          3       0 jane       
+##  6 Sense &amp; Sensibility          3       0 austen     
+##  7 Sense &amp; Sensibility          5       0 1811       
+##  8 Sense &amp; Sensibility         10       1 chapter    
+##  9 Sense &amp; Sensibility         10       1 1          
+## 10 Sense &amp; Sensibility         13       1 the        
+## # ... with 725,045 more rows</code></pre>
+<pre class="r"><code>data(stop_words)
+tidy_books &lt;- tidy_books %&gt;%
+  anti_join(stop_words)
+tidy_books %&gt;%
+  count(word, sort = TRUE)</code></pre>
+<pre><code>## # A tibble: 13,914 x 2
+##    word       n
+##    &lt;chr&gt;  &lt;int&gt;
+##  1 miss    1855
+##  2 time    1337
+##  3 fanny    862
+##  4 dear     822
+##  5 lady     817
+##  6 sir      806
+##  7 day      797
+##  8 emma     787
+##  9 sister   727
+## 10 house    699
+## # ... with 13,904 more rows</code></pre>
+<ol style="list-style-type: decimal">
+<li><strong style="color: darkred;">Corpus</strong> : These types of objects typically contain raw strings annotated with additional metadata and details.</li>
+<li><strong style="color: darkred;">Document-term matrix</strong> : This is a sparse matrix describing a collection (i.e., a corpus) of documents with one row for each document and one column for each term. The value in the matrix is typically word count or tf-idf (see Chapter 3).</li>
+<li>A <strong style="color: darkred;">tibble</strong> is a modern class of data frame within R, available in the dplyr and tibble packages, that has a convenient print method, will <strong style="color: darkred;">not convert strings to factors, and does not use row names</strong> . Tibbles are great for use with tidy tools.</li>
+<li>A <strong style="color: darkred;">token</strong> is a meaningful unit of text, most often a word, that we are interested in using for further analysis, and tokenization is the process of splitting text into tokens 5.Stop words are words that are not useful for an analysis, typically extremely common words such as “the”, “of”, “to”, and so forth in English. We can remove stop words (kept in the tidytext dataset stop_words) with an anti_join(). <img src="https://www.tidytextmining.com/images/tidyflow-ch-1.png" /></li>
+</ol>
+<pre class="r"><code>library(ggplot2)
+tidy_books %&gt;%
+  count(word, sort = TRUE) %&gt;%
+  filter(n &gt; 600) %&gt;%
+  mutate(word = reorder(word, n)) %&gt;%
+  ggplot(aes(word, n)) +
+  geom_col() +
+  xlab(NULL) +
+  coord_flip()</code></pre>
+<p><img src="/post/2018-09-20-nlp-part04-word-count-use-r_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="gutenbergr" class="section level2">
+<h2><strong style="color: darkred;">Gutenbergr</strong></h2>
+<blockquote>
+<p>The gutenbergr package provides access to the public domain works from the <a href="https://www.gutenberg.org/">Project Gutenberg</a> collection. The package includes tools both for downloading books (stripping out the unhelpful header/footer information), and a complete dataset of Project Gutenberg metadata that can be used to find works of interest. </p>
+</blockquote>
+<pre class="r"><code>library(&quot;gutenbergr&quot;)
+hgwells &lt;- gutenberg_download(c(35, 36, 5230, 159))
+tidy_hgwells &lt;- hgwells %&gt;%
+  unnest_tokens(word, text) %&gt;%
+  anti_join(stop_words)
+tidy_hgwells %&gt;%
+  count(word, sort = TRUE)</code></pre>
+<pre><code>## # A tibble: 11,769 x 2
+##    word       n
+##    &lt;chr&gt;  &lt;int&gt;
+##  1 time     454
+##  2 people   302
+##  3 door     260
+##  4 heard    249
+##  5 black    232
+##  6 stood    229
+##  7 white    222
+##  8 hand     218
+##  9 kemp     213
+## 10 eyes     210
+## # ... with 11,759 more rows</code></pre>
+<pre class="r"><code>bronte &lt;- gutenberg_download(c(1260, 768, 969, 9182, 767))
+tidy_bronte &lt;- bronte %&gt;%
+  unnest_tokens(word, text) %&gt;%
+  anti_join(stop_words)
+tidy_bronte %&gt;%
+  count(word, sort = TRUE)</code></pre>
+<pre><code>## # A tibble: 23,050 x 2
+##    word       n
+##    &lt;chr&gt;  &lt;int&gt;
+##  1 time    1065
+##  2 miss     855
+##  3 day      827
+##  4 hand     768
+##  5 eyes     713
+##  6 night    647
+##  7 heart    638
+##  8 looked   601
+##  9 door     592
+## 10 half     586
+## # ... with 23,040 more rows</code></pre>
+<div id="frequence" class="section level3">
+<h3>Frequence</h3>
+<pre class="r"><code>library(tidyr)
+frequency &lt;-
+  bind_rows(
+    mutate(tidy_bronte, author = &quot;Brontë Sisters&quot;),
+    mutate(tidy_hgwells, author = &quot;H.G. Wells&quot;),
+    mutate(tidy_books, author = &quot;Jane Austen&quot;)
+  ) %&gt;%
+  mutate(word = str_extract(word, &quot;[a-z&#39;]+&quot;)) %&gt;%
+  count(author, word) %&gt;%
+  group_by(author) %&gt;%
+  mutate(proportion = n / sum(n)) %&gt;%
+  select(-n) %&gt;%
+  spread(author, proportion) %&gt;%
+  gather(author, proportion, `Brontë Sisters`:`H.G. Wells`)</code></pre>
+</div>
+<div id="plot" class="section level3">
+<h3>Plot</h3>
+<pre class="r"><code>library(scales)
+
+# expect a warning about rows with missing values being removed
+ggplot(frequency, aes(x = proportion, y = `Jane Austen`, color = abs(`Jane Austen` - proportion))) +
+  geom_abline(color = &quot;gray40&quot;, lty = 2) +
+  geom_jitter(alpha = 0.1, size = 2.5, width = 0.3, height = 0.3) +
+  geom_text(aes(label = word), check_overlap = TRUE, vjust = 1.5) +
+  scale_x_log10(labels = percent_format()) +
+  scale_y_log10(labels = percent_format()) +
+  scale_color_gradient(limits = c(0, 0.001), low = &quot;darkslategray4&quot;, high = &quot;gray75&quot;) +
+  facet_wrap(~author, ncol = 2) +
+  theme(legend.position=&quot;none&quot;) +
+  labs(y = &quot;Jane Austen&quot;, x = NULL)</code></pre>
+<p><img src="/post/2018-09-20-nlp-part04-word-count-use-r_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+</div>
+<div id="conclusion" class="section level2">
+<h2>Conclusion</h2>
+<p>We explored <strong style="color: darkred;">what we mean by tidy data</strong> when it comes to text, and <strong style="color: darkred;">how tidy data principles </strong> can be applied to natural language processing. When text is organized in <strong style="color: darkred;">a format with one token per row, tasks</strong> like removing stop words or calculating word frequencies are natural applications of familiar operations within the tidy tool ecosystem. The one-token-per-row framework can be extended from single words to n-grams and other meaningful units of text, as well as to many other analysis priorities.</p>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="//tags/nlp/">NLP</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/nlp-part-03-sentiment-analysis/" data-tooltip="NLP part 03 sentiment analysis">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/09/nlp-part04-word-count-use-r/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/09/nlp-part04-word-count-use-r/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/09/nlp-part04-word-count-use-r/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2018 Jixing Liu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/nlp-part-03-sentiment-analysis/" data-tooltip="NLP part 03 sentiment analysis">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/09/nlp-part04-word-count-use-r/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/09/nlp-part04-word-count-use-r/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/09/nlp-part04-word-count-use-r/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F09%2Fnlp-part04-word-count-use-r%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F09%2Fnlp-part04-word-count-use-r%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F09%2Fnlp-part04-word-count-use-r%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Jixing Liu</h4>
+    
+      <div id="about-card-bio">Reading And Writing</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Data Scientist
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/09/nlp-part04-word-count-use-r/">
+                <h3 class="media-heading">NLP part04 word count use R</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">What Is Clean Data Each variable is a column Each observation is a row Each type of observational unit is a table   A table with one-token-per-row.  A token is a meaningful unit of text, such as a word, that we are interested in using for analysis, and tokenization is the process of splitting text into tokens.
+ text &lt;- c( &quot;Because I could not stop for Death -&quot;, &quot;He kindly stopped for me -&quot;, &quot;The Carriage held but just Ourselves -&quot;, &quot;and Immortality&quot; ) text ## [1] &quot;Because I could not stop for Death -&quot; ## [2] &quot;He kindly stopped for me -&quot; ## [3] &quot;The Carriage held but just Ourselves -&quot; ## [4] &quot;and Immortality&quot; library(dplyr) text_df &lt;- data_frame(line = 1:4, text = text) text_df ## # A tibble: 4 x 2 ## line text ## &lt;int&gt; &lt;chr&gt; ## 1 1 Because I could not stop for Death - ## 2 2 He kindly stopped for me - ## 3 3 The Carriage held but just Ourselves - ## 4 4 and Immortality library(tidytext) text_df %&gt;% unnest_tokens(word, text) ## # A tibble: 20 x 2 ## line word ## &lt;int&gt; &lt;chr&gt; ## 1 1 because ## 2 1 i ## 3 1 could ## 4 1 not ## 5 1 stop ## 6 1 for ## 7 1 death ## 8 2 he ## 9 2 kindly ## 10 2 stopped ## 11 2 for ## 12 2 me ## 13 3 the ## 14 3 carriage ## 15 3 held ## 16 3 but ## 17 3 just ## 18 3 ourselves ## 19 4 and ## 20 4 immortality For tidy text mining, the token that is stored in each row is most often a single word, but can also be an n-gram, sentence, or paragraph</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/09/nlp-part-03-sentiment-analysis/">
+                <h3 class="media-heading">NLP part 03 sentiment analysis</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Case Study: Sentiment Analysis Data Prep import pandas as pd import numpy as np # Read in the data df = pd.read_csv(&#39;/Users/zero/Desktop/NLP/raw-data/Amazon_Unlocked_Mobile.csv&#39;) # 对数据进行采样以加快计算速度 # Comment out this line to match with lecture df = df.sample(frac=0.1, random_state=10) df.head()   .dataframe thead tr:only-child th { text-align: right; } .dataframe thead th { text-align: left; } .dataframe tbody tr th { vertical-align: top; }   &lt;tr style=&quot;text-align: right;&quot;&gt; &lt;th&gt;&lt;/th&gt; &lt;th&gt;Product Name&lt;/th&gt; &lt;th&gt;Brand Name&lt;/th&gt; &lt;th&gt;Price&lt;/th&gt; &lt;th&gt;Rating&lt;/th&gt; &lt;th&gt;Reviews&lt;/th&gt; &lt;th&gt;Review Votes&lt;/th&gt; &lt;/tr&gt;   &lt;tr&gt; &lt;th&gt;394349&lt;/th&gt; &lt;td&gt;Sony XPERIA Z2 D6503 FACTORY UNLOCKED Internat.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/09/nlp-part-03-sentiment-analysis/">
+                <h3 class="media-heading">NLP part 03 sentiment analysis</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/09/npl-use-python-part-01/">
+                <h3 class="media-heading">NLP use python part 01</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/09/will_data_scientists_be_replaced_by_machines_2018-09-10/">
+                <h3 class="media-heading">数据科学家会不会被机器取?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">数据科学自动化 曾今是一个热门话题, 大多数人都在讨论所谓的“自动化”工具, 人们声称他们的工具可以自动化数据科学过程。给人一种错觉, 只要将这些工具与大数据架构相结合就可以解决任何业务问题。
+但是其实在实际的数据分析工作中, 自动化建模部分仅仅占到总工作量的10%, 大多数的时间和精力花在了 feature engineering 和 feature selection。 比起构建一个复杂的模型, 我们更应该关注的问题这些问题 例如: 定义要解决的问题，获取数据，探索数据，部署项目，调试和监视, 而这些问题往往都无法完全自动化。
+这里 Berry 和 Linoff 从摄影的角度给了一个有趣的比喻:
+ “The camera can relieve the photographer from having to set the shutter speed, aperture and other settings every time a picture is taken. This makes the process easier for expert photographers and makes better photography accessible to people who are not experts. But this is still automating only a small part of the process of producing a photograph.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/08/some-opinion-about-data-science/">
+                <h3 class="media-heading">Some Opinion For Data Scientist</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Some View From Hadley    Pragmatically, if you’re a data scientist, learning the basics of SQL is really important.    You should also have a minimal reading knowledge of R and Python, because so many data science teams use both .    Then I think you’re better off specializing in one of these two and getting really good at it, rather than spreading yourself too thin and being mediocre at several languages.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/08/the_linear_algebra_view_of_least-squares_regression/">
+                <h3 class="media-heading">线性代数角度理解最小二乘回归</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">  </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/08/bianliang-he-cunliang/">
+                <h3 class="media-heading">变量与存量</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">《刀塔传奇》的制作人王信文说：变量大于存量，这话怎么理解？
+最近，在美团点评进入打车领域向滴滴宣战之后，王信文问了一个朋友美团点评做打车的逻辑是什么。 对方的回答是：没有人为了出行而出行，出行总要有个目的，比如去餐厅、酒店、电影院。美团点评做打车优势不在于打车上，而是在大众点评上找到目的地之后，可以直接打车，免去了输入目的地和切换APP的过程。美团点评省了这两步，就比滴滴有效率优势。这个效率优势看起来不大，也许是10%，也许是20%，但在长期作战中就会非常有用。这让王信文意识到，在持久作战过程中，比的和看的不是过去的实力存量，而是变量 。
+要赢得长跑，一时的领先不重要，重要的是速度。长跑比的是耐力和持久。 决定公司估值的，最重要的不是账上有多少现金，而是获得现金流的能力。 在找工作选公司，公司有多少钱不是最重要的指标，公司的发展速度才重要。 找男朋友，他现在有多少钱不是最重要的，重要的是他赚钱的能力。  所以对于“变量大于存量”的启发是：把“变量”作为最重要的目标，而不那么在意“存量”，要努力去寻找变量，“因为最终变量会决定存量”。</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/08/mcmc/">
+                <h3 class="media-heading">MCMC</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"> “MCMC 就是一种通过在概率空间 中随机采样 来近似感兴趣参数的后验分布 的方法”
+ Concept 感兴趣的参数 只是用来抽象我们感兴趣的现象的一些数字。通常我们会使用统计的方法来估计这些参数。例如，如果我们想了解成年人的身高，那么我们需要的参数可能就是以英寸为单位的平均身高。
+分布 就是参数的各个可能值和我们能观察到每个参数的可能性的数学表示。分布描述了我们对参数的确信度。因此，上面的钟形曲线可以表明我们非常确定参数的值接近于零，同时我们认为真实值高于或低于该值的可能性是相等的。
+在得到任何数据之前，通过以往的知识，对参数确信度的描述分布被称为先验分布 。
+从总体出发估计样本（观察数据）通过概率（probability）体现，从样本出发估计总体通过统计推论（infer）解释 。一般样本有具体的数值，而总体通过参数表示。
+似然分布 以参数值范围的形式总结了数据可以告诉我们什么，而参数范围值中的每个参数解释了我们正在观察的数据的可能性，属于从总体（参数值范围中的每个参数）出发估计现有样本的可能性。估计最大似然分布的参数值就是回答了这个问题：什么样的参数值能使分布最有可能观察到我们观察得到的数据？在没有先验信息的情况下，我们可能会就此打住，无法进行下去了。
+贝叶斯分析 的关键是将先验信息和似然分布结合起来去确定后验分布（可以把它看作一种先验和可能性分布的平均值）。这告诉我们，在有先验数据的情况下，哪些参数值能够最大化观察到我们指定数据的可能性，缩小了似然分布的参数值范围
+先验分布较短且较为分散，所以它代表了一组关于平均人体身高真实值 “不太确定” 的概率。 同时，可能性分布在相对较窄的范围内就可以总结数据，因此它代表了对真实参数值 “更确定” 的概率。当先验和可能性结合在一起时，数据（可能性分布表示）弱化了个体在巨人中长大的可能性，纠正了先验分布。 尽管那个人仍然认为人的平均身高比数据告诉他的稍高一些，但是他最相信的还是数据。
+ MCMC 回到最初的问题：我们试图估计我们感兴趣参数的后验分布，即人均身高μ ：
+我们知道后验分布在先验分布和似然分布范围内，但是，我们很难直接计算它，MCMC 方法考虑选择一个随机参数值。然后模拟会继续生成随机值（这是蒙特卡罗的一部分），但要根据一些规则来确定什么是一个好的参数值。这个诀窍就是，对于一对参数值，基于先验信息，通过计算每个值在解释数据时的可能性有多大，来计算哪个参数值更好。如果随机生成的参数值比最后一个参数值更好，则以一定的概率值将其添加到参数值链中（这是马尔科夫链部分）
+对于单个参数 ，MCMC 方法是沿 x 轴开始随机采样：由于随机样本受到固定概率 的影响，经过一段时间之后，它们往往会在我们感兴趣参数概率最高的区域收敛 ，在数据收敛之后，MCMC 抽样产生一组来自后验分布的样本点 。 在这些点周围绘制直方图，并计算任何您喜欢的统计数据。
+根据 MCMC 模拟生成的样本集计算出的任何统计量就是我们对该真实后验分布统计量的最佳预测。
+MCMC 方法也可以用来估计多个参数的后验分布（比如说人的身高和体重）。
+对于 n 个参数，存在 n 维空间中的高概率区域，这些区域中的某些参数值组可以更好地解释观察到的数据。 因此，我认为 MCMC 是一种在概率空间内进行随机采样来接近后验分布的方法
+ </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/08/wuzhi-zhi-mu/">
+                <h3 class="media-heading">如果没有今天，明天还会有昨天吗？- “无知之幕”</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">几天看了一本书叫 如果没有今天，明天还会有昨天吗？
+这本书的灵魂就是，如何从思想实验的角度来认识哲学。
+所谓的思想实验就是，用想象力去进行的实验，因为所做的都是在现实中做不到的实验。
+无知之幕 公平是所有人都想要的。关于公平的种种设计中，美国哲学家罗尔斯所提出的“无知之幕”，是其中最为知名的一种设计。
+所谓的无知之幕就是指： 如果不让政策制定者知道自己在这个社会中处于什么位置、从事什么样的职业、有什么样的爱好和背景，那么他们才会尽力制定出最照顾弱者利益的社会制度，由此就能实现公平。
+举个例子： 地球上70亿人，假设有两种情况： 1.第一种情况是，所有人每天都赚10块钱，最弱的人也能赚到10块。 2.第二种情况，最弱的那个人赚9块钱，其他人每个人都赚100块钱。 那么按照“无知之幕”的原则，我们应该选择第一种情况。这样不知道自己处在什么样的位置，就会选择大家都赚9块
+但是 诺齐克提出的“张伯伦论证” 的思想实验却认为，“无知之幕”并不能保证完全的公平。
+举例： 假如一支 NBA 球队，所有球员的总收入相同，其他种种条件也都齐全，那这就是一个公平的状况。在球队签约张伯伦这样的高薪大牌球星后，虽然球队内收入的分配状况发生了变化，但由于大家都同意这一决定，因此新的分配状况同样是公平的。
+哲学家诺齐克认为，不应当总想着靠政策制定者去设计出一套公平的制度，而是应该把一切都交给市场，只要所有的选择都是自由的 ，那无论最终出现什么结果，都可以称之为公平。
+这让我想起我们国家之前提出的共同富裕概念，计划经济就是在这种情况下诞生的，结果大家也就看到，这样的公平并没有给大家带来生活的进步，而最终的自由市场经济带来了经济提升，但是也带来少部分人富裕的不公平，随之而来的就是各种资源的聚集，阶层分化越来越严重，看来偏向任何一块都不是明智之举？
+ </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         49 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://i.loli.net/2018/02/26/5a9416186c149.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" integrity="sha256-IFHWFEbU2/+wNycDECKgjIRSirRNIDp2acEB5fvdVRU=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js" integrity="sha256-+mpyNVJsNt4rVXCw0F+pAOiB3YxmHgrbJsx4ecPuUaI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js" integrity="sha256-vMxgR/7FtLovVA+IPrR7+xTgIgARH7y9VZQnmmi0HDI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js" integrity="sha256-N0qFUh7/9vLvia87dDndewmsgsyYoNkdA212tPc+2NI=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-kr8dyqj6rb6ortyib7whfo9x9p6td6zo8t1v4fdz4ecx5kwybsdlmk1slygn.min.js"></script>
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = '\/2018\/09\/nlp-part04-word-count-use-r\/';
+          
+            this.page.identifier = '\/2018\/09\/nlp-part04-word-count-use-r\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'jixing';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+    
+  </body>
+</html>
+

@@ -1,0 +1,171 @@
+---
+title: NLP part04 word count use R
+author: ZERO
+date: '2018-09-20'
+slug: nlp-part04-word-count-use-r
+categories:
+  - machine learning
+tags:
+  - NLP
+keywords:
+  - tech
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/08/13/5b70bd4dc9763.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE,
+	engine.path="/Users/zero/anaconda3/bin/python"
+)
+```
+
+<!--more-->
+## What Is Clean Data 
+
+1. Each variable is a column
+2. Each observation is a row
+3. Each type of observational unit is a table
+
+## A table with one-token-per-row.
+
+> A <strong style="color: darkred;">token</strong>  is a meaningful unit of text, such as a word, that we are interested in using for analysis, and tokenization is the process of splitting text into tokens. 
+
+```{r}
+text <- c(
+  "Because I could not stop for Death -",
+  "He kindly stopped for me -",
+  "The Carriage held but just Ourselves -",
+  "and Immortality"
+)
+text
+library(dplyr)
+text_df <- data_frame(line = 1:4, text = text)
+text_df
+library(tidytext)
+text_df %>%
+  unnest_tokens(word, text)
+```
+
+For tidy text mining, the token that is stored in each row is most often a single word, but can also be an n-gram, sentence, or paragraph
+
+A workflow where importing, filtering, and processing is done using dplyr and other tidy tools, after which the data is converted into a document-term matrix for machine learning applications
+
+This function uses the tokenizers package to separate each line of text in the original data frame into tokens. The default tokenizing is for words, but other options include characters, n-grams, sentences, lines, paragraphs, or separation around a regex pattern
+
+![](https://www.tidytextmining.com/images/tidyflow-ch-1.png)
+
+```{r}
+library(janeaustenr)
+library(dplyr)
+library(stringr)
+original_books <- austen_books() %>%
+  group_by(book) %>%
+  mutate(linenumber = row_number(),
+         chapter = cumsum(str_detect(
+           text, regex("^chapter [\\divxlc]",
+                       ignore_case = TRUE)
+         ))) %>%
+  ungroup()
+original_books
+library(tidytext)
+tidy_books <- original_books %>%
+  unnest_tokens(word, text)
+tidy_books
+data(stop_words)
+tidy_books <- tidy_books %>%
+  anti_join(stop_words)
+tidy_books %>%
+  count(word, sort = TRUE)
+```
+
+
+
+1. <strong style="color: darkred;">Corpus</strong> : These types of objects typically contain raw strings annotated with additional metadata and details.
+2. <strong style="color: darkred;">Document-term matrix</strong> : This is a sparse matrix describing a collection (i.e., a corpus) of documents with one row for each document and one column for each term. The value in the matrix is typically word count or tf-idf (see Chapter 3).
+3. A <strong style="color: darkred;">tibble</strong>  is a modern class of data frame within R, available in the dplyr and tibble packages, that has a convenient print method, will <strong style="color: darkred;">not convert strings to factors, and does not use row names</strong> . Tibbles are great for use with tidy tools.
+4. A <strong style="color: darkred;">token</strong>  is a meaningful unit of text, most often a word, that we are interested in using for further analysis, and tokenization is the process of splitting text into tokens
+5.Stop words are words that are not useful for an analysis, typically extremely common words such as “the”, “of”, “to”, and so forth in English. We can remove stop words (kept in the tidytext dataset stop_words) with an anti_join().
+![](https://www.tidytextmining.com/images/tidyflow-ch-1.png)
+
+
+
+
+
+```{r}
+library(ggplot2)
+tidy_books %>%
+  count(word, sort = TRUE) %>%
+  filter(n > 600) %>%
+  mutate(word = reorder(word, n)) %>%
+  ggplot(aes(word, n)) +
+  geom_col() +
+  xlab(NULL) +
+  coord_flip()
+```
+
+## <strong style="color: darkred;">Gutenbergr</strong> 
+
+> The gutenbergr package provides access to the public domain works from the [Project Gutenberg](https://www.gutenberg.org/) collection. The package includes tools both for downloading books (stripping out the unhelpful header/footer information), and a complete dataset of Project Gutenberg metadata that can be used to find works of interest. 
+
+```{r}
+library("gutenbergr")
+hgwells <- gutenberg_download(c(35, 36, 5230, 159))
+tidy_hgwells <- hgwells %>%
+  unnest_tokens(word, text) %>%
+  anti_join(stop_words)
+tidy_hgwells %>%
+  count(word, sort = TRUE)
+bronte <- gutenberg_download(c(1260, 768, 969, 9182, 767))
+tidy_bronte <- bronte %>%
+  unnest_tokens(word, text) %>%
+  anti_join(stop_words)
+tidy_bronte %>%
+  count(word, sort = TRUE)
+```
+
+### Frequence
+```{r}
+library(tidyr)
+frequency <-
+  bind_rows(
+    mutate(tidy_bronte, author = "Brontë Sisters"),
+    mutate(tidy_hgwells, author = "H.G. Wells"),
+    mutate(tidy_books, author = "Jane Austen")
+  ) %>%
+  mutate(word = str_extract(word, "[a-z']+")) %>%
+  count(author, word) %>%
+  group_by(author) %>%
+  mutate(proportion = n / sum(n)) %>%
+  select(-n) %>%
+  spread(author, proportion) %>%
+  gather(author, proportion, `Brontë Sisters`:`H.G. Wells`)
+
+```
+
+
+### Plot
+```{r}
+library(scales)
+
+# expect a warning about rows with missing values being removed
+ggplot(frequency, aes(x = proportion, y = `Jane Austen`, color = abs(`Jane Austen` - proportion))) +
+  geom_abline(color = "gray40", lty = 2) +
+  geom_jitter(alpha = 0.1, size = 2.5, width = 0.3, height = 0.3) +
+  geom_text(aes(label = word), check_overlap = TRUE, vjust = 1.5) +
+  scale_x_log10(labels = percent_format()) +
+  scale_y_log10(labels = percent_format()) +
+  scale_color_gradient(limits = c(0, 0.001), low = "darkslategray4", high = "gray75") +
+  facet_wrap(~author, ncol = 2) +
+  theme(legend.position="none") +
+  labs(y = "Jane Austen", x = NULL)
+```
+
+
+## Conclusion
+We explored <strong style="color: darkred;">what we mean by tidy data</strong>  when it comes to text, and <strong style="color: darkred;">how tidy data principles </strong> can be applied to natural language processing. When text is organized in <strong style="color: darkred;">a format with one token per row, tasks</strong>  like removing stop words or calculating word frequencies are natural applications of familiar operations within the tidy tool ecosystem. The one-token-per-row framework can be extended from single words to n-grams and other meaningful units of text, as well as to many other analysis priorities.
+

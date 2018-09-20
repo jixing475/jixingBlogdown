@@ -2,12 +2,253 @@
   <title>student zero </title>
   <link href="/index.xml" rel="self"/>
   <link href="/"/>
-  <updated>2018-09-17T00:00:00+00:00</updated>
+  <updated>2018-09-20T00:00:00+00:00</updated>
   <id>/</id>
   <author>
     <name>Jixing Liu</name>
   </author>
   <generator>Hugo -- gohugo.io</generator>
+  <entry>
+    <title type="html"><![CDATA[NLP part04 word count use R]]></title>
+    <link href="/2018/09/nlp-part04-word-count-use-r/"/>
+    <id>/2018/09/nlp-part04-word-count-use-r/</id>
+    <published>2018-09-20T00:00:00+00:00</published>
+    <updated>2018-09-20T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<!--more-->
+<div id="what-is-clean-data" class="section level2">
+<h2>What Is Clean Data</h2>
+<ol style="list-style-type: decimal">
+<li>Each variable is a column</li>
+<li>Each observation is a row</li>
+<li>Each type of observational unit is a table</li>
+</ol>
+</div>
+<div id="a-table-with-one-token-per-row." class="section level2">
+<h2>A table with one-token-per-row.</h2>
+<blockquote>
+<p>A <strong style="color: darkred;">token</strong> is a meaningful unit of text, such as a word, that we are interested in using for analysis, and tokenization is the process of splitting text into tokens.</p>
+</blockquote>
+<pre class="r"><code>text &lt;- c(
+  &quot;Because I could not stop for Death -&quot;,
+  &quot;He kindly stopped for me -&quot;,
+  &quot;The Carriage held but just Ourselves -&quot;,
+  &quot;and Immortality&quot;
+)
+text</code></pre>
+<pre><code>## [1] &quot;Because I could not stop for Death -&quot;  
+## [2] &quot;He kindly stopped for me -&quot;            
+## [3] &quot;The Carriage held but just Ourselves -&quot;
+## [4] &quot;and Immortality&quot;</code></pre>
+<pre class="r"><code>library(dplyr)
+text_df &lt;- data_frame(line = 1:4, text = text)
+text_df</code></pre>
+<pre><code>## # A tibble: 4 x 2
+##    line text                                  
+##   &lt;int&gt; &lt;chr&gt;                                 
+## 1     1 Because I could not stop for Death -  
+## 2     2 He kindly stopped for me -            
+## 3     3 The Carriage held but just Ourselves -
+## 4     4 and Immortality</code></pre>
+<pre class="r"><code>library(tidytext)
+text_df %&gt;%
+  unnest_tokens(word, text)</code></pre>
+<pre><code>## # A tibble: 20 x 2
+##     line word       
+##    &lt;int&gt; &lt;chr&gt;      
+##  1     1 because    
+##  2     1 i          
+##  3     1 could      
+##  4     1 not        
+##  5     1 stop       
+##  6     1 for        
+##  7     1 death      
+##  8     2 he         
+##  9     2 kindly     
+## 10     2 stopped    
+## 11     2 for        
+## 12     2 me         
+## 13     3 the        
+## 14     3 carriage   
+## 15     3 held       
+## 16     3 but        
+## 17     3 just       
+## 18     3 ourselves  
+## 19     4 and        
+## 20     4 immortality</code></pre>
+<p>For tidy text mining, the token that is stored in each row is most often a single word, but can also be an n-gram, sentence, or paragraph</p>
+<p>A workflow where importing, filtering, and processing is done using dplyr and other tidy tools, after which the data is converted into a document-term matrix for machine learning applications</p>
+<p>This function uses the tokenizers package to separate each line of text in the original data frame into tokens. The default tokenizing is for words, but other options include characters, n-grams, sentences, lines, paragraphs, or separation around a regex pattern</p>
+<div class="figure">
+<img src="https://www.tidytextmining.com/images/tidyflow-ch-1.png" />
+
+</div>
+<pre class="r"><code>library(janeaustenr)
+library(dplyr)
+library(stringr)
+original_books &lt;- austen_books() %&gt;%
+  group_by(book) %&gt;%
+  mutate(linenumber = row_number(),
+         chapter = cumsum(str_detect(
+           text, regex(&quot;^chapter [\\divxlc]&quot;,
+                       ignore_case = TRUE)
+         ))) %&gt;%
+  ungroup()
+original_books</code></pre>
+<pre><code>## # A tibble: 73,422 x 4
+##    text                  book                linenumber chapter
+##    &lt;chr&gt;                 &lt;fct&gt;                    &lt;int&gt;   &lt;int&gt;
+##  1 SENSE AND SENSIBILITY Sense &amp; Sensibility          1       0
+##  2 &quot;&quot;                    Sense &amp; Sensibility          2       0
+##  3 by Jane Austen        Sense &amp; Sensibility          3       0
+##  4 &quot;&quot;                    Sense &amp; Sensibility          4       0
+##  5 (1811)                Sense &amp; Sensibility          5       0
+##  6 &quot;&quot;                    Sense &amp; Sensibility          6       0
+##  7 &quot;&quot;                    Sense &amp; Sensibility          7       0
+##  8 &quot;&quot;                    Sense &amp; Sensibility          8       0
+##  9 &quot;&quot;                    Sense &amp; Sensibility          9       0
+## 10 CHAPTER 1             Sense &amp; Sensibility         10       1
+## # ... with 73,412 more rows</code></pre>
+<pre class="r"><code>library(tidytext)
+tidy_books &lt;- original_books %&gt;%
+  unnest_tokens(word, text)
+tidy_books</code></pre>
+<pre><code>## # A tibble: 725,055 x 4
+##    book                linenumber chapter word       
+##    &lt;fct&gt;                    &lt;int&gt;   &lt;int&gt; &lt;chr&gt;      
+##  1 Sense &amp; Sensibility          1       0 sense      
+##  2 Sense &amp; Sensibility          1       0 and        
+##  3 Sense &amp; Sensibility          1       0 sensibility
+##  4 Sense &amp; Sensibility          3       0 by         
+##  5 Sense &amp; Sensibility          3       0 jane       
+##  6 Sense &amp; Sensibility          3       0 austen     
+##  7 Sense &amp; Sensibility          5       0 1811       
+##  8 Sense &amp; Sensibility         10       1 chapter    
+##  9 Sense &amp; Sensibility         10       1 1          
+## 10 Sense &amp; Sensibility         13       1 the        
+## # ... with 725,045 more rows</code></pre>
+<pre class="r"><code>data(stop_words)
+tidy_books &lt;- tidy_books %&gt;%
+  anti_join(stop_words)
+tidy_books %&gt;%
+  count(word, sort = TRUE)</code></pre>
+<pre><code>## # A tibble: 13,914 x 2
+##    word       n
+##    &lt;chr&gt;  &lt;int&gt;
+##  1 miss    1855
+##  2 time    1337
+##  3 fanny    862
+##  4 dear     822
+##  5 lady     817
+##  6 sir      806
+##  7 day      797
+##  8 emma     787
+##  9 sister   727
+## 10 house    699
+## # ... with 13,904 more rows</code></pre>
+<ol style="list-style-type: decimal">
+<li><strong style="color: darkred;">Corpus</strong> : These types of objects typically contain raw strings annotated with additional metadata and details.</li>
+<li><strong style="color: darkred;">Document-term matrix</strong> : This is a sparse matrix describing a collection (i.e., a corpus) of documents with one row for each document and one column for each term. The value in the matrix is typically word count or tf-idf (see Chapter 3).</li>
+<li>A <strong style="color: darkred;">tibble</strong> is a modern class of data frame within R, available in the dplyr and tibble packages, that has a convenient print method, will <strong style="color: darkred;">not convert strings to factors, and does not use row names</strong> . Tibbles are great for use with tidy tools.</li>
+<li>A <strong style="color: darkred;">token</strong> is a meaningful unit of text, most often a word, that we are interested in using for further analysis, and tokenization is the process of splitting text into tokens 5.Stop words are words that are not useful for an analysis, typically extremely common words such as “the”, “of”, “to”, and so forth in English. We can remove stop words (kept in the tidytext dataset stop_words) with an anti_join(). <img src="https://www.tidytextmining.com/images/tidyflow-ch-1.png" /></li>
+</ol>
+<pre class="r"><code>library(ggplot2)
+tidy_books %&gt;%
+  count(word, sort = TRUE) %&gt;%
+  filter(n &gt; 600) %&gt;%
+  mutate(word = reorder(word, n)) %&gt;%
+  ggplot(aes(word, n)) +
+  geom_col() +
+  xlab(NULL) +
+  coord_flip()</code></pre>
+<p><img src="/post/2018-09-20-nlp-part04-word-count-use-r_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="gutenbergr" class="section level2">
+<h2><strong style="color: darkred;">Gutenbergr</strong></h2>
+<blockquote>
+<p>The gutenbergr package provides access to the public domain works from the <a href="https://www.gutenberg.org/">Project Gutenberg</a> collection. The package includes tools both for downloading books (stripping out the unhelpful header/footer information), and a complete dataset of Project Gutenberg metadata that can be used to find works of interest. </p>
+</blockquote>
+<pre class="r"><code>library(&quot;gutenbergr&quot;)
+hgwells &lt;- gutenberg_download(c(35, 36, 5230, 159))
+tidy_hgwells &lt;- hgwells %&gt;%
+  unnest_tokens(word, text) %&gt;%
+  anti_join(stop_words)
+tidy_hgwells %&gt;%
+  count(word, sort = TRUE)</code></pre>
+<pre><code>## # A tibble: 11,769 x 2
+##    word       n
+##    &lt;chr&gt;  &lt;int&gt;
+##  1 time     454
+##  2 people   302
+##  3 door     260
+##  4 heard    249
+##  5 black    232
+##  6 stood    229
+##  7 white    222
+##  8 hand     218
+##  9 kemp     213
+## 10 eyes     210
+## # ... with 11,759 more rows</code></pre>
+<pre class="r"><code>bronte &lt;- gutenberg_download(c(1260, 768, 969, 9182, 767))
+tidy_bronte &lt;- bronte %&gt;%
+  unnest_tokens(word, text) %&gt;%
+  anti_join(stop_words)
+tidy_bronte %&gt;%
+  count(word, sort = TRUE)</code></pre>
+<pre><code>## # A tibble: 23,050 x 2
+##    word       n
+##    &lt;chr&gt;  &lt;int&gt;
+##  1 time    1065
+##  2 miss     855
+##  3 day      827
+##  4 hand     768
+##  5 eyes     713
+##  6 night    647
+##  7 heart    638
+##  8 looked   601
+##  9 door     592
+## 10 half     586
+## # ... with 23,040 more rows</code></pre>
+<div id="frequence" class="section level3">
+<h3>Frequence</h3>
+<pre class="r"><code>library(tidyr)
+frequency &lt;-
+  bind_rows(
+    mutate(tidy_bronte, author = &quot;Brontë Sisters&quot;),
+    mutate(tidy_hgwells, author = &quot;H.G. Wells&quot;),
+    mutate(tidy_books, author = &quot;Jane Austen&quot;)
+  ) %&gt;%
+  mutate(word = str_extract(word, &quot;[a-z&#39;]+&quot;)) %&gt;%
+  count(author, word) %&gt;%
+  group_by(author) %&gt;%
+  mutate(proportion = n / sum(n)) %&gt;%
+  select(-n) %&gt;%
+  spread(author, proportion) %&gt;%
+  gather(author, proportion, `Brontë Sisters`:`H.G. Wells`)</code></pre>
+</div>
+<div id="plot" class="section level3">
+<h3>Plot</h3>
+<pre class="r"><code>library(scales)
+
+# expect a warning about rows with missing values being removed
+ggplot(frequency, aes(x = proportion, y = `Jane Austen`, color = abs(`Jane Austen` - proportion))) +
+  geom_abline(color = &quot;gray40&quot;, lty = 2) +
+  geom_jitter(alpha = 0.1, size = 2.5, width = 0.3, height = 0.3) +
+  geom_text(aes(label = word), check_overlap = TRUE, vjust = 1.5) +
+  scale_x_log10(labels = percent_format()) +
+  scale_y_log10(labels = percent_format()) +
+  scale_color_gradient(limits = c(0, 0.001), low = &quot;darkslategray4&quot;, high = &quot;gray75&quot;) +
+  facet_wrap(~author, ncol = 2) +
+  theme(legend.position=&quot;none&quot;) +
+  labs(y = &quot;Jane Austen&quot;, x = NULL)</code></pre>
+<p><img src="/post/2018-09-20-nlp-part04-word-count-use-r_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+</div>
+<div id="conclusion" class="section level2">
+<h2>Conclusion</h2>
+<p>We explored <strong style="color: darkred;">what we mean by tidy data</strong> when it comes to text, and <strong style="color: darkred;">how tidy data principles </strong> can be applied to natural language processing. When text is organized in <strong style="color: darkred;">a format with one token per row, tasks</strong> like removing stop words or calculating word frequencies are natural applications of familiar operations within the tidy tool ecosystem. The one-token-per-row framework can be extended from single words to n-grams and other meaningful units of text, as well as to many other analysis priorities.</p>
+</div>
+]]></content>
+  </entry>
   <entry>
     <title type="html"><![CDATA[NLP part 03 sentiment analysis]]></title>
     <link href="/2018/09/nlp-part-03-sentiment-analysis/"/>
