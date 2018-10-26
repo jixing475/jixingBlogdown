@@ -2,12 +2,292 @@
   <title>student zero </title>
   <link href="/index.xml" rel="self"/>
   <link href="/"/>
-  <updated>2018-09-20T00:00:00+00:00</updated>
+  <updated>2018-10-26T00:00:00+00:00</updated>
   <id>/</id>
   <author>
     <name>Jixing Liu</name>
   </author>
   <generator>Hugo -- gohugo.io</generator>
+  <entry>
+    <title type="html"><![CDATA[pubchunks：提取学术文章的某部分]]></title>
+    <link href="/2018/10/pubchunks_extract_parts_of_scholarly_xml_articles/"/>
+    <id>/2018/10/pubchunks_extract_parts_of_scholarly_xml_articles/</id>
+    <published>2018-10-26T00:00:00+00:00</published>
+    <updated>2018-10-26T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<!--more-->
+<div id="background" class="section level2">
+<h2>Background</h2>
+<p>pubchunks 的目的是从XML格式的学术文章中获取部分数据。用户不需要了解XML及其所有的格式原理。他们只需知道他们的文件或XML字符串在哪里以及他们想要每篇文章的哪些部分。然后用户可以组合这些部分并做他们希望下游的任何事情; 例如，分析文本结构或获取其他数据的 Meta-Analysis</p>
+</div>
+<div id="pubchunks" class="section level2">
+<h2>pubchunks中的函数</h2>
+<p>两个主要功能是： 2. pub_chunks()：获取XML部分 3. pub_tabularize()：强制输出pub_chunks()到data.frame中 5. pub_guess_publisher()：从XML文件或字符串猜测发布者 6. pub_sections()：部分pubchunks知道如何处理 7. pub_providers()：提供者（即发布者）pubchunks知道如何明确处理</p>
+</div>
+<div class="section level2">
+<h2>支持的出版商</h2>
+<ol style="list-style-type: decimal">
+<li>elife</li>
+<li>plos</li>
+<li>elsevier</li>
+<li>hindawi</li>
+<li>pensoft</li>
+<li>peerj</li>
+<li>copernicus</li>
+<li>frontiers</li>
+<li>f1000research</li>
+</ol>
+</div>
+<div class="section level2">
+<h2>支持提取的部分有:</h2>
+<ol style="list-style-type: decimal">
+<li>Front - 发布者，期刊和文章元数据元素</li>
+<li>Body - 文章的正文</li>
+<li>Back - 文章的背面，致谢，作者贡献，参考文献</li>
+<li>Title - 文章标题</li>
+<li>Doi - 文章doi</li>
+<li>Categories - 发布商的类别，如果有的话</li>
+<li>Author - 作者</li>
+<li>Aff - 隶属关系（包括作者姓名）</li>
+<li>Keyword - 关键字</li>
+<li>Abstract - 文章摘要</li>
+<li>Executive_summary - 文章执行摘要</li>
+<li>Refs - 参考文献</li>
+<li>Refs_dois - 参考dois - 如果有的话</li>
+<li>Publisher - 发布者名称</li>
+<li>Journal_meta - 期刊元数据</li>
+<li>Article_meta - 文章元数据</li>
+<li>Acknowledgments - 致谢</li>
+<li>Permissions - 文章权限</li>
+<li>History - 日期，收到，出版，接受等</li>
+</ol>
+</div>
+<div class="section level2">
+<h2>安装</h2>
+<pre class="r"><code>#install.packages(&quot;pubchunks&quot;)
+#
+#remotes::install_github(&quot;ropensci/pubchunks&quot;)
+#
+#remotes::install_github(&quot;ropensci/pubchunks@fix-pub_chunks&quot;)
+
+library(pubchunks)</code></pre>
+<div id="import" class="section level3">
+<h3>Import</h3>
+<ol style="list-style-type: decimal">
+<li>Path(s)</li>
+</ol>
+<pre class="r"><code>#path
+path &lt;- system.file(&quot;examples/pensoft_1.xml&quot;, package = &quot;pubchunks&quot;)
+#paths 
+pensoft_xml &lt;- system.file(&quot;examples/pensoft_1.xml&quot;, package = &quot;pubchunks&quot;)
+peerj_xml &lt;- system.file(&quot;examples/peerj_1.xml&quot;, package = &quot;pubchunks&quot;)
+copernicus_xml &lt;- system.file(&quot;examples/copernicus_1.xml&quot;, package = &quot;pubchunks&quot;)
+frontiers_xml &lt;- system.file(&quot;examples/frontiers_1.xml&quot;, package = &quot;pubchunks&quot;)
+paths &lt;- list(pensoft_xml, peerj_xml, copernicus_xml, frontiers_xml)
+pub_chunks(
+  paths,
+  sections = c(&quot;abstract&quot;, &quot;title&quot;, &quot;authors&quot;, &quot;refs&quot;)
+)</code></pre>
+<pre><code>## [[1]]
+## &lt;pub chunks&gt;
+##   from: character
+##   sections: abstract, title, authors, refs
+##    abstract (n=1): AbstractNineteen species of seed-beetles belonging ...
+##    title (n=1): Contribution to the knowledge of seed-beetles (Col ...
+##    authors (n=7): nested list
+##    refs (n=13): AntonKW (2010) Catalogue of Palaearctic Coleoptera
+## 
+## [[2]]
+## &lt;pub chunks&gt;
+##   from: character
+##   sections: abstract, title, authors, refs
+##    abstract (n=1): Climate change is predicted to lead to more extrem ...
+##    title (n=1): Storm effects on intertidal invertebrates: increas ...
+##    authors (n=7): nested list
+##    refs (n=60): Alcántara-Carrió et al. (2017)Alcántara-CarrióJSas
+## 
+## [[3]]
+## &lt;pub chunks&gt;
+##   from: character
+##   sections: abstract, title, authors, refs
+##    abstract (n=1): Soil temperatures at various depths are unique par ...
+##    title (n=1): Quality control of 10-min soil temperatures data a ...
+##    authors (n=3): nested list
+##    refs (n=9): 1Bertrand, C., Gonzalez Sotelino, L., and Journée,
+## 
+## [[4]]
+## &lt;pub chunks&gt;
+##   from: character
+##   sections: abstract, title, authors, refs
+##    abstract (n=1): Our current understanding of Antarctic soils is de ...
+##    title (n=1): Metagenomic Analysis of a Southern Maritime Antarc ...
+##    authors (n=8): nested list
+##    refs (n=56): AislabieJ.BroadyP.SaulD. (2006). Culturable hetero
+## 
+## attr(,&quot;ft_data&quot;)
+## [1] FALSE</code></pre>
+<pre class="r"><code>x &lt;- path
+pub_chunks(x, sections = &quot;abstract&quot;)</code></pre>
+<pre><code>## &lt;pub chunks&gt;
+##   from: character
+##   sections: abstract
+##    abstract (n=1): AbstractNineteen species of seed-beetles belonging ...</code></pre>
+<pre class="r"><code>pub_chunks(x, sections = &quot;aff&quot;)</code></pre>
+<pre><code>## &lt;pub chunks&gt;
+##   from: character
+##   sections: aff
+##    aff (n=7): nested list</code></pre>
+<pre class="r"><code>pub_chunks(x, sections = c(&quot;abstract&quot;, &quot;title&quot;, &quot;authors&quot;, &quot;refs&quot;))</code></pre>
+<pre><code>## &lt;pub chunks&gt;
+##   from: character
+##   sections: abstract, title, authors, refs
+##    abstract (n=1): AbstractNineteen species of seed-beetles belonging ...
+##    title (n=1): Contribution to the knowledge of seed-beetles (Col ...
+##    authors (n=7): nested list
+##    refs (n=13): AntonKW (2010) Catalogue of Palaearctic Coleoptera</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Strings</li>
+</ol>
+<pre class="r"><code>xml_str &lt;- paste0(readLines(path), collapse = &quot;\n&quot;)
+
+pub_chunks(xml_str, sections = &quot;title&quot;)</code></pre>
+<pre><code>## &lt;pub chunks&gt;
+##   from: character
+##   sections: title
+##    title (n=1): Contribution to the knowledge of seed-beetles (Col ...</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>xml_document</li>
+</ol>
+<pre class="r"><code>xml_doc &lt;- xml2::read_xml(path)
+class(xml_doc)</code></pre>
+<pre><code>## [1] &quot;xml_document&quot; &quot;xml_node&quot;</code></pre>
+<pre class="r"><code>pub_chunks(xml_doc, sections = &quot;title&quot;)</code></pre>
+<pre><code>## &lt;pub chunks&gt;
+##   from: xml_document
+##   sections: title
+##    title (n=1): Contribution to the knowledge of seed-beetles (Col ...</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Doi</li>
+</ol>
+<pre class="r"><code>library(&quot;fulltext&quot;)
+dois &lt;- c(&#39;10.1371/journal.pone.0086169&#39;, &#39;10.1371/journal.pone.0155491&#39;, 
+  &#39;10.7554/eLife.03032&#39;)
+x &lt;- fulltext::ft_get(dois) %&gt;% fulltext::ft_collect()
+
+pub_chunks(x, sections=&quot;authors&quot;)</code></pre>
+<pre><code>## $plos
+## $plos$`10.1371/journal.pone.0086169`
+## &lt;pub chunks&gt;
+##   from: xml_document
+##   sections: authors
+##    authors (n=4): nested list
+## 
+## $plos$`10.1371/journal.pone.0155491`
+## &lt;pub chunks&gt;
+##   from: xml_document
+##   sections: authors
+##    authors (n=9): nested list
+## 
+## 
+## $elife
+## $elife$`10.7554/eLife.03032`
+## &lt;pub chunks&gt;
+##   from: xml_document
+##   sections: authors
+##    authors (n=6): nested list
+## 
+## 
+## attr(,&quot;ft_data&quot;)
+## [1] TRUE</code></pre>
+</div>
+<div id="output" class="section level3">
+<h3>Output</h3>
+<ol style="list-style-type: decimal">
+<li><p>List: default</p></li>
+<li><p>Dataframe: 输出表格</p></li>
+</ol>
+<pre class="r"><code>path &lt;- system.file(&quot;examples/elife_1.xml&quot;, package = &quot;pubchunks&quot;)
+res &lt;- pub_chunks(x, c(&quot;doi&quot;, &quot;title&quot;, &quot;keywords&quot;))
+pub_tabularize(res)</code></pre>
+<pre><code>## $plos
+## $plos$`10.1371/journal.pone.0086169`
+##                            doi
+## 1 10.1371/journal.pone.0086169
+##                                                                                                               title
+## 1 Holsteins Favor Heifers, Not Bulls: Biased Milk Production Programmed during Pregnancy as a Function of Fetal Sex
+##   .publisher
+## 1       plos
+## 
+## $plos$`10.1371/journal.pone.0155491`
+##                            doi
+## 1 10.1371/journal.pone.0155491
+##                                                                                                            title
+## 1 Uterine Expression of NDRG4 Is Induced by Estrogen and Up-Regulated during Embryo Implantation Process in Mice
+##   .publisher
+## 1       plos
+## 
+## 
+## $elife
+## $elife$`10.7554/eLife.03032`
+##                   doi                                          title
+## 1 10.7554/eLife.03032 MicroRNA-mediated repression of nonsense mRNAs
+## 2 10.7554/eLife.03032 MicroRNA-mediated repression of nonsense mRNAs
+## 3 10.7554/eLife.03032 MicroRNA-mediated repression of nonsense mRNAs
+## 4 10.7554/eLife.03032 MicroRNA-mediated repression of nonsense mRNAs
+## 5 10.7554/eLife.03032 MicroRNA-mediated repression of nonsense mRNAs
+## 6 10.7554/eLife.03032 MicroRNA-mediated repression of nonsense mRNAs
+##                       keywords .publisher
+## 1                     microRNA      elife
+## 2            nonsense mutation      elife
+## 3 nonsense-mediated mRNA decay      elife
+## 4                          APC      elife
+## 5             intron retention      elife
+## 6  premature termination codon      elife</code></pre>
+<pre class="r"><code>#paths
+paths &lt;- list(pensoft_xml, peerj_xml, copernicus_xml, frontiers_xml)
+out &lt;- pub_chunks(
+  paths,
+  sections = c(&quot;doi&quot;, &quot;title&quot;, &quot;keywords&quot;)
+)
+pub_tabularize(out)</code></pre>
+<pre><code>## [[1]]
+##                                                                                                     title
+## 1 Contribution to the knowledge of seed-beetles (Coleoptera, Chrysomelidae, Bruchinae) in Xinjiang, China
+##   .publisher
+## 1    pensoft
+## 
+## [[2]]
+##                                                                                                title
+## 1 Storm effects on intertidal invertebrates: increased beta diversity of few individuals and species
+##   .publisher
+## 1      peerj
+## 
+## [[3]]
+##                      doi
+## 1 10.5194/asr-12-23-2015
+##                                                     title .publisher
+## 1 Quality control of 10-min soil temperatures data at RMI copernicus
+## 
+## [[4]]
+##                        doi
+## 1 10.3389/fmicb.2012.00403
+##                                                        title .publisher
+## 1 Metagenomic Analysis of a Southern Maritime Antarctic Soil  frontiers</code></pre>
+<pre class="r"><code>#rbind a list of dataframe
+data.table::rbindlist(pub_tabularize(out), fill = TRUE)</code></pre>
+<pre><code>##                                                                                                      title
+## 1: Contribution to the knowledge of seed-beetles (Coleoptera, Chrysomelidae, Bruchinae) in Xinjiang, China
+## 2:      Storm effects on intertidal invertebrates: increased beta diversity of few individuals and species
+## 3:                                                 Quality control of 10-min soil temperatures data at RMI
+## 4:                                              Metagenomic Analysis of a Southern Maritime Antarctic Soil
+##    .publisher                      doi
+## 1:    pensoft                     &lt;NA&gt;
+## 2:      peerj                     &lt;NA&gt;
+## 3: copernicus   10.5194/asr-12-23-2015
+## 4:  frontiers 10.3389/fmicb.2012.00403</code></pre>
+</div>
+</div>
+]]></content>
+  </entry>
   <entry>
     <title type="html"><![CDATA[NLP part04 word count use R]]></title>
     <link href="/2018/09/nlp-part04-word-count-use-r/"/>

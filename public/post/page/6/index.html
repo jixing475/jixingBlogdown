@@ -214,6 +214,65 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="/2018/03/7-how-to-do-hyperparameter-tuning/">
+          7 How To Do Hyperparameter Tuning 
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-03-30T00:00:00Z">
+        
+  March 30, 2018
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/machine-learning">machine learning</a>
+    
+  
+
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      Load Package And Data load(&quot;../../data/craet_6.Rdata&quot;) library(tidyverse) library(caret) # Set Parallel Processing - Decrease computation time if (!require(&quot;doMC&quot;)) install.packages(&quot;doMC&quot;) library(doMC) registerDoMC(cores = 4) Hyper parameter tuning using tuneGrid Model Tuning Parameter Set
+ Cross Validation Set
+Cross validation method can be one amongst:  ‘boot’: Bootstrap sampling ‘boot632’: Bootstrap sampling with 63.2% bias correction applied ‘optimism_boot’: The optimism bootstrap estimator ‘boot_all’: All boot methods. ‘cv’: k-Fold cross validation ‘repeatedcv’: Repeated k-Fold cross validation ‘oob’: Out of Bag cross validation ‘LOOCV’: Leave one out cross validation ‘LGOCV’: Leave group out cross validation  Training And Tuning
+      <p>
+        <a href="/2018/03/7-how-to-do-hyperparameter-tuning/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="/2018/03/7-how-to-do-hyperparameter-tuning/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/30/5abd8ebe45769.jpg"/>
+      </div>
+    </a>
+  
+</article>
+
+          
+            
+  
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
         <a class="link-unstyled" href="/2018/03/6-training-and-tuning-the-model/">
           6 Training and Tuning the model
         </a>
@@ -557,66 +616,6 @@ Step 2: Keeping priority to the most important variables, iterate through by bui
 </article>
 
           
-            
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/03/3-2-statistic-description-and-impute-missing-value/">
-          3.2 statistic description and impute missing value
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-03-24T00:00:00Z">
-        
-  March 24, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/machine-learning">machine learning</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      加载数据和包 load(&quot;../../data/caret.Rdata&quot;) library(tidyverse) library(caret) 在进行数据整理之前 我们先看看训练数据的统计描述
-skimr包对列的统计提供了方便的函数
-skimr::skim_to_wide() 输出一个包含列统计描述的数据框
-library(skimr) skimmed &lt;- skim_to_wide(trainData) skimmed[, c(1:5, 9:11, 13, 15:16)] ## # A tibble: 18 x 11 ## type variable missing complete n mean sd p0 median p100 ## &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; ## 1 factor Purchase 0 857 857 &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; ## 2 factor Store7 0 857 857 &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; ## 3 integ… SpecialCH 2 855 857 &quot; 0.
-      <p>
-        <a href="/2018/03/3-2-statistic-description-and-impute-missing-value/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/03/3-2-statistic-description-and-impute-missing-value/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/24/5ab6156847293.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-          
           
   <div class="pagination-bar">
     <ul class="pagination">
@@ -698,6 +697,25 @@ library(skimr) skimmed &lt;- skim_to_wide(trainData) skimmed[, c(1:5, 9:11, 13, 
       <div class="no-result text-color-light text-center">no post found</div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/10/pubchunks_extract_parts_of_scholarly_xml_articles/">
+                <h3 class="media-heading">pubchunks：提取学术文章的某部分</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Background pubchunks 的目的是从XML格式的学术文章中获取部分数据。用户不需要了解XML及其所有的格式原理。他们只需知道他们的文件或XML字符串在哪里以及他们想要每篇文章的哪些部分。然后用户可以组合这些部分并做他们希望下游的任何事情; 例如，分析文本结构或获取其他数据的 Meta-Analysis
+ pubchunks中的函数 两个主要功能是： 2. pub_chunks()：获取XML部分 3. pub_tabularize()：强制输出pub_chunks()到data.frame中 5. pub_guess_publisher()：从XML文件或字符串猜测发布者 6. pub_sections()：部分pubchunks知道如何处理 7. pub_providers()：提供者（即发布者）pubchunks知道如何明确处理
+ 支持的出版商 elife plos elsevier hindawi pensoft peerj copernicus frontiers f1000research   支持提取的部分有: Front - 发布者，期刊和文章元数据元素 Body - 文章的正文 Back - 文章的背面，致谢，作者贡献，参考文献 Title - 文章标题 Doi - 文章doi Categories - 发布商的类别，如果有的话 Author - 作者 Aff - 隶属关系（包括作者姓名） Keyword - 关键字 Abstract - 文章摘要 Executive_summary - 文章执行摘要 Refs - 参考文献 Refs_dois - 参考dois - 如果有的话 Publisher - 发布者名称 Journal_meta - 期刊元数据 Article_meta - 文章元数据 Acknowledgments - 致谢 Permissions - 文章权限 History - 日期，收到，出版，接受等   安装 #install.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -872,33 +890,6 @@ MCMC 方法也可以用来估计多个参数的后验分布（比如说人的身
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/08/wuzhi-zhi-mu/">
-                <h3 class="media-heading">如果没有今天，明天还会有昨天吗？- “无知之幕”</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">几天看了一本书叫 如果没有今天，明天还会有昨天吗？
-这本书的灵魂就是，如何从思想实验的角度来认识哲学。
-所谓的思想实验就是，用想象力去进行的实验，因为所做的都是在现实中做不到的实验。
-无知之幕 公平是所有人都想要的。关于公平的种种设计中，美国哲学家罗尔斯所提出的“无知之幕”，是其中最为知名的一种设计。
-所谓的无知之幕就是指： 如果不让政策制定者知道自己在这个社会中处于什么位置、从事什么样的职业、有什么样的爱好和背景，那么他们才会尽力制定出最照顾弱者利益的社会制度，由此就能实现公平。
-举个例子： 地球上70亿人，假设有两种情况： 1.第一种情况是，所有人每天都赚10块钱，最弱的人也能赚到10块。 2.第二种情况，最弱的那个人赚9块钱，其他人每个人都赚100块钱。 那么按照“无知之幕”的原则，我们应该选择第一种情况。这样不知道自己处在什么样的位置，就会选择大家都赚9块
-但是 诺齐克提出的“张伯伦论证” 的思想实验却认为，“无知之幕”并不能保证完全的公平。
-举例： 假如一支 NBA 球队，所有球员的总收入相同，其他种种条件也都齐全，那这就是一个公平的状况。在球队签约张伯伦这样的高薪大牌球星后，虽然球队内收入的分配状况发生了变化，但由于大家都同意这一决定，因此新的分配状况同样是公平的。
-哲学家诺齐克认为，不应当总想着靠政策制定者去设计出一套公平的制度，而是应该把一切都交给市场，只要所有的选择都是自由的 ，那无论最终出现什么结果，都可以称之为公平。
-这让我想起我们国家之前提出的共同富裕概念，计划经济就是在这种情况下诞生的，结果大家也就看到，这样的公平并没有给大家带来生活的进步，而最终的自由市场经济带来了经济提升，但是也带来少部分人富裕的不公平，随之而来的就是各种资源的聚集，阶层分化越来越严重，看来偏向任何一块都不是明智之举？
- </div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -906,7 +897,7 @@ MCMC 方法也可以用来估计多个参数的后验分布（比如说人的身
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         49 posts found
+         50 posts found
       </p>
     </div>
   </div>

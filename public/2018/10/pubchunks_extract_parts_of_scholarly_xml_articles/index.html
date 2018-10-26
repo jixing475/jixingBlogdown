@@ -1,0 +1,1028 @@
+
+
+  
+    
+  
+
+
+  
+
+
+
+
+
+  
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.32.2 with theme Tranquilpeak 0.4.1-BETA">
+    <title>pubchunks：提取学术文章的某部分</title>
+    <meta name="author" content="Jixing Liu">
+    <meta name="keywords" content="tech, R">
+
+    <link rel="icon" href="img/R_py.png">
+    
+
+    
+    <meta name="description" content="Background pubchunks 的目的是从XML格式的学术文章中获取部分数据。用户不需要了解XML及其所有的格式原理。他们只需知道他们的文件或XML字符串在哪里以及他们想要每篇文章的哪些部分。然后用户可以组合这些部分并做他们希望下游的任何事情; 例如，分析文本结构或获取其他数据的 Meta-Analysis
+ pubchunks中的函数 两个主要功能是： 2. pub_chunks()：获取XML部分 3. pub_tabularize()：强制输出pub_chunks()到data.frame中 5. pub_guess_publisher()：从XML文件或字符串猜测发布者 6. pub_sections()：部分pubchunks知道如何处理 7. pub_providers()：提供者（即发布者）pubchunks知道如何明确处理
+ 支持的出版商 elife plos elsevier hindawi pensoft peerj copernicus frontiers f1000research   支持提取的部分有: Front - 发布者，期刊和文章元数据元素 Body - 文章的正文 Back - 文章的背面，致谢，作者贡献，参考文献 Title - 文章标题 Doi - 文章doi Categories - 发布商的类别，如果有的话 Author - 作者 Aff - 隶属关系（包括作者姓名） Keyword - 关键字 Abstract - 文章摘要 Executive_summary - 文章执行摘要 Refs - 参考文献 Refs_dois - 参考dois - 如果有的话 Publisher - 发布者名称 Journal_meta - 期刊元数据 Article_meta - 文章元数据 Acknowledgments - 致谢 Permissions - 文章权限 History - 日期，收到，出版，接受等   安装 #install.">
+    <meta property="og:description" content="Background pubchunks 的目的是从XML格式的学术文章中获取部分数据。用户不需要了解XML及其所有的格式原理。他们只需知道他们的文件或XML字符串在哪里以及他们想要每篇文章的哪些部分。然后用户可以组合这些部分并做他们希望下游的任何事情; 例如，分析文本结构或获取其他数据的 Meta-Analysis
+ pubchunks中的函数 两个主要功能是： 2. pub_chunks()：获取XML部分 3. pub_tabularize()：强制输出pub_chunks()到data.frame中 5. pub_guess_publisher()：从XML文件或字符串猜测发布者 6. pub_sections()：部分pubchunks知道如何处理 7. pub_providers()：提供者（即发布者）pubchunks知道如何明确处理
+ 支持的出版商 elife plos elsevier hindawi pensoft peerj copernicus frontiers f1000research   支持提取的部分有: Front - 发布者，期刊和文章元数据元素 Body - 文章的正文 Back - 文章的背面，致谢，作者贡献，参考文献 Title - 文章标题 Doi - 文章doi Categories - 发布商的类别，如果有的话 Author - 作者 Aff - 隶属关系（包括作者姓名） Keyword - 关键字 Abstract - 文章摘要 Executive_summary - 文章执行摘要 Refs - 参考文献 Refs_dois - 参考dois - 如果有的话 Publisher - 发布者名称 Journal_meta - 期刊元数据 Article_meta - 文章元数据 Acknowledgments - 致谢 Permissions - 文章权限 History - 日期，收到，出版，接受等   安装 #install.">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="pubchunks：提取学术文章的某部分">
+    <meta property="og:url" content="/2018/10/pubchunks_extract_parts_of_scholarly_xml_articles/">
+    <meta property="og:site_name" content="student zero ">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="student zero ">
+    <meta name="twitter:description" content="Background pubchunks 的目的是从XML格式的学术文章中获取部分数据。用户不需要了解XML及其所有的格式原理。他们只需知道他们的文件或XML字符串在哪里以及他们想要每篇文章的哪些部分。然后用户可以组合这些部分并做他们希望下游的任何事情; 例如，分析文本结构或获取其他数据的 Meta-Analysis
+ pubchunks中的函数 两个主要功能是： 2. pub_chunks()：获取XML部分 3. pub_tabularize()：强制输出pub_chunks()到data.frame中 5. pub_guess_publisher()：从XML文件或字符串猜测发布者 6. pub_sections()：部分pubchunks知道如何处理 7. pub_providers()：提供者（即发布者）pubchunks知道如何明确处理
+ 支持的出版商 elife plos elsevier hindawi pensoft peerj copernicus frontiers f1000research   支持提取的部分有: Front - 发布者，期刊和文章元数据元素 Body - 文章的正文 Back - 文章的背面，致谢，作者贡献，参考文献 Title - 文章标题 Doi - 文章doi Categories - 发布商的类别，如果有的话 Author - 作者 Aff - 隶属关系（包括作者姓名） Keyword - 关键字 Abstract - 文章摘要 Executive_summary - 文章执行摘要 Refs - 参考文献 Refs_dois - 参考dois - 如果有的话 Publisher - 发布者名称 Journal_meta - 期刊元数据 Article_meta - 文章元数据 Acknowledgments - 致谢 Permissions - 文章权限 History - 日期，收到，出版，接受等   安装 #install.">
+    
+      <meta name="twitter:creator" content="@studentZero475">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="https://i.loli.net/2018/02/26/5a937bb148b02.jpg">
+    
+
+    
+      <meta property="og:image" content="https://i.loli.net/2018/10/26/5bd280c84f888.jpg">
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-hbs5om8csx9a8yrv5hnhpi2qqdv4ykuslajwbramhqxvleqbfklxgek50hye.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <link rel="stylesheet" href="/css/monokai-sublime.css" rel="stylesheet" id="theme-stylesheet">
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">student zero </a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <h1 class="sidebar-profile-title">pubchunks：提取学术文章的某部分</h1>
+        <a href="/#about">
+          <img class="sidebar-profile-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Jixing Liu</h4>
+        
+          <h5 class="sidebar-profile-bio">Reading And Writing</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/studentZero475">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">Twitter</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.r-bloggers.com/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-book"></i>
+      
+      <span class="sidebar-button-desc">R-bloggers</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+
+      <div id="main" data-behavior="4"
+        class="
+               hasCoverMetaOut
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-center">
+  
+    <h1 class="post-title" itemprop="headline">
+      pubchunks：提取学术文章的某部分
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-10-26T00:00:00Z">
+        
+  October 26, 2018
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/computers">computers</a>
+    
+  
+
+
+  </div>
+
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <!--more-->
+<div id="background" class="section level2">
+<h2>Background</h2>
+<p>pubchunks 的目的是从XML格式的学术文章中获取部分数据。用户不需要了解XML及其所有的格式原理。他们只需知道他们的文件或XML字符串在哪里以及他们想要每篇文章的哪些部分。然后用户可以组合这些部分并做他们希望下游的任何事情; 例如，分析文本结构或获取其他数据的 Meta-Analysis</p>
+</div>
+<div id="pubchunks" class="section level2">
+<h2>pubchunks中的函数</h2>
+<p>两个主要功能是： 2. pub_chunks()：获取XML部分 3. pub_tabularize()：强制输出pub_chunks()到data.frame中 5. pub_guess_publisher()：从XML文件或字符串猜测发布者 6. pub_sections()：部分pubchunks知道如何处理 7. pub_providers()：提供者（即发布者）pubchunks知道如何明确处理</p>
+</div>
+<div class="section level2">
+<h2>支持的出版商</h2>
+<ol style="list-style-type: decimal">
+<li>elife</li>
+<li>plos</li>
+<li>elsevier</li>
+<li>hindawi</li>
+<li>pensoft</li>
+<li>peerj</li>
+<li>copernicus</li>
+<li>frontiers</li>
+<li>f1000research</li>
+</ol>
+</div>
+<div class="section level2">
+<h2>支持提取的部分有:</h2>
+<ol style="list-style-type: decimal">
+<li>Front - 发布者，期刊和文章元数据元素</li>
+<li>Body - 文章的正文</li>
+<li>Back - 文章的背面，致谢，作者贡献，参考文献</li>
+<li>Title - 文章标题</li>
+<li>Doi - 文章doi</li>
+<li>Categories - 发布商的类别，如果有的话</li>
+<li>Author - 作者</li>
+<li>Aff - 隶属关系（包括作者姓名）</li>
+<li>Keyword - 关键字</li>
+<li>Abstract - 文章摘要</li>
+<li>Executive_summary - 文章执行摘要</li>
+<li>Refs - 参考文献</li>
+<li>Refs_dois - 参考dois - 如果有的话</li>
+<li>Publisher - 发布者名称</li>
+<li>Journal_meta - 期刊元数据</li>
+<li>Article_meta - 文章元数据</li>
+<li>Acknowledgments - 致谢</li>
+<li>Permissions - 文章权限</li>
+<li>History - 日期，收到，出版，接受等</li>
+</ol>
+</div>
+<div class="section level2">
+<h2>安装</h2>
+<pre class="r"><code>#install.packages(&quot;pubchunks&quot;)
+#
+#remotes::install_github(&quot;ropensci/pubchunks&quot;)
+#
+#remotes::install_github(&quot;ropensci/pubchunks@fix-pub_chunks&quot;)
+
+library(pubchunks)</code></pre>
+<div id="import" class="section level3">
+<h3>Import</h3>
+<ol style="list-style-type: decimal">
+<li>Path(s)</li>
+</ol>
+<pre class="r"><code>#path
+path &lt;- system.file(&quot;examples/pensoft_1.xml&quot;, package = &quot;pubchunks&quot;)
+#paths 
+pensoft_xml &lt;- system.file(&quot;examples/pensoft_1.xml&quot;, package = &quot;pubchunks&quot;)
+peerj_xml &lt;- system.file(&quot;examples/peerj_1.xml&quot;, package = &quot;pubchunks&quot;)
+copernicus_xml &lt;- system.file(&quot;examples/copernicus_1.xml&quot;, package = &quot;pubchunks&quot;)
+frontiers_xml &lt;- system.file(&quot;examples/frontiers_1.xml&quot;, package = &quot;pubchunks&quot;)
+paths &lt;- list(pensoft_xml, peerj_xml, copernicus_xml, frontiers_xml)
+pub_chunks(
+  paths,
+  sections = c(&quot;abstract&quot;, &quot;title&quot;, &quot;authors&quot;, &quot;refs&quot;)
+)</code></pre>
+<pre><code>## [[1]]
+## &lt;pub chunks&gt;
+##   from: character
+##   sections: abstract, title, authors, refs
+##    abstract (n=1): AbstractNineteen species of seed-beetles belonging ...
+##    title (n=1): Contribution to the knowledge of seed-beetles (Col ...
+##    authors (n=7): nested list
+##    refs (n=13): AntonKW (2010) Catalogue of Palaearctic Coleoptera
+## 
+## [[2]]
+## &lt;pub chunks&gt;
+##   from: character
+##   sections: abstract, title, authors, refs
+##    abstract (n=1): Climate change is predicted to lead to more extrem ...
+##    title (n=1): Storm effects on intertidal invertebrates: increas ...
+##    authors (n=7): nested list
+##    refs (n=60): Alcántara-Carrió et al. (2017)Alcántara-CarrióJSas
+## 
+## [[3]]
+## &lt;pub chunks&gt;
+##   from: character
+##   sections: abstract, title, authors, refs
+##    abstract (n=1): Soil temperatures at various depths are unique par ...
+##    title (n=1): Quality control of 10-min soil temperatures data a ...
+##    authors (n=3): nested list
+##    refs (n=9): 1Bertrand, C., Gonzalez Sotelino, L., and Journée,
+## 
+## [[4]]
+## &lt;pub chunks&gt;
+##   from: character
+##   sections: abstract, title, authors, refs
+##    abstract (n=1): Our current understanding of Antarctic soils is de ...
+##    title (n=1): Metagenomic Analysis of a Southern Maritime Antarc ...
+##    authors (n=8): nested list
+##    refs (n=56): AislabieJ.BroadyP.SaulD. (2006). Culturable hetero
+## 
+## attr(,&quot;ft_data&quot;)
+## [1] FALSE</code></pre>
+<pre class="r"><code>x &lt;- path
+pub_chunks(x, sections = &quot;abstract&quot;)</code></pre>
+<pre><code>## &lt;pub chunks&gt;
+##   from: character
+##   sections: abstract
+##    abstract (n=1): AbstractNineteen species of seed-beetles belonging ...</code></pre>
+<pre class="r"><code>pub_chunks(x, sections = &quot;aff&quot;)</code></pre>
+<pre><code>## &lt;pub chunks&gt;
+##   from: character
+##   sections: aff
+##    aff (n=7): nested list</code></pre>
+<pre class="r"><code>pub_chunks(x, sections = c(&quot;abstract&quot;, &quot;title&quot;, &quot;authors&quot;, &quot;refs&quot;))</code></pre>
+<pre><code>## &lt;pub chunks&gt;
+##   from: character
+##   sections: abstract, title, authors, refs
+##    abstract (n=1): AbstractNineteen species of seed-beetles belonging ...
+##    title (n=1): Contribution to the knowledge of seed-beetles (Col ...
+##    authors (n=7): nested list
+##    refs (n=13): AntonKW (2010) Catalogue of Palaearctic Coleoptera</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Strings</li>
+</ol>
+<pre class="r"><code>xml_str &lt;- paste0(readLines(path), collapse = &quot;\n&quot;)
+
+pub_chunks(xml_str, sections = &quot;title&quot;)</code></pre>
+<pre><code>## &lt;pub chunks&gt;
+##   from: character
+##   sections: title
+##    title (n=1): Contribution to the knowledge of seed-beetles (Col ...</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>xml_document</li>
+</ol>
+<pre class="r"><code>xml_doc &lt;- xml2::read_xml(path)
+class(xml_doc)</code></pre>
+<pre><code>## [1] &quot;xml_document&quot; &quot;xml_node&quot;</code></pre>
+<pre class="r"><code>pub_chunks(xml_doc, sections = &quot;title&quot;)</code></pre>
+<pre><code>## &lt;pub chunks&gt;
+##   from: xml_document
+##   sections: title
+##    title (n=1): Contribution to the knowledge of seed-beetles (Col ...</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Doi</li>
+</ol>
+<pre class="r"><code>library(&quot;fulltext&quot;)
+dois &lt;- c(&#39;10.1371/journal.pone.0086169&#39;, &#39;10.1371/journal.pone.0155491&#39;, 
+  &#39;10.7554/eLife.03032&#39;)
+x &lt;- fulltext::ft_get(dois) %&gt;% fulltext::ft_collect()
+
+pub_chunks(x, sections=&quot;authors&quot;)</code></pre>
+<pre><code>## $plos
+## $plos$`10.1371/journal.pone.0086169`
+## &lt;pub chunks&gt;
+##   from: xml_document
+##   sections: authors
+##    authors (n=4): nested list
+## 
+## $plos$`10.1371/journal.pone.0155491`
+## &lt;pub chunks&gt;
+##   from: xml_document
+##   sections: authors
+##    authors (n=9): nested list
+## 
+## 
+## $elife
+## $elife$`10.7554/eLife.03032`
+## &lt;pub chunks&gt;
+##   from: xml_document
+##   sections: authors
+##    authors (n=6): nested list
+## 
+## 
+## attr(,&quot;ft_data&quot;)
+## [1] TRUE</code></pre>
+</div>
+<div id="output" class="section level3">
+<h3>Output</h3>
+<ol style="list-style-type: decimal">
+<li><p>List: default</p></li>
+<li><p>Dataframe: 输出表格</p></li>
+</ol>
+<pre class="r"><code>path &lt;- system.file(&quot;examples/elife_1.xml&quot;, package = &quot;pubchunks&quot;)
+res &lt;- pub_chunks(x, c(&quot;doi&quot;, &quot;title&quot;, &quot;keywords&quot;))
+pub_tabularize(res)</code></pre>
+<pre><code>## $plos
+## $plos$`10.1371/journal.pone.0086169`
+##                            doi
+## 1 10.1371/journal.pone.0086169
+##                                                                                                               title
+## 1 Holsteins Favor Heifers, Not Bulls: Biased Milk Production Programmed during Pregnancy as a Function of Fetal Sex
+##   .publisher
+## 1       plos
+## 
+## $plos$`10.1371/journal.pone.0155491`
+##                            doi
+## 1 10.1371/journal.pone.0155491
+##                                                                                                            title
+## 1 Uterine Expression of NDRG4 Is Induced by Estrogen and Up-Regulated during Embryo Implantation Process in Mice
+##   .publisher
+## 1       plos
+## 
+## 
+## $elife
+## $elife$`10.7554/eLife.03032`
+##                   doi                                          title
+## 1 10.7554/eLife.03032 MicroRNA-mediated repression of nonsense mRNAs
+## 2 10.7554/eLife.03032 MicroRNA-mediated repression of nonsense mRNAs
+## 3 10.7554/eLife.03032 MicroRNA-mediated repression of nonsense mRNAs
+## 4 10.7554/eLife.03032 MicroRNA-mediated repression of nonsense mRNAs
+## 5 10.7554/eLife.03032 MicroRNA-mediated repression of nonsense mRNAs
+## 6 10.7554/eLife.03032 MicroRNA-mediated repression of nonsense mRNAs
+##                       keywords .publisher
+## 1                     microRNA      elife
+## 2            nonsense mutation      elife
+## 3 nonsense-mediated mRNA decay      elife
+## 4                          APC      elife
+## 5             intron retention      elife
+## 6  premature termination codon      elife</code></pre>
+<pre class="r"><code>#paths
+paths &lt;- list(pensoft_xml, peerj_xml, copernicus_xml, frontiers_xml)
+out &lt;- pub_chunks(
+  paths,
+  sections = c(&quot;doi&quot;, &quot;title&quot;, &quot;keywords&quot;)
+)
+pub_tabularize(out)</code></pre>
+<pre><code>## [[1]]
+##                                                                                                     title
+## 1 Contribution to the knowledge of seed-beetles (Coleoptera, Chrysomelidae, Bruchinae) in Xinjiang, China
+##   .publisher
+## 1    pensoft
+## 
+## [[2]]
+##                                                                                                title
+## 1 Storm effects on intertidal invertebrates: increased beta diversity of few individuals and species
+##   .publisher
+## 1      peerj
+## 
+## [[3]]
+##                      doi
+## 1 10.5194/asr-12-23-2015
+##                                                     title .publisher
+## 1 Quality control of 10-min soil temperatures data at RMI copernicus
+## 
+## [[4]]
+##                        doi
+## 1 10.3389/fmicb.2012.00403
+##                                                        title .publisher
+## 1 Metagenomic Analysis of a Southern Maritime Antarctic Soil  frontiers</code></pre>
+<pre class="r"><code>#rbind a list of dataframe
+data.table::rbindlist(pub_tabularize(out), fill = TRUE)</code></pre>
+<pre><code>##                                                                                                      title
+## 1: Contribution to the knowledge of seed-beetles (Coleoptera, Chrysomelidae, Bruchinae) in Xinjiang, China
+## 2:      Storm effects on intertidal invertebrates: increased beta diversity of few individuals and species
+## 3:                                                 Quality control of 10-min soil temperatures data at RMI
+## 4:                                              Metagenomic Analysis of a Southern Maritime Antarctic Soil
+##    .publisher                      doi
+## 1:    pensoft                     &lt;NA&gt;
+## 2:      peerj                     &lt;NA&gt;
+## 3: copernicus   10.5194/asr-12-23-2015
+## 4:  frontiers 10.3389/fmicb.2012.00403</code></pre>
+</div>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="//tags/pubmed/">pubmed</a>
+
+                  </div>
+                
+              
+            
+            
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/nlp-part04-word-count-use-r/" data-tooltip="NLP part04 word count use R">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/10/pubchunks_extract_parts_of_scholarly_xml_articles/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/10/pubchunks_extract_parts_of_scholarly_xml_articles/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/10/pubchunks_extract_parts_of_scholarly_xml_articles/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2018 Jixing Liu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/nlp-part04-word-count-use-r/" data-tooltip="NLP part04 word count use R">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2018/10/pubchunks_extract_parts_of_scholarly_xml_articles/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2018/10/pubchunks_extract_parts_of_scholarly_xml_articles/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2018/10/pubchunks_extract_parts_of_scholarly_xml_articles/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2018%2F10%2Fpubchunks_extract_parts_of_scholarly_xml_articles%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2018%2F10%2Fpubchunks_extract_parts_of_scholarly_xml_articles%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2018%2F10%2Fpubchunks_extract_parts_of_scholarly_xml_articles%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Jixing Liu</h4>
+    
+      <div id="about-card-bio">Reading And Writing</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Data Scientist
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/10/pubchunks_extract_parts_of_scholarly_xml_articles/">
+                <h3 class="media-heading">pubchunks：提取学术文章的某部分</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Background pubchunks 的目的是从XML格式的学术文章中获取部分数据。用户不需要了解XML及其所有的格式原理。他们只需知道他们的文件或XML字符串在哪里以及他们想要每篇文章的哪些部分。然后用户可以组合这些部分并做他们希望下游的任何事情; 例如，分析文本结构或获取其他数据的 Meta-Analysis
+ pubchunks中的函数 两个主要功能是： 2. pub_chunks()：获取XML部分 3. pub_tabularize()：强制输出pub_chunks()到data.frame中 5. pub_guess_publisher()：从XML文件或字符串猜测发布者 6. pub_sections()：部分pubchunks知道如何处理 7. pub_providers()：提供者（即发布者）pubchunks知道如何明确处理
+ 支持的出版商 elife plos elsevier hindawi pensoft peerj copernicus frontiers f1000research   支持提取的部分有: Front - 发布者，期刊和文章元数据元素 Body - 文章的正文 Back - 文章的背面，致谢，作者贡献，参考文献 Title - 文章标题 Doi - 文章doi Categories - 发布商的类别，如果有的话 Author - 作者 Aff - 隶属关系（包括作者姓名） Keyword - 关键字 Abstract - 文章摘要 Executive_summary - 文章执行摘要 Refs - 参考文献 Refs_dois - 参考dois - 如果有的话 Publisher - 发布者名称 Journal_meta - 期刊元数据 Article_meta - 文章元数据 Acknowledgments - 致谢 Permissions - 文章权限 History - 日期，收到，出版，接受等   安装 #install.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/09/nlp-part04-word-count-use-r/">
+                <h3 class="media-heading">NLP part04 word count use R</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">What Is Clean Data Each variable is a column Each observation is a row Each type of observational unit is a table   A table with one-token-per-row.  A token is a meaningful unit of text, such as a word, that we are interested in using for analysis, and tokenization is the process of splitting text into tokens.
+ text &lt;- c( &quot;Because I could not stop for Death -&quot;, &quot;He kindly stopped for me -&quot;, &quot;The Carriage held but just Ourselves -&quot;, &quot;and Immortality&quot; ) text ## [1] &quot;Because I could not stop for Death -&quot; ## [2] &quot;He kindly stopped for me -&quot; ## [3] &quot;The Carriage held but just Ourselves -&quot; ## [4] &quot;and Immortality&quot; library(dplyr) text_df &lt;- data_frame(line = 1:4, text = text) text_df ## # A tibble: 4 x 2 ## line text ## &lt;int&gt; &lt;chr&gt; ## 1 1 Because I could not stop for Death - ## 2 2 He kindly stopped for me - ## 3 3 The Carriage held but just Ourselves - ## 4 4 and Immortality library(tidytext) text_df %&gt;% unnest_tokens(word, text) ## # A tibble: 20 x 2 ## line word ## &lt;int&gt; &lt;chr&gt; ## 1 1 because ## 2 1 i ## 3 1 could ## 4 1 not ## 5 1 stop ## 6 1 for ## 7 1 death ## 8 2 he ## 9 2 kindly ## 10 2 stopped ## 11 2 for ## 12 2 me ## 13 3 the ## 14 3 carriage ## 15 3 held ## 16 3 but ## 17 3 just ## 18 3 ourselves ## 19 4 and ## 20 4 immortality For tidy text mining, the token that is stored in each row is most often a single word, but can also be an n-gram, sentence, or paragraph</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/09/nlp-part-03-sentiment-analysis/">
+                <h3 class="media-heading">NLP part 03 sentiment analysis</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Case Study: Sentiment Analysis Data Prep import pandas as pd import numpy as np # Read in the data df = pd.read_csv(&#39;/Users/zero/Desktop/NLP/raw-data/Amazon_Unlocked_Mobile.csv&#39;) # 对数据进行采样以加快计算速度 # Comment out this line to match with lecture df = df.sample(frac=0.1, random_state=10) df.head()   .dataframe thead tr:only-child th { text-align: right; } .dataframe thead th { text-align: left; } .dataframe tbody tr th { vertical-align: top; }   &lt;tr style=&quot;text-align: right;&quot;&gt; &lt;th&gt;&lt;/th&gt; &lt;th&gt;Product Name&lt;/th&gt; &lt;th&gt;Brand Name&lt;/th&gt; &lt;th&gt;Price&lt;/th&gt; &lt;th&gt;Rating&lt;/th&gt; &lt;th&gt;Reviews&lt;/th&gt; &lt;th&gt;Review Votes&lt;/th&gt; &lt;/tr&gt;   &lt;tr&gt; &lt;th&gt;394349&lt;/th&gt; &lt;td&gt;Sony XPERIA Z2 D6503 FACTORY UNLOCKED Internat.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/09/nlp-part-03-sentiment-analysis/">
+                <h3 class="media-heading">NLP part 03 sentiment analysis</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/09/npl-use-python-part-01/">
+                <h3 class="media-heading">NLP use python part 01</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/09/will_data_scientists_be_replaced_by_machines_2018-09-10/">
+                <h3 class="media-heading">数据科学家会不会被机器取?</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Sep 9, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">数据科学自动化 曾今是一个热门话题, 大多数人都在讨论所谓的“自动化”工具, 人们声称他们的工具可以自动化数据科学过程。给人一种错觉, 只要将这些工具与大数据架构相结合就可以解决任何业务问题。
+但是其实在实际的数据分析工作中, 自动化建模部分仅仅占到总工作量的10%, 大多数的时间和精力花在了 feature engineering 和 feature selection。 比起构建一个复杂的模型, 我们更应该关注的问题这些问题 例如: 定义要解决的问题，获取数据，探索数据，部署项目，调试和监视, 而这些问题往往都无法完全自动化。
+这里 Berry 和 Linoff 从摄影的角度给了一个有趣的比喻:
+ “The camera can relieve the photographer from having to set the shutter speed, aperture and other settings every time a picture is taken. This makes the process easier for expert photographers and makes better photography accessible to people who are not experts. But this is still automating only a small part of the process of producing a photograph.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/08/some-opinion-about-data-science/">
+                <h3 class="media-heading">Some Opinion For Data Scientist</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Some View From Hadley    Pragmatically, if you’re a data scientist, learning the basics of SQL is really important.    You should also have a minimal reading knowledge of R and Python, because so many data science teams use both .    Then I think you’re better off specializing in one of these two and getting really good at it, rather than spreading yourself too thin and being mediocre at several languages.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/08/the_linear_algebra_view_of_least-squares_regression/">
+                <h3 class="media-heading">线性代数角度理解最小二乘回归</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">  </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/08/bianliang-he-cunliang/">
+                <h3 class="media-heading">变量与存量</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">《刀塔传奇》的制作人王信文说：变量大于存量，这话怎么理解？
+最近，在美团点评进入打车领域向滴滴宣战之后，王信文问了一个朋友美团点评做打车的逻辑是什么。 对方的回答是：没有人为了出行而出行，出行总要有个目的，比如去餐厅、酒店、电影院。美团点评做打车优势不在于打车上，而是在大众点评上找到目的地之后，可以直接打车，免去了输入目的地和切换APP的过程。美团点评省了这两步，就比滴滴有效率优势。这个效率优势看起来不大，也许是10%，也许是20%，但在长期作战中就会非常有用。这让王信文意识到，在持久作战过程中，比的和看的不是过去的实力存量，而是变量 。
+要赢得长跑，一时的领先不重要，重要的是速度。长跑比的是耐力和持久。 决定公司估值的，最重要的不是账上有多少现金，而是获得现金流的能力。 在找工作选公司，公司有多少钱不是最重要的指标，公司的发展速度才重要。 找男朋友，他现在有多少钱不是最重要的，重要的是他赚钱的能力。  所以对于“变量大于存量”的启发是：把“变量”作为最重要的目标，而不那么在意“存量”，要努力去寻找变量，“因为最终变量会决定存量”。</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2018/08/mcmc/">
+                <h3 class="media-heading">MCMC</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Aug 8, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"> “MCMC 就是一种通过在概率空间 中随机采样 来近似感兴趣参数的后验分布 的方法”
+ Concept 感兴趣的参数 只是用来抽象我们感兴趣的现象的一些数字。通常我们会使用统计的方法来估计这些参数。例如，如果我们想了解成年人的身高，那么我们需要的参数可能就是以英寸为单位的平均身高。
+分布 就是参数的各个可能值和我们能观察到每个参数的可能性的数学表示。分布描述了我们对参数的确信度。因此，上面的钟形曲线可以表明我们非常确定参数的值接近于零，同时我们认为真实值高于或低于该值的可能性是相等的。
+在得到任何数据之前，通过以往的知识，对参数确信度的描述分布被称为先验分布 。
+从总体出发估计样本（观察数据）通过概率（probability）体现，从样本出发估计总体通过统计推论（infer）解释 。一般样本有具体的数值，而总体通过参数表示。
+似然分布 以参数值范围的形式总结了数据可以告诉我们什么，而参数范围值中的每个参数解释了我们正在观察的数据的可能性，属于从总体（参数值范围中的每个参数）出发估计现有样本的可能性。估计最大似然分布的参数值就是回答了这个问题：什么样的参数值能使分布最有可能观察到我们观察得到的数据？在没有先验信息的情况下，我们可能会就此打住，无法进行下去了。
+贝叶斯分析 的关键是将先验信息和似然分布结合起来去确定后验分布（可以把它看作一种先验和可能性分布的平均值）。这告诉我们，在有先验数据的情况下，哪些参数值能够最大化观察到我们指定数据的可能性，缩小了似然分布的参数值范围
+先验分布较短且较为分散，所以它代表了一组关于平均人体身高真实值 “不太确定” 的概率。 同时，可能性分布在相对较窄的范围内就可以总结数据，因此它代表了对真实参数值 “更确定” 的概率。当先验和可能性结合在一起时，数据（可能性分布表示）弱化了个体在巨人中长大的可能性，纠正了先验分布。 尽管那个人仍然认为人的平均身高比数据告诉他的稍高一些，但是他最相信的还是数据。
+ MCMC 回到最初的问题：我们试图估计我们感兴趣参数的后验分布，即人均身高μ ：
+我们知道后验分布在先验分布和似然分布范围内，但是，我们很难直接计算它，MCMC 方法考虑选择一个随机参数值。然后模拟会继续生成随机值（这是蒙特卡罗的一部分），但要根据一些规则来确定什么是一个好的参数值。这个诀窍就是，对于一对参数值，基于先验信息，通过计算每个值在解释数据时的可能性有多大，来计算哪个参数值更好。如果随机生成的参数值比最后一个参数值更好，则以一定的概率值将其添加到参数值链中（这是马尔科夫链部分）
+对于单个参数 ，MCMC 方法是沿 x 轴开始随机采样：由于随机样本受到固定概率 的影响，经过一段时间之后，它们往往会在我们感兴趣参数概率最高的区域收敛 ，在数据收敛之后，MCMC 抽样产生一组来自后验分布的样本点 。 在这些点周围绘制直方图，并计算任何您喜欢的统计数据。
+根据 MCMC 模拟生成的样本集计算出的任何统计量就是我们对该真实后验分布统计量的最佳预测。
+MCMC 方法也可以用来估计多个参数的后验分布（比如说人的身高和体重）。
+对于 n 个参数，存在 n 维空间中的高概率区域，这些区域中的某些参数值组可以更好地解释观察到的数据。 因此，我认为 MCMC 是一种在概率空间内进行随机采样来接近后验分布的方法
+ </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         50 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://i.loli.net/2018/02/26/5a9416186c149.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" integrity="sha256-IFHWFEbU2/+wNycDECKgjIRSirRNIDp2acEB5fvdVRU=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js" integrity="sha256-+mpyNVJsNt4rVXCw0F+pAOiB3YxmHgrbJsx4ecPuUaI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js" integrity="sha256-vMxgR/7FtLovVA+IPrR7+xTgIgARH7y9VZQnmmi0HDI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js" integrity="sha256-N0qFUh7/9vLvia87dDndewmsgsyYoNkdA212tPc+2NI=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-kr8dyqj6rb6ortyib7whfo9x9p6td6zo8t1v4fdz4ecx5kwybsdlmk1slygn.min.js"></script>
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = '\/2018\/10\/pubchunks_extract_parts_of_scholarly_xml_articles\/';
+          
+            this.page.identifier = '\/2018\/10\/pubchunks_extract_parts_of_scholarly_xml_articles\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'jixing';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+    
+  </body>
+</html>
+

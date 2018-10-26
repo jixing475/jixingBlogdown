@@ -1,0 +1,158 @@
+---
+title: pubchunks：提取学术文章的某部分
+author: ZERO
+date: '2018-10-26'
+slug: pubchunks_extract_parts_of_scholarly_XML_articles
+categories:
+  - computers
+tags:
+  - pubmed
+keywords:
+  - tech
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/10/26/5bd280c84f888.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE,
+	engine.path="/Users/zero/anaconda3/bin/python"
+)
+```
+
+<!--more-->
+
+## Background
+
+pubchunks 的目的是从XML格式的学术文章中获取部分数据。用户不需要了解XML及其所有的格式原理。他们只需知道他们的文件或XML字符串在哪里以及他们想要每篇文章的哪些部分。然后用户可以组合这些部分并做他们希望下游的任何事情; 例如，分析文本结构或获取其他数据的 Meta-Analysis
+
+## pubchunks中的函数
+
+两个主要功能是：
+2. pub_chunks()：获取XML部分
+3. pub_tabularize()：强制输出pub_chunks()到data.frame中
+5. pub_guess_publisher()：从XML文件或字符串猜测发布者
+6. pub_sections()：部分pubchunks知道如何处理
+7. pub_providers()：提供者（即发布者）pubchunks知道如何明确处理
+
+## 支持的出版商
+
+  1. elife
+  2. plos
+  3. elsevier
+  4. hindawi
+  5. pensoft
+  6. peerj
+  7. copernicus
+  8. frontiers
+  9. f1000research
+
+## 支持提取的部分有:
+
+1. Front - 发布者，期刊和文章元数据元素
+2. Body - 文章的正文
+3. Back - 文章的背面，致谢，作者贡献，参考文献
+4. Title - 文章标题
+5. Doi - 文章doi
+6. Categories - 发布商的类别，如果有的话
+7. Author - 作者
+8. Aff - 隶属关系（包括作者姓名）
+9. Keyword - 关键字
+10. Abstract - 文章摘要
+11. Executive_summary - 文章执行摘要
+12. Refs - 参考文献
+13. Refs_dois - 参考dois - 如果有的话
+14. Publisher - 发布者名称
+15. Journal_meta - 期刊元数据
+16. Article_meta - 文章元数据
+17. Acknowledgments - 致谢
+18. Permissions - 文章权限
+19. History - 日期，收到，出版，接受等
+  
+## 安装
+```{r}
+#install.packages("pubchunks")
+#
+#remotes::install_github("ropensci/pubchunks")
+#
+#remotes::install_github("ropensci/pubchunks@fix-pub_chunks")
+
+library(pubchunks)
+```
+
+
+### Import
+  1. Path(s)
+```{r}
+#path
+path <- system.file("examples/pensoft_1.xml", package = "pubchunks")
+#paths 
+pensoft_xml <- system.file("examples/pensoft_1.xml", package = "pubchunks")
+peerj_xml <- system.file("examples/peerj_1.xml", package = "pubchunks")
+copernicus_xml <- system.file("examples/copernicus_1.xml", package = "pubchunks")
+frontiers_xml <- system.file("examples/frontiers_1.xml", package = "pubchunks")
+paths <- list(pensoft_xml, peerj_xml, copernicus_xml, frontiers_xml)
+pub_chunks(
+  paths,
+  sections = c("abstract", "title", "authors", "refs")
+)
+
+x <- path
+pub_chunks(x, sections = "abstract")
+
+pub_chunks(x, sections = "aff")
+
+pub_chunks(x, sections = c("abstract", "title", "authors", "refs"))
+```
+
+  2. Strings
+```{r}
+xml_str <- paste0(readLines(path), collapse = "\n")
+
+pub_chunks(xml_str, sections = "title")
+```
+  3. xml_document
+```{r}
+xml_doc <- xml2::read_xml(path)
+class(xml_doc)
+
+pub_chunks(xml_doc, sections = "title")
+
+```
+  
+  4. Doi
+```{r}
+library("fulltext")
+dois <- c('10.1371/journal.pone.0086169', '10.1371/journal.pone.0155491', 
+  '10.7554/eLife.03032')
+x <- fulltext::ft_get(dois) %>% fulltext::ft_collect()
+
+pub_chunks(x, sections="authors")
+```
+  
+### Output
+  1. List: default
+  
+  2. Dataframe: 输出表格
+```{r}
+path <- system.file("examples/elife_1.xml", package = "pubchunks")
+res <- pub_chunks(x, c("doi", "title", "keywords"))
+pub_tabularize(res)
+
+#paths
+paths <- list(pensoft_xml, peerj_xml, copernicus_xml, frontiers_xml)
+out <- pub_chunks(
+  paths,
+  sections = c("doi", "title", "keywords")
+)
+pub_tabularize(out)
+#rbind a list of dataframe
+data.table::rbindlist(pub_tabularize(out), fill = TRUE)
+```
+  
+
+
