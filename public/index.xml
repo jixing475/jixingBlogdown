@@ -2,12 +2,29 @@
   <title>student zero </title>
   <link href="/index.xml" rel="self"/>
   <link href="/"/>
-  <updated>2018-10-26T00:00:00+00:00</updated>
+  <updated>2019-03-14T00:00:00+00:00</updated>
   <id>/</id>
   <author>
     <name>Jixing Liu</name>
   </author>
   <generator>Hugo -- gohugo.io</generator>
+  <entry>
+    <title type="html"><![CDATA[逃往北上广]]></title>
+    <link href="/2019/03/tao_wang_bei_shang_guang/"/>
+    <id>/2019/03/tao_wang_bei_shang_guang/</id>
+    <published>2019-03-14T00:00:00+00:00</published>
+    <updated>2019-03-14T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<!--more-->
+<blockquote>
+<p>奋斗，应该是一种生活方式, 登山并不全是为了登顶的那一刻</p>
+</blockquote>
+<p>只有不停奋斗的人生，才有意义，才活的有劲儿，混吃等死的日子其实是很艰难的，无聊死了，一头扎进人堆儿里不停的扑棱才有意思啊！</p>
+<p>逃往北京、上海、广州、深圳</p>
+<p>在家乡，在那个你生长了二三十年的小城镇，如果你拒绝过上和所有人一样循规蹈矩的生活，拒绝结婚生子，拒绝稳定工作，拒绝放弃影响你赚钱升职的爱好，那么你就变成了一头和周围的一切格格不入的怪物。</p>
+<p>于是大家要挽救你，要教育你，要让你学会认命，停止毫无意义的折腾，这样你才能和大家一样“踏踏实实过日子”。</p>
+<p>许多人因此选择了对抗，在愤怒中慢慢变得绝望，在绝望中变得麻木，在麻木中逃往虚无</p>
+]]></content>
+  </entry>
   <entry>
     <title type="html"><![CDATA[pubchunks：提取学术文章的某部分]]></title>
     <link href="/2018/10/pubchunks_extract_parts_of_scholarly_xml_articles/"/>
@@ -15,13 +32,20 @@
     <published>2018-10-26T00:00:00+00:00</published>
     <updated>2018-10-26T00:00:00+00:00</updated>
     <content type="html"><![CDATA[<!--more-->
-<div id="background" class="section level2">
-<h2>Background</h2>
-<p>pubchunks 的目的是从XML格式的学术文章中获取部分数据。用户不需要了解XML及其所有的格式原理。他们只需知道他们的文件或XML字符串在哪里以及他们想要每篇文章的哪些部分。然后用户可以组合这些部分并做他们希望下游的任何事情; 例如，分析文本结构或获取其他数据的 Meta-Analysis</p>
+<div class="section level2">
+<h2>背景</h2>
+<p>pubchunks 的目的是从XML格式的学术文章中获取部分数据。我们不需要了解XML及其所有的格式原理。只需知道我们的文件或XML字符串在哪里以及我们想要每篇文章的哪些部分。然后用户可以组合这些部分并做我们希望下游的任何事情; 例如,分析文本结构</p>
 </div>
 <div id="pubchunks" class="section level2">
 <h2>pubchunks中的函数</h2>
-<p>两个主要功能是： 2. pub_chunks()：获取XML部分 3. pub_tabularize()：强制输出pub_chunks()到data.frame中 5. pub_guess_publisher()：从XML文件或字符串猜测发布者 6. pub_sections()：部分pubchunks知道如何处理 7. pub_providers()：提供者（即发布者）pubchunks知道如何明确处理</p>
+<p>两个主要功能是：</p>
+<ol start="2" style="list-style-type: decimal">
+<li>pub_chunks()：获取XML部分</li>
+<li>pub_tabularize()：强制输出pub_chunks()到data.frame中</li>
+<li>pub_guess_publisher()：从XML文件或字符串猜测发布者</li>
+<li>pub_sections()：部分pubchunks知道如何处理</li>
+<li>pub_providers()：提供者（即发布者）pubchunks知道如何明确处理</li>
+</ol>
 </div>
 <div class="section level2">
 <h2>支持的出版商</h2>
@@ -73,7 +97,7 @@ library(pubchunks)</code></pre>
 <div id="import" class="section level3">
 <h3>Import</h3>
 <ol style="list-style-type: decimal">
-<li>Path(s)</li>
+<li>XML Path(s)</li>
 </ol>
 <pre class="r"><code>#path
 path &lt;- system.file(&quot;examples/pensoft_1.xml&quot;, package = &quot;pubchunks&quot;)

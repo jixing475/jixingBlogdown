@@ -18,13 +18,20 @@ coverMeta: out
 
 
 <!--more-->
-<div id="background" class="section level2">
-<h2>Background</h2>
-<p>pubchunks 的目的是从XML格式的学术文章中获取部分数据。用户不需要了解XML及其所有的格式原理。他们只需知道他们的文件或XML字符串在哪里以及他们想要每篇文章的哪些部分。然后用户可以组合这些部分并做他们希望下游的任何事情; 例如，分析文本结构或获取其他数据的 Meta-Analysis</p>
+<div class="section level2">
+<h2>背景</h2>
+<p>pubchunks 的目的是从XML格式的学术文章中获取部分数据。我们不需要了解XML及其所有的格式原理。只需知道我们的文件或XML字符串在哪里以及我们想要每篇文章的哪些部分。然后用户可以组合这些部分并做我们希望下游的任何事情; 例如,分析文本结构</p>
 </div>
 <div id="pubchunks" class="section level2">
 <h2>pubchunks中的函数</h2>
-<p>两个主要功能是： 2. pub_chunks()：获取XML部分 3. pub_tabularize()：强制输出pub_chunks()到data.frame中 5. pub_guess_publisher()：从XML文件或字符串猜测发布者 6. pub_sections()：部分pubchunks知道如何处理 7. pub_providers()：提供者（即发布者）pubchunks知道如何明确处理</p>
+<p>两个主要功能是：</p>
+<ol start="2" style="list-style-type: decimal">
+<li>pub_chunks()：获取XML部分</li>
+<li>pub_tabularize()：强制输出pub_chunks()到data.frame中</li>
+<li>pub_guess_publisher()：从XML文件或字符串猜测发布者</li>
+<li>pub_sections()：部分pubchunks知道如何处理</li>
+<li>pub_providers()：提供者（即发布者）pubchunks知道如何明确处理</li>
+</ol>
 </div>
 <div class="section level2">
 <h2>支持的出版商</h2>
@@ -76,7 +83,7 @@ library(pubchunks)</code></pre>
 <div id="import" class="section level3">
 <h3>Import</h3>
 <ol style="list-style-type: decimal">
-<li>Path(s)</li>
+<li>XML Path(s)</li>
 </ol>
 <pre class="r"><code>#path
 path &lt;- system.file(&quot;examples/pensoft_1.xml&quot;, package = &quot;pubchunks&quot;)
