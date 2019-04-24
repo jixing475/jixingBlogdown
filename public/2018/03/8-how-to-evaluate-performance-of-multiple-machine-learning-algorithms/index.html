@@ -565,6 +565,25 @@ bwplot(models_compare, scales=scales)</code></pre>
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2019/04/analyze-and-visualize-your-iphone-s-health-app-data-in-r/">
+                <h3 class="media-heading">使用 R 分析可视化你的 iPhone 健康 APP 数据</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">介绍 iPhone 的 health APP 存储着我们的私人健康数据, 这里有一篇帖子是用 Python 分析 health APP 的数据Apple Health Data How to Export Analyze Visualize Guide - ryanpraski.com , 而我更喜欢 R 的版本.
+让我们赶紧开始吧!!
+ 首先获取数据并读取 从你的 health APP 应用中导出数据 在 R 中读取数据  加载包并读入数据 library(XML) library(tidyverse) library(lubridate) library(scales) library(here) library(ggthemes) xml &lt;- xmlParse(here(&quot;data/apple_health_export/export.xml&quot;)) summary(xml) ## $nameCounts ## ## Record ExportDate HealthData Me Workout ## 90037 1 1 1 1 ## ## $numNodes ## [1] 90041 Record 是我的主要数据, 有 90,037 条</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2019/03/tao_wang_bei_shang_guang/">
                 <h3 class="media-heading">逃往北上广</h3>
               </a>
@@ -726,25 +745,6 @@ pub_chunks()：获取XML部分 pub_tabularize()：强制输出pub_chunks()到dat
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/08/bianliang-he-cunliang/">
-                <h3 class="media-heading">变量与存量</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">《刀塔传奇》的制作人王信文说：变量大于存量，这话怎么理解？
-最近，在美团点评进入打车领域向滴滴宣战之后，王信文问了一个朋友美团点评做打车的逻辑是什么。 对方的回答是：没有人为了出行而出行，出行总要有个目的，比如去餐厅、酒店、电影院。美团点评做打车优势不在于打车上，而是在大众点评上找到目的地之后，可以直接打车，免去了输入目的地和切换APP的过程。美团点评省了这两步，就比滴滴有效率优势。这个效率优势看起来不大，也许是10%，也许是20%，但在长期作战中就会非常有用。这让王信文意识到，在持久作战过程中，比的和看的不是过去的实力存量，而是变量 。
-要赢得长跑，一时的领先不重要，重要的是速度。长跑比的是耐力和持久。 决定公司估值的，最重要的不是账上有多少现金，而是获得现金流的能力。 在找工作选公司，公司有多少钱不是最重要的指标，公司的发展速度才重要。 找男朋友，他现在有多少钱不是最重要的，重要的是他赚钱的能力。  所以对于“变量大于存量”的启发是：把“变量”作为最重要的目标，而不那么在意“存量”，要努力去寻找变量，“因为最终变量会决定存量”。</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -752,7 +752,7 @@ pub_chunks()：获取XML部分 pub_tabularize()：强制输出pub_chunks()到dat
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         51 posts found
+         52 posts found
       </p>
     </div>
   </div>

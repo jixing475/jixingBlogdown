@@ -1,0 +1,158 @@
+---
+title: 使用 R 分析可视化你的 iPhone 健康 APP 数据
+author: ZERO
+date: '2019-04-24'
+slug: analyze-and-visualize-your-iphone-s-health-app-data-in-r
+categories:
+  - datavis and dataclean
+tags:
+  - personal data
+  - ggplot2
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2019/04/24/5cc013b94ac97.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+```{r include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval=TRUE, message=FALSE, warning=FALSE)
+library(reticulate)
+use_condaenv(condaenv = "tfdeeplearning", 
+             conda = "/Users/zero/anaconda3/bin/conda")
+#Enable the reticulate Python engine
+#knitr::knit_engines(python = reticulate::eng_python)
+```
+
+## 介绍
+
+iPhone 的 health APP 存储着我们的私人健康数据, 这里有一篇帖子是用 Python 分析 health APP 的数据[Apple Health Data How to Export Analyze Visualize Guide - ryanpraski.com](http://www.ryanpraski.com/apple-health-data-how-to-export-analyze-visualize-guide/)
+, 而我更喜欢 R 的版本. 
+
+让我们赶紧开始吧!!
+
+## 首先获取数据并读取
+
+1. 从你的 health APP 应用中导出数据
+2. 在 R 中读取数据
+
+### 加载包并读入数据
+```{r}
+library(XML)
+library(tidyverse)
+library(lubridate)
+library(scales)
+library(here)
+library(ggthemes)
+xml <- xmlParse(here("data/apple_health_export/export.xml"))
+summary(xml)
+```
+
+Record 是我的主要数据, 有 `r numform::f_comma(90037)` 条
+```{r}
+df_record <-   XML:::xmlAttrsToDataFrame(xml["//Record"])
+```
+
+
+Record 数据查看
+```{r}
+library(kableExtra)
+head(df_record) %>%
+  kable("html") %>%
+  kable_styling("hover", full_width = F)
+```
+
+## 数据清洗
+注: 查看自及在哪个时区 "base::Sys.timezone()"
+```{r}
+ df <- df_record %>%
+  mutate(device = gsub(".*(name:)|,.*", "",device),
+         value = as.numeric(as.character(value)),
+         endDate = ymd_hms(endDate,tz="Asia/Shanghai"),
+         date = date(endDate),
+         year = year(endDate),
+         month = month(endDate),
+         day = day(endDate),
+         yday = yday(endDate),
+         wday = wday(endDate),
+         hour = hour(endDate),
+         minute = minute(endDate),
+         type = str_remove(type, "HKQuantityTypeIdentifier")
+         )
+
+```
+
+
+## 都有些什么数据呢?
+```{r}
+df %>% select(type) %>% distinct()
+```
+
+## 先看看体重变化吧
+```{r}
+p_weight <- 
+df %>%
+  arrange(endDate) %>% 
+  filter(type == 'BodyMass') %>% 
+  # Had to reduce sourceName to these 2 sources to avoid double-counting
+  # by other apps that use BodyMass and then store it back into Health
+  #filter(sourceName %in% c("健康", "小米运动")) %>% 
+  
+  ggplot(aes(x= date, y = value)) +
+    geom_point(alpha = 0.3) +
+    geom_smooth(span = 0.2, col = "grey30", se = FALSE) +
+    theme_minimal()+ scale_color_tableau() + scale_fill_tableau() +
+    labs(title = "Apple Health Weight Chart Sample",
+         caption = "Zero Student") +
+    theme(axis.text.x = element_text(angle = 0, hjust = 1), 
+        legend.position = "bottom",
+        plot.caption=element_text(size=12,family = "Arial",face = "bold",
+                                  hjust=0, margin=margin(t=15)))
+plotly::ggplotly(p_weight)
+```
+额, 这个数据点好像有点少, 在 18 年 10 月之后就没用过小米体重计了
+
+
+## 看看步数
+```{r}
+p_stepCount <- 
+df %>%
+  filter(type == 'StepCount') %>% 
+  group_by(date,wday,hour) %>% 
+  summarize(steps=sum(value)) %>% 
+  group_by(hour,wday) %>% 
+  summarize(steps=sum(steps)) %>% 
+  arrange(desc(steps)) %>%
+  ggplot(aes(x=hour, y=wday,  fill=steps)) + 
+    geom_tile(col = 'grey40') + 
+    scale_fill_continuous(labels = scales::comma, low = 'grey95', high = '#008FD5') +
+    theme(panel.grid.major = element_blank()) +
+    scale_x_continuous(
+      breaks = c(0, 6, 12, 18),
+      label = c("Midnight", "6 AM", "Midday", "6 PM")
+    ) +
+    scale_y_reverse(
+      breaks = c(1,2,3,4,5,6,7),
+      label = c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
+    ) +
+    theme_minimal()+ 
+    theme(axis.text.x = element_text(angle = 0, hjust = 1), 
+        legend.position = "bottom",
+        plot.caption=element_text(size=12,family = "Arial",face = "bold",
+                                  hjust=0, margin=margin(t=15))) +
+    labs(title = "Weekly Step Count Heatmap",
+         caption = 'Zero Student') +
+    guides(fill=FALSE)+
+    coord_equal()
+plotly::ggplotly(p_stepCount)
+```
+
+😱 😱 😱  惊呆了我的小伙伴, 这样下去可怎么办?
+
+
+
+## Links
+
+- [Apple Health Data How to Export Analyze Visualize Guide - ryanpraski.com](http://www.ryanpraski.com/apple-health-data-how-to-export-analyze-visualize-guide/)
+
+- [Analyze and visualize your iPhone's Health app data in R - Taras Kaduk](https://taraskaduk.com/2019/03/23/apple-health/)
+

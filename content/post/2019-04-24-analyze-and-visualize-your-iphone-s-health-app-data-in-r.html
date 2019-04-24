@@ -1,0 +1,372 @@
+---
+title: 使用 R 分析可视化你的 iPhone 健康 APP 数据
+author: ZERO
+date: '2019-04-24'
+slug: analyze-and-visualize-your-iphone-s-health-app-data-in-r
+categories:
+  - datavis and dataclean
+tags:
+  - personal data
+  - ggplot2
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2019/04/24/5cc013b94ac97.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/plotly-binding/plotly.js"></script>
+<script src="/rmarkdown-libs/typedarray/typedarray.min.js"></script>
+<script src="/rmarkdown-libs/jquery/jquery.min.js"></script>
+<link href="/rmarkdown-libs/crosstalk/css/crosstalk.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/crosstalk/js/crosstalk.min.js"></script>
+<link href="/rmarkdown-libs/plotly-htmlwidgets-css/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/plotly-main/plotly-latest.min.js"></script>
+
+
+<div class="section level2">
+<h2>介绍</h2>
+<p>iPhone 的 health APP 存储着我们的私人健康数据, 这里有一篇帖子是用 Python 分析 health APP 的数据<a href="http://www.ryanpraski.com/apple-health-data-how-to-export-analyze-visualize-guide/">Apple Health Data How to Export Analyze Visualize Guide - ryanpraski.com</a> , 而我更喜欢 R 的版本.</p>
+<p>让我们赶紧开始吧!!</p>
+</div>
+<div class="section level2">
+<h2>首先获取数据并读取</h2>
+<ol style="list-style-type: decimal">
+<li>从你的 health APP 应用中导出数据</li>
+<li>在 R 中读取数据</li>
+</ol>
+<div class="section level3">
+<h3>加载包并读入数据</h3>
+<pre class="r"><code>library(XML)
+library(tidyverse)
+library(lubridate)
+library(scales)
+library(here)
+library(ggthemes)
+xml &lt;- xmlParse(here(&quot;data/apple_health_export/export.xml&quot;))
+summary(xml)</code></pre>
+<pre><code>## $nameCounts
+## 
+##     Record ExportDate HealthData         Me    Workout 
+##      90037          1          1          1          1 
+## 
+## $numNodes
+## [1] 90041</code></pre>
+<p>Record 是我的主要数据, 有 90,037 条</p>
+<pre class="r"><code>df_record &lt;-   XML:::xmlAttrsToDataFrame(xml[&quot;//Record&quot;])</code></pre>
+<p>Record 数据查看</p>
+<pre class="r"><code>library(kableExtra)
+head(df_record) %&gt;%
+  kable(&quot;html&quot;) %&gt;%
+  kable_styling(&quot;hover&quot;, full_width = F)</code></pre>
+<table class="table table-hover" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+type
+</th>
+<th style="text-align:left;">
+sourceName
+</th>
+<th style="text-align:left;">
+sourceVersion
+</th>
+<th style="text-align:left;">
+unit
+</th>
+<th style="text-align:left;">
+creationDate
+</th>
+<th style="text-align:left;">
+startDate
+</th>
+<th style="text-align:left;">
+endDate
+</th>
+<th style="text-align:left;">
+value
+</th>
+<th style="text-align:left;">
+device
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+HKQuantityTypeIdentifierDietaryWater
+</td>
+<td style="text-align:left;">
+WaterMinder
+</td>
+<td style="text-align:left;">
+3.1.17
+</td>
+<td style="text-align:left;">
+mL
+</td>
+<td style="text-align:left;">
+2017-02-02 18:27:52 +0800
+</td>
+<td style="text-align:left;">
+2017-02-02 18:27:52 +0800
+</td>
+<td style="text-align:left;">
+2017-02-02 18:27:52 +0800
+</td>
+<td style="text-align:left;">
+250
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HKQuantityTypeIdentifierBodyMassIndex
+</td>
+<td style="text-align:left;">
+小米运动
+</td>
+<td style="text-align:left;">
+201712191618
+</td>
+<td style="text-align:left;">
+count
+</td>
+<td style="text-align:left;">
+2017-12-24 19:07:08 +0800
+</td>
+<td style="text-align:left;">
+2017-12-24 19:06:47 +0800
+</td>
+<td style="text-align:left;">
+2017-12-24 19:06:47 +0800
+</td>
+<td style="text-align:left;">
+22
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HKQuantityTypeIdentifierBodyMassIndex
+</td>
+<td style="text-align:left;">
+小米运动
+</td>
+<td style="text-align:left;">
+201712191618
+</td>
+<td style="text-align:left;">
+count
+</td>
+<td style="text-align:left;">
+2017-12-24 19:08:59 +0800
+</td>
+<td style="text-align:left;">
+2017-12-24 19:08:54 +0800
+</td>
+<td style="text-align:left;">
+2017-12-24 19:08:54 +0800
+</td>
+<td style="text-align:left;">
+22
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HKQuantityTypeIdentifierBodyMassIndex
+</td>
+<td style="text-align:left;">
+小米运动
+</td>
+<td style="text-align:left;">
+201712191618
+</td>
+<td style="text-align:left;">
+count
+</td>
+<td style="text-align:left;">
+2017-12-28 21:44:31 +0800
+</td>
+<td style="text-align:left;">
+2017-12-27 18:44:12 +0800
+</td>
+<td style="text-align:left;">
+2017-12-27 18:44:12 +0800
+</td>
+<td style="text-align:left;">
+22.6049
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HKQuantityTypeIdentifierBodyMassIndex
+</td>
+<td style="text-align:left;">
+小米运动
+</td>
+<td style="text-align:left;">
+201712191618
+</td>
+<td style="text-align:left;">
+count
+</td>
+<td style="text-align:left;">
+2017-12-30 10:13:09 +0800
+</td>
+<td style="text-align:left;">
+2017-12-30 10:12:46 +0800
+</td>
+<td style="text-align:left;">
+2017-12-30 10:12:46 +0800
+</td>
+<td style="text-align:left;">
+22
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HKQuantityTypeIdentifierBodyMassIndex
+</td>
+<td style="text-align:left;">
+小米运动
+</td>
+<td style="text-align:left;">
+201712191618
+</td>
+<td style="text-align:left;">
+count
+</td>
+<td style="text-align:left;">
+2017-12-30 10:13:19 +0800
+</td>
+<td style="text-align:left;">
+2017-12-30 10:13:14 +0800
+</td>
+<td style="text-align:left;">
+2017-12-30 10:13:14 +0800
+</td>
+<td style="text-align:left;">
+22
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="section level2">
+<h2>数据清洗</h2>
+<p>注: 查看自及在哪个时区 “base::Sys.timezone()”</p>
+<pre class="r"><code> df &lt;- df_record %&gt;%
+  mutate(device = gsub(&quot;.*(name:)|,.*&quot;, &quot;&quot;,device),
+         value = as.numeric(as.character(value)),
+         endDate = ymd_hms(endDate,tz=&quot;Asia/Shanghai&quot;),
+         date = date(endDate),
+         year = year(endDate),
+         month = month(endDate),
+         day = day(endDate),
+         yday = yday(endDate),
+         wday = wday(endDate),
+         hour = hour(endDate),
+         minute = minute(endDate),
+         type = str_remove(type, &quot;HKQuantityTypeIdentifier&quot;)
+         )</code></pre>
+</div>
+<div class="section level2">
+<h2>都有些什么数据呢?</h2>
+<pre class="r"><code>df %&gt;% select(type) %&gt;% distinct()</code></pre>
+<pre><code>##                     type
+## 1           DietaryWater
+## 2          BodyMassIndex
+## 3                 Height
+## 4               BodyMass
+## 5      BodyFatPercentage
+## 6           LeanBodyMass
+## 7              StepCount
+## 8 DistanceWalkingRunning
+## 9     ActiveEnergyBurned</code></pre>
+</div>
+<div class="section level2">
+<h2>先看看体重变化吧</h2>
+<pre class="r"><code>p_weight &lt;- 
+df %&gt;%
+  arrange(endDate) %&gt;% 
+  filter(type == &#39;BodyMass&#39;) %&gt;% 
+  # Had to reduce sourceName to these 2 sources to avoid double-counting
+  # by other apps that use BodyMass and then store it back into Health
+  #filter(sourceName %in% c(&quot;健康&quot;, &quot;小米运动&quot;)) %&gt;% 
+  
+  ggplot(aes(x= date, y = value)) +
+    geom_point(alpha = 0.3) +
+    geom_smooth(span = 0.2, col = &quot;grey30&quot;, se = FALSE) +
+    theme_minimal()+ scale_color_tableau() + scale_fill_tableau() +
+    labs(title = &quot;Apple Health Weight Chart Sample&quot;,
+         caption = &quot;Zero Student&quot;) +
+    theme(axis.text.x = element_text(angle = 0, hjust = 1), 
+        legend.position = &quot;bottom&quot;,
+        plot.caption=element_text(size=12,family = &quot;Arial&quot;,face = &quot;bold&quot;,
+                                  hjust=0, margin=margin(t=15)))
+plotly::ggplotly(p_weight)</code></pre>
+<p><div id="htmlwidget-1" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"data":[{"x":[17524,17524,17524,17527,17530,17530,17530,17532,17533,17533,17536,17547,17553,17558,17558,17558,17642,17642,17642,17683,17696,17700,17700,17714,17714,17768,17817],"y":[60,63.7,63.7,63.8,62.35,62.35,62.35,62.3,64,62.85,64.4,63.05,62.85,61.85,62.15,62.65,63.95,63.95,63.95,64.55,64.2,64.2,64.2,63.4,63.4,62.55,62.65],"text":["date: 2017-12-24<br />value: 60.00","date: 2017-12-24<br />value: 63.70","date: 2017-12-24<br />value: 63.70","date: 2017-12-27<br />value: 63.80","date: 2017-12-30<br />value: 62.35","date: 2017-12-30<br />value: 62.35","date: 2017-12-30<br />value: 62.35","date: 2018-01-01<br />value: 62.30","date: 2018-01-02<br />value: 64.00","date: 2018-01-02<br />value: 62.85","date: 2018-01-05<br />value: 64.40","date: 2018-01-16<br />value: 63.05","date: 2018-01-22<br />value: 62.85","date: 2018-01-27<br />value: 61.85","date: 2018-01-27<br />value: 62.15","date: 2018-01-27<br />value: 62.65","date: 2018-04-21<br />value: 63.95","date: 2018-04-21<br />value: 63.95","date: 2018-04-21<br />value: 63.95","date: 2018-06-01<br />value: 64.55","date: 2018-06-14<br />value: 64.20","date: 2018-06-18<br />value: 64.20","date: 2018-06-18<br />value: 64.20","date: 2018-07-02<br />value: 63.40","date: 2018-07-02<br />value: 63.40","date: 2018-08-25<br />value: 62.55","date: 2018-10-13<br />value: 62.65"],"type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":0.3,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[17524,17527.7088607595,17531.417721519,17535.1265822785,17538.835443038,17542.5443037975,17546.253164557,17549.9620253165,17553.6708860759,17557.3797468354,17561.0886075949,17564.7974683544,17568.5063291139,17572.2151898734,17575.9240506329,17579.6329113924,17583.3417721519,17587.0506329114,17590.7594936709,17594.4683544304,17598.1772151899,17601.8860759494,17605.5949367089,17609.3037974684,17613.0126582278,17616.7215189873,17620.4303797468,17624.1392405063,17627.8481012658,17631.5569620253,17635.2658227848,17638.9746835443,17642.6835443038,17646.3924050633,17650.1012658228,17653.8101265823,17657.5189873418,17661.2278481013,17664.9367088608,17668.6455696203,17672.3544303797,17676.0632911392,17679.7721518987,17683.4810126582,17687.1898734177,17690.8987341772,17694.6075949367,17698.3164556962,17702.0253164557,17705.7341772152,17709.4430379747,17713.1518987342,17716.8607594937,17720.5696202532,17724.2784810127,17727.9873417722,17731.6962025316,17735.4050632911,17739.1139240506,17742.8227848101,17746.5316455696,17750.2405063291,17753.9493670886,17757.6582278481,17761.3670886076,17765.0759493671,17768.7848101266,17772.4936708861,17776.2025316456,17779.9113924051,17783.6202531646,17787.3291139241,17791.0379746835,17794.746835443,17798.4556962025,17802.164556962,17805.8734177215,17809.582278481,17813.2911392405,17817],"y":[62.4666666666667,63.5969894500877,62.6396226900543,64.4222762803754,63.7566165094094,63.2660629618887,63.065641010192,62.9861336527131,62.7919371195111,62.2693594902906,62.0412328448662,61.8815318071187,61.7734591645635,61.7127944059177,61.6953170198989,61.7168064952241,61.7730423206106,61.8598039847757,61.9728709764365,62.1080227843105,62.2610388971147,62.4276988035664,62.6037819923831,62.7850679522816,62.9673361719796,63.146366140194,63.3179373456421,63.4778292770414,63.6218214231089,63.7456932725618,63.8452243141176,63.9161940364934,63.9558633208662,64.0147676616422,64.1102114729757,64.2295457682722,64.3601215609375,64.4892898643767,64.6044016919953,64.6928080571991,64.7418599733932,64.7389084539832,64.6713045123746,64.527596664365,64.3836651038808,64.2859751833642,64.2278170845603,64.2024809892147,64.1617768958448,63.9469355128869,63.6583333566412,63.4298363315536,63.3207120969447,63.225014499142,63.136988754321,63.0562665772681,62.9824796827694,62.9152597856112,62.8542386005798,62.7990478424616,62.7493192260426,62.7046844661091,62.6647752774476,62.6292233748441,62.5976604730849,62.5697182869564,62.5450691288861,62.5246440148675,62.508968354097,62.4980421465747,62.4918653923006,62.4904380912746,62.4937602434967,62.501831848967,62.5146529076855,62.5322234196521,62.5545433848668,62.5816128033297,62.6134316750408,62.65],"text":["date: 17524.00<br />value: 62.46667","date: 17527.71<br />value: 63.59699","date: 17531.42<br />value: 62.63962","date: 17535.13<br />value: 64.42228","date: 17538.84<br />value: 63.75662","date: 17542.54<br />value: 63.26606","date: 17546.25<br />value: 63.06564","date: 17549.96<br />value: 62.98613","date: 17553.67<br />value: 62.79194","date: 17557.38<br />value: 62.26936","date: 17561.09<br />value: 62.04123","date: 17564.80<br />value: 61.88153","date: 17568.51<br />value: 61.77346","date: 17572.22<br />value: 61.71279","date: 17575.92<br />value: 61.69532","date: 17579.63<br />value: 61.71681","date: 17583.34<br />value: 61.77304","date: 17587.05<br />value: 61.85980","date: 17590.76<br />value: 61.97287","date: 17594.47<br />value: 62.10802","date: 17598.18<br />value: 62.26104","date: 17601.89<br />value: 62.42770","date: 17605.59<br />value: 62.60378","date: 17609.30<br />value: 62.78507","date: 17613.01<br />value: 62.96734","date: 17616.72<br />value: 63.14637","date: 17620.43<br />value: 63.31794","date: 17624.14<br />value: 63.47783","date: 17627.85<br />value: 63.62182","date: 17631.56<br />value: 63.74569","date: 17635.27<br />value: 63.84522","date: 17638.97<br />value: 63.91619","date: 17642.68<br />value: 63.95586","date: 17646.39<br />value: 64.01477","date: 17650.10<br />value: 64.11021","date: 17653.81<br />value: 64.22955","date: 17657.52<br />value: 64.36012","date: 17661.23<br />value: 64.48929","date: 17664.94<br />value: 64.60440","date: 17668.65<br />value: 64.69281","date: 17672.35<br />value: 64.74186","date: 17676.06<br />value: 64.73891","date: 17679.77<br />value: 64.67130","date: 17683.48<br />value: 64.52760","date: 17687.19<br />value: 64.38367","date: 17690.90<br />value: 64.28598","date: 17694.61<br />value: 64.22782","date: 17698.32<br />value: 64.20248","date: 17702.03<br />value: 64.16178","date: 17705.73<br />value: 63.94694","date: 17709.44<br />value: 63.65833","date: 17713.15<br />value: 63.42984","date: 17716.86<br />value: 63.32071","date: 17720.57<br />value: 63.22501","date: 17724.28<br />value: 63.13699","date: 17727.99<br />value: 63.05627","date: 17731.70<br />value: 62.98248","date: 17735.41<br />value: 62.91526","date: 17739.11<br />value: 62.85424","date: 17742.82<br />value: 62.79905","date: 17746.53<br />value: 62.74932","date: 17750.24<br />value: 62.70468","date: 17753.95<br />value: 62.66478","date: 17757.66<br />value: 62.62922","date: 17761.37<br />value: 62.59766","date: 17765.08<br />value: 62.56972","date: 17768.78<br />value: 62.54507","date: 17772.49<br />value: 62.52464","date: 17776.20<br />value: 62.50897","date: 17779.91<br />value: 62.49804","date: 17783.62<br />value: 62.49187","date: 17787.33<br />value: 62.49044","date: 17791.04<br />value: 62.49376","date: 17794.75<br />value: 62.50183","date: 17798.46<br />value: 62.51465","date: 17802.16<br />value: 62.53222","date: 17805.87<br />value: 62.55454","date: 17809.58<br />value: 62.58161","date: 17813.29<br />value: 62.61343","date: 17817.00<br />value: 62.65000"],"type":"scatter","mode":"lines","name":"fitted values","line":{"width":3.77952755905512,"color":"rgba(77,77,77,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.7625570776256,"r":7.30593607305936,"b":40.1826484018265,"l":37.2602739726027},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":"Apple Health Weight Chart Sample","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[17509.35,17831.65],"tickmode":"array","ticktext":["Jan","Apr","Jul","Oct"],"tickvals":[17532,17622,17713,17805],"categoryorder":"array","categoryarray":["Jan","Apr","Jul","Oct"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":"date","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[59.7629070013303,64.9789529720628],"tickmode":"array","ticktext":["60","61","62","63","64"],"tickvals":[60,61,62,63,64],"categoryorder":"array","categoryarray":["60","61","62","63","64"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"value","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":[{"name":"Collaborate","icon":{"width":1000,"ascent":500,"descent":-50,"path":"M487 375c7-10 9-23 5-36l-79-259c-3-12-11-23-22-31-11-8-22-12-35-12l-263 0c-15 0-29 5-43 15-13 10-23 23-28 37-5 13-5 25-1 37 0 0 0 3 1 7 1 5 1 8 1 11 0 2 0 4-1 6 0 3-1 5-1 6 1 2 2 4 3 6 1 2 2 4 4 6 2 3 4 5 5 7 5 7 9 16 13 26 4 10 7 19 9 26 0 2 0 5 0 9-1 4-1 6 0 8 0 2 2 5 4 8 3 3 5 5 5 7 4 6 8 15 12 26 4 11 7 19 7 26 1 1 0 4 0 9-1 4-1 7 0 8 1 2 3 5 6 8 4 4 6 6 6 7 4 5 8 13 13 24 4 11 7 20 7 28 1 1 0 4 0 7-1 3-1 6-1 7 0 2 1 4 3 6 1 1 3 4 5 6 2 3 3 5 5 6 1 2 3 5 4 9 2 3 3 7 5 10 1 3 2 6 4 10 2 4 4 7 6 9 2 3 4 5 7 7 3 2 7 3 11 3 3 0 8 0 13-1l0-1c7 2 12 2 14 2l218 0c14 0 25-5 32-16 8-10 10-23 6-37l-79-259c-7-22-13-37-20-43-7-7-19-10-37-10l-248 0c-5 0-9-2-11-5-2-3-2-7 0-12 4-13 18-20 41-20l264 0c5 0 10 2 16 5 5 3 8 6 10 11l85 282c2 5 2 10 2 17 7-3 13-7 17-13z m-304 0c-1-3-1-5 0-7 1-1 3-2 6-2l174 0c2 0 4 1 7 2 2 2 4 4 5 7l6 18c0 3 0 5-1 7-1 1-3 2-6 2l-173 0c-3 0-5-1-8-2-2-2-4-4-4-7z m-24-73c-1-3-1-5 0-7 2-2 3-2 6-2l174 0c2 0 5 0 7 2 3 2 4 4 5 7l6 18c1 2 0 5-1 6-1 2-3 3-5 3l-174 0c-3 0-5-1-7-3-3-1-4-4-5-6z"},"click":"function(gd) { \n        // is this being viewed in RStudio?\n        if (location.search == '?viewer_pane=1') {\n          alert('To learn about plotly for collaboration, visit:\\n https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html');\n        } else {\n          window.open('https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html', '_blank');\n        }\n      }"}],"cloud":false},"source":"A","attrs":{"36561e31dab8":{"x":{},"y":{},"type":"scatter"},"36565b0e7584":{"x":{},"y":{}}},"cur_data":"36561e31dab8","visdat":{"36561e31dab8":["function (y) ","x"],"36565b0e7584":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"base_url":"https://plot.ly"},"evals":["config.modeBarButtonsToAdd.0.click"],"jsHooks":[]}</script> 额, 这个数据点好像有点少, 在 18 年 10 月之后就没用过小米体重计了</p>
+</div>
+<div class="section level2">
+<h2>看看步数</h2>
+<pre class="r"><code>p_stepCount &lt;- 
+df %&gt;%
+  filter(type == &#39;StepCount&#39;) %&gt;% 
+  group_by(date,wday,hour) %&gt;% 
+  summarize(steps=sum(value)) %&gt;% 
+  group_by(hour,wday) %&gt;% 
+  summarize(steps=sum(steps)) %&gt;% 
+  arrange(desc(steps)) %&gt;%
+  ggplot(aes(x=hour, y=wday,  fill=steps)) + 
+    geom_tile(col = &#39;grey40&#39;) + 
+    scale_fill_continuous(labels = scales::comma, low = &#39;grey95&#39;, high = &#39;#008FD5&#39;) +
+    theme(panel.grid.major = element_blank()) +
+    scale_x_continuous(
+      breaks = c(0, 6, 12, 18),
+      label = c(&quot;Midnight&quot;, &quot;6 AM&quot;, &quot;Midday&quot;, &quot;6 PM&quot;)
+    ) +
+    scale_y_reverse(
+      breaks = c(1,2,3,4,5,6,7),
+      label = c(&quot;Sunday&quot;, &quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;, &quot;Thursday&quot;, &quot;Friday&quot;, &quot;Saturday&quot;)
+    ) +
+    theme_minimal()+ 
+    theme(axis.text.x = element_text(angle = 0, hjust = 1), 
+        legend.position = &quot;bottom&quot;,
+        plot.caption=element_text(size=12,family = &quot;Arial&quot;,face = &quot;bold&quot;,
+                                  hjust=0, margin=margin(t=15))) +
+    labs(title = &quot;Weekly Step Count Heatmap&quot;,
+         caption = &#39;Zero Student&#39;) +
+    guides(fill=FALSE)+
+    coord_equal()
+plotly::ggplotly(p_stepCount)</code></pre>
+<div id="htmlwidget-2" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"data":[{"x":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],"y":[-7,-6,-5,-4,-3,-2,-1],"z":[[0.0404265064214133,0.0187237784658227,0.00495025923822436,0.0118571716468498,0.00250993899199384,0.0115017496290054,0.0120000732828903,0.0961984500668706,0.111782056684316,0.214968030339117,0.21206602788414,0.243768206218053,0.248780755913013,0.24854991480864,0.212403129179415,0.245853104446439,0.224223659381126,0.288657640657348,0.493344081490574,0.517589725738783,0.361918546067457,0.364589707418061,0.24917648352051,0.126119854167048],[0.0103731931187366,0.00175512522213876,0.00417346060128612,0,0.00010259604638807,0.00375941227121998,0.00894784090284521,0.434160819302713,0.406749354194529,0.114035505560339,0.106743857977759,0.335225253283989,0.622050821684407,0.19681952256197,0.137592290639943,0.107073630984006,0.10826447795101,0.290988036568162,0.789102834215781,0.466500558782038,0.310631515306964,0.451184434714105,0.264126193137057,0.112214425736951],[0.00578934833189821,0.00652950552369785,0.00171848377700016,0.00168184233186157,0.00180275910081894,0.00503087041752927,0.0151072678306432,0.504915449865343,0.306567979041093,0.16767491709873,0.118414158254402,0.386138541304069,0.642401480314384,0.106311488925123,0.136493047285785,0.119586684498837,0.203451624132056,0.359397614641921,0.913192752322152,0.432867376289321,0.291515673378158,0.375644431416375,0.305827821849294,0.0958943260722203],[0.0272978766282542,0.00109191506513017,0.000864738105270872,0.00493926680468278,0.00575270688675961,0.00522873422127769,0.0191304985068611,0.567759192422549,0.364032757451954,0.0964732609054101,0.106556986607552,0.335287543740725,0.631518971108221,0.135551362145723,0.190561163732298,0.113793672022425,0.188322371434329,0.278218492937361,0.851792682703406,0.343641793232325,0.360181741567887,0.389036879614532,0.265207115768646,0.0467691405749043],[0.0267152776505505,0.0208233332722643,0.000802447648535258,0.000835424949159995,0.00128245057985087,0.00322078302768261,0.00942417968964696,0.510767088653976,0.359822655405529,0.0875693897367312,0.104354835754722,0.31976989172453,0.686939156880347,0.116281626147335,0.207738673213272,0.0982906765842845,0.137486030449041,0.240767271861202,1,0.427341846362421,0.280358353333455,0.400428704908122,0.167550336185259,0.0875657255922174],[0.0348533426158328,0.0404631478665519,0.0132642031401718,null,0.00119084696700438,0.0247476320466079,0.0227396808530128,0.509825403513915,0.304567356136526,0.132191341626514,0.118003774068849,0.328468570800432,0.706589963908177,0.151208251653445,0.159895938295806,0.103882161112434,0.10445743180111,0.337167249876335,0.894655845226536,0.363963138706191,0.322671894179506,0.264811388161149,0.106864774746716,0.102621695399667],[0.0969495996922119,0.0472857849513585,0.00371910668156752,3.29773006247366e-05,0.000399391752010699,0.000908707839437187,0.00688126339702838,0.061158236080831,0.121360130443545,0.143183775168093,0.1683014858106,0.205719729586135,0.251792682703406,0.234981587673818,0.276243519044391,0.277460015022993,0.208742648810069,0.418518586373047,0.484898228386128,0.512324350072367,0.39661066632468,0.363963138706191,0.163336569994321,0.0754996977080776]],"text":[["hour:  0<br />wday: 7<br />steps:  11054","hour:  1<br />wday: 7<br />steps:   5131","hour:  2<br />wday: 7<br />steps:   1372","hour:  3<br />wday: 7<br />steps:   3257","hour:  4<br />wday: 7<br />steps:    706","hour:  5<br />wday: 7<br />steps:   3160","hour:  6<br />wday: 7<br />steps:   3296","hour:  7<br />wday: 7<br />steps:  26275","hour:  8<br />wday: 7<br />steps:  30528","hour:  9<br />wday: 7<br />steps:  58689","hour: 10<br />wday: 7<br />steps:  57897","hour: 11<br />wday: 7<br />steps:  66549","hour: 12<br />wday: 7<br />steps:  67917","hour: 13<br />wday: 7<br />steps:  67854","hour: 14<br />wday: 7<br />steps:  57989","hour: 15<br />wday: 7<br />steps:  67118","hour: 16<br />wday: 7<br />steps:  61215","hour: 17<br />wday: 7<br />steps:  78800","hour: 18<br />wday: 7<br />steps: 134662","hour: 19<br />wday: 7<br />steps: 141279","hour: 20<br />wday: 7<br />steps:  98794","hour: 21<br />wday: 7<br />steps:  99523","hour: 22<br />wday: 7<br />steps:  68025","hour: 23<br />wday: 7<br />steps:  34441"],["hour:  0<br />wday: 6<br />steps:   2852","hour:  1<br />wday: 6<br />steps:    500","hour:  2<br />wday: 6<br />steps:   1160","hour:  3<br />wday: 6<br />steps:     21","hour:  4<br />wday: 6<br />steps:     49","hour:  5<br />wday: 6<br />steps:   1047","hour:  6<br />wday: 6<br />steps:   2463","hour:  7<br />wday: 6<br />steps: 118510","hour:  8<br />wday: 6<br />steps: 111029","hour:  9<br />wday: 6<br />steps:  31143","hour: 10<br />wday: 6<br />steps:  29153","hour: 11<br />wday: 6<br />steps:  91509","hour: 12<br />wday: 6<br />steps: 169788","hour: 13<br />wday: 6<br />steps:  53736","hour: 14<br />wday: 6<br />steps:  37572","hour: 15<br />wday: 6<br />steps:  29243","hour: 16<br />wday: 6<br />steps:  29568","hour: 17<br />wday: 6<br />steps:  79436","hour: 18<br />wday: 6<br />steps: 215379","hour: 19<br />wday: 6<br />steps: 127336","hour: 20<br />wday: 6<br />steps:  84797","hour: 21<br />wday: 6<br />steps: 123156","hour: 22<br />wday: 6<br />steps:  72105","hour: 23<br />wday: 6<br />steps:  30646"],["hour:  0<br />wday: 5<br />steps:   1601","hour:  1<br />wday: 5<br />steps:   1803","hour:  2<br />wday: 5<br />steps:    490","hour:  3<br />wday: 5<br />steps:    480","hour:  4<br />wday: 5<br />steps:    513","hour:  5<br />wday: 5<br />steps:   1394","hour:  6<br />wday: 5<br />steps:   4144","hour:  7<br />wday: 5<br />steps: 137820","hour:  8<br />wday: 5<br />steps:  83688","hour:  9<br />wday: 5<br />steps:  45782","hour: 10<br />wday: 5<br />steps:  32338","hour: 11<br />wday: 5<br />steps: 105404","hour: 12<br />wday: 5<br />steps: 175342","hour: 13<br />wday: 5<br />steps:  29035","hour: 14<br />wday: 5<br />steps:  37272","hour: 15<br />wday: 5<br />steps:  32658","hour: 16<br />wday: 5<br />steps:  55546","hour: 17<br />wday: 5<br />steps:  98106","hour: 18<br />wday: 5<br />steps: 249245","hour: 19<br />wday: 5<br />steps: 118157","hour: 20<br />wday: 5<br />steps:  79580","hour: 21<br />wday: 5<br />steps: 102540","hour: 22<br />wday: 5<br />steps:  83486","hour: 23<br />wday: 5<br />steps:  26192"],["hour:  0<br />wday: 4<br />steps:   7471","hour:  1<br />wday: 4<br />steps:    319","hour:  2<br />wday: 4<br />steps:    257","hour:  3<br />wday: 4<br />steps:   1369","hour:  4<br />wday: 4<br />steps:   1591","hour:  5<br />wday: 4<br />steps:   1448","hour:  6<br />wday: 4<br />steps:   5242","hour:  7<br />wday: 4<br />steps: 154971","hour:  8<br />wday: 4<br />steps:  99371","hour:  9<br />wday: 4<br />steps:  26350","hour: 10<br />wday: 4<br />steps:  29102","hour: 11<br />wday: 4<br />steps:  91526","hour: 12<br />wday: 4<br />steps: 172372","hour: 13<br />wday: 4<br />steps:  37015","hour: 14<br />wday: 4<br />steps:  52028","hour: 15<br />wday: 4<br />steps:  31077","hour: 16<br />wday: 4<br />steps:  51417","hour: 17<br />wday: 4<br />steps:  75951","hour: 18<br />wday: 4<br />steps: 232488","hour: 19<br />wday: 4<br />steps:  93806","hour: 20<br />wday: 4<br />steps:  98320","hour: 21<br />wday: 4<br />steps: 106195","hour: 22<br />wday: 4<br />steps:  72400","hour: 23<br />wday: 4<br />steps:  12785"],["hour:  0<br />wday: 3<br />steps:   7312","hour:  1<br />wday: 3<br />steps:   5704","hour:  2<br />wday: 3<br />steps:    240","hour:  3<br />wday: 3<br />steps:    249","hour:  4<br />wday: 3<br />steps:    371","hour:  5<br />wday: 3<br />steps:    900","hour:  6<br />wday: 3<br />steps:   2593","hour:  7<br />wday: 3<br />steps: 139417","hour:  8<br />wday: 3<br />steps:  98222","hour:  9<br />wday: 3<br />steps:  23920","hour: 10<br />wday: 3<br />steps:  28501","hour: 11<br />wday: 3<br />steps:  87291","hour: 12<br />wday: 3<br />steps: 187497","hour: 13<br />wday: 3<br />steps:  31756","hour: 14<br />wday: 3<br />steps:  56716","hour: 15<br />wday: 3<br />steps:  26846","hour: 16<br />wday: 3<br />steps:  37543","hour: 17<br />wday: 3<br />steps:  65730","hour: 18<br />wday: 3<br />steps: 272936","hour: 19<br />wday: 3<br />steps: 116649","hour: 20<br />wday: 3<br />steps:  76535","hour: 21<br />wday: 3<br />steps: 109304","hour: 22<br />wday: 3<br />steps:  45748","hour: 23<br />wday: 3<br />steps:  23919"],["hour:  0<br />wday: 2<br />steps:   9533","hour:  1<br />wday: 2<br />steps:  11064","hour:  2<br />wday: 2<br />steps:   3641",null,"hour:  4<br />wday: 2<br />steps:    346","hour:  5<br />wday: 2<br />steps:   6775","hour:  6<br />wday: 2<br />steps:   6227","hour:  7<br />wday: 2<br />steps: 139160","hour:  8<br />wday: 2<br />steps:  83142","hour:  9<br />wday: 2<br />steps:  36098","hour: 10<br />wday: 2<br />steps:  32226","hour: 11<br />wday: 2<br />steps:  89665","hour: 12<br />wday: 2<br />steps: 192860","hour: 13<br />wday: 2<br />steps:  41288","hour: 14<br />wday: 2<br />steps:  43659","hour: 15<br />wday: 2<br />steps:  28372","hour: 16<br />wday: 2<br />steps:  28529","hour: 17<br />wday: 2<br />steps:  92039","hour: 18<br />wday: 2<br />steps: 244186","hour: 19<br />wday: 2<br />steps:  99352","hour: 20<br />wday: 2<br />steps:  88083","hour: 21<br />wday: 2<br />steps:  72292","hour: 22<br />wday: 2<br />steps:  29186","hour: 23<br />wday: 2<br />steps:  28028"],["hour:  0<br />wday: 1<br />steps:  26480","hour:  1<br />wday: 1<br />steps:  12926","hour:  2<br />wday: 1<br />steps:   1036","hour:  3<br />wday: 1<br />steps:     30","hour:  4<br />wday: 1<br />steps:    130","hour:  5<br />wday: 1<br />steps:    269","hour:  6<br />wday: 1<br />steps:   1899","hour:  7<br />wday: 1<br />steps:  16712","hour:  8<br />wday: 1<br />steps:  33142","hour:  9<br />wday: 1<br />steps:  39098","hour: 10<br />wday: 1<br />steps:  45953","hour: 11<br />wday: 1<br />steps:  56165","hour: 12<br />wday: 1<br />steps:  68739","hour: 13<br />wday: 1<br />steps:  64151","hour: 14<br />wday: 1<br />steps:  75412","hour: 15<br />wday: 1<br />steps:  75744","hour: 16<br />wday: 1<br />steps:  56990","hour: 17<br />wday: 1<br />steps: 114241","hour: 18<br />wday: 1<br />steps: 132357","hour: 19<br />wday: 1<br />steps: 139842","hour: 20<br />wday: 1<br />steps: 108262","hour: 21<br />wday: 1<br />steps:  99352","hour: 22<br />wday: 1<br />steps:  44598","hour: 23<br />wday: 1<br />steps:  20626"]],"colorscale":[[0,"#F2F2F2"],[3.29773006247366e-05,"#F2F2F2"],[0.00010259604638807,"#F2F2F2"],[0.000399391752010699,"#F2F2F2"],[0.000802447648535258,"#F2F2F2"],[0.000835424949159995,"#F2F2F2"],[0.000864738105270872,"#F2F2F2"],[0.000908707839437187,"#F2F2F2"],[0.00109191506513017,"#F2F2F2"],[0.00119084696700438,"#F2F2F2"],[0.00128245057985087,"#F2F2F2"],[0.00168184233186157,"#F2F2F2"],[0.00171848377700016,"#F2F2F2"],[0.00175512522213876,"#F2F2F2"],[0.00180275910081894,"#F2F2F2"],[0.00250993899199384,"#F2F2F2"],[0.00322078302768261,"#F1F2F2"],[0.00371910668156752,"#F1F2F2"],[0.00375941227121998,"#F1F2F2"],[0.00417346060128612,"#F1F2F2"],[0.00493926680468278,"#F1F1F2"],[0.00495025923822436,"#F1F1F2"],[0.00503087041752927,"#F1F1F2"],[0.00522873422127769,"#F1F1F2"],[0.00575270688675961,"#F1F1F2"],[0.00578934833189821,"#F1F1F2"],[0.00652950552369785,"#F1F1F2"],[0.00688126339702838,"#F1F1F2"],[0.00894784090284521,"#F1F1F2"],[0.00942417968964696,"#F0F1F2"],[0.0103731931187366,"#F0F1F2"],[0.0115017496290054,"#F0F1F2"],[0.0118571716468498,"#F0F1F2"],[0.0120000732828903,"#F0F1F2"],[0.0132642031401718,"#F0F1F2"],[0.0151072678306432,"#EFF0F2"],[0.0187237784658227,"#EFF0F2"],[0.0191304985068611,"#EFF0F1"],[0.0208233332722643,"#EFF0F1"],[0.0227396808530128,"#EEF0F1"],[0.0247476320466079,"#EEEFF1"],[0.0267152776505505,"#EEEFF1"],[0.0272978766282542,"#EDEFF1"],[0.0348533426158328,"#ECEEF1"],[0.0404265064214133,"#EBEEF1"],[0.0404631478665519,"#EBEEF1"],[0.0467691405749043,"#EAEDF1"],[0.0472857849513585,"#EAEDF1"],[0.061158236080831,"#E8ECF0"],[0.0754996977080776,"#E5EAF0"],[0.0875657255922174,"#E3E9F0"],[0.0875693897367312,"#E3E9F0"],[0.0958943260722203,"#E2E8EF"],[0.0961984500668706,"#E2E8EF"],[0.0964732609054101,"#E2E8EF"],[0.0969495996922119,"#E2E8EF"],[0.0982906765842845,"#E2E8EF"],[0.102621695399667,"#E1E7EF"],[0.103882161112434,"#E1E7EF"],[0.104354835754722,"#E1E7EF"],[0.10445743180111,"#E1E7EF"],[0.106311488925123,"#E0E7EF"],[0.106556986607552,"#E0E7EF"],[0.106743857977759,"#E0E7EF"],[0.106864774746716,"#E0E7EF"],[0.107073630984006,"#E0E7EF"],[0.10826447795101,"#E0E7EF"],[0.111782056684316,"#DFE6EF"],[0.112214425736951,"#DFE6EF"],[0.113793672022425,"#DFE6EF"],[0.114035505560339,"#DFE6EF"],[0.116281626147335,"#DFE6EF"],[0.118003774068849,"#DEE6EF"],[0.118414158254402,"#DEE6EF"],[0.119586684498837,"#DEE6EF"],[0.121360130443545,"#DEE5EF"],[0.126119854167048,"#DDE5EF"],[0.132191341626514,"#DCE4EE"],[0.135551362145723,"#DBE4EE"],[0.136493047285785,"#DBE4EE"],[0.137486030449041,"#DBE4EE"],[0.137592290639943,"#DBE4EE"],[0.143183775168093,"#DAE3EE"],[0.151208251653445,"#D9E2EE"],[0.159895938295806,"#D7E1EE"],[0.163336569994321,"#D7E1EE"],[0.167550336185259,"#D6E1ED"],[0.16767491709873,"#D6E1ED"],[0.1683014858106,"#D6E1ED"],[0.188322371434329,"#D2DEED"],[0.190561163732298,"#D2DEED"],[0.19681952256197,"#D1DEED"],[0.203451624132056,"#D0DDED"],[0.205719729586135,"#D0DDEC"],[0.207738673213272,"#CFDDEC"],[0.208742648810069,"#CFDCEC"],[0.21206602788414,"#CEDCEC"],[0.212403129179415,"#CEDCEC"],[0.214968030339117,"#CEDCEC"],[0.224223659381126,"#CCDBEC"],[0.234981587673818,"#CBDAEC"],[0.240767271861202,"#CAD9EB"],[0.243768206218053,"#C9D9EB"],[0.245853104446439,"#C9D9EB"],[0.24854991480864,"#C8D8EB"],[0.248780755913013,"#C8D8EB"],[0.24917648352051,"#C8D8EB"],[0.251792682703406,"#C8D8EB"],[0.264126193137057,"#C6D7EB"],[0.264811388161149,"#C5D7EB"],[0.265207115768646,"#C5D7EB"],[0.276243519044391,"#C3D6EA"],[0.277460015022993,"#C3D5EA"],[0.278218492937361,"#C3D5EA"],[0.280358353333455,"#C3D5EA"],[0.288657640657348,"#C1D4EA"],[0.290988036568162,"#C1D4EA"],[0.291515673378158,"#C1D4EA"],[0.304567356136526,"#BFD3EA"],[0.305827821849294,"#BED3EA"],[0.306567979041093,"#BED2EA"],[0.310631515306964,"#BDD2EA"],[0.31976989172453,"#BCD1E9"],[0.322671894179506,"#BBD1E9"],[0.328468570800432,"#BAD0E9"],[0.335225253283989,"#B9D0E9"],[0.335287543740725,"#B9D0E9"],[0.337167249876335,"#B9CFE9"],[0.343641793232325,"#B8CFE9"],[0.359397614641921,"#B5CDE8"],[0.359822655405529,"#B5CDE8"],[0.360181741567887,"#B5CDE8"],[0.361918546067457,"#B4CDE8"],[0.363963138706191,"#B4CDE8"],[0.364032757451954,"#B4CDE8"],[0.364589707418061,"#B4CDE8"],[0.375644431416375,"#B2CBE8"],[0.386138541304069,"#B0CAE7"],[0.389036879614532,"#B0CAE7"],[0.39661066632468,"#AEC9E7"],[0.400428704908122,"#AEC9E7"],[0.406749354194529,"#ADC8E7"],[0.418518586373047,"#AAC7E6"],[0.427341846362421,"#A9C6E6"],[0.432867376289321,"#A8C6E6"],[0.434160819302713,"#A8C6E6"],[0.451184434714105,"#A5C4E6"],[0.466500558782038,"#A2C2E5"],[0.484898228386128,"#9EC1E5"],[0.493344081490574,"#9DC0E4"],[0.504915449865343,"#9BBFE4"],[0.509825403513915,"#9ABEE4"],[0.510767088653976,"#9ABEE4"],[0.512324350072367,"#99BEE4"],[0.517589725738783,"#98BDE4"],[0.567759192422549,"#8FB8E2"],[0.622050821684407,"#84B3E1"],[0.631518971108221,"#82B2E0"],[0.642401480314384,"#80B1E0"],[0.686939156880347,"#77ADDF"],[0.706589963908177,"#72ABDE"],[0.789102834215781,"#5FA3DC"],[0.851792682703406,"#4F9DDA"],[0.894655845226536,"#4199D8"],[0.913192752322152,"#3B97D8"],[1,"#008FD5"]],"type":"heatmap","showscale":false,"autocolorscale":false,"showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.7625570776256,"r":7.30593607305936,"b":40.1826484018265,"l":78.1735159817352},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":"Weekly Step Count Heatmap","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-1.7,24.7],"tickmode":"array","ticktext":["Midnight","6 AM","Midday","6 PM"],"tickvals":[0,6,12,18],"categoryorder":"array","categoryarray":["Midnight","6 AM","Midday","6 PM"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":"hour","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"scaleanchor":"y","scaleratio":1,"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-7.85,-0.15],"tickmode":"array","ticktext":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"tickvals":[-1,-2,-3,-4,-5,-6,-7],"categoryorder":"array","categoryarray":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":"wday","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"scaleanchor":"x","scaleratio":1,"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":[{"name":"Collaborate","icon":{"width":1000,"ascent":500,"descent":-50,"path":"M487 375c7-10 9-23 5-36l-79-259c-3-12-11-23-22-31-11-8-22-12-35-12l-263 0c-15 0-29 5-43 15-13 10-23 23-28 37-5 13-5 25-1 37 0 0 0 3 1 7 1 5 1 8 1 11 0 2 0 4-1 6 0 3-1 5-1 6 1 2 2 4 3 6 1 2 2 4 4 6 2 3 4 5 5 7 5 7 9 16 13 26 4 10 7 19 9 26 0 2 0 5 0 9-1 4-1 6 0 8 0 2 2 5 4 8 3 3 5 5 5 7 4 6 8 15 12 26 4 11 7 19 7 26 1 1 0 4 0 9-1 4-1 7 0 8 1 2 3 5 6 8 4 4 6 6 6 7 4 5 8 13 13 24 4 11 7 20 7 28 1 1 0 4 0 7-1 3-1 6-1 7 0 2 1 4 3 6 1 1 3 4 5 6 2 3 3 5 5 6 1 2 3 5 4 9 2 3 3 7 5 10 1 3 2 6 4 10 2 4 4 7 6 9 2 3 4 5 7 7 3 2 7 3 11 3 3 0 8 0 13-1l0-1c7 2 12 2 14 2l218 0c14 0 25-5 32-16 8-10 10-23 6-37l-79-259c-7-22-13-37-20-43-7-7-19-10-37-10l-248 0c-5 0-9-2-11-5-2-3-2-7 0-12 4-13 18-20 41-20l264 0c5 0 10 2 16 5 5 3 8 6 10 11l85 282c2 5 2 10 2 17 7-3 13-7 17-13z m-304 0c-1-3-1-5 0-7 1-1 3-2 6-2l174 0c2 0 4 1 7 2 2 2 4 4 5 7l6 18c0 3 0 5-1 7-1 1-3 2-6 2l-173 0c-3 0-5-1-8-2-2-2-4-4-4-7z m-24-73c-1-3-1-5 0-7 2-2 3-2 6-2l174 0c2 0 5 0 7 2 3 2 4 4 5 7l6 18c1 2 0 5-1 6-1 2-3 3-5 3l-174 0c-3 0-5-1-7-3-3-1-4-4-5-6z"},"click":"function(gd) { \n        // is this being viewed in RStudio?\n        if (location.search == '?viewer_pane=1') {\n          alert('To learn about plotly for collaboration, visit:\\n https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html');\n        } else {\n          window.open('https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html', '_blank');\n        }\n      }"}],"cloud":false},"source":"A","attrs":{"3656413f0110":{"x":{},"y":{},"fill":{},"type":"heatmap"}},"cur_data":"3656413f0110","visdat":{"3656413f0110":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"base_url":"https://plot.ly"},"evals":["config.modeBarButtonsToAdd.0.click"],"jsHooks":[]}</script>
+<p>😱 😱 😱 惊呆了我的小伙伴, 这样下去可怎么办?</p>
+</div>
+<div id="links" class="section level2">
+<h2>Links</h2>
+<ul>
+<li><p><a href="http://www.ryanpraski.com/apple-health-data-how-to-export-analyze-visualize-guide/">Apple Health Data How to Export Analyze Visualize Guide - ryanpraski.com</a></p></li>
+<li><p><a href="https://taraskaduk.com/2019/03/23/apple-health/">Analyze and visualize your iPhone’s Health app data in R - Taras Kaduk</a></p></li>
+</ul>
+</div>

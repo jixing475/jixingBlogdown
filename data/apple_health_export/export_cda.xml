@@ -1,0 +1,1229 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="CDA.xsl"?>
+<ClinicalDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:hl7-org:v3 ../../../CDA%20R2/cda-schemas-and-samples/infrastructure/cda/CDA.xsd" xmlns="urn:hl7-org:v3" xmlns:cda="urn:hl7-org:v3" xmlns:sdtc="urn:l7-org:sdtc" xmlns:fhir="http://hl7.org/fhir/v3">
+ <realmCode code="US"/>
+ <typeId root="2.16.840.1.113883.1.3" extension="POCD_HD000040"/>
+ <templateId root="2.16.840.1.113883.10.20.22.1.2"/>
+ <id extension="Health Export CDA" root="1.1.1.1.1.1.1.1.1"/>
+ <code codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" code="34109-9" displayName="Note"/>
+ <title>Health Data Export</title>
+ <effectiveTime value="20190424143034+0800"/>
+ <confidentialityCode code="N" codeSystem="2.16.840.1.113883.5.25"/>
+ <recordTarget>
+  <patientRole>
+   <id root="2.16.840.1.113883.4.6" nullFlavor="NA"/>
+   <patient>
+    <name use="CL">刘吉星</name>
+    <administrativeGenderCode code="M" codeSystem="2.16.840.1.113883.5.1" displayName="Male"/>
+    <birthTime value="19890324"/>
+   </patient>
+  </patientRole>
+ </recordTarget>
+ <entry typeCode="DRIV">
+  <organizer classCode="BATTERY" moodCode="EVN">
+   <templateId root="2.16.840.1.113883.10.20.22.4.1"/>
+   <id root="7d5a02b0-67a4-11db-bd13-0800200c9a66"/>
+   <code xsi:type="CE" code="386053000" displayName="Result" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT"/>
+   <statusCode code="completed"/>
+   <component>
+    <observation classCode="OBS" moodCode="EVN">
+     <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+     <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+     <code code="251853006" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Oral fluid input"/>
+     <text>
+      <sourceName>WaterMinder</sourceName>
+      <sourceVersion>3.1.17</sourceVersion>
+      <value>250</value>
+      <type>HKQuantityTypeIdentifierDietaryWater</type>
+      <unit>mL</unit>
+     </text>
+     <statusCode code="completed"/>
+     <effectiveTime>
+      <low value="20170202182752+0800"/>
+      <high value="20170202182752+0800"/>
+     </effectiveTime>
+     <value xsi:type="PQ" value="250" unit="mL"/>
+     <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+    </observation>
+   </component>
+  </organizer>
+ </entry>
+</ClinicalDocument>
+<component>
+ <section>
+  <templateId root="2.16.840.1.113883.10.20.22.2.4.1"/>
+  <code codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" code="8716-3" displayName="VITAL SIGNS"/>
+  <title>Vital Signs</title>
+  <text/>
+  <entry typeCode="DRIV">
+   <organizer classCode="CLUSTER" moodCode="EVN">
+    <templateId root="2.16.840.1.113883.10.20.22.4.26"/>
+    <id root="c6f88320-67ad-11db-bd13-0800200c9a66"/>
+    <code code="46680005" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Vital signs"/>
+    <statusCode code="completed"/>
+    <effectiveTime>
+     <low value="20171224190647+0800"/>
+     <high value="20181013081908+0800"/>
+    </effectiveTime>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>22</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20171224190647+0800"/>
+       <high value="20171224190647+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>22</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20171224190854+0800"/>
+       <high value="20171224190854+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>22.6049</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20171227184412+0800"/>
+       <high value="20171227184412+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22.6049" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>22</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20171230101246+0800"/>
+       <high value="20171230101246+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>22</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20171230101314+0800"/>
+       <high value="20171230101314+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>22.0911</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20171230101328+0800"/>
+       <high value="20171230101328+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22.0911" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>22</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180101105206+0800"/>
+       <high value="20180101105206+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>22.6757</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180102213035+0800"/>
+       <high value="20180102213035+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22.6757" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>22.2683</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180102213052+0800"/>
+       <high value="20180102213052+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22.2683" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>22.8175</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180105073542+0800"/>
+       <high value="20180105073542+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22.8175" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>22.3</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180116073919+0800"/>
+       <high value="20180116073919+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22.3" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>22.2</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180122232416+0800"/>
+       <high value="20180122232416+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22.2" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>21.914</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180127102535+0800"/>
+       <high value="20180127102535+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="21.914" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>22</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180127102653+0800"/>
+       <high value="20180127102653+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>22.1</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180127102856+0800"/>
+       <high value="20180127102856+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22.1" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201803272155</sourceVersion>
+       <value>22.658</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180421091008+0800"/>
+       <high value="20180421091008+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22.658" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201803272155</sourceVersion>
+       <value>22.658</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180421091021+0800"/>
+       <high value="20180421091021+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22.658" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201803272155</sourceVersion>
+       <value>22.6</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180421091036+0800"/>
+       <high value="20180421091036+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22.6" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201803272155</sourceVersion>
+       <value>22.8</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180601072319+0800"/>
+       <high value="20180601072319+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22.8" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201805281616</sourceVersion>
+       <value>22.7</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180614200417+0800"/>
+       <high value="20180614200417+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22.7" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201805281616</sourceVersion>
+       <value>22.7</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180618082125+0800"/>
+       <high value="20180618082125+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22.7" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201805281616</sourceVersion>
+       <value>22.7</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180618082208+0800"/>
+       <high value="20180618082208+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22.7" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201805281616</sourceVersion>
+       <value>22.4</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180702201342+0800"/>
+       <high value="20180702201342+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22.4" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201805281616</sourceVersion>
+       <value>22.4</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180702201402+0800"/>
+       <high value="20180702201402+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22.4" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201805281616</sourceVersion>
+       <value>22.1</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180825092956+0800"/>
+       <high value="20180825092956+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22.1" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="39156-5" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body mass index"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201805281616</sourceVersion>
+       <value>22.1</value>
+       <type>HKQuantityTypeIdentifierBodyMassIndex</type>
+       <unit>count</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20181013081908+0800"/>
+       <high value="20181013081908+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="22.1" unit="count"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+   </organizer>
+  </entry>
+  <entry typeCode="DRIV">
+   <organizer classCode="CLUSTER" moodCode="EVN">
+    <templateId root="2.16.840.1.113883.10.20.22.4.26"/>
+    <id root="c6f88320-67ad-11db-bd13-0800200c9a66"/>
+    <code code="46680005" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Vital signs"/>
+    <statusCode code="completed"/>
+    <effectiveTime>
+     <low value="20190402133456+0800"/>
+     <high value="20190402133456+0800"/>
+    </effectiveTime>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="8302-2" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Height"/>
+      <text>
+       <sourceName>健康</sourceName>
+       <sourceVersion>12.1.4</sourceVersion>
+       <value>168</value>
+       <type>HKQuantityTypeIdentifierHeight</type>
+       <unit>cm</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20190402133456+0800"/>
+       <high value="20190402133456+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="168" unit="cm"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+   </organizer>
+  </entry>
+  <entry typeCode="DRIV">
+   <organizer classCode="CLUSTER" moodCode="EVN">
+    <templateId root="2.16.840.1.113883.10.20.22.4.26"/>
+    <id root="c6f88320-67ad-11db-bd13-0800200c9a66"/>
+    <code code="46680005" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED CT" displayName="Vital signs"/>
+    <statusCode code="completed"/>
+    <effectiveTime>
+     <low value="20171224190627+0800"/>
+     <high value="20181013081908+0800"/>
+    </effectiveTime>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>60</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20171224190627+0800"/>
+       <high value="20171224190627+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="60" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>63.7</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20171224190647+0800"/>
+       <high value="20171224190647+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="63.7" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>63.7</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20171224190854+0800"/>
+       <high value="20171224190854+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="63.7" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>63.8</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20171227184412+0800"/>
+       <high value="20171227184412+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="63.8" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>62.35</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20171230101246+0800"/>
+       <high value="20171230101246+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="62.35" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>62.35</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20171230101314+0800"/>
+       <high value="20171230101314+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="62.35" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>62.35</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20171230101328+0800"/>
+       <high value="20171230101328+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="62.35" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>62.3</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180101105206+0800"/>
+       <high value="20180101105206+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="62.3" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>64</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180102213035+0800"/>
+       <high value="20180102213035+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="64" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>62.85</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180102213052+0800"/>
+       <high value="20180102213052+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="62.85" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>64.4</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180105073542+0800"/>
+       <high value="20180105073542+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="64.4" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>63.05</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180116073919+0800"/>
+       <high value="20180116073919+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="63.05" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>62.85</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180122232416+0800"/>
+       <high value="20180122232416+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="62.85" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>61.85</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180127102535+0800"/>
+       <high value="20180127102535+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="61.85" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>62.15</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180127102653+0800"/>
+       <high value="20180127102653+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="62.15" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201712191618</sourceVersion>
+       <value>62.65</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180127102856+0800"/>
+       <high value="20180127102856+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="62.65" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201803272155</sourceVersion>
+       <value>63.95</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180421091008+0800"/>
+       <high value="20180421091008+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="63.95" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201803272155</sourceVersion>
+       <value>63.95</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180421091021+0800"/>
+       <high value="20180421091021+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="63.95" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201803272155</sourceVersion>
+       <value>63.95</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180421091036+0800"/>
+       <high value="20180421091036+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="63.95" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201803272155</sourceVersion>
+       <value>64.55</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180601072319+0800"/>
+       <high value="20180601072319+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="64.55" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201805281616</sourceVersion>
+       <value>64.2</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180614200417+0800"/>
+       <high value="20180614200417+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="64.2" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201805281616</sourceVersion>
+       <value>64.2</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180618082125+0800"/>
+       <high value="20180618082125+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="64.2" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201805281616</sourceVersion>
+       <value>64.2</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180618082208+0800"/>
+       <high value="20180618082208+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="64.2" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201805281616</sourceVersion>
+       <value>63.4</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180702201342+0800"/>
+       <high value="20180702201342+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="63.4" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201805281616</sourceVersion>
+       <value>63.4</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180702201402+0800"/>
+       <high value="20180702201402+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="63.4" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201805281616</sourceVersion>
+       <value>62.55</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20180825092956+0800"/>
+       <high value="20180825092956+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="62.55" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+    <component>
+     <observation classCode="OBS" moodCode="EVN">
+      <templateId root="2.16.840.1.113883.10.20.22.4.27"/>
+      <id root="c6f88321-67ad-11db-bd13-0800200c9a66"/>
+      <code code="3141-9" codeSystem="2.16.840.1.113883.6.1" codeSystemName="LOINC" displayName="Body weight Measured"/>
+      <text>
+       <sourceName>小米运动</sourceName>
+       <sourceVersion>201805281616</sourceVersion>
+       <value>62.65</value>
+       <type>HKQuantityTypeIdentifierBodyMass</type>
+       <unit>kg</unit>
+      </text>
+      <statusCode code="completed"/>
+      <effectiveTime>
+       <low value="20181013081908+0800"/>
+       <high value="20181013081908+0800"/>
+      </effectiveTime>
+      <value xsi:type="PQ" value="62.65" unit="kg"/>
+      <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/>
+     </observation>
+    </component>
+   </organizer>
+  </entry>
+ </section>
+</component>

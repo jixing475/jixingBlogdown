@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/2019/04/analyze-and-visualize-your-iphone-s-health-app-data-in-r/</loc>
+    <lastmod>2019-04-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2019/03/tao_wang_bei_shang_guang/</loc>
     <lastmod>2019-03-14T00:00:00+00:00</lastmod>
   </url>
@@ -311,7 +316,7 @@
   
   <url>
     <loc>/categories/datavis-and-dataclean/</loc>
-    <lastmod>2018-09-13T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -341,7 +346,7 @@
   
   <url>
     <loc>/tags/ggplot2/</loc>
-    <lastmod>2018-03-18T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -400,6 +405,12 @@
   </url>
   
   <url>
+    <loc>/tags/personal-data/</loc>
+    <lastmod>2019-04-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/phast/</loc>
     <lastmod>2018-04-27T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -407,7 +418,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2019-03-14T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -539,7 +550,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-03-14T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

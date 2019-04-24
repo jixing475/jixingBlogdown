@@ -28,15 +28,15 @@
     
 
     
-    <meta name="description" content="">
-    <meta property="og:description" content="">
+    <meta name="description" content="Case Study: Sentiment Analysis Data Prep import pandas as pd import numpy as np # Read in the data df = pd.read_csv(&#39;/Users/zero/Desktop/NLP/raw-data/Amazon_Unlocked_Mobile.csv&#39;) # 对数据进行采样以加快计算速度 # Comment out this line to match with lecture df = df.sample(frac=0.1, random_state=10) df.head()   .dataframe thead tr:only-child th { text-align: right; } .dataframe thead th { text-align: left; } .dataframe tbody tr th { vertical-align: top; }   &lt;tr style=&quot;text-align: right;&quot;&gt; &lt;th&gt;&lt;/th&gt; &lt;th&gt;Product Name&lt;/th&gt; &lt;th&gt;Brand Name&lt;/th&gt; &lt;th&gt;Price&lt;/th&gt; &lt;th&gt;Rating&lt;/th&gt; &lt;th&gt;Reviews&lt;/th&gt; &lt;th&gt;Review Votes&lt;/th&gt; &lt;/tr&gt;   &lt;tr&gt; &lt;th&gt;394349&lt;/th&gt; &lt;td&gt;Sony XPERIA Z2 D6503 FACTORY UNLOCKED Internat.">
+    <meta property="og:description" content="Case Study: Sentiment Analysis Data Prep import pandas as pd import numpy as np # Read in the data df = pd.read_csv(&#39;/Users/zero/Desktop/NLP/raw-data/Amazon_Unlocked_Mobile.csv&#39;) # 对数据进行采样以加快计算速度 # Comment out this line to match with lecture df = df.sample(frac=0.1, random_state=10) df.head()   .dataframe thead tr:only-child th { text-align: right; } .dataframe thead th { text-align: left; } .dataframe tbody tr th { vertical-align: top; }   &lt;tr style=&quot;text-align: right;&quot;&gt; &lt;th&gt;&lt;/th&gt; &lt;th&gt;Product Name&lt;/th&gt; &lt;th&gt;Brand Name&lt;/th&gt; &lt;th&gt;Price&lt;/th&gt; &lt;th&gt;Rating&lt;/th&gt; &lt;th&gt;Reviews&lt;/th&gt; &lt;th&gt;Review Votes&lt;/th&gt; &lt;/tr&gt;   &lt;tr&gt; &lt;th&gt;394349&lt;/th&gt; &lt;td&gt;Sony XPERIA Z2 D6503 FACTORY UNLOCKED Internat.">
     <meta property="og:type" content="blog">
     <meta property="og:title" content="NLP part 03 sentiment analysis">
     <meta property="og:url" content="/2018/09/nlp-part-03-sentiment-analysis/">
     <meta property="og:site_name" content="student zero ">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="student zero ">
-    <meta name="twitter:description" content="">
+    <meta name="twitter:description" content="Case Study: Sentiment Analysis Data Prep import pandas as pd import numpy as np # Read in the data df = pd.read_csv(&#39;/Users/zero/Desktop/NLP/raw-data/Amazon_Unlocked_Mobile.csv&#39;) # 对数据进行采样以加快计算速度 # Comment out this line to match with lecture df = df.sample(frac=0.1, random_state=10) df.head()   .dataframe thead tr:only-child th { text-align: right; } .dataframe thead th { text-align: left; } .dataframe tbody tr th { vertical-align: top; }   &lt;tr style=&quot;text-align: right;&quot;&gt; &lt;th&gt;&lt;/th&gt; &lt;th&gt;Product Name&lt;/th&gt; &lt;th&gt;Brand Name&lt;/th&gt; &lt;th&gt;Price&lt;/th&gt; &lt;th&gt;Rating&lt;/th&gt; &lt;th&gt;Reviews&lt;/th&gt; &lt;th&gt;Review Votes&lt;/th&gt; &lt;/tr&gt;   &lt;tr&gt; &lt;th&gt;394349&lt;/th&gt; &lt;td&gt;Sony XPERIA Z2 D6503 FACTORY UNLOCKED Internat.">
     
       <meta name="twitter:creator" content="@studentZero475">
     
@@ -50,7 +50,7 @@
     
 
     
-      <meta property="og:image" content="https://i.loli.net/2018/09/17/5b9f11b1ed07f.jpg">
+      <meta property="og:image" content="https://i.loli.net/2018/08/13/5b70bd4dc9763.jpg">
     
     
     
@@ -238,25 +238,22 @@
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p></p>
-
-<h1 id="case-study-sentiment-analysis">Case Study: Sentiment Analysis</h1>
-
-<h3 id="data-prep">Data Prep</h3>
-
-<pre><code class="language-python">import pandas as pd
+              <!--more-->
+<div id="case-study-sentiment-analysis" class="section level1">
+<h1>Case Study: Sentiment Analysis</h1>
+<div id="data-prep" class="section level3">
+<h3>Data Prep</h3>
+<pre class="python"><code>import pandas as pd
 import numpy as np
 
 # Read in the data
-df = pd.read_csv('/Users/zero/Desktop/NLP/raw-data/Amazon_Unlocked_Mobile.csv')
+df = pd.read_csv(&#39;/Users/zero/Desktop/NLP/raw-data/Amazon_Unlocked_Mobile.csv&#39;)
 
 # 对数据进行采样以加快计算速度
 # Comment out this line to match with lecture
 df = df.sample(frac=0.1, random_state=10)
 
-df.head()
-</code></pre>
-
+df.head()</code></pre>
 <div>
 <style>
     .dataframe thead tr:only-child th {
@@ -272,87 +269,80 @@ df.head()
     }
 </style>
 <table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Product Name</th>
-      <th>Brand Name</th>
-      <th>Price</th>
-      <th>Rating</th>
-      <th>Reviews</th>
-      <th>Review Votes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>394349</th>
-      <td>Sony XPERIA Z2 D6503 FACTORY UNLOCKED Internat...</td>
-      <td>NaN</td>
-      <td>244.95</td>
-      <td>5</td>
-      <td>Very good one! Better than Samsung S and iphon...</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>34377</th>
-      <td>Apple iPhone 5c 8GB (Pink) - Verizon Wireless</td>
-      <td>Apple</td>
-      <td>194.99</td>
-      <td>1</td>
-      <td>The phone needed a SIM card, would have been n...</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>248521</th>
-      <td>Motorola Droid RAZR MAXX XT912 M Verizon Smart...</td>
-      <td>Motorola</td>
-      <td>174.99</td>
-      <td>5</td>
-      <td>I was 3 months away from my upgrade and my Str...</td>
-      <td>3.0</td>
-    </tr>
-    <tr>
-      <th>167661</th>
-      <td>CNPGD [U.S. Office Extended Warranty] Smartwat...</td>
-      <td>CNPGD</td>
-      <td>49.99</td>
-      <td>1</td>
-      <td>an experience i want to forget</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>73287</th>
-      <td>Apple iPhone 7 Unlocked Phone 256 GB - US Vers...</td>
-      <td>Apple</td>
-      <td>922.00</td>
-      <td>5</td>
-      <td>GREAT PHONE WORK ACCORDING MY EXPECTATIONS.</td>
-      <td>1.0</td>
-    </tr>
-  </tbody>
+<thead>
+<pre><code>&lt;tr style=&quot;text-align: right;&quot;&gt;
+  &lt;th&gt;&lt;/th&gt;
+  &lt;th&gt;Product Name&lt;/th&gt;
+  &lt;th&gt;Brand Name&lt;/th&gt;
+  &lt;th&gt;Price&lt;/th&gt;
+  &lt;th&gt;Rating&lt;/th&gt;
+  &lt;th&gt;Reviews&lt;/th&gt;
+  &lt;th&gt;Review Votes&lt;/th&gt;
+&lt;/tr&gt;</code></pre>
+</thead>
+<tbody>
+<pre><code>&lt;tr&gt;
+  &lt;th&gt;394349&lt;/th&gt;
+  &lt;td&gt;Sony XPERIA Z2 D6503 FACTORY UNLOCKED Internat...&lt;/td&gt;
+  &lt;td&gt;NaN&lt;/td&gt;
+  &lt;td&gt;244.95&lt;/td&gt;
+  &lt;td&gt;5&lt;/td&gt;
+  &lt;td&gt;Very good one! Better than Samsung S and iphon...&lt;/td&gt;
+  &lt;td&gt;0.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;34377&lt;/th&gt;
+  &lt;td&gt;Apple iPhone 5c 8GB (Pink) - Verizon Wireless&lt;/td&gt;
+  &lt;td&gt;Apple&lt;/td&gt;
+  &lt;td&gt;194.99&lt;/td&gt;
+  &lt;td&gt;1&lt;/td&gt;
+  &lt;td&gt;The phone needed a SIM card, would have been n...&lt;/td&gt;
+  &lt;td&gt;1.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;248521&lt;/th&gt;
+  &lt;td&gt;Motorola Droid RAZR MAXX XT912 M Verizon Smart...&lt;/td&gt;
+  &lt;td&gt;Motorola&lt;/td&gt;
+  &lt;td&gt;174.99&lt;/td&gt;
+  &lt;td&gt;5&lt;/td&gt;
+  &lt;td&gt;I was 3 months away from my upgrade and my Str...&lt;/td&gt;
+  &lt;td&gt;3.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;167661&lt;/th&gt;
+  &lt;td&gt;CNPGD [U.S. Office Extended Warranty] Smartwat...&lt;/td&gt;
+  &lt;td&gt;CNPGD&lt;/td&gt;
+  &lt;td&gt;49.99&lt;/td&gt;
+  &lt;td&gt;1&lt;/td&gt;
+  &lt;td&gt;an experience i want to forget&lt;/td&gt;
+  &lt;td&gt;0.0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;73287&lt;/th&gt;
+  &lt;td&gt;Apple iPhone 7 Unlocked Phone 256 GB - US Vers...&lt;/td&gt;
+  &lt;td&gt;Apple&lt;/td&gt;
+  &lt;td&gt;922.00&lt;/td&gt;
+  &lt;td&gt;5&lt;/td&gt;
+  &lt;td&gt;GREAT PHONE WORK ACCORDING MY EXPECTATIONS.&lt;/td&gt;
+  &lt;td&gt;1.0&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+</tbody>
 </table>
 </div>
-
-<pre><code class="language-python">np.where(df['Rating'] &gt; 3, 1, 0)
-</code></pre>
-
-<pre><code>array([1, 0, 1, ..., 1, 0, 0])
-</code></pre>
-
-<pre><code class="language-python"># Drop missing values
+<pre class="python"><code>np.where(df[&#39;Rating&#39;] &gt; 3, 1, 0)</code></pre>
+<pre><code>array([1, 0, 1, ..., 1, 0, 0])</code></pre>
+<pre class="python"><code># Drop missing values
 df.dropna(inplace=True)
 
-# Remove any 'neutral' ratings equal to 3
+# Remove any &#39;neutral&#39; ratings equal to 3
 # filter rows
-df = df[df['Rating'] != 3]
+df = df[df[&#39;Rating&#39;] != 3]
 
 # Encode 4s and 5s as 1 (rated positively)
 # Encode 1s and 2s as 0 (rated poorly)
 # class labels
-df['Positively Rated'] = np.where(df['Rating'] &gt; 3, 1, 0)
-df.head(10)
-</code></pre>
-
+df[&#39;Positively Rated&#39;] = np.where(df[&#39;Rating&#39;] &gt; 3, 1, 0)
+df.head(10)</code></pre>
 <div>
 <style>
     .dataframe thead tr:only-child th {
@@ -368,234 +358,194 @@ df.head(10)
     }
 </style>
 <table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Product Name</th>
-      <th>Brand Name</th>
-      <th>Price</th>
-      <th>Rating</th>
-      <th>Reviews</th>
-      <th>Review Votes</th>
-      <th>Positively Rated</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>34377</th>
-      <td>Apple iPhone 5c 8GB (Pink) - Verizon Wireless</td>
-      <td>Apple</td>
-      <td>194.99</td>
-      <td>1</td>
-      <td>The phone needed a SIM card, would have been n...</td>
-      <td>1.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>248521</th>
-      <td>Motorola Droid RAZR MAXX XT912 M Verizon Smart...</td>
-      <td>Motorola</td>
-      <td>174.99</td>
-      <td>5</td>
-      <td>I was 3 months away from my upgrade and my Str...</td>
-      <td>3.0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>167661</th>
-      <td>CNPGD [U.S. Office Extended Warranty] Smartwat...</td>
-      <td>CNPGD</td>
-      <td>49.99</td>
-      <td>1</td>
-      <td>an experience i want to forget</td>
-      <td>0.0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>73287</th>
-      <td>Apple iPhone 7 Unlocked Phone 256 GB - US Vers...</td>
-      <td>Apple</td>
-      <td>922.00</td>
-      <td>5</td>
-      <td>GREAT PHONE WORK ACCORDING MY EXPECTATIONS.</td>
-      <td>1.0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>277158</th>
-      <td>Nokia N8 Unlocked GSM Touch Screen Phone Featu...</td>
-      <td>Nokia</td>
-      <td>95.00</td>
-      <td>5</td>
-      <td>I fell in love with this phone because it did ...</td>
-      <td>0.0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>100311</th>
-      <td>Blackberry Torch 2 9810 Unlocked Phone with 1....</td>
-      <td>BlackBerry</td>
-      <td>77.49</td>
-      <td>5</td>
-      <td>I am pleased with this Blackberry phone! The p...</td>
-      <td>0.0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>251669</th>
-      <td>Motorola Moto E (1st Generation) - Black - 4 G...</td>
-      <td>Motorola</td>
-      <td>89.99</td>
-      <td>5</td>
-      <td>Great product, best value for money smartphone...</td>
-      <td>0.0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>279878</th>
-      <td>OtterBox 77-29864 Defender Series Hybrid Case ...</td>
-      <td>OtterBox</td>
-      <td>9.99</td>
-      <td>5</td>
-      <td>I've bought 3 no problems. Fast delivery.</td>
-      <td>0.0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>406017</th>
-      <td>Verizon HTC Rezound 4G Android Smarphone - 8MP...</td>
-      <td>HTC</td>
-      <td>74.99</td>
-      <td>4</td>
-      <td>Great phone for the price...</td>
-      <td>0.0</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>302567</th>
-      <td>RCA M1 Unlocked Cell Phone, Dual Sim, 5Mp Came...</td>
-      <td>RCA</td>
-      <td>159.99</td>
-      <td>5</td>
-      <td>My mom is not good with new technoloy but this...</td>
-      <td>4.0</td>
-      <td>1</td>
-    </tr>
-  </tbody>
+<thead>
+<pre><code>&lt;tr style=&quot;text-align: right;&quot;&gt;
+  &lt;th&gt;&lt;/th&gt;
+  &lt;th&gt;Product Name&lt;/th&gt;
+  &lt;th&gt;Brand Name&lt;/th&gt;
+  &lt;th&gt;Price&lt;/th&gt;
+  &lt;th&gt;Rating&lt;/th&gt;
+  &lt;th&gt;Reviews&lt;/th&gt;
+  &lt;th&gt;Review Votes&lt;/th&gt;
+  &lt;th&gt;Positively Rated&lt;/th&gt;
+&lt;/tr&gt;</code></pre>
+</thead>
+<tbody>
+<pre><code>&lt;tr&gt;
+  &lt;th&gt;34377&lt;/th&gt;
+  &lt;td&gt;Apple iPhone 5c 8GB (Pink) - Verizon Wireless&lt;/td&gt;
+  &lt;td&gt;Apple&lt;/td&gt;
+  &lt;td&gt;194.99&lt;/td&gt;
+  &lt;td&gt;1&lt;/td&gt;
+  &lt;td&gt;The phone needed a SIM card, would have been n...&lt;/td&gt;
+  &lt;td&gt;1.0&lt;/td&gt;
+  &lt;td&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;248521&lt;/th&gt;
+  &lt;td&gt;Motorola Droid RAZR MAXX XT912 M Verizon Smart...&lt;/td&gt;
+  &lt;td&gt;Motorola&lt;/td&gt;
+  &lt;td&gt;174.99&lt;/td&gt;
+  &lt;td&gt;5&lt;/td&gt;
+  &lt;td&gt;I was 3 months away from my upgrade and my Str...&lt;/td&gt;
+  &lt;td&gt;3.0&lt;/td&gt;
+  &lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;167661&lt;/th&gt;
+  &lt;td&gt;CNPGD [U.S. Office Extended Warranty] Smartwat...&lt;/td&gt;
+  &lt;td&gt;CNPGD&lt;/td&gt;
+  &lt;td&gt;49.99&lt;/td&gt;
+  &lt;td&gt;1&lt;/td&gt;
+  &lt;td&gt;an experience i want to forget&lt;/td&gt;
+  &lt;td&gt;0.0&lt;/td&gt;
+  &lt;td&gt;0&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;73287&lt;/th&gt;
+  &lt;td&gt;Apple iPhone 7 Unlocked Phone 256 GB - US Vers...&lt;/td&gt;
+  &lt;td&gt;Apple&lt;/td&gt;
+  &lt;td&gt;922.00&lt;/td&gt;
+  &lt;td&gt;5&lt;/td&gt;
+  &lt;td&gt;GREAT PHONE WORK ACCORDING MY EXPECTATIONS.&lt;/td&gt;
+  &lt;td&gt;1.0&lt;/td&gt;
+  &lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;277158&lt;/th&gt;
+  &lt;td&gt;Nokia N8 Unlocked GSM Touch Screen Phone Featu...&lt;/td&gt;
+  &lt;td&gt;Nokia&lt;/td&gt;
+  &lt;td&gt;95.00&lt;/td&gt;
+  &lt;td&gt;5&lt;/td&gt;
+  &lt;td&gt;I fell in love with this phone because it did ...&lt;/td&gt;
+  &lt;td&gt;0.0&lt;/td&gt;
+  &lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;100311&lt;/th&gt;
+  &lt;td&gt;Blackberry Torch 2 9810 Unlocked Phone with 1....&lt;/td&gt;
+  &lt;td&gt;BlackBerry&lt;/td&gt;
+  &lt;td&gt;77.49&lt;/td&gt;
+  &lt;td&gt;5&lt;/td&gt;
+  &lt;td&gt;I am pleased with this Blackberry phone! The p...&lt;/td&gt;
+  &lt;td&gt;0.0&lt;/td&gt;
+  &lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;251669&lt;/th&gt;
+  &lt;td&gt;Motorola Moto E (1st Generation) - Black - 4 G...&lt;/td&gt;
+  &lt;td&gt;Motorola&lt;/td&gt;
+  &lt;td&gt;89.99&lt;/td&gt;
+  &lt;td&gt;5&lt;/td&gt;
+  &lt;td&gt;Great product, best value for money smartphone...&lt;/td&gt;
+  &lt;td&gt;0.0&lt;/td&gt;
+  &lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;279878&lt;/th&gt;
+  &lt;td&gt;OtterBox 77-29864 Defender Series Hybrid Case ...&lt;/td&gt;
+  &lt;td&gt;OtterBox&lt;/td&gt;
+  &lt;td&gt;9.99&lt;/td&gt;
+  &lt;td&gt;5&lt;/td&gt;
+  &lt;td&gt;I&#39;ve bought 3 no problems. Fast delivery.&lt;/td&gt;
+  &lt;td&gt;0.0&lt;/td&gt;
+  &lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;406017&lt;/th&gt;
+  &lt;td&gt;Verizon HTC Rezound 4G Android Smarphone - 8MP...&lt;/td&gt;
+  &lt;td&gt;HTC&lt;/td&gt;
+  &lt;td&gt;74.99&lt;/td&gt;
+  &lt;td&gt;4&lt;/td&gt;
+  &lt;td&gt;Great phone for the price...&lt;/td&gt;
+  &lt;td&gt;0.0&lt;/td&gt;
+  &lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+  &lt;th&gt;302567&lt;/th&gt;
+  &lt;td&gt;RCA M1 Unlocked Cell Phone, Dual Sim, 5Mp Came...&lt;/td&gt;
+  &lt;td&gt;RCA&lt;/td&gt;
+  &lt;td&gt;159.99&lt;/td&gt;
+  &lt;td&gt;5&lt;/td&gt;
+  &lt;td&gt;My mom is not good with new technoloy but this...&lt;/td&gt;
+  &lt;td&gt;4.0&lt;/td&gt;
+  &lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;</code></pre>
+</tbody>
 </table>
 </div>
-
-<pre><code class="language-python"># Most ratings are positive
+<pre class="python"><code># Most ratings are positive
 # More than 50% is positive
-df['Positively Rated'].mean()
-</code></pre>
-
-<pre><code>0.7471776686078667
-</code></pre>
-
-<pre><code class="language-python">from sklearn.model_selection import train_test_split
+df[&#39;Positively Rated&#39;].mean()</code></pre>
+<pre><code>0.7471776686078667</code></pre>
+<pre class="python"><code>from sklearn.model_selection import train_test_split
 
 # Split data into training and test sets
-X_train, X_test, y_train, y_test = train_test_split(df['Reviews'], 
-                                                    df['Positively Rated'], 
-                                                    random_state=0)
-</code></pre>
-
-<pre><code class="language-python">print('X_train first entry:\n\n', X_train.iloc[0])
-print('\n\nX_train shape: ', X_train.shape)
-</code></pre>
-
+X_train, X_test, y_train, y_test = train_test_split(df[&#39;Reviews&#39;], 
+                                                    df[&#39;Positively Rated&#39;], 
+                                                    random_state=0)</code></pre>
+<pre class="python"><code>print(&#39;X_train first entry:\n\n&#39;, X_train.iloc[0])
+print(&#39;\n\nX_train shape: &#39;, X_train.shape)</code></pre>
 <pre><code>X_train first entry:
 
  Everything about it is awesome!
 
 
-X_train shape:  (23052,)
-</code></pre>
-
-<h1 id="countvectorizer">CountVectorizer</h1>
-
+X_train shape:  (23052,)</code></pre>
+</div>
+</div>
+<div id="countvectorizer" class="section level1">
+<h1>CountVectorizer</h1>
 <p>Construct a sparse matrix</p>
-
-<pre><code class="language-python">from sklearn.feature_extraction.text import CountVectorizer
+<pre class="python"><code>from sklearn.feature_extraction.text import CountVectorizer
 
 # Fit the CountVectorizer to the training data
 # init countvertoizer
 init_countVectorizer = CountVectorizer()
 # and then fit it
-vect = init_countVectorizer.fit(X_train)
-</code></pre>
-
-<pre><code class="language-python"># step is 2000
+vect = init_countVectorizer.fit(X_train)</code></pre>
+<pre class="python"><code># step is 2000
 #sparse matrix
-vect.get_feature_names()[::2000]
-</code></pre>
-
-<pre><code>['00',
- 'arroja',
- 'comapañias',
- 'dvds',
- 'golden',
- 'lands',
- 'oil',
- 'razonable',
- 'smallsliver',
- 'tweak']
-</code></pre>
-
-<pre><code class="language-python">len(vect.get_feature_names())
-</code></pre>
-
-<pre><code>19601
-</code></pre>
-
-<pre><code class="language-python">19601/2000
-</code></pre>
-
-<pre><code>9.8005
-</code></pre>
-
-<pre><code class="language-python"># transform the documents in the training data to a document-term matrix
+vect.get_feature_names()[::2000]</code></pre>
+<pre><code>[&#39;00&#39;,
+ &#39;arroja&#39;,
+ &#39;comapañias&#39;,
+ &#39;dvds&#39;,
+ &#39;golden&#39;,
+ &#39;lands&#39;,
+ &#39;oil&#39;,
+ &#39;razonable&#39;,
+ &#39;smallsliver&#39;,
+ &#39;tweak&#39;]</code></pre>
+<pre class="python"><code>len(vect.get_feature_names())</code></pre>
+<pre><code>19601</code></pre>
+<pre class="python"><code>19601/2000</code></pre>
+<pre><code>9.8005</code></pre>
+<pre class="python"><code># transform the documents in the training data to a document-term matrix
 X_train_vectorized = vect.transform(X_train)
 
-X_train_vectorized
-</code></pre>
-
-<pre><code>&lt;23052x19601 sparse matrix of type '&lt;class 'numpy.int64'&gt;'
-    with 613289 stored elements in Compressed Sparse Row format&gt;
-</code></pre>
-
-<pre><code class="language-python">print(type(X_train_vectorized)) 
-</code></pre>
-
-<pre><code>&lt;class 'scipy.sparse.csr.csr_matrix'&gt;
-</code></pre>
-
-<pre><code class="language-python">from sklearn.linear_model import LogisticRegression
+X_train_vectorized</code></pre>
+<pre><code>&lt;23052x19601 sparse matrix of type &#39;&lt;class &#39;numpy.int64&#39;&gt;&#39;
+    with 613289 stored elements in Compressed Sparse Row format&gt;</code></pre>
+<pre class="python"><code>print(type(X_train_vectorized)) </code></pre>
+<pre><code>&lt;class &#39;scipy.sparse.csr.csr_matrix&#39;&gt;</code></pre>
+<pre class="python"><code>from sklearn.linear_model import LogisticRegression
 
 # Train the model
 model = LogisticRegression()
-model.fit(X_train_vectorized, y_train)
-</code></pre>
-
+model.fit(X_train_vectorized, y_train)</code></pre>
 <pre><code>LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,
-          intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
-          penalty='l2', random_state=None, solver='liblinear', tol=0.0001,
-          verbose=0, warm_start=False)
-</code></pre>
-
-<pre><code class="language-python">from sklearn.metrics import roc_auc_score
+          intercept_scaling=1, max_iter=100, multi_class=&#39;ovr&#39;, n_jobs=1,
+          penalty=&#39;l2&#39;, random_state=None, solver=&#39;liblinear&#39;, tol=0.0001,
+          verbose=0, warm_start=False)</code></pre>
+<pre class="python"><code>from sklearn.metrics import roc_auc_score
 
 # Predict the transformed test documents
 predictions = model.predict(vect.transform(X_test))
 
-print('AUC: ', roc_auc_score(y_test, predictions))
-</code></pre>
-
-<pre><code>AUC:  0.897433277667
-</code></pre>
-
-<pre><code class="language-python"># get the feature names as numpy array
+print(&#39;AUC: &#39;, roc_auc_score(y_test, predictions))</code></pre>
+<pre><code>AUC:  0.897433277667</code></pre>
+<pre class="python"><code># get the feature names as numpy array
 feature_names = np.array(vect.get_feature_names())
 
 # Sort the coefficients from the model
@@ -604,99 +554,71 @@ sorted_coef_index = model.coef_[0].argsort()
 # Find the 10 smallest and 10 largest coefficients
 # The 10 largest coefficients are being indexed using [:-11:-1] 
 # so the list returned is in order of largest to smallest
-print('Smallest Coefs:\n{}\n'.format(feature_names[sorted_coef_index[:10]]))
-print('Largest Coefs: \n{}'.format(feature_names[sorted_coef_index[:-11:-1]]))
-</code></pre>
-
+print(&#39;Smallest Coefs:\n{}\n&#39;.format(feature_names[sorted_coef_index[:10]]))
+print(&#39;Largest Coefs: \n{}&#39;.format(feature_names[sorted_coef_index[:-11:-1]]))</code></pre>
 <pre><code>Smallest Coefs:
-['worst' 'terrible' 'slow' 'junk' 'poor' 'sucks' 'horrible' 'useless'
- 'waste' 'disappointed']
+[&#39;worst&#39; &#39;terrible&#39; &#39;slow&#39; &#39;junk&#39; &#39;poor&#39; &#39;sucks&#39; &#39;horrible&#39; &#39;useless&#39;
+ &#39;waste&#39; &#39;disappointed&#39;]
 
 Largest Coefs: 
-['excelent' 'excelente' 'excellent' 'perfectly' 'love' 'perfect' 'exactly'
- 'great' 'best' 'awesome']
-</code></pre>
-
-<h1 id="tfidf">Tfidf</h1>
-
+[&#39;excelent&#39; &#39;excelente&#39; &#39;excellent&#39; &#39;perfectly&#39; &#39;love&#39; &#39;perfect&#39; &#39;exactly&#39;
+ &#39;great&#39; &#39;best&#39; &#39;awesome&#39;]</code></pre>
+</div>
+<div id="tfidf" class="section level1">
+<h1>Tfidf</h1>
 <p>🔥 feature: limit frequency threshold</p>
-
-<pre><code class="language-python">from sklearn.feature_extraction.text import TfidfVectorizer
+<pre class="python"><code>from sklearn.feature_extraction.text import TfidfVectorizer
 
 # Fit the TfidfVectorizer to the training data specifiying a minimum document frequency of 5
 vect = TfidfVectorizer(min_df=5).fit(X_train)
-len(vect.get_feature_names())
-</code></pre>
-
-<pre><code>5442
-</code></pre>
-
-<pre><code class="language-python">X_train_vectorized = vect.transform(X_train)
+len(vect.get_feature_names())</code></pre>
+<pre><code>5442</code></pre>
+<pre class="python"><code>X_train_vectorized = vect.transform(X_train)
 
 model = LogisticRegression()
 model.fit(X_train_vectorized, y_train)
 
 predictions = model.predict(vect.transform(X_test))
 
-print('AUC: ', roc_auc_score(y_test, predictions))
-</code></pre>
-
-<pre><code>AUC:  0.889951006492
-</code></pre>
-
-<pre><code class="language-python">feature_names = np.array(vect.get_feature_names())
+print(&#39;AUC: &#39;, roc_auc_score(y_test, predictions))</code></pre>
+<pre><code>AUC:  0.889951006492</code></pre>
+<pre class="python"><code>feature_names = np.array(vect.get_feature_names())
 
 sorted_tfidf_index = X_train_vectorized.max(0).toarray()[0].argsort()
 
-print('Smallest tfidf:\n{}\n'.format(feature_names[sorted_tfidf_index[:10]]))
-print('Largest tfidf: \n{}'.format(feature_names[sorted_tfidf_index[:-11:-1]]))
-</code></pre>
-
+print(&#39;Smallest tfidf:\n{}\n&#39;.format(feature_names[sorted_tfidf_index[:10]]))
+print(&#39;Largest tfidf: \n{}&#39;.format(feature_names[sorted_tfidf_index[:-11:-1]]))</code></pre>
 <pre><code>Smallest tfidf:
-['61' 'printer' 'approach' 'adjustment' 'consequences' 'length' 'emailing'
- 'degrees' 'handsfree' 'chipset']
+[&#39;61&#39; &#39;printer&#39; &#39;approach&#39; &#39;adjustment&#39; &#39;consequences&#39; &#39;length&#39; &#39;emailing&#39;
+ &#39;degrees&#39; &#39;handsfree&#39; &#39;chipset&#39;]
 
 Largest tfidf: 
-['unlocked' 'handy' 'useless' 'cheat' 'up' 'original' 'exelent' 'exelente'
- 'exellent' 'satisfied']
-</code></pre>
+[&#39;unlocked&#39; &#39;handy&#39; &#39;useless&#39; &#39;cheat&#39; &#39;up&#39; &#39;original&#39; &#39;exelent&#39; &#39;exelente&#39;
+ &#39;exellent&#39; &#39;satisfied&#39;]</code></pre>
+<pre class="python"><code>sorted_coef_index = model.coef_[0].argsort()
 
-<pre><code class="language-python">sorted_coef_index = model.coef_[0].argsort()
-
-print('Smallest Coefs:\n{}\n'.format(feature_names[sorted_coef_index[:10]]))
-print('Largest Coefs: \n{}'.format(feature_names[sorted_coef_index[:-11:-1]]))
-</code></pre>
-
+print(&#39;Smallest Coefs:\n{}\n&#39;.format(feature_names[sorted_coef_index[:10]]))
+print(&#39;Largest Coefs: \n{}&#39;.format(feature_names[sorted_coef_index[:-11:-1]]))</code></pre>
 <pre><code>Smallest Coefs:
-['not' 'slow' 'disappointed' 'worst' 'terrible' 'never' 'return' 'doesn'
- 'horrible' 'waste']
+[&#39;not&#39; &#39;slow&#39; &#39;disappointed&#39; &#39;worst&#39; &#39;terrible&#39; &#39;never&#39; &#39;return&#39; &#39;doesn&#39;
+ &#39;horrible&#39; &#39;waste&#39;]
 
 Largest Coefs: 
-['great' 'love' 'excellent' 'good' 'best' 'perfect' 'price' 'awesome' 'far'
- 'perfectly']
-</code></pre>
-
-<pre><code class="language-python">vect.transform(['not an issue, phone is working',
-                                    'an issue, phone is not working'])
-</code></pre>
-
-<pre><code>&lt;2x5442 sparse matrix of type '&lt;class 'numpy.float64'&gt;'
-    with 12 stored elements in Compressed Sparse Row format&gt;
-</code></pre>
-
-<pre><code class="language-python"># These reviews are treated the same by our current model
-print(model.predict(vect.transform(['not an issue, phone is working',
-                                    'an issue, phone is not working'])))
-</code></pre>
-
-<pre><code>[0 0]
-</code></pre>
-
-<h1 id="n-grams">n-grams</h1>
-
-<p>🔥 &ldquo;back as&rdquo; or &ldquo;is not&rdquo; is grams</p>
-
-<pre><code class="language-python"># Fit the CountVectorizer to the training data specifiying a minimum 
+[&#39;great&#39; &#39;love&#39; &#39;excellent&#39; &#39;good&#39; &#39;best&#39; &#39;perfect&#39; &#39;price&#39; &#39;awesome&#39; &#39;far&#39;
+ &#39;perfectly&#39;]</code></pre>
+<pre class="python"><code>vect.transform([&#39;not an issue, phone is working&#39;,
+                                    &#39;an issue, phone is not working&#39;])</code></pre>
+<pre><code>&lt;2x5442 sparse matrix of type &#39;&lt;class &#39;numpy.float64&#39;&gt;&#39;
+    with 12 stored elements in Compressed Sparse Row format&gt;</code></pre>
+<pre class="python"><code># These reviews are treated the same by our current model
+print(model.predict(vect.transform([&#39;not an issue, phone is working&#39;,
+                                    &#39;an issue, phone is not working&#39;])))</code></pre>
+<pre><code>[0 0]</code></pre>
+</div>
+<div id="n-grams" class="section level1">
+<h1>n-grams</h1>
+<p>🔥 “back as” or “is not” is grams</p>
+<pre class="python"><code># Fit the CountVectorizer to the training data specifiying a minimum 
 # document frequency of 5 and extracting 1-grams and 2-grams
 # min_df
 # ngram_range
@@ -705,63 +627,46 @@ vect = CountVectorizer(min_df=5, ngram_range=(1,2)).fit(X_train)
 
 X_train_vectorized = vect.transform(X_train)
 
-len(vect.get_feature_names())
-</code></pre>
-
-<pre><code>29072
-</code></pre>
-
-<pre><code class="language-python">vect.get_feature_names()[3000:3010]
-</code></pre>
-
-<pre><code>['back as',
- 'back asap',
- 'back because',
- 'back but',
- 'back button',
- 'back camera',
- 'back case',
- 'back cover',
- 'back for',
- 'back from']
-</code></pre>
-
-<pre><code class="language-python">model = LogisticRegression()
+len(vect.get_feature_names())</code></pre>
+<pre><code>29072</code></pre>
+<pre class="python"><code>vect.get_feature_names()[3000:3010]</code></pre>
+<pre><code>[&#39;back as&#39;,
+ &#39;back asap&#39;,
+ &#39;back because&#39;,
+ &#39;back but&#39;,
+ &#39;back button&#39;,
+ &#39;back camera&#39;,
+ &#39;back case&#39;,
+ &#39;back cover&#39;,
+ &#39;back for&#39;,
+ &#39;back from&#39;]</code></pre>
+<pre class="python"><code>model = LogisticRegression()
 model.fit(X_train_vectorized, y_train)
 
 predictions = model.predict(vect.transform(X_test))
 
-print('AUC: ', roc_auc_score(y_test, predictions))
-</code></pre>
-
-<pre><code>AUC:  0.91106617946
-</code></pre>
-
-<pre><code class="language-python">feature_names = np.array(vect.get_feature_names())
+print(&#39;AUC: &#39;, roc_auc_score(y_test, predictions))</code></pre>
+<pre><code>AUC:  0.91106617946</code></pre>
+<pre class="python"><code>feature_names = np.array(vect.get_feature_names())
 
 sorted_coef_index = model.coef_[0].argsort()
 
-print('Smallest Coefs:\n{}\n'.format(feature_names[sorted_coef_index[:10]]))
-print('Largest Coefs: \n{}'.format(feature_names[sorted_coef_index[:-11:-1]]))
-</code></pre>
-
+print(&#39;Smallest Coefs:\n{}\n&#39;.format(feature_names[sorted_coef_index[:10]]))
+print(&#39;Largest Coefs: \n{}&#39;.format(feature_names[sorted_coef_index[:-11:-1]]))</code></pre>
 <pre><code>Smallest Coefs:
-['no good' 'junk' 'poor' 'slow' 'worst' 'broken' 'not good' 'terrible'
- 'defective' 'horrible']
+[&#39;no good&#39; &#39;junk&#39; &#39;poor&#39; &#39;slow&#39; &#39;worst&#39; &#39;broken&#39; &#39;not good&#39; &#39;terrible&#39;
+ &#39;defective&#39; &#39;horrible&#39;]
 
 Largest Coefs: 
-['excellent' 'excelente' 'excelent' 'perfect' 'great' 'love' 'awesome'
- 'no problems' 'good' 'best']
-</code></pre>
-
-<pre><code class="language-python"># These reviews are now correctly identified
+[&#39;excellent&#39; &#39;excelente&#39; &#39;excelent&#39; &#39;perfect&#39; &#39;great&#39; &#39;love&#39; &#39;awesome&#39;
+ &#39;no problems&#39; &#39;good&#39; &#39;best&#39;]</code></pre>
+<pre class="python"><code># These reviews are now correctly identified
 # why 🤔
-print(model.predict(vect.transform(['not an issue, phone is working',
-                                    'an issue, phone is not working'])))
-</code></pre>
+print(model.predict(vect.transform([&#39;not an issue, phone is working&#39;,
+                                    &#39;an issue, phone is not working&#39;])))</code></pre>
+<pre><code>[1 0]</code></pre>
+</div>
 
-<pre><code>[1 0]
-</code></pre>
               
             </div>
           </div>
@@ -785,7 +690,7 @@ print(model.predict(vect.transform(['not an issue, phone is working',
         <ul class="post-actions post-action-nav">
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/nlp-part-03-sentiment-analysis/" data-tooltip="NLP part 03 sentiment analysis">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/nlp-part04-word-count-use-r/" data-tooltip="NLP part04 word count use R">
               
                 <i class="fa fa-angle-left"></i>
                 <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -793,7 +698,7 @@ print(model.predict(vect.transform(['not an issue, phone is working',
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/npl-use-python-part-01/" data-tooltip="NLP use python part 01">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/nlp-part-03-sentiment-analysis/" data-tooltip="NLP part 03 sentiment analysis">
               
                 <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                 <i class="fa fa-angle-right"></i>
@@ -869,7 +774,7 @@ print(model.predict(vect.transform(['not an issue, phone is working',
         <ul class="post-actions post-action-nav">
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/nlp-part-03-sentiment-analysis/" data-tooltip="NLP part 03 sentiment analysis">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/nlp-part04-word-count-use-r/" data-tooltip="NLP part04 word count use R">
               
                 <i class="fa fa-angle-left"></i>
                 <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
@@ -877,7 +782,7 @@ print(model.predict(vect.transform(['not an issue, phone is working',
             </li>
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/npl-use-python-part-01/" data-tooltip="NLP use python part 01">
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/nlp-part-03-sentiment-analysis/" data-tooltip="NLP part 03 sentiment analysis">
               
                 <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
                 <i class="fa fa-angle-right"></i>
@@ -1005,6 +910,25 @@ print(model.predict(vect.transform(['not an issue, phone is working',
       <div class="no-result text-color-light text-center">no post found</div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/04/analyze-and-visualize-your-iphone-s-health-app-data-in-r/">
+                <h3 class="media-heading">使用 R 分析可视化你的 iPhone 健康 APP 数据</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">介绍 iPhone 的 health APP 存储着我们的私人健康数据, 这里有一篇帖子是用 Python 分析 health APP 的数据Apple Health Data How to Export Analyze Visualize Guide - ryanpraski.com , 而我更喜欢 R 的版本.
+让我们赶紧开始吧!!
+ 首先获取数据并读取 从你的 health APP 应用中导出数据 在 R 中读取数据  加载包并读入数据 library(XML) library(tidyverse) library(lubridate) library(scales) library(here) library(ggthemes) xml &lt;- xmlParse(here(&quot;data/apple_health_export/export.xml&quot;)) summary(xml) ## $nameCounts ## ## Record ExportDate HealthData Me Workout ## 90037 1 1 1 1 ## ## $numNodes ## [1] 90041 Record 是我的主要数据, 有 90,037 条</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -1170,25 +1094,6 @@ pub_chunks()：获取XML部分 pub_tabularize()：强制输出pub_chunks()到dat
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/08/bianliang-he-cunliang/">
-                <h3 class="media-heading">变量与存量</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">《刀塔传奇》的制作人王信文说：变量大于存量，这话怎么理解？
-最近，在美团点评进入打车领域向滴滴宣战之后，王信文问了一个朋友美团点评做打车的逻辑是什么。 对方的回答是：没有人为了出行而出行，出行总要有个目的，比如去餐厅、酒店、电影院。美团点评做打车优势不在于打车上，而是在大众点评上找到目的地之后，可以直接打车，免去了输入目的地和切换APP的过程。美团点评省了这两步，就比滴滴有效率优势。这个效率优势看起来不大，也许是10%，也许是20%，但在长期作战中就会非常有用。这让王信文意识到，在持久作战过程中，比的和看的不是过去的实力存量，而是变量 。
-要赢得长跑，一时的领先不重要，重要的是速度。长跑比的是耐力和持久。 决定公司估值的，最重要的不是账上有多少现金，而是获得现金流的能力。 在找工作选公司，公司有多少钱不是最重要的指标，公司的发展速度才重要。 找男朋友，他现在有多少钱不是最重要的，重要的是他赚钱的能力。  所以对于“变量大于存量”的启发是：把“变量”作为最重要的目标，而不那么在意“存量”，要努力去寻找变量，“因为最终变量会决定存量”。</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -1196,7 +1101,7 @@ pub_chunks()：获取XML部分 pub_tabularize()：强制输出pub_chunks()到dat
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         51 posts found
+         52 posts found
       </p>
     </div>
   </div>
