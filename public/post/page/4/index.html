@@ -214,6 +214,64 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="/2018/05/purrr-use-partial-and-map-instead-of-loop/">
+          purrr: Use partial and map instead of loop
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-05-22T00:00:00Z">
+        
+  May 22, 2018
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/computers">computers</a>
+    
+  
+
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      🐌 I want to …   create three normal distribution with purrr::map as simple as possible
+  🐌 Here’s how to:   library(tidyverse) #rnorm(n=5, mean = mu, sd = sigma) #函数的一般形式 black_box &lt;- partial(rnorm, n=5)# 先把不变的固定下来，生成新的黑箱函数，黑箱函数只需要接受 map 传递的参数即可， 其他的参数已经通过 ·partial· 固定下来了 mu &lt;- list(10, 100, -100)# 参数 x sigma &lt;- list(0.01, 1, 10)# 参数 y map2(mu, sigma, ~ black_box(mean=.x, sd=.y)) %&gt;% do.call(cbind, .) ## [,1] [,2] [,3] ## [1,] 10.
+      <p>
+        <a href="/2018/05/purrr-use-partial-and-map-instead-of-loop/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="/2018/05/purrr-use-partial-and-map-instead-of-loop/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="/post/2018-05-22-purrr-use-partial-and-map-instead-of-loop_files/IMG_4733.JPG"/>
+      </div>
+    </a>
+  
+</article>
+
+          
+            
+  
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
         <a class="link-unstyled" href="/2018/05/iga-three-subgroup-deg-and-enrichment-analysis/">
           IgA-three-subgroup-DEG-and-enrichment-analysis
         </a>
@@ -561,63 +619,6 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
 </article>
 
           
-            
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/04/algorithms-quick-sort/">
-          algorithms: quick sort
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-04-18T00:00:00Z">
-        
-  April 18, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/machine-learning">machine learning</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      快速排序 和 分而治之（D&amp;C）divde and conquer  D&amp;C 将问题逐步分解，找到最基本的情况为止 快速排序，随机的选择基准值，平均运行时间为**O(n*logn)**  def quicksort(array): if len(array) &lt; 2:# base case, arrays with 0 or 1 element are already &quot;sorted&quot; return array else:# recursive case pivot = array[0]# sub-array of all the elements less than the pivot less = [i for i in array[1:] if i &lt;= pivot]# sub-array of all the elements greater than the pivot greater = [i for i in array[1:] if i &gt; pivot] return quicksort(less) + [pivot] + quicksort(greater) print(quicksort([10, 5, 2, 3]))  ## [2, 3, 5, 10]  
-      <p>
-        <a href="/2018/04/algorithms-quick-sort/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/04/algorithms-quick-sort/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/04/18/5ad684af2080b.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-          
           
   <div class="pagination-bar">
     <ul class="pagination">
@@ -699,6 +700,30 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
       <div class="no-result text-color-light text-center">no post found</div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/05/the-hello-world-of-neural-network/">
+                <h3 class="media-heading">The Hello World Of Neural Network</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">简单来说神经网络和我们一般的编程区别在于: 一个是输入数据和函数规则, 然后得到结果. 而神经网络是输入数据和答案, 通过迭代学习, 神经网络能学习出函数规则.如下图:
+举个简单的例子, 这里有两组数据:
+X: -1, 0, 1, 2, 3, 4 Y: -3, -1, 1, 3, 5, 7
+你可以把 x 看做是数据, y 看做是答案, 现在你要做的是找到其中的函数关系, 这个关系能够帮助我们, 用 x 去预测 Y 的值(假设你没有学过解方程组).
+最常用的方法就是归纳法, 首先你根据第一对数据猜一个对应关系规则, 拿着这个规则计算答案值, 评估计算的答案和真实答案差多远, 然后在调整你的规则, 继续评估, 直到你的规则能够拟合所有的数据.
+这就是神经网络的逻辑过程.
+我们来看一个简单的神经网络的例子
+1.Import: 加载所需模块 import tensorflow as tf ## /Users/zero/anaconda3/envs/tfdeeplearning/lib/python3.5/importlib/_bootstrap.py:222: RuntimeWarning: compiletime version 3.6 of module &#39;tensorflow.python.framework.fast_tensor_util&#39; does not match runtime version 3.5 ## return f(*args, **kwds) import numpy as np from tensorflow import keras  2.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -866,23 +891,6 @@ pub_chunks()：获取XML部分 pub_tabularize()：强制输出pub_chunks()到dat
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/08/the_linear_algebra_view_of_least-squares_regression/">
-                <h3 class="media-heading">线性代数角度理解最小二乘回归</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">  </div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -890,7 +898,7 @@ pub_chunks()：获取XML部分 pub_tabularize()：强制输出pub_chunks()到dat
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         52 posts found
+         53 posts found
       </p>
     </div>
   </div>

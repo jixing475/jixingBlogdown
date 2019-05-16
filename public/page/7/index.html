@@ -214,6 +214,64 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="/2018/03/scraping-and-wranging-tables-from-research-articles/">
+          Scraping and Wranging Tables from Research Articles
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-03-27T00:00:00Z">
+        
+  March 27, 2018
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/statistics">statistics</a>
+    
+  
+
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      What do you do when you want to use results from the literature to anchor your own analysis? we’ll go through a practical scenario on scraping an html table from a Nature Genetics article into R and wrangling the data into a useful format.
+01. Scraping a html table from a webpage #load packages library(&quot;rvest&quot;) library(&quot;knitr&quot;) library(tidyverse) #scraping web page url &lt;- &quot;https://www.nature.com/articles/ng.2802/tables/2&quot; #====🔥find where is the table lives on this webpage==== table_path=&#39;//*[@id=&quot;content&quot;]/div/div/figure/div[1]/div/div[1]/table&#39; #get the table nature_genetics_table2 &lt;- url %&gt;% read_html() %&gt;% html_nodes(xpath=table_path) %&gt;% html_table(fill=T) %&gt;% .
+      <p>
+        <a href="/2018/03/scraping-and-wranging-tables-from-research-articles/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="/2018/03/scraping-and-wranging-tables-from-research-articles/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/27/5aba60b02b557.jpg"/>
+      </div>
+    </a>
+  
+</article>
+
+          
+            
+  
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
         <a class="link-unstyled" href="/2018/03/how-to-create-dummy-variables-and-normalization/">
           3.3 How To Create Dummy Variables And Normalization
         </a>
@@ -564,63 +622,6 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
 </article>
 
           
-            
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/03/how-to-use-the-ncbis-new-api-keys/">
-          HOW TO USE THE NCBI&#39;S NEW API KEYS
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-03-19T00:00:00Z">
-        
-  March 19, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/computers">computers</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      The NCBI is one of the most important sources of biological data. The centre provides access to information on 28 million scholarly articles through PubMed and 250 million DNA sequences through GenBank. More importantly, records in the [50 public databases] (https://www.ncbi.nlm.nih.gov/guide/all/#databases) maintained by the NCBI are strongly cross-referenced. As a result, it is possible to pinpoint searches using almost 2 million taxonomic names or a controlled vocabulary with 270,000 terms.
-      <p>
-        <a href="/2018/03/how-to-use-the-ncbis-new-api-keys/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/03/how-to-use-the-ncbis-new-api-keys/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/21/5ab1c0c655826.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-          
           
   <div class="pagination-bar">
     <ul class="pagination">
@@ -702,6 +703,30 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
       <div class="no-result text-color-light text-center">no post found</div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/05/the-hello-world-of-neural-network/">
+                <h3 class="media-heading">The Hello World Of Neural Network</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">简单来说神经网络和我们一般的编程区别在于: 一个是输入数据和函数规则, 然后得到结果. 而神经网络是输入数据和答案, 通过迭代学习, 神经网络能学习出函数规则.如下图:
+举个简单的例子, 这里有两组数据:
+X: -1, 0, 1, 2, 3, 4 Y: -3, -1, 1, 3, 5, 7
+你可以把 x 看做是数据, y 看做是答案, 现在你要做的是找到其中的函数关系, 这个关系能够帮助我们, 用 x 去预测 Y 的值(假设你没有学过解方程组).
+最常用的方法就是归纳法, 首先你根据第一对数据猜一个对应关系规则, 拿着这个规则计算答案值, 评估计算的答案和真实答案差多远, 然后在调整你的规则, 继续评估, 直到你的规则能够拟合所有的数据.
+这就是神经网络的逻辑过程.
+我们来看一个简单的神经网络的例子
+1.Import: 加载所需模块 import tensorflow as tf ## /Users/zero/anaconda3/envs/tfdeeplearning/lib/python3.5/importlib/_bootstrap.py:222: RuntimeWarning: compiletime version 3.6 of module &#39;tensorflow.python.framework.fast_tensor_util&#39; does not match runtime version 3.5 ## return f(*args, **kwds) import numpy as np from tensorflow import keras  2.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -869,23 +894,6 @@ pub_chunks()：获取XML部分 pub_tabularize()：强制输出pub_chunks()到dat
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/08/the_linear_algebra_view_of_least-squares_regression/">
-                <h3 class="media-heading">线性代数角度理解最小二乘回归</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">  </div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -893,7 +901,7 @@ pub_chunks()：获取XML部分 pub_tabularize()：强制输出pub_chunks()到dat
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         52 posts found
+         53 posts found
       </p>
     </div>
   </div>
