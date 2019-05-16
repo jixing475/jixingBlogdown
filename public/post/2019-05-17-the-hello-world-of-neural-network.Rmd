@@ -23,10 +23,9 @@ knitr::opts_chunk$set(
 	engine.path="/Users/zero/anaconda3/envs/tfdeeplearning/bin/python"
 )
 library(reticulate)
-use_condaenv(condaenv = "tfdeeplearning", 
-conda = "/Users/zero/anaconda3/bin/conda")
+#use_condaenv(condaenv = "tfdeeplearning")
 #Enable the reticulate Python engine
-knitr::knit_engines$set(python = reticulate::eng_python)
+#knitr::knit_engines$set(python = reticulate::eng_python)
 ```
 
 
@@ -74,9 +73,9 @@ model.compile(optimizer='sgd', loss='mean_squared_error')
 # 3.Providing the Data
 ```{python}
 # data
-xs = np.array([-1.0,  0.0, 1.0, 2.0, 3.0, 4.0], dtype=float)
+xs = np.array([-1.0,  0.0, 1.0, 2.0, 3.0, 4.0, 5.0], dtype=float)
 #answers
-ys = np.array([-3.0, -1.0, 1.0, 3.0, 5.0, 7.0], dtype=float)
+ys = np.array([-3.0, -1.0, 1.0, 3.0, 5.0, 7.0, 9.0], dtype=float)
 ```
 
 # 4.Training the Neural Networ
