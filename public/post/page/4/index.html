@@ -214,6 +214,63 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="/2018/07/missing-data-imputation-and-fit-regression/">
+          Missing data imputation and fit regression
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-07-28T00:00:00Z">
+        
+  July 28, 2018
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/datavis-and-dataclean">datavis and dataclean</a>
+    
+  
+
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      Mind map   Goal impute missing data fit regression  library(tidyverse) library(AER) library(naniar) library(mice)  Steps Step 01. missing data wages_data &lt;- read_csv(&quot;/Users/zero/myrepo/jixingBlogdown/data/Mroz.csv&quot;) wages_data &lt;- wages_data %&gt;% select(wage, educ, fatheduc, motheduc, inlf, hours, kidslt6, kidsge6, age, huswage, mtr, unem, city, exper) %&gt;% mutate_at(vars(kidslt6, kidsge6, hours, educ, age, wage, huswage, mtr, motheduc, fatheduc, unem, exper), as.numeric) %&gt;% mutate_at(vars(city, inlf), as.character) wages_data &lt;- wages_data %&gt;% mutate(wage = ifelse(is.na(wage), 0, wage)) vis_miss(wages_data) wages_mis &lt;- ampute(wages_data)$amp vis_miss(wages_mis)  Step 02.
+      <p>
+        <a href="/2018/07/missing-data-imputation-and-fit-regression/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="/2018/07/missing-data-imputation-and-fit-regression/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="/post/2018-07-28-missing-data-imputation-and-fit-regression_files/purplecastlecat_2018-Jun-29.jpg"/>
+      </div>
+    </a>
+  
+</article>
+
+          
+            
+  
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
         <a class="link-unstyled" href="/2018/07/biostrings/">
           📦 BioStrings
         </a>
@@ -552,66 +609,6 @@ Annotation packages  Description 1. phastCons100way.UCSC.hg19 phastCons scores d
 </article>
 
           
-            
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/04/purrr-adverb/">
-          purrr: adverb
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-04-20T00:00:00Z">
-        
-  April 20, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/computers">computers</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      What is an adverb Read carefully the purrr documentation
- Adverbs modify the action of a function ; taking a function as input and returning a function with modified action as output.
- In other words, adverbs take a function, and return this function modified. Yes, just an adverb modifies a verb.
-library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&quot;) ## $result ## NULL ## ## $error ## &lt;simpleError in log(x = x, base = base): non-numeric argument to mathematical function&gt; # have a result and error  how to write your own?
-      <p>
-        <a href="/2018/04/purrr-adverb/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/04/purrr-adverb/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/04/20/5ad936eeb6ee7.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-          
           
   <div class="pagination-bar">
     <ul class="pagination">
@@ -693,6 +690,30 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
       <div class="no-result text-color-light text-center">no post found</div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/06/drug-discovery/">
+                <h3 class="media-heading">新药研发</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">确定致病机制 1. 皇后确诊乳腺癌  2. 药物遍寻均无效  3. 精准医疗项目启动 生物信息分析 特异化突变基因鉴定 蛋白通路与疾病关联性 XYZ蛋白三维晶体结构 XYZ蛋白药物结合口袋突变前后分析    先导化合物 1. 计算机辅助药物设计:  在 蛋白质三维结构基础上，彻底分析突变后XYZ蛋白结合口袋周围理化性质
+ 突变前：小分子包围在疏水口袋，亲水氨基酸R125、E154与其形成氢键铆钉作用，使其牢牢稳固在蛋白质中 突变后：疏水环境大致不变，但氨基酸N125、I154(无法形成氢键)造成很大空隙，亲水性转换为疏水口袋，稳定性降低     2. 分子动力学方法  分子动力学方法对XYZ蛋白突变后与小分子Hormone间相互作用状况进行了计算模拟分析, 目的:以期得到蛋白质在突变后的小分子结合信息
+ 计算中心首席科学家是这么解释分析结果的:
+突变后XYZ蛋白Region A区域没有变化，对该部分不做任何修改； Region B区域中，小分子下方出现巨大空洞，需要对该部分进行补漏； Region B区域巨大空袭，在小分子稳定结合时，下方出现由10~13个水分子组成的“水氢键网络体系”； “水氢键网络体系”中，水分子能量Energy（球体大小）和占有率Occupancy（球体颜色）均能表达出蛋白质局部区域理化性质。 &gt; 具体总结：Region B区域绝大多数水分子能量Energy极小、占有率Occupancy较小，说明该区域极为疏水；但其中W1水分子，能量较好、占有率较高，说明W1水分子极为稳定，周围氨基酸为极亲水性氨基酸，将来可以通过替换W1水分子或通过桥键作用对其进行化学修饰  ; ;
+ 3. 基于体内原生激素Hormone的药物设计:化学片段增长设计法  首先设计的化学片段，将能够有效的到达W1水分子附近或将其替换掉, 福斯坦国立大学化学院研究团队，共设计母核结构50枚，且均具备有机合成实验方法实现的可能性
+ ; ;
+ 4. 分子对接方法判定最佳化学母核结构  利用分子对接方法，将50枚母核结构分别对接进入突变后蛋白质XYZ结构中， 利用分子对接权重值, 判定3枚小分子药物在对接结果中占据较好的权重位置。奥古斯汀·Khan将此结果呈现给，福斯坦国立大学化学院研究团队，经过再三斟酌分析，决定采用C2、C1和C3进行后期化学结构改造
+      5.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -875,26 +896,6 @@ pub_chunks()：获取XML部分 pub_tabularize()：强制输出pub_chunks()到dat
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/09/will_data_scientists_be_replaced_by_machines_2018-09-10/">
-                <h3 class="media-heading">数据科学家会不会被机器取?</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Sep 9, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">数据科学自动化 曾今是一个热门话题, 大多数人都在讨论所谓的“自动化”工具, 人们声称他们的工具可以自动化数据科学过程。给人一种错觉, 只要将这些工具与大数据架构相结合就可以解决任何业务问题。
-但是其实在实际的数据分析工作中, 自动化建模部分仅仅占到总工作量的10%, 大多数的时间和精力花在了 feature engineering 和 feature selection。 比起构建一个复杂的模型, 我们更应该关注的问题这些问题 例如: 定义要解决的问题，获取数据，探索数据，部署项目，调试和监视, 而这些问题往往都无法完全自动化。
-这里 Berry 和 Linoff 从摄影的角度给了一个有趣的比喻:
- “The camera can relieve the photographer from having to set the shutter speed, aperture and other settings every time a picture is taken. This makes the process easier for expert photographers and makes better photography accessible to people who are not experts. But this is still automating only a small part of the process of producing a photograph.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -902,7 +903,7 @@ pub_chunks()：获取XML部分 pub_tabularize()：强制输出pub_chunks()到dat
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         54 posts found
+         55 posts found
       </p>
     </div>
   </div>

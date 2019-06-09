@@ -2,12 +2,134 @@
   <title>student zero </title>
   <link href="/index.xml" rel="self"/>
   <link href="/"/>
-  <updated>2019-06-03T00:00:00+00:00</updated>
+  <updated>2019-06-09T00:00:00+00:00</updated>
   <id>/</id>
   <author>
     <name>Jixing Liu</name>
   </author>
   <generator>Hugo -- gohugo.io</generator>
+  <entry>
+    <title type="html"><![CDATA[新药研发]]></title>
+    <link href="/2019/06/drug-discovery/"/>
+    <id>/2019/06/drug-discovery/</id>
+    <published>2019-06-09T00:00:00+00:00</published>
+    <updated>2019-06-09T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<!--more-->
+<div id="section" class="section level1">
+<h1>确定致病机制</h1>
+<div id="section-1" class="section level2">
+<h2>1. 皇后确诊乳腺癌</h2>
+</div>
+<div id="section-2" class="section level2">
+<h2>2. 药物遍寻均无效</h2>
+</div>
+<div id="section-3" class="section level2">
+<h2>3. 精准医疗项目启动</h2>
+<ol start="0" style="list-style-type: decimal">
+<li>生物信息分析</li>
+<li>特异化突变基因鉴定</li>
+<li>蛋白通路与疾病关联性</li>
+<li>XYZ蛋白三维晶体结构</li>
+<li>XYZ蛋白药物结合口袋突变前后分析</li>
+</ol>
+</div>
+</div>
+<div id="section-4" class="section level1">
+<h1>先导化合物</h1>
+<div id="section-5" class="section level2">
+<h2>1. 计算机辅助药物设计:</h2>
+<blockquote>
+<p><font color="darkred">在 蛋白质三维结构基础上，彻底分析突变后XYZ蛋白结合口袋周围理化性质</font></p>
+</blockquote>
+<ol style="list-style-type: decimal">
+<li>突变前：小分子包围在疏水口袋，亲水氨基酸R125、E154与其<strong>形成氢键铆钉作用</strong>，使其牢牢稳固在蛋白质中</li>
+<li>突变后：疏水环境大致不变，但<strong>氨基酸N125、I154(无法形成氢键)造成很大空隙</strong>，亲水性转换为疏水口袋，稳定性降低</li>
+</ol>
+<center>
+<img src="https://i.loli.net/2019/06/09/5cfcb3826d27738529.jpg"  width="320" height="180" />
+</center>
+</div>
+<div id="section-6" class="section level2">
+<h2>2. 分子动力学方法</h2>
+<blockquote>
+<p>分子动力学方法对<code>XYZ蛋白突变后与小分子Hormone间相互作用状况进行了计算模拟分析</code>, 目的:以期得到蛋白质在突变后的小分子结合信息</p>
+</blockquote>
+<p>计算中心首席科学家是这么解释分析结果的:</p>
+<ol style="list-style-type: decimal">
+<li>突变后XYZ蛋白Region A区域没有变化，对该部分不做任何修改；</li>
+<li>Region B区域中，小分子下方出现巨大空洞，需要对该部分进行补漏；</li>
+<li>Region B区域巨大空袭，在小分子稳定结合时，下方出现由10~13个水分子组成的“水氢键网络体系”；</li>
+<li>“水氢键网络体系”中，水分子能量Energy（球体大小）和占有率Occupancy（球体颜色）均能表达出蛋白质局部区域理化性质。
+&gt; 具体总结：Region B区域绝大多数水分子能量Energy极小、占有率Occupancy较小，说明该区域极为疏水；但其中W1水分子，能量较好、占有率较高，说明W1水分子极为稳定，周围氨基酸为极亲水性氨基酸，<code>将来可以通过替换W1水分子或通过桥键作用对其进行化学修饰</code></li>
+</ol>
+<p><img src="https://i.loli.net/2019/05/26/5ce9f0dea78d870471.jpg"  width="320" height="180" />;
+<img src="https://i.loli.net/2019/05/26/5ce9f0f605ee126371.jpg"  width="320" height="180" />;</p>
+</div>
+<div id="hormone" class="section level2">
+<h2>3. 基于体内原生激素Hormone的药物设计:化学片段增长设计法</h2>
+<blockquote>
+<p>首先设计的化学片段，<code>将能够有效的到达W1水分子附近或将其替换掉</code>, 福斯坦国立大学化学院研究团队，共设计母核结构50枚，且均具备有机合成实验方法实现的可能性</p>
+</blockquote>
+<p><img src="https://i.loli.net/2019/05/26/5ce9f39f1b3bf75735.jpg"  width="320" height="180" />;
+<img src="https://i.loli.net/2019/05/26/5ce9f4023036010347.jpg"  width="320" height="180" />;</p>
+</div>
+<div id="section-7" class="section level2">
+<h2>4. 分子对接方法判定最佳化学母核结构</h2>
+<blockquote>
+<p>利用分子对接方法，将50枚母核结构分别对接进入突变后蛋白质XYZ结构中， 利用<code>分子对接权重值</code>, 判定3枚小分子药物在对接结果中占据较好的权重位置。奥古斯汀·Khan将此结果呈现给，福斯坦国立大学化学院研究团队，经过再三斟酌分析，决定采用C2、C1和C3进行<code>后期化学结构改造</code></p>
+</blockquote>
+<center>
+<img src="https://i.loli.net/2019/05/26/5ce9f4fd6609169267.jpg"  width="320" height="180" />
+</center>
+<center>
+<img src="https://i.loli.net/2019/05/26/5ce9f54709f6769978.jpg"  width="320" height="180" />
+</center>
+</div>
+<div id="section-8" class="section level2">
+<h2>5. 新型母核结构修饰，分子再对接</h2>
+<blockquote>
+<p>福斯坦国立大学化学院研究团队，<code>兵分3路，对C2~3三类化合物进行化学片段化结构修饰</code>, 尤其以第2类C2化合物为重点研究对象，由米国都<code>计算中心</code>, 首席科学家奥古斯汀.Khan, 福斯坦国立大学<code>化学院</code>, <code>共同</code>, 承担任务, 基于C2化合物，奥古斯汀·Khan，共设计化学片段78枚, <code>这一步的化学修饰, 是基于什么样的目的, 策略上和上一步的修饰有什么不同?</code>, 而后再对这78枚新型化学分子进行Molecular docking操作，预测其结构属性</p>
+</blockquote>
+<blockquote>
+<p>通过分子动力学模拟，<code>计算蛋白质Protein与小分子Ligand之间的能量体系</code>, 将最有能量体系进行排名，得到前50位较好能量体系的小分子</p>
+</blockquote>
+<center>
+<img src="https://i.loli.net/2019/05/26/5ce9f7004f09f23493.jpg"  width="320" height="180" />
+</center>
+<center>
+<img src="https://i.loli.net/2019/05/26/5ce9f7924105883023.jpg"  width="320" height="180" />
+</center>
+</div>
+<div id="section-9" class="section level2">
+<h2>化学合成</h2>
+<blockquote>
+<p>福斯坦国立大学<code>化学院研究团队</code>, 在得到化合物结构后，分三批人马，昼夜不息，力争以最快速度进行化学合成工作</p>
+</blockquote>
+<center>
+<img src="https://i.loli.net/2019/05/26/5ce9f808d3f8695626.jpg" alt="Paris" class="center" width="320" height="180" />
+</center>
+</div>
+</div>
+<div id="section-10" class="section level1">
+<h1>三阶段</h1>
+<div id="section-11" class="section level2">
+<h2>细胞: 体外细胞活性实验</h2>
+<ol style="list-style-type: decimal">
+<li>肿瘤细胞培养</li>
+<li>细胞活性实验</li>
+</ol>
+</div>
+<div id="section-12" class="section level2">
+<h2>动物</h2>
+<ol style="list-style-type: decimal">
+<li>动物肿瘤模型构建</li>
+<li>动物体内活性实验
+## 人: 残酷而神秘的临床实验</li>
+</ol>
+</div>
+</div>
+]]></content>
+  </entry>
   <entry>
     <title type="html"><![CDATA[Deep Work]]></title>
     <link href="/2019/06/deep-work/"/>
