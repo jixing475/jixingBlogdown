@@ -76,8 +76,8 @@ canonifyurls = true
   identifier = "about"
   name = "About"
   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-question\"></i>"
-  url = "/#about"
-  #url = "/page/about/"
+  #url = "/#about"
+  url = "/page/about/"
 #[[menu.main]]
 #  weight = 4
 #  identifier = "conferences_podcasts_webinars"

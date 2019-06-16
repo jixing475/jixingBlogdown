@@ -4,33 +4,25 @@ date: 2017-09-12T16:06:06+02:00
 comments:       false
 showMeta:       false
 showActions:    false
-thumbnailImage: /img/Bewerbungsfoto.jpg
+thumbnailImage: /img/jixing_touxiang.png
 ---
 
-![](/img/Bewerbungsfoto_klein.jpg)
+![](/img/jixing_touxiang.png)
 
-I'm Shirin, a biologist turned bioinformatician turned data scientist. 
+Hi, 我是吉星, 一位由临床专业学生转变为生物信息分析员,接着投向数据科学怀抱的终生学习者。
 
-I'm especially interested in machine learning and data visualization. While I am using R most every day at work, I wanted to have an incentive to regularly explore other types of analyses and other types of data that I don't normally work with. I have also very often benefited from other people's published code in that it gave me ideas for my own work; and I hope that sharing my own analyses will inspire others as much as I often am by what can be be done with data.  It's amazing to me what can be learned from analyzing and visualizing data!
+我对机器学习和数据可视化特别感兴趣。虽然我每天都在工作中使用R 和 python，但我希望有动力定期探索其它类型的分析和数据类型。从数据分析和可视化数据中可以学到的东西是我每天惊喜的源泉！ 
 
-My tool of choice for data analysis so far has been R. I also organize the [MünsteR R-users group on meetup.com](https://shiring.github.io/r_users_group/2017/05/20/muenster_r_user_group). 
+> 这世界上永远有两种人，一种如荒火，停留处寸草不生，自衰衰人，自毁毁他。一种如瑞兽，所过之处，水滋土肥，鸟语花香。
 
-![My journey to Data Science](http://res.cloudinary.com/shiring/image/upload/v1511852499/my_story_wml3zm.png)
-
-I love dancing and used to do competitive ballroom and latin dancing. Even though I don't have time for that anymore, I still enjoy teaching "social dances" once a week with the Hochschulsport (university sports courses).
-
-I created the R package [exprAnalysis](https://github.com/ShirinG/exprAnalysis), designed to streamline my RNA-seq data analysis pipeline. It is available via Github. Instructions for installation and usage can be found [here](https://shiring.github.io/rna-seq/microarray/2016/09/28/exprAnalysis).
-
-This blog will showcase some of the analyses I have been doing with different data sets (all freely available). I will also host teaching materials for students to access in conjunction with R courses I am giving.
+我想成为后者!
 
 ---
 
-## Contact me:
-- [Codecentric AG](https://www.codecentric.de/team/shirin-glander/)
-- [Email](mailto:shirin.glander@gmail.com)
-- [Xing](http://www.xing.com/profile/Shirin_Glander)
-- [Linkedin](http://de.linkedin.com/in/shirin-glander-01120881)
-- [Twitter](http://twitter.com/ShirinGlander)
+## 联系我:
+- [Email](mailto:jixing475@163.com)
+- [Github](https://github.com/jixing475)
+- [Twitter](https://twitter.com/studentZero475)
 
 -----
 

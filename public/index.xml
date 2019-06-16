@@ -13252,32 +13252,26 @@ I talked about how blogging about R and Data Science helped me become a Data Sci
     <updated>2017-09-12T16:06:06+02:00</updated>
     <content type="html"><![CDATA[
 
-<p><img src="/img/Bewerbungsfoto_klein.jpg" alt="" /></p>
+<p><img src="/img/jixing_touxiang.png" alt="" /></p>
 
-<p>I&rsquo;m Shirin, a biologist turned bioinformatician turned data scientist.</p>
+<p>Hi, 我是吉星, 一位由临床专业学生转变为生物信息分析员,接着投向数据科学怀抱的终生学习者。</p>
 
-<p>I&rsquo;m especially interested in machine learning and data visualization. While I am using R most every day at work, I wanted to have an incentive to regularly explore other types of analyses and other types of data that I don&rsquo;t normally work with. I have also very often benefited from other people&rsquo;s published code in that it gave me ideas for my own work; and I hope that sharing my own analyses will inspire others as much as I often am by what can be be done with data.  It&rsquo;s amazing to me what can be learned from analyzing and visualizing data!</p>
+<p>我对机器学习和数据可视化特别感兴趣。虽然我每天都在工作中使用R 和 python，但我希望有动力定期探索其它类型的分析和数据类型。从数据分析和可视化数据中可以学到的东西是我每天惊喜的源泉！</p>
 
-<p>My tool of choice for data analysis so far has been R. I also organize the <a href="https://shiring.github.io/r_users_group/2017/05/20/muenster_r_user_group">MünsteR R-users group on meetup.com</a>.</p>
+<blockquote>
+<p>这世界上永远有两种人，一种如荒火，停留处寸草不生，自衰衰人，自毁毁他。一种如瑞兽，所过之处，水滋土肥，鸟语花香。</p>
+</blockquote>
 
-<p><img src="http://res.cloudinary.com/shiring/image/upload/v1511852499/my_story_wml3zm.png" alt="My journey to Data Science" /></p>
-
-<p>I love dancing and used to do competitive ballroom and latin dancing. Even though I don&rsquo;t have time for that anymore, I still enjoy teaching &ldquo;social dances&rdquo; once a week with the Hochschulsport (university sports courses).</p>
-
-<p>I created the R package <a href="https://github.com/ShirinG/exprAnalysis">exprAnalysis</a>, designed to streamline my RNA-seq data analysis pipeline. It is available via Github. Instructions for installation and usage can be found <a href="https://shiring.github.io/rna-seq/microarray/2016/09/28/exprAnalysis">here</a>.</p>
-
-<p>This blog will showcase some of the analyses I have been doing with different data sets (all freely available). I will also host teaching materials for students to access in conjunction with R courses I am giving.</p>
+<p>我想成为后者!</p>
 
 <hr />
 
-<h2 id="contact-me">Contact me:</h2>
+<h2 id="联系我">联系我:</h2>
 
 <ul>
-<li><a href="https://www.codecentric.de/team/shirin-glander/">Codecentric AG</a></li>
-<li><a href="mailto:shirin.glander@gmail.com">Email</a></li>
-<li><a href="http://www.xing.com/profile/Shirin_Glander">Xing</a></li>
-<li><a href="http://de.linkedin.com/in/shirin-glander-01120881">Linkedin</a></li>
-<li><a href="http://twitter.com/ShirinGlander">Twitter</a></li>
+<li><a href="mailto:jixing475@163.com">Email</a></li>
+<li><a href="https://github.com/jixing475">Github</a></li>
+<li><a href="https://twitter.com/studentZero475">Twitter</a></li>
 </ul>
 
 <hr />
