@@ -1,0 +1,295 @@
+---
+title: 多标签分类问题
+author: ZERO
+date: '2019-06-19'
+slug: multi-label-classfication
+categories:
+  - machine learning
+tags:
+  - algorithms
+keywords:
+  - tech
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2019/06/19/5d0a1659111d314630.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+
+
+<!--more-->
+<blockquote>
+<p>Difference between multi-class classification &amp; multi-label classification is that in multi-class problems the classes are mutually exclusive, whereas for multi-label problems each label represents a different classification task, but <strong><code>the tasks are somehow related</code></strong>.</p>
+</blockquote>
+<blockquote>
+<p><strong><code>multi-class classification</code></strong> makes the assumption that each sample is assigned to one and only one label: a fruit can be either an apple or a pear but not both at the same time.
+Whereas, an instance of <strong><code>multi-label classification</code></strong> can be that a text might be about any of religion, politics, finance or education at the same time or none of these</p>
+</blockquote>
+<div id="problem-definition-evaluation-metrics" class="section level1">
+<h1>Problem Definition &amp; Evaluation Metrics</h1>
+<div id="problem-definition" class="section level4">
+<h4>Problem Definition:</h4>
+<ul>
+<li>conformation classification is a multi-label classification problem with a highly imbalanced dataset.</li>
+<li>We’re challenged to build a <strong><code>multi-labeld model</code></strong>that’s capable of detecting different types of
+conformation like cidi, cido, codi, codo, w. W
+e need to create a model which <strong><code>predicts a probability of each type of conformation for each ligand</code></strong>.</li>
+</ul>
+</div>
+<div id="evaluation-metrics" class="section level4">
+<h4>Evaluation Metrics:</h4>
+<blockquote>
+<p><strong>Note:</strong> Initially evaluation metric in the model task challenge was <em>Log-Loss</em>, which was later changed to <em>AUC</em>.
+But in this post we throw light on other evaluation metrics as well.</p>
+</blockquote>
+<ul>
+<li>The evaluation measures for <strong><code>single-label</code></strong> are usually different than for multi-label. Here in single-label classfication we use simple metrics such as precision, recall, accuracy, etc,. Say, in single-label classification, <strong><code>accuracy</code></strong> is just:</li>
+</ul>
+<center>
+<img src="https://cdn-images-1.medium.com/max/1600/1*A6N4fAv_VXVgdcU-KCabfw.png" />
+</center>
+<center>
+Fig-3: Accuracy in single-label classification
+</center>
+<ul>
+<li>In <strong><code>multi-label classification</code></strong>, a misclassification is <strong>no longer a hard wrong or right.</strong> A prediction containing a subset of the actual classes should be considered better than a prediction that contains none of them, i.e.,<strong><code>predicting two of the three labels correctly this is better than predicting no labels at all</code></strong>.</li>
+</ul>
+</div>
+<div id="hamming-loss-example-based-measure" class="section level4">
+<h4>Hamming-Loss (Example based measure):</h4>
+<ul>
+<li>In simplest of terms, <em>Hamming-Loss</em> is the fraction of labels that are incorrectly predicted,
+i.e., <strong><code>the fraction of the wrong labels to the total number of labels</code></strong>.</li>
+</ul>
+<p>N: number of samples</p>
+<p>L: number of labels</p>
+<p><strong><code>number of wrong / N * L</code></strong></p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*_qeJQPY9CKki2xouAQr6fg.png" /></p>
+<center>
+Fig-6: Hamming-Loss
+</center>
+</div>
+<div id="averaging" class="section level4">
+<h4><strong>Averaging</strong></h4>
+<p><strong>Macro-averaging</strong></p>
+<p>宏平均（Macro-averaging）是指所有类别的每一个统计指标值的算数平均值，也就是宏精确率（Macro-Precision），宏召回率（Macro-Recall），宏F值（Macro-F Score），其计算公式如下：</p>
+<div class="figure">
+<img src="https://www.zhihu.com/equation?tex=%5Cbegin%7Beqnarray%7D+P_%7Bmacro%7D+%26%3D%26+%5Cfrac%7B1%7D%7Bn%7D%5Csum_%7Bi%3D1%7D%5En+P_i+%5Cend%7Beqnarray%7D" alt="[公式]" />
+<p class="caption">[公式]</p>
+</div>
+<div class="figure">
+<img src="https://www.zhihu.com/equation?tex=%5Cbegin%7Bequation%7D+R_%7Bmacro%7D+%3D+%5Cfrac%7B1%7D%7Bn%7D+%5Csum_%7Bi%3D1%7D%5En+R_i+%5Cend%7Bequation%7D" alt="[公式]" />
+<p class="caption">[公式]</p>
+</div>
+<div class="figure">
+<img src="https://www.zhihu.com/equation?tex=%5Cbegin%7Bequation%7D+F_%7Bmacro%7D+%3D+%5Cfrac%7B2+%5Ctimes+P_%7Bmacro%7D+%5Ctimes+R_%7Bmacro%7D%7D%7BP_%7Bmacro%7D+%2B+R_%7Bmacro%7D%7D+%5Cend%7Bequation%7D" alt="[公式]" />
+<p class="caption">[公式]</p>
+</div>
+<p><strong>Micro-averaging</strong></p>
+<p>微平均（Micro-averaging）是对数据集中的每一个示例不分类别进行统计建立全局混淆矩阵，然后计算相应的指标。其计算公式如下：</p>
+<div class="figure">
+<img src="https://www.zhihu.com/equation?tex=%5Cbegin%7Bequation%7D+P_%7Bmicro%7D+%3D+%5Cfrac%7B%5Cbar%7BTP%7D%7D%7B%5Cbar%7BTP%7D+%2B+%5Cbar%7BFP%7D%7D+%3D+%5Cfrac%7B%5Csum_%7Bi%3D1%7D%5En+%7BTP%7D_i%7D%7B%5Csum_%7Bi%3D1%7D%5En+%7BTP%7D_i+%2B+%5Csum_%7Bi%3D1%7D%5En+%7BFP%7D_i%7D+%5Cend%7Bequation%7D" alt="[公式]" />
+<p class="caption">[公式]</p>
+</div>
+<div class="figure">
+<img src="https://www.zhihu.com/equation?tex=%5Cbegin%7Bequation%7D+R_%7Bmicro%7D+%3D+%5Cfrac%7B%5Cbar%7BTP%7D%7D%7B%5Cbar%7BTP%7D+%2B+%5Cbar%7BFN%7D%7D+%3D+%5Cfrac%7B%5Csum_%7Bi%3D1%7D%5En+%7BTP%7D_i%7D%7B%5Csum_%7Bi%3D1%7D%5En+%7BTP%7D_i+%2B+%5Csum_%7Bi%3D1%7D%5En+%7BFN%7D_i%7D+%5Cend%7Bequation%7D" alt="[公式]" />
+<p class="caption">[公式]</p>
+</div>
+<div class="figure">
+<img src="https://www.zhihu.com/equation?tex=%5Cbegin%7Bequation%7D+F_%7Bmicro%7D+%3D+%5Cfrac%7B2+%5Ctimes+P_%7Bmicro%7D+%5Ctimes+R_%7Bmicro%7D%7D%7BP_%7Bmicro%7D+%2B+R_%7Bmicro%7D%7D+%5Cend%7Bequation%7D" alt="[公式]" />
+<p class="caption">[公式]</p>
+</div>
+<p>Macro-averaging与Micro-averaging的不同之处在于：Macro-averaging赋予每个类相同的权重，然而Micro-averaging赋予每个样本决策相同的权重。因为从 <img src="https://www.zhihu.com/equation?tex=F_1" alt="[公式]" /> 值的计算公式可以看出，它忽略了那些被分类器正确判定为负类的那些样本，它的大小主要由被分类器正确判定为正类的那些样本决定的，在微平均评估指标中，样本数多的类别主导着样本数少的类。</p>
+</div>
+<div id="exact-match-ratio-subset-accuracy" class="section level4">
+<h4>Exact Match Ratio (Subset accuracy):</h4>
+<ul>
+<li>It is the <strong><code>most strict</code></strong> metric, indicating the percentage of samples that have all their labels
+classified correctly.</li>
+</ul>
+<center>
+<img src="https://cdn-images-1.medium.com/max/1600/1*iAqf__O54Tp0HzpLhaONkA.png" />
+</center>
+<center>
+Fig-7: Exact Match Ratio
+</center>
+<ul>
+<li>The disadvantage of this measure is that multi-class classification problems <strong><code>have a chance of being partially correct,</code></strong> but here we ignore those partially correct matches.</li>
+<li>There is a function in _scikit-learn _which implements subset accuracy, called as <strong>accuracy_score.</strong></li>
+</ul>
+<blockquote>
+<p><strong>Note: </strong>We will be using <strong>accuracy_score</strong> function to evaluate all our models in this project.</p>
+</blockquote>
+</div>
+<div id="multi-label-classification-techniques" class="section level3">
+<h3>Multi-Label Classification Techniques:</h3>
+<blockquote>
+<p>Most traditional learning algorithms are developed for single-label classification problems.
+Therefore a lot of approaches in the literature <strong><code>transform the multi-label problem into multiple single-label problems</code></strong>, so that the existing single-label algorithms can be used.</p>
+</blockquote>
+<div id="onevsrest" class="section level4">
+<h4>1. OneVsRest</h4>
+<ul>
+<li>Traditional two-class and multi-class problems can both be cast into multi-label ones by restricting each instance to have only one label. On the other hand, <strong><code>the generality of multi-label problems inevitably makes it more difficult to learn. An intuitive approach to solving multi-label problem is to decompose it into multiple independent binary classification problems (one per category)</code></strong></li>
+<li>In an “one-to-rest” strategy, one could <strong><code>build multiple independent classifiers</code></strong> and, for an unseen instance, choose the class for which the confidence is maximized.</li>
+<li>The <strong><code>main assumption</code></strong>here is that the <strong><code>labels are _mutually exclusive_. You do not consider any underlying correlation between the classes in this method.</code></strong></li>
+<li>For instance, it is more like asking simple questions, say, “<em>is the comment toxic or not</em>”, “<em>is the comment threatening or not?</em>”, etc. Also there might be an extensive case of overfitting here, since most of the comments are unlabeled, i,e., most of the comments are clean comments.</li>
+</ul>
+</div>
+<div id="binary-relevance" class="section level4">
+<h4>2. Binary Relevance</h4>
+<ul>
+<li>In this case an ensemble of single-label binary classifiers is trained, one for each class. <strong><code>Each classifier predicts either the membership or the non-membership of one class.</code></strong>
+The union of all classes that were predicted is taken as the multi-label output. <strong><code>This approach is popular because it is easy to implement, however it also ignores the possible correlations between class labels</code></strong>.</li>
+<li>In other words, <strong><code>if there’s _q_ labels, the binary relevance method create _q_new data sets from the images</code></strong>, one for each label and train single-label classifiers on each new data set. One classifier may answer yes/no to the question “does it contain trees?”, thus the “binary” in “binary relevance”. This is a simple approach but does not work well when there’s dependencies between the labels.</li>
+<li><em>OneVsRest &amp; Binary Relevance <em>seem very much alike. If multiple classifiers in OneVsRest answer </em>“yes”</em> then you are back to the binary relevance scenario.</li>
+</ul>
+</div>
+<div id="classifier-chains" class="section level4">
+<h4>3. Classifier Chains</h4>
+<ul>
+<li>A chain of binary classifiers C0, C1, . . . , Cn is constructed, where a classifier Ci uses the predictions of all the classifier Cj , where j &lt; i. This way the method, also called classifier chains (CC), can take into account label correlations.</li>
+<li>The total number of classifiers needed for this approach is equal to the number of classes, but the training of the classifiers is more involved.</li>
+<li>Following is an illustrated example with a classification problem of three categories {C1, C2, C3} chained in that order.</li>
+</ul>
+<p><img src="https://cdn-images-1.medium.com/max/2400/1*ycwr_uE8_5lnOMNCnFOuXQ.png" /></p>
+<center>
+Fig-13: Classifier Chains
+</center>
+</div>
+<div id="labelpowerset" class="section level4">
+<h4>4. Label Powerset</h4>
+<ul>
+<li>This approach does take possible correlations between class labels into account.
+More commonly this approach is called the label-powerset method,
+because it considers <strong><code>each member of the power set of labels in the training set as a single label</code></strong>.</li>
+<li>This method <strong>needs worst case (2^|C|) classifiers</strong>, and has a high computational complexity.</li>
+<li>However when the number of classes increases the number of distinct label combinations can grow exponentially. This easily leads to combinatorial explosion and thus computational infeasibility. Furthermore, some label combinations will have very few positive examples.</li>
+</ul>
+</div>
+<div id="adapted-algorithm" class="section level4">
+<h4>5. Adapted Algorithm</h4>
+<ul>
+<li>Algorithm adaptation methods for multi-label classification concentrate on adapting single-label classification algorithms to the multi-label case usually by changes in cost/decision functions.</li>
+<li>Here we use a multi-label lazy learning approach named <strong><em>ML-KNN</em></strong> which is derived from the traditional K-nearest neighbor (KNN) algorithm.</li>
+<li>The <code>[**skmultilearn.adapt**](http://scikit.ml/api/api/skmultilearn.adapt.html#module-skmultilearn.adapt)</code> module implements algorithm adaptation approaches to multi-label classification, including but not limited to <strong><em>ML-KNN.</em></strong></li>
+</ul>
+</div>
+</div>
+<div id="example" class="section level3">
+<h3>Example</h3>
+<div id="load-packages" class="section level4">
+<h4>Load Packages</h4>
+</div>
+<div id="load-data" class="section level4">
+<h4>load data</h4>
+<pre class="r"><code>load(&quot;../../data/multi-label-classfication.rda&quot;)</code></pre>
+</div>
+<div id="prepare-data" class="section level4">
+<h4>Prepare Data</h4>
+<pre class="r"><code>set.seed(2019)
+index &lt;- sample(1:nrow(data), floor(nrow(data) * .9))
+
+train_data &lt;- data[index, ]
+test_data  &lt;- data[-index, ]</code></pre>
+<pre class="python"><code>#------------------------------------------------
+# Multi-Label Classfication Machine Learning
+#------------------------------------------------
+import pandas as pd
+import numpy as np
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import Pipeline
+from sklearn.metrics import accuracy_score
+from sklearn.multiclass import OneVsRestClassifier
+y_col = [&quot;label_cidi&quot;,&quot;label_cido&quot;,&quot;label_codi&quot;,&quot;label_codo&quot;,&quot;label_w&quot;]
+y_train = r.train_data[y_col]
+x_train = r.train_data.drop(y_col, axis = 1)
+y_test = r.test_data[y_col]
+x_test = r.test_data.drop(y_col, axis = 1)</code></pre>
+</div>
+<div id="classifier-binary-relevance" class="section level4">
+<h4>Classifier: Binary Relevance</h4>
+<pre class="python"><code>#------------------------------------------------
+# using binary relevance
+#------------------------------------------------
+from skmultilearn.problem_transform import BinaryRelevance
+from sklearn.naive_bayes import GaussianNB
+# initialize binary relevance multi-label classifier
+# with a gaussian naive bayes base classifier
+classifier = BinaryRelevance(GaussianNB())
+# train
+classifier.fit(x_train, y_train)
+# predict
+predictions = classifier.predict(x_test)
+# accuracy
+print(&quot;Accuracy = &quot;,accuracy_score(y_test,predictions))</code></pre>
+<pre><code>## Accuracy =  0.368888888889</code></pre>
+</div>
+<div id="classifier-chains-1" class="section level4">
+<h4>Classifier Chains</h4>
+<pre class="python"><code>#------------------------------------------------
+# using classifier chains
+#------------------------------------------------
+from skmultilearn.problem_transform import ClassifierChain
+from sklearn.linear_model import LogisticRegression
+# initialize classifier chains multi-label classifier
+classifier = ClassifierChain(LogisticRegression())
+# Training logistic regression model on train data
+classifier.fit(x_train, y_train)
+# predict
+predictions = classifier.predict(x_test)
+# accuracy
+print(&quot;Accuracy = &quot;,accuracy_score(y_test,predictions))</code></pre>
+<pre><code>## Accuracy =  0.76</code></pre>
+</div>
+<div id="classifer-label-powerset" class="section level4">
+<h4>Classifer: Label Powerset</h4>
+<pre class="python"><code>#------------------------------------------------
+# using Label Powerset
+#------------------------------------------------
+from skmultilearn.problem_transform import LabelPowerset
+# initialize label powerset multi-label classifier
+classifier = LabelPowerset(LogisticRegression())
+# train
+classifier.fit(x_train, y_train)
+# predict
+predictions = classifier.predict(x_test)
+# accuracy
+print(&quot;Accuracy = &quot;,accuracy_score(y_test,predictions))</code></pre>
+<pre><code>## Accuracy =  0.795555555556</code></pre>
+</div>
+<div id="classifer-mlknn" class="section level4">
+<h4>Classifer: MLkNN</h4>
+<pre class="python"><code>#------------------------------------------------
+# Adapted Algorithm: MLkNN
+#------------------------------------------------
+from skmultilearn.adapt import MLkNN
+from scipy.sparse import csr_matrix, lil_matrix
+classifier_new = MLkNN(k=10)
+# Note that this classifier can throw up errors when handling sparse matrices.
+x_train = lil_matrix(x_train).toarray()
+y_train = lil_matrix(y_train).toarray()
+x_test = lil_matrix(x_test).toarray()
+# train
+classifier_new.fit(x_train, y_train)
+# predict
+predictions_new = classifier_new.predict(x_test)
+# accuracy
+print(&quot;Accuracy = &quot;,accuracy_score(y_test,predictions_new))</code></pre>
+<pre><code>## Accuracy =  0.72</code></pre>
+</div>
+</div>
+<div id="conclusion" class="section level3">
+<h3>Conclusion:</h3>
+<div id="results" class="section level4">
+<h4>Results:</h4>
+<ul>
+<li>There are two main methods for tackling a multi-label classification problem: <strong><code>problem transformation methods</code> </strong>and <strong><code>algorithm adaptation methods</code></strong>.</li>
+<li>Problem <strong><code>transformation methods</code></strong> transform the multi-label problem into a set of <a href="https://en.wikipedia.org/wiki/Binary_classification">binary classification</a> problems, which can then be handled using single-class classifiers.</li>
+<li>Whereas <strong><code>algorithm adaptation methods</code></strong> adapt the algorithms to directly perform multi-label classification. In other words, rather than trying to convert the problem to a simpler problem, they try to address the problem in its full form.</li>
+<li>In an extensive comparison with other approaches, <strong><code>label-powerset method scores best</code></strong>, followed by the classifer chains method.</li>
+<li>Both ML-KNN and label-powerset take considerable amount of time when run on this dataset, so experimentation was done on a random sample of the train data.</li>
+</ul>
+</div>
+</div>
+</div>
