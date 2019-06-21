@@ -214,6 +214,63 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="/2018/04/algorithms-selection-sort/">
+          algorithms: selection sort
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-04-17T00:00:00Z">
+        
+  April 17, 2018
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/machine-learning">machine learning</a>
+    
+  
+
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      选择排序  计算机内存就像一大堆的抽屉， 每个抽屉都有地址 存储多个元素可以使用：数组和链表 数组的元素都在一起 链表的元素是分开的，每个元素都存着下一个元素的地址 数组的读取速度很快 链表的插入和删除速度很快 在同一个数组中，所有的元素类型必须一致   def findSmallest(arr): smallest = arr[0] #初始化：存储最小的值 smallest_index=0 #初始化: 存储最小值的索引 for i in range(1, len(arr)): if arr[i] &lt; smallest: smallest=arr[i] smallest_index=i return smallest_index def selectionSort(arr): #对数据进行排序 newArr=[] for i in range(len(arr)): smallest=findSmallest(arr)#找出数据中最小的元素，并将其加到新的数组中去 newArr.append(arr.pop(smallest)) return newArr print(selectionSort([5,3,6,2])) ## [2, 3, 5, 6]  
+      <p>
+        <a href="/2018/04/algorithms-selection-sort/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="/2018/04/algorithms-selection-sort/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="https://i.loli.net/2018/04/17/5ad52d7f7de35.jpg"/>
+      </div>
+    </a>
+  
+</article>
+
+          
+            
+  
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
         <a class="link-unstyled" href="/2018/04/hierarchical-clustering/">
           Hierarchical Clustering
         </a>
@@ -551,65 +608,6 @@ library(caretEnsemble) # Stacking Algorithms - Run multiple algos in one call. t
 </article>
 
           
-            
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/03/7-how-to-do-hyperparameter-tuning/">
-          7 How To Do Hyperparameter Tuning 
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-03-30T00:00:00Z">
-        
-  March 30, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/machine-learning">machine learning</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      Load Package And Data load(&quot;../../data/craet_6.Rdata&quot;) library(tidyverse) library(caret) # Set Parallel Processing - Decrease computation time if (!require(&quot;doMC&quot;)) install.packages(&quot;doMC&quot;) library(doMC) registerDoMC(cores = 4) Hyper parameter tuning using tuneGrid Model Tuning Parameter Set
- Cross Validation Set
-Cross validation method can be one amongst:  ‘boot’: Bootstrap sampling ‘boot632’: Bootstrap sampling with 63.2% bias correction applied ‘optimism_boot’: The optimism bootstrap estimator ‘boot_all’: All boot methods. ‘cv’: k-Fold cross validation ‘repeatedcv’: Repeated k-Fold cross validation ‘oob’: Out of Bag cross validation ‘LOOCV’: Leave one out cross validation ‘LGOCV’: Leave group out cross validation  Training And Tuning
-      <p>
-        <a href="/2018/03/7-how-to-do-hyperparameter-tuning/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/03/7-how-to-do-hyperparameter-tuning/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/30/5abd8ebe45769.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-          
           
   <div class="pagination-bar">
     <ul class="pagination">
@@ -691,6 +689,23 @@ Cross validation method can be one amongst:  ‘boot’: Bootstrap sampling �
       <div class="no-result text-color-light text-center">no post found</div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/06/multi-classfication-machine-learning/">
+                <h3 class="media-heading">multi-classfication machine learning</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"> </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -881,23 +896,6 @@ pub_chunks()：获取XML部分 pub_tabularize()：强制输出pub_chunks()到dat
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/09/nlp-part-03-sentiment-analysis/">
-                <h3 class="media-heading">NLP part 03 sentiment analysis</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Sep 9, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -905,7 +903,7 @@ pub_chunks()：获取XML部分 pub_tabularize()：强制输出pub_chunks()到dat
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         56 posts found
+         57 posts found
       </p>
     </div>
   </div>

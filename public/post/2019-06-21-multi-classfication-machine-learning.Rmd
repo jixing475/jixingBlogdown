@@ -1,0 +1,27 @@
+---
+title: multi-classfication machine learning
+author: ZERO
+date: '2019-06-21'
+slug: multi-classfication-machine-learning
+categories:
+  - machine learning
+tags:
+  - algorithms
+keywords:
+  - tech
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/08/13/5b70bd4dc9763.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE,
+	engine.path="/Users/zero/anaconda3/bin/python"
+)
+```
+
+<!--more-->

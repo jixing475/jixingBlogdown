@@ -1,0 +1,457 @@
+---
+title: 多分类机器学习
+author: ZERO
+date: '2019-06-21'
+slug: multi-classfication-machine-learning
+categories:
+  - machine learning
+tags:
+  - algorithms
+keywords:
+  - tech
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2018/08/13/5b70bd4dc9763.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE
+)
+library(reticulate)
+use_condaenv(condaenv = "decoy", 
+             conda = "/Users/zero/anaconda3/bin/conda")
+use_python(python = "/Users/zero/anaconda3/envs/decoy/bin/python3",
+           required = TRUE)
+knitr::knit_engines$set(python = reticulate::eng_python)
+
+# load pkg
+library(tidyverse)
+library(tidyr)
+library(caret)
+library(here)
+```
+
+<!--more-->
+# The Data And Problem
+
+
+- The data set is a collection of approximately **2156** (remove 88 ligand with multi-labels) ligands , calculate the fingerprint(morgan fingerprints, fp_size = 1024) as the feature.
+
+- The problem is supervised multi-classification problem, **classifying ligand into one and and only one of 5 pre-defined classes: cidi, cido, codi, codo, w** and our goal is to investigate which supervised machine learning methods are best suited to solve it.
+
+- After model training then given a new ligand comes in, we want to assign it to one of 5 categories. The classifier makes the assumption that each new ligand is assigned to one and only one category.
+
+  
+```{r include=FALSE}
+# function -----------------------------------------------------------
+
+# load data  -----------------------------------------------------------
+after_step_05_update <- read_csv("/Users/zero/Desktop/deepdrug_ASFV/decoy_find/output_data/kinaMetrix/after_step_05_update.csv")
+
+white_list_init <- read_csv("/Users/zero/Desktop/deepdrug_ASFV/decoy_find/output_data/kinaMetrix/white_list_init.csv") %>% distinct()
+
+# tow lable frequence -----------------------------------------------------------
+after_step_05_update %>% 
+  filter(pdb_ligand_id %in% white_list_init$pdb_ligand_id) %>% # keep the white ligand 
+  select(pdb_ligand_id, conformation, smiles_SrcPDB) %>% distinct() %>% # unique
+  mutate(conformation = str_replace(conformation, "ω_cd", "w")) %>% 
+  group_by(pdb_ligand_id) %>% 
+  summarise(counts = n()) %>% # calculate the frequence
+  pull(counts) %>% 
+  table()
+
+# extract the duplicate ----------------------------------------------------------
+multi_lables_ligand <- 
+after_step_05_update %>% 
+  filter(pdb_ligand_id %in% white_list_init$pdb_ligand_id) %>% 
+  select(pdb_ligand_id, conformation, smiles_SrcPDB) %>% distinct() %>% 
+  mutate(conformation = str_replace(conformation, "ω_cd", "w")) %>% 
+  janitor::get_dupes(pdb_ligand_id) %>%  
+  pull(pdb_ligand_id) %>% unique()
+
+
+ligand_conf_smiles <- 
+  after_step_05_update %>% 
+  filter(pdb_ligand_id %in% white_list_init$pdb_ligand_id) %>% 
+  select(pdb_ligand_id, conformation, smiles_SrcPDB) %>% 
+  mutate(conformation = str_replace(conformation, "ω_cd", "w")) %>%
+  distinct() 
+
+# remove multiple labels ligand
+`%nin%` <- function (x, table) match(x, table, nomatch = 0) == 0
+ligand_smiles_label <- 
+  ligand_conf_smiles %>%
+  filter(pdb_ligand_id %nin% multi_lables_ligand)
+
+source_python("/Users/zero/Desktop/deepdock_kinase_project/R/ligand_conf_mapping_data_prepare.py")
+py$data_df %>% dim()
+data_multi_class <- py$data_df
+
+data_multi_class <- 
+data_multi_class %>% 
+  rename_all(~str_c("Var_", .)) %>%
+  rownames_to_column(var = "pdb_ligand_id") 
+
+data_multi_class %>% 
+  select(-pdb_ligand_id) %>% 
+  imap(~ sum(.x)) %>% 
+  unlist() %>% sort() %>% head(10)
+
+data4ml <-
+  ligand_smiles_label %>% select(-smiles_SrcPDB) %>%
+  inner_join(data_multi_class, by = "pdb_ligand_id") 
+
+
+data <- data4ml %>% dplyr::select(-pdb_ligand_id)
+```
+
+
+```{python}
+#------------------------------------------------
+# data prepare 
+#------------------------------------------------
+import numpy as np
+import pandas as pd
+import os
+import seaborn as sns
+import matplotlib.pyplot as plt 
+y_col = ["conformation"]
+df = r.data
+
+df['category_id'] = df['conformation'].factorize()[0]
+df[['conformation', 'category_id']].drop_duplicates().head()
+
+category_id_df = df[['conformation', 'category_id']].drop_duplicates().sort_values('category_id')
+category_to_id = dict(category_id_df.values)
+id_to_category = dict(category_id_df[['category_id', 'conformation']].values)
+
+features = df.drop(['conformation', 'category_id'], axis = 1).values
+features.shape
+
+labels = df['conformation'].values
+labels_keras = df['category_id'].values
+```
+
+# Exploreing Data
+
+Before diving into training machine learning models, first look at the number of ligand in each class: **classes are balanced or imbalanced ?**
+
+```{python}
+# The category are imbalance
+fig, ax = plt.subplots(figsize=(10,10))
+df.conformation.value_counts().plot(kind='bar');
+plt.show()
+```
+
+- We see that the number of ligand per conformation is imbalanced.
+- **ligand of conformation are more biased towards `cidi`.**
+
+> With imbalanced classes, it’s easy to get a high accuracy without actually making useful predictions. When we encounter such problems, we are bound to have difficulties solving them with standard algorithms. Conventional algorithms are often biased towards the majority class, not taking the data distribution into consideration. In the worst case, minority classes are treated as outliers and ignored. 
+
+### How To Evaluate Model For Data With Imbalanced Classes
+
+The model have good accuracy since data is heavily biased towards cidi conformation, may never be able to classify codi or codo correctly. 
+
+**Now the question is if the accuracy, in this case, is not the right metric to choose then what metrics to use to measure the performance of the model?**
+
+
+### Metric 1: Confusion-Matrix
+
+> Confusion Matrix is a performance measurement for a classification algorithm where output can be two or more classes.
+
+- With imbalanced classes, it’s easy to get a high accuracy without actually making useful predictions. 
+- So, **accuracy as an evaluation metrics makes sense only if the class labels are uniformly distributed.** 
+- In case of imbalanced classes confusion-matrix is good technique to summarizing the performance of a classification algorithm.
+
+### Metric 2: Precision-Recall Curves
+
+- **Precision-Recall** is a useful measure of success of prediction when the classes are very imbalanced. 
+- **Precision** is a measure of the _ability of a classification model to identify only the relevant data points,_ while **`recall`** is a measure of the_ability of a model to find all the relevant cases within a dataset_.
+
+- **The precision-recall curve shows the trade-off between precision and recall for different threshold**. A high area under the curve represents both high recall and high precision, where high precision relates to a low false positive rate, and high recall relates to a low false negative rate.
+
+> _High scores for both _**_precision _**_and _**_recall _**_show that the classifier is returning accurate results (precision), as well as returning a majority of all positive results (recall). An ideal system with high precision and high recall will return many results, with all results labeled correctly._
+
+### Metric 3: Micro Average
+
+> [**macro-average**](https://datascience.stackexchange.com/questions/15989/micro-average-vs-macro-average-performance-in-a-multiclass-classification-settin) computes the [**precision**](https://en.wikipedia.org/wiki/Precision_and_recall), [**recall**](https://en.wikipedia.org/wiki/Precision_and_recall) and [**f1-score**](https://en.wikipedia.org/wiki/F1_score) independently for each class and then take the average (hence treating all classes equally), whereas a [**micro-average**](https://datascience.stackexchange.com/questions/15989/micro-average-vs-macro-average-performance-in-a-multiclass-classification-settin) will aggregate the contributions of all classes to compute the average metric. 
+
+> **In a multi-class classification setup, micro-average is preferable if you suspect there might be class imbalance** (i.e you may have many more examples of one class than of other classes).
+
+
+# Model Trainning and select
+
+I will benchmark the following four models:
+
+  * Logistic Regression
+  * (Multinomial) Naive Bayes
+  * Linear Support Vector Machine
+  * Random Forest
+
+### Logistic Regression
+
+**Logistic regression** is a simple and easy to understand classification algorithm, and Logistic regression can be easily generalized to multiple classes.
+
+### Naive Bayes Classifier for Multinomial Models
+
+start with a [Naive Bayes](http://scikit-learn.org/stable/modules/naive_bayes.html#naive-bayes) classifier
+
+### Linear Support Vector Machine
+
+[Linear Support Vector Machine](http://scikit-learn.org/stable/modules/svm.html#svm) is widely regarded as one of the best classification algorithms.
+
+
+```{python}
+from sklearn.metrics import f1_score
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import MultinomialNB
+
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.svm import LinearSVC
+from sklearn.model_selection import cross_val_score
+# import sklearn
+# sorted(sklearn.metrics.SCORERS.keys())
+
+models = [
+    RandomForestClassifier(n_estimators=200, max_depth=3, random_state=0),
+    LinearSVC(),
+    MultinomialNB(),
+    LogisticRegression(random_state=0),
+]
+CV = 5
+cv_df = pd.DataFrame(index=range(CV * len(models)))
+entries = []
+
+for model in models:
+  model_name = model.__class__.__name__
+  f1_scores = cross_val_score(model, features, labels, scoring='f1_micro', cv=CV)
+  for fold_idx, f1_score in enumerate(f1_scores):
+    entries.append((model_name, fold_idx, f1_score))
+cv_df = pd.DataFrame(entries, columns=['model_name', 'fold_idx', 'f1_micro'])
+
+```
+
+```{python}
+fig, ax = plt.subplots(figsize=(10,10))
+sns.boxplot(x='model_name', y='f1_micro', data=cv_df)
+sns.stripplot(x='model_name', y='f1_micro', data=cv_df, 
+              size=8, jitter=True, edgecolor="gray", linewidth=2)
+plt.show()
+```
+
+```{python}
+print(cv_df.groupby('model_name').f1_micro.mean())
+```
+
+# Model Evaluation LogisticRegression
+
+### confusion matrix
+```{python}
+from sklearn.metrics import classification_report
+from sklearn.metrics import accuracy_score, confusion_matrix
+my_tags = df['conformation'].drop_duplicates().tolist()
+
+features.shape
+model = LogisticRegression(random_state=0)
+X_train, X_test, y_train, y_test, indices_train, indices_test = train_test_split(features, labels, df.index, test_size=0.33, random_state=0)
+
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+
+conf_mat = confusion_matrix(y_test, y_pred)
+conf_mat
+
+fig, ax = plt.subplots(figsize=(10,10))
+sns.heatmap(conf_mat, annot=True, fmt='d',
+            xticklabels=category_id_df.conformation.values, 
+            yticklabels=category_id_df.conformation.values)
+plt.ylabel('Actual')
+plt.xlabel('Predicted')
+plt.show()
+
+```
+
+```{python}
+from sklearn import metrics
+print('micro f1-score:',metrics.f1_score(y_test,y_pred,  average='micro'))#预测微平均f1-score输出
+print('混淆矩阵输出:\n',metrics.confusion_matrix(y_test,y_pred))#混淆矩阵输出
+print('分类报告:\n', metrics.classification_report(y_test, y_pred))#分类报告输出
+
+```
+
+
+### Precision-Recall curve
+```{python}
+#------------------------------------------------
+# OneVsRestClassifier
+#------------------------------------------------
+from sklearn.preprocessing import label_binarize
+# Use label_binarize to be multi-label like settings
+Y = label_binarize(labels, classes=['cidi', "cido", "codi", "codo", "w"])
+n_classes = Y.shape[1]
+
+X_train, X_test, Y_train, Y_test = train_test_split(features, Y, test_size=.3,
+                                                    random_state=0)
+                                                    
+from sklearn.multiclass import OneVsRestClassifier
+# Run classifier
+classifier = OneVsRestClassifier(LogisticRegression(random_state=0))
+classifier.fit(X_train, Y_train)
+
+y_score = classifier.decision_function(X_test)
+
+
+from sklearn.metrics import precision_recall_curve
+from sklearn.metrics import average_precision_score
+# For each class
+precision = dict()
+recall = dict()
+average_precision = dict()
+
+for i in range(n_classes):
+    precision[i], recall[i], _ = precision_recall_curve(Y_test[:, i],
+                                                        y_score[:, i])
+    average_precision[i] = average_precision_score(Y_test[:, i], y_score[:, i])
+
+# A "micro-average": quantifying score on all classes jointly
+precision["micro"], recall["micro"], _ = precision_recall_curve(Y_test.ravel(),
+    y_score.ravel())
+average_precision["micro"] = average_precision_score(Y_test, y_score,
+                                                     average="micro")
+print('Average precision score, micro-averaged over all classes: {0:0.2f}'
+      .format(average_precision["micro"]))
+```
+
+
+```{python}
+# Plot the micro-averaged Precision-Recall curve
+from sklearn.metrics import precision_recall_curve
+import matplotlib.pyplot as plt
+from inspect import signature
+step_kwargs = ({'step': 'post'}
+               if 'step' in signature(plt.fill_between).parameters
+               else {})
+plt.figure()
+plt.step(recall['micro'], precision['micro'], color='b', alpha=0.2,
+         where='post')
+plt.fill_between(recall["micro"], precision["micro"], alpha=0.2, color='b', **step_kwargs)
+
+plt.xlabel('Recall')
+plt.ylabel('Precision')
+plt.ylim([0.0, 1.05])
+plt.xlim([0.0, 1.0])
+plt.title(
+    'Average precision score, micro-averaged over all classes: AP={0:0.2f}'
+    .format(average_precision["micro"]))
+plt.show()
+```
+
+```{python warning=FALSE}
+Y_pred = classifier.predict(X_test)
+
+
+from sklearn import metrics
+print('micro f1-score:',metrics.f1_score(Y_test,Y_pred,  average='micro'))#预测微平均f1-score输出
+print('分类报告:\n', metrics.classification_report(Y_test, Y_pred))#分类报告输出
+
+```
+
+
+```{python}
+# Plot Precision-Recall curve for each class and iso-f1 curves
+from itertools import cycle
+# setup plot details
+colors = cycle(['navy', 'turquoise', 'darkorange', 'cornflowerblue', 'teal'])
+
+plt.figure(figsize=(7, 8))
+f_scores = np.linspace(0.2, 0.8, num=4)
+lines = []
+labels_plt = []
+for f_score in f_scores:
+    x = np.linspace(0.01, 1)
+    y = f_score * x / (2 * x - f_score)
+    l, = plt.plot(x[y >= 0], y[y >= 0], color='gray', alpha=0.2)
+    plt.annotate('f1={0:0.1f}'.format(f_score), xy=(0.9, y[45] + 0.02))
+
+lines.append(l)
+labels_plt.append('iso-f1 curves')
+l, = plt.plot(recall["micro"], precision["micro"], color='gold', lw=2)
+lines.append(l)
+labels_plt.append('micro-average Precision-recall (area = {0:0.2f})'
+              ''.format(average_precision["micro"]))
+
+for i, color in zip(range(n_classes), colors):
+    l, = plt.plot(recall[i], precision[i], color=color, lw=2)
+    lines.append(l)
+    labels_plt.append('Precision-recall for class {0} (area = {1:0.2f})'
+                  ''.format(i, average_precision[i]))
+
+fig = plt.gcf()
+fig.subplots_adjust(bottom=0.25)
+plt.xlim([0.0, 1.0])
+plt.ylim([0.0, 1.05])
+plt.xlabel('Recall')
+plt.ylabel('Precision')
+plt.title('Extension of Precision-Recall curve to multi-class')
+plt.legend(lines, labels_plt, loc=(0, -.38), prop=dict(size=14))
+plt.show()
+```
+
+```{r echo=FALSE}
+library(kableExtra)
+ data.frame(stringsAsFactors=FALSE,
+       class = c("class 0", "class 1", "class 2", "class 3", "class 4"),
+        name = c("cidi", "cido", "codi", "codo", "w")
+) %>%
+    kable("html") %>%
+    kable_styling("hover", full_width = F)
+
+```
+
+
+# Model Tunning: How To Improve The Performance?
+
+
+### add class_weight
+```{python}
+from sklearn.metrics import classification_report
+from sklearn.metrics import accuracy_score, confusion_matrix
+my_tags = df['conformation'].drop_duplicates().tolist()
+
+features.shape
+X_train, X_test, y_train, y_test, indices_train, indices_test = train_test_split(features, labels, df.index, test_size=0.33, random_state=0)
+
+# add class weight
+from sklearn.utils import class_weight
+class_weight = class_weight = dict({'cidi':1427/2156, 'cido':169/2156, 'codi':451/2156, 'codo':30/2156, 'w':79/2156})
+
+model = LogisticRegression(random_state=0, class_weight=class_weight)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+
+conf_mat = confusion_matrix(y_test, y_pred)
+conf_mat
+
+fig, ax = plt.subplots(figsize=(10,10))
+sns.heatmap(conf_mat, annot=True, fmt='d',
+            xticklabels=category_id_df.conformation.values, 
+            yticklabels=category_id_df.conformation.values)
+plt.ylabel('Actual')
+plt.xlabel('Predicted')
+plt.show()
+```
+
+```{python}
+from sklearn import metrics
+print('micro f1-score:',metrics.f1_score(y_test,y_pred,  average='micro'))#预测微平均f1-score输出
+print('混淆矩阵输出:\n',metrics.confusion_matrix(y_test,y_pred))#混淆矩阵输出
+print('分类报告:\n', metrics.classification_report(y_test, y_pred))#分类报告输出
+
+```
+
+# continue ...

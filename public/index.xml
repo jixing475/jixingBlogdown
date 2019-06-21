@@ -2,12 +2,21 @@
   <title>student zero </title>
   <link href="/index.xml" rel="self"/>
   <link href="/"/>
-  <updated>2019-06-19T00:00:00+00:00</updated>
+  <updated>2019-06-21T00:00:00+00:00</updated>
   <id>/</id>
   <author>
     <name>Jixing Liu</name>
   </author>
   <generator>Hugo -- gohugo.io</generator>
+  <entry>
+    <title type="html"><![CDATA[multi-classfication machine learning]]></title>
+    <link href="/2019/06/multi-classfication-machine-learning/"/>
+    <id>/2019/06/multi-classfication-machine-learning/</id>
+    <published>2019-06-21T00:00:00+00:00</published>
+    <updated>2019-06-21T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<!--more-->
+]]></content>
+  </entry>
   <entry>
     <title type="html"><![CDATA[多标签分类问题]]></title>
     <link href="/2019/06/multi-label-classfication/"/>
