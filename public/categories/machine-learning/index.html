@@ -217,63 +217,6 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2019/06/multi-classfication-machine-learning/">
-          multi-classfication machine learning
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2019-06-21T00:00:00Z">
-        
-  June 21, 2019
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/machine-learning">machine learning</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-       
-      <p>
-        <a href="/2019/06/multi-classfication-machine-learning/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2019/06/multi-classfication-machine-learning/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/08/13/5b70bd4dc9763.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-            
-              
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
         <a class="link-unstyled" href="/2019/06/multi-label-classfication/">
           多标签分类问题
         </a>
@@ -617,6 +560,73 @@ X: -1, 0, 1, 2, 3, 4 Y: -3, -1, 1, 3, 5, 7
 </article>
 
             
+              
+  
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="/2018/08/t-sne/">
+          t-SNE
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-08-07T00:00:00Z">
+        
+  August 7, 2018
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/machine-learning">machine learning</a>
+    
+  
+
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      note  许多真实世界的数据集具有较低的内在维度，但是它们嵌入在高维空间中，人类因为受限于三维可视化，而不易发现这些内在的结构
+t分布式随机邻域嵌入（t-SNE）：t-distributed stochastic neighbor embedding (t-SNE)， 是一种非常流行的非线性降为的方法，它和 PCA的不同之处在于：
+PCA的本质是在降维之后尽量保存矩阵的最大变异性，而实际上我们经常是想保存原本的结构，换句话说，就是降维前各个点相对距离结构在降维之后要继续保留下来
+ 过程 我们这里用 3维代替高维， 2维代替低维 那么3维的点经过 映射之后 在2维的空间 要保存原有的相对距离结构
+这个过程本质 神经网络深度学习问题，是找到最佳的映射矩阵（最好的 w1 w2 组合方式），使得映射后，数据结构得以保存 那么怎么来衡量数据结构保存的效果？
+那就看比较原始数据下的距离矩阵 和 映射后的距离矩阵 的差 这样的话问题就转化为： 求熵最小化的问题？
+那么这里有个问题，高维度的距离矩阵怎么和低维的距离矩阵进行比较呢 ？ 这就是 t-SNE 的特殊的地方：它把距离问题转换为概率问题，距离越近的i,j两点，pij越大， 以i为中心的t分布，描述 i 与所有点的距离，
+之所以不用正态分布，是因为t分布是长尾 的，这样的分布在尾部的数据点之间（距离较远的点）的惩罚不是区分的很严格，
+换句话说就是 映射后 近变远 的惩罚系数 &gt; 远变近的惩罚系数，
+这个过程可以想象成 一个弹簧产生形变，映射由远变进就是压缩，会产生斥力，映射由近变远，就会拉伸，产生引力 ，形变就好像是熵，是映射前和映射后的差距，产生的单位力（力/形变长度） 的绝对值就好像是惩罚系数，拉伸的形变产生的单位引力 &gt; 压缩的形变产生的单位斥力 ，
+这就很好的解决了数据点映射后的拥挤问题，就好像点与点之间有一定的斥力（为了纠正远变近的情况），但是这个斥力系数又小于点与点之间的引力, 这样在纠正同样误差的时候我们会优先纠正近的变成远的, 体现在单位引力大于单位斥力（为了纠正近变远的情况，单位引力大于单位斥力是因为我们更在乎点与点之间相似的机构 ， 可以想象最后每个点会在所有合力的情况下达到一个平衡， 如下图：  Links  tsne   
+      <p>
+        <a href="/2018/08/t-sne/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="/2018/08/t-sne/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="https://i.loli.net/2018/08/07/5b68cda2c6c88.jpg"/>
+      </div>
+    </a>
+  
+</article>
+
+            
             
   <div class="pagination-bar">
     <ul class="pagination">
@@ -696,15 +706,26 @@ X: -1, 0, 1, 2, 3, 4 Y: -3, -1, 1, 3, 5, 7
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2019/06/multi-classfication-machine-learning/">
-                <h3 class="media-heading">multi-classfication machine learning</h3>
+              <a class="link-unstyled" href="/2019/10/what-are-we-talking-about-when-we-say-reading-literature/">
+                <h3 class="media-heading">如何阅读大量的学术论文, 而不发疯？</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
-                  Jun 6, 2019
+                  Oct 10, 2019
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather"> </div>
+              <div class="media-content hide-xs font-merryweather">某个宁静的下午, 我带着一个急需解决的问题或者困惑去 Google Scholar 上查阅文献, 但是我在阅读过程中不断点击正在阅读的论文的参考文献链接, 然后继续阅读这些文章的引用论文, 无休无止, 很快我发现我想了解的这个问题所在领域是一个深不可测的海洋, 需要用一生去研究才可能有所作为, 因此很快我变得不知所措, 对阅读论文这件事感到无比焦虑、惶恐, 那么你在做研究时是否碰到类似的问题, 又有什么办法应对这种感觉呢？
+所以“如何高效阅读论文”对于刚入门的研究人员来说, 是一个永恒的问题
+数学 数学是一篇文献的基本要素之一, 并且是有限的, 学会如何拆解他, 并理解和解释, 这些东西是不变的.
+ 综述 阅读综述: 在40-60页的综述文章中, 你通常能够以一种优美、整洁、结构化、条理清晰的方式获取100-200篇论文中的重要信息。
+当你阅读了2-3篇最近(过去5年内)的综述论文后, 你会发现三点：
+总是被引用的论文； 其具体工作听起来很酷或很相关的作者； 你感兴趣的子领域中相对较新的进展, 以及关于这些主题的值得注意的论文。  一旦有了这三点, 那么你就很清楚接下来该读什么, 为什么读, 以及读的顺序了。
+ 略读 最重要的是, 你要回答一个具体的问题。提出这样一个问题, 可以帮助你在一分钟内确定这篇论文是否包含答案。
+至少以粗略的方式阅读各种论文是件好事, 因为即使你不了解如何实现这些论文, 你也会知道有这样的方法/想法存在 , 并且当有机会或当它与你的研究相关性很大时, 你可以回过头来深入阅读。将这些论文视为工具箱中的可能有用的工具就行。头脑里的关键字积累是很重要的.
+如果你能在5分钟内意识到一篇论文可能不是你现在需要学习的东西, 漂亮！这样你只浪费了5分钟的时间就可以进行下一步操作了。
+ 精读 随手列出问题清单, 一定要抵制立即查找你遇到的不理解内容的冲动！ 并在获得答案时写下答案, 仅在读完论文之后, 才去查阅里面的知识点
+再怎么强调都不为过的是: 一定要确保你在阅读的同时进行输出.  哪怕只是在白纸上写写画画。只要确保将相关的思想联系在一起, 并跟踪这些思想的准确引用即可。对关键概念做一点文献笔记很有必要, 当你为了找到一个准确的引用需要回顾1-3年前读过的论文时, 你会发现将两个关键思想联系在一起很有帮助。
+慢慢地, 随着你的进步, 你将开始了解更多, 并且由于你已经积累了框架, 很多让你早期感觉困惑的知识点开始变得不言而喻。对于我来说, 很多时候我会浏览论文中的公式。因为人们的写作风格和某些单词背后的含义含糊不清, 但是公式是清晰的。</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -906,7 +927,7 @@ pub_chunks()：获取XML部分 pub_tabularize()：强制输出pub_chunks()到dat
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         57 posts found
+         58 posts found
       </p>
     </div>
   </div>
