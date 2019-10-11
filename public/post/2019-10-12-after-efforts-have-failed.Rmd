@@ -1,0 +1,42 @@
+---
+title: 努力后的失败，才是诚实的失败
+author: ZERO
+date: '2019-10-12'
+slug: after-efforts-have-failed
+categories:
+  - life
+tags:
+  - 小确幸
+keywords:
+  - tech
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2019/10/12/wUmfOEPGtBMCbRe.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE,
+	engine.path="/Users/zero/anaconda3/bin/python"
+)
+```
+
+<!--more-->
+
+
+记得吗？读书时候，我们只崇拜和欣赏无需努力或者看上去不怎么需要努力，就取得好成绩的同学。不够聪明的人才需要全力以赴，聪明的人都轻松上阵。
+
+这个由固定型思维衍生和推导出来的观点有多致命？这个观点让固定型思维模式者不愿意努力了。<font color="darkred">许多人认为需要大量努力是能力低下的表现</font> ，他们不愿意自己看起来能力低下。如果他们不努力，他们至少可以找到一个借口:我之所以失败了，我之所以表现不佳，是因为我压根没尽力。努力了，仍然失败了，是固定型思维模式者更大的恐惧。可是努力后的失败，才是诚实的失败。
+
+
+两种思维模式的人，想法和行为有太多不同: 对待挑战，固定型思维模式者只对他们一开始就做得很好的事情，保持兴趣，当开始感到困难的时候，获得的乐趣就骤减，如果这件事不能证明他们有多聪明，他们就无法对其感兴趣，但是呢，成长性思维的人，越有挑战，他就越来劲，越感兴趣，越沉浸其中。固定思维的人不想接受挑战，他们因此错过许多机会，成长思维的人喜欢挑战，即使刚开始磕磕绊绊，但他们会越来越好。关注优胜，会很容易焦虑，但是如果关心的是成长，心态会发生巨大的改变。
+
+
+```{r out.width="30%", fig.align = "center", fig.margin=TRUE, echo=FALSE, eval=TRUE}
+knitr::include_graphics("https://media.giphy.com/media/8UGoKT4boBkF9MGUb3/giphy.gif")
+```
+
+
