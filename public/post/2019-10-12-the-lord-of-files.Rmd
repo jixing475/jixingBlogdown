@@ -1,0 +1,44 @@
+---
+title: 蝇王
+author: ZERO
+date: '2019-10-12'
+slug: the-lord-of-files
+categories:
+  - Essays
+tags:
+  - book note
+keywords:
+  - tech
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2019/10/12/uwFrUE1AlH95KCB.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE,
+	engine.path="/Users/zero/anaconda3/bin/python"
+)
+```
+
+<!--more-->
+
+> <font color="darkred">You Become A Monster, You Will Not Be Scare A Monster</font> 
+
+
+一群孩子被放到隔绝外界环境的孤岛, (这样的设定有点像实验术语中的控制变量. 作者想要证明人性本恶, 与外界无关, 也就是和其他变量没有关系.) 天真的孩子是如何从文明走向罪恶的过程, 完美的推演了由善像恶的自发过程. 表明人性本恶, 恶就存在人的身体里, 天生就带着恶的属性. 
+
+总结起来需要三个自带的条件:
+
+- 共同的敌人
+- 迫切的基础需求
+- 主流的裹挟(集体无意思)
+
+
+```{r out.width="30%", fig.align = "center", fig.margin=TRUE, echo=FALSE, eval=TRUE}
+knitr::include_graphics("https://media.giphy.com/media/67Ta0f4vkyb7xmTGVy/giphy-downsized.gif")
+```
+
