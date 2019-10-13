@@ -1,0 +1,95 @@
+---
+title: 如何拟合一条曲线
+author: ZERO
+date: '2019-10-13'
+slug: ''
+categories:
+  - statistics
+tags:
+  - caret
+keywords:
+  - tech
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2019/10/13/sNhrIqXHCeW5E3J.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	message = FALSE,
+	warning = FALSE,
+	engine.path="/Users/zero/anaconda3/bin/python"
+)
+```
+
+<!--more-->
+
+
+
+
+
+## 简单拟合一个线性模型
+
+```{r}
+states <- as.data.frame(state.x77[,c("Murder", "Population", 
+                                     "Illiteracy", "Income", "Frost")])
+
+fit <- lm(Murder ~ Population + Illiteracy + Income + Frost, data=states)
+#summary(fit)
+```
+
+
+## 线性模型假设的综合验证
+
+使用gvlma包中的`gvlma`函数验证模型的线性假设。`gvlma`函数由Pena和Slate ( 2006 )编写，能对线性模型假设进行综合验证，同时还能做偏斜度、峰度和异方差性的评价。换句话说，它给模型假设提供了一个单独的综合检验(通过/不通过)。
+
+```{r}
+# Listing 8.8 - Global test of linear model assumptions
+library(gvlma)
+gvmodel <- gvlma(fit) 
+summary(gvmodel)
+```
+
+
+从输出项( Global Stat中的 文字栏)我们可以看到数据满足OLS回归模型所有的统计假设( p=0.597 )。 若Decision下的文字表明违反了假设条件(比如p<0.05 ), 
+
+## <font color="darkred">接下来的工作就是:判断哪些假设没有被满足?</font> 
+
+<font color="darkred">这里我们只讨论正态性和同方差性假设没被满足</font> 
+
+## 变量变换
+
+> 当模型不符合正态性、线性或者同方差性假设时, 一个或多个变量的变换通常可以改善或调整模型效果。
+
+
+## powerTransform
+
+当模型违反了正态假设时,通常可以对响应变量尝试某种变换。car包中的`powerTransform()`函数通过λ的最大似然估计来正态化变量x^λ代码清单8-10是对数据states的应用。
+```{r}
+# Listing 8.10 - Box-Cox Transformation to normality
+library(car)
+summary(powerTransform(states$Murder))
+```
+
+
+结果表明，你可以用Murder^0.87来正态化变量Murder。由于0.6很接近0.5,你可以尝试用平方根变换来提高模型正态性的符合程度。但在本例中, λ= 1的假设也无法拒绝(p= =0.145),因此没有强有力的证据表明本例需要变量变换.
+
+## boxTidwell
+
+car包中的`boxTidwell()`函数通过获得预测变量幂数的最大似然估计来改善线性关系。下面的例子为用州的人口和文盲率来预测谋杀率，对模型进行了Box-Tidwell变换:
+```{r}
+# Box-Tidwell Transformations to linearity
+library(car)
+boxTidwell(Murder~Population+Illiteracy,data=states)
+```
+
+结果显示，使用变换Population^0.87和Illiteracy^1.36能够大大改善线性关系。但是对Population(p=0.75 )和Iliteracy ( p =0.54 )的计分检验又表明变量并不需要变换。这些结果与图8-11的成分残差图是一致的。
+
+响应变量变换还能改善异方差性(误差方差非恒定)。在代码清单8-7中,你可以看到car包中spreadLevelPlot ()函数提供的幂次变换应用，不过，states例子满足了方差不变性,不需要进行变量变换。
+
+## 谨慎使用变量变换
+
+统计学中流传着一个很老的笑话:如果你不能证明A，那就证明B,假装它就是A。(对于统计学家来说，这很滑稽好笑。)此处引申的意思是，如果你变换了变量，你的解释必须基于变换后的变量，而不是初始变量。如果变换得有意义，比如收入的对数变换、距离的逆变换，解释起来就会容易得多。但是若变换得没有意义，你就应该避免这样做。比如，你怎样解释自杀意念的频率与抑郁程度的立方根间的关系呢?
+

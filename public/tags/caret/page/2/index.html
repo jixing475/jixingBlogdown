@@ -217,6 +217,64 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="/2018/03/how-to-create-dummy-variables-and-normalization/">
+          3.3 How To Create Dummy Variables And Normalization
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-03-26T00:00:00Z">
+        
+  March 26, 2018
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/machine-learning">machine learning</a>
+    
+  
+
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      Load Package And Data load(&quot;../../data/craet_3-2.Rdata&quot;) library(tidyverse) library(caret)  Why Dummy Variables 对于字符型的因子变量，我们需要把它转变为有序的数值，一般转为 0，1 的二变量， 这样0 就代表基础水平， 1代表比较组
+ How # One-Hot Encoding # Creating dummy variables is converting a categorical variable to as many binary variables as here are categories. dummies_model &lt;- dummyVars(Purchase ~ ., data=trainData) # Create the dummy variables using predict. The Y variable (Purchase) will not be present in trainData_mat. trainData_mat &lt;- predict(dummies_model, newdata = trainData) # # Convert to dataframe trainData &lt;- data.
+      <p>
+        <a href="/2018/03/how-to-create-dummy-variables-and-normalization/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="/2018/03/how-to-create-dummy-variables-and-normalization/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="https://i.loli.net/2018/03/26/5ab843cfa3701.jpg"/>
+      </div>
+    </a>
+  
+</article>
+
+            
+              
+  
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
         <a class="link-unstyled" href="/2018/03/3-2-statistic-description-and-impute-missing-value/">
           3.2 statistic description and impute missing value
         </a>
@@ -527,6 +585,24 @@ Caret 包很好地让所有与机器学习模型开发相关的步骤集成到�
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2019/10/%E5%A6%82%E4%BD%95%E6%8B%9F%E5%90%88%E4%B8%80%E6%9D%A1%E6%9B%B2%E7%BA%BF/">
+                <h3 class="media-heading">如何拟合一条曲线</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">简单拟合一个线性模型 states &lt;- as.data.frame(state.x77[,c(&quot;Murder&quot;, &quot;Population&quot;, &quot;Illiteracy&quot;, &quot;Income&quot;, &quot;Frost&quot;)]) fit &lt;- lm(Murder ~ Population + Illiteracy + Income + Frost, data=states) #summary(fit)  线性模型假设的综合验证 使用gvlma包中的gvlma函数验证模型的线性假设。gvlma函数由Pena和Slate ( 2006 )编写，能对线性模型假设进行综合验证，同时还能做偏斜度、峰度和异方差性的评价。换句话说，它给模型假设提供了一个单独的综合检验(通过/不通过)。
+# Listing 8.8 - Global test of linear model assumptions library(gvlma) gvmodel &lt;- gvlma(fit) summary(gvmodel) ## ## Call: ## lm(formula = Murder ~ Population + Illiteracy + Income + Frost, ## data = states) ## ## Residuals: ## Min 1Q Median 3Q Max ## -4.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2019/10/after-efforts-have-failed/">
                 <h3 class="media-heading">努力后的失败，才是诚实的失败</h3>
               </a>
@@ -726,25 +802,6 @@ X: -1, 0, 1, 2, 3, 4 Y: -3, -1, 1, 3, 5, 7
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/10/pubchunks_extract_parts_of_scholarly_xml_articles/">
-                <h3 class="media-heading">pubchunks：提取学术文章的某部分</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Oct 10, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">背景 pubchunks 的目的是从XML格式的学术文章中获取部分数据。我们不需要了解XML及其所有的格式原理。只需知道我们的文件或XML字符串在哪里以及我们想要每篇文章的哪些部分。然后用户可以组合这些部分并做我们希望下游的任何事情; 例如,分析文本结构
- pubchunks中的函数 两个主要功能是：
-pub_chunks()：获取XML部分 pub_tabularize()：强制输出pub_chunks()到data.frame中 pub_guess_publisher()：从XML文件或字符串猜测发布者 pub_sections()：部分pubchunks知道如何处理 pub_providers()：提供者（即发布者）pubchunks知道如何明确处理   支持的出版商 elife plos elsevier hindawi pensoft peerj copernicus frontiers f1000research   支持提取的部分有: Front - 发布者，期刊和文章元数据元素 Body - 文章的正文 Back - 文章的背面，致谢，作者贡献，参考文献 Title - 文章标题 Doi - 文章doi Categories - 发布商的类别，如果有的话 Author - 作者 Aff - 隶属关系（包括作者姓名） Keyword - 关键字 Abstract - 文章摘要 Executive_summary - 文章执行摘要 Refs - 参考文献 Refs_dois - 参考dois - 如果有的话 Publisher - 发布者名称 Journal_meta - 期刊元数据 Article_meta - 文章元数据 Acknowledgments - 致谢 Permissions - 文章权限 History - 日期，收到，出版，接受等   安装 #install.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -752,7 +809,7 @@ pub_chunks()：获取XML部分 pub_tabularize()：强制输出pub_chunks()到dat
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         60 posts found
+         61 posts found
       </p>
     </div>
   </div>

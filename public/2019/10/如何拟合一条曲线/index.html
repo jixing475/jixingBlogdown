@@ -1,5 +1,9 @@
 
 
+  
+    
+  
+
 
   
 
@@ -16,23 +20,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.32.2 with theme Tranquilpeak 0.4.1-BETA">
-    <title>student zero </title>
+    <title>如何拟合一条曲线</title>
     <meta name="author" content="Jixing Liu">
-    <meta name="keywords" content=", R">
+    <meta name="keywords" content="tech, R">
 
     <link rel="icon" href="img/R_py.png">
     
 
     
-    <meta name="description" content="Exploring and playing with data in R and python">
-    <meta property="og:description" content="Exploring and playing with data in R and python">
+    <meta name="description" content="简单拟合一个线性模型 states &lt;- as.data.frame(state.x77[,c(&quot;Murder&quot;, &quot;Population&quot;, &quot;Illiteracy&quot;, &quot;Income&quot;, &quot;Frost&quot;)]) fit &lt;- lm(Murder ~ Population &#43; Illiteracy &#43; Income &#43; Frost, data=states) #summary(fit)  线性模型假设的综合验证 使用gvlma包中的gvlma函数验证模型的线性假设。gvlma函数由Pena和Slate ( 2006 )编写，能对线性模型假设进行综合验证，同时还能做偏斜度、峰度和异方差性的评价。换句话说，它给模型假设提供了一个单独的综合检验(通过/不通过)。
+# Listing 8.8 - Global test of linear model assumptions library(gvlma) gvmodel &lt;- gvlma(fit) summary(gvmodel) ## ## Call: ## lm(formula = Murder ~ Population &#43; Illiteracy &#43; Income &#43; Frost, ## data = states) ## ## Residuals: ## Min 1Q Median 3Q Max ## -4.">
+    <meta property="og:description" content="简单拟合一个线性模型 states &lt;- as.data.frame(state.x77[,c(&quot;Murder&quot;, &quot;Population&quot;, &quot;Illiteracy&quot;, &quot;Income&quot;, &quot;Frost&quot;)]) fit &lt;- lm(Murder ~ Population &#43; Illiteracy &#43; Income &#43; Frost, data=states) #summary(fit)  线性模型假设的综合验证 使用gvlma包中的gvlma函数验证模型的线性假设。gvlma函数由Pena和Slate ( 2006 )编写，能对线性模型假设进行综合验证，同时还能做偏斜度、峰度和异方差性的评价。换句话说，它给模型假设提供了一个单独的综合检验(通过/不通过)。
+# Listing 8.8 - Global test of linear model assumptions library(gvlma) gvmodel &lt;- gvlma(fit) summary(gvmodel) ## ## Call: ## lm(formula = Murder ~ Population &#43; Illiteracy &#43; Income &#43; Frost, ## data = states) ## ## Residuals: ## Min 1Q Median 3Q Max ## -4.">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="student zero ">
-    <meta property="og:url" content="/">
+    <meta property="og:title" content="如何拟合一条曲线">
+    <meta property="og:url" content="/2019/10/%E5%A6%82%E4%BD%95%E6%8B%9F%E5%90%88%E4%B8%80%E6%9D%A1%E6%9B%B2%E7%BA%BF/">
     <meta property="og:site_name" content="student zero ">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="student zero ">
-    <meta name="twitter:description" content="Exploring and playing with data in R and python">
+    <meta name="twitter:description" content="简单拟合一个线性模型 states &lt;- as.data.frame(state.x77[,c(&quot;Murder&quot;, &quot;Population&quot;, &quot;Illiteracy&quot;, &quot;Income&quot;, &quot;Frost&quot;)]) fit &lt;- lm(Murder ~ Population &#43; Illiteracy &#43; Income &#43; Frost, data=states) #summary(fit)  线性模型假设的综合验证 使用gvlma包中的gvlma函数验证模型的线性假设。gvlma函数由Pena和Slate ( 2006 )编写，能对线性模型假设进行综合验证，同时还能做偏斜度、峰度和异方差性的评价。换句话说，它给模型假设提供了一个单独的综合检验(通过/不通过)。
+# Listing 8.8 - Global test of linear model assumptions library(gvlma) gvmodel &lt;- gvlma(fit) summary(gvmodel) ## ## Call: ## lm(formula = Murder ~ Population &#43; Illiteracy &#43; Income &#43; Frost, ## data = states) ## ## Residuals: ## Min 1Q Median 3Q Max ## -4.">
     
       <meta name="twitter:creator" content="@studentZero475">
     
@@ -45,6 +52,8 @@
       <meta property="og:image" content="https://i.loli.net/2018/02/26/5a937bb148b02.jpg">
     
 
+    
+      <meta property="og:image" content="https://i.loli.net/2019/10/13/sNhrIqXHCeW5E3J.jpg">
     
     
     
@@ -73,7 +82,7 @@
 <script src="/js/highlight.pack.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
-<header id="header" data-behavior="1">
+<header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
     <a class="header-title-link" href="/">student zero </a>
@@ -93,11 +102,11 @@
   
 </header>
 
-      <nav id="sidebar" data-behavior="1">
+      <nav id="sidebar" data-behavior="4">
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
-        <h1 class="sidebar-profile-title">student zero </h1>
+        <h1 class="sidebar-profile-title">如何拟合一条曲线</h1>
         <a href="/#about">
           <img class="sidebar-profile-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
         </a>
@@ -194,36 +203,25 @@
 
       
 
-      <div id="main" data-behavior="1"
+      <div id="main" data-behavior="4"
         class="
-               hasCoverMetaIn
+               hasCoverMetaOut
                ">
-        <section class="postShorten-group main-content-wrap">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
           
           
-            
+            <div class="post-header main-content-wrap text-center">
   
-    
+    <h1 class="post-title" itemprop="headline">
+      如何拟合一条曲线
+    </h1>
   
-
-
   
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/09/npl-use-python-part-01/">
-          NLP use python part 01
-        </a>
-      </h1>
-      
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-09-13T00:00:00Z">
+      <time itemprop="datePublished" datetime="2019-10-13T00:00:00Z">
         
-  September 13, 2018
+  October 13, 2019
 
       </time>
     
@@ -232,430 +230,214 @@
   
     <span>in</span>
     
-      <a class="category-link" href="/categories/datavis-and-dataclean">datavis and dataclean</a>
+      <a class="category-link" href="/categories/statistics">statistics</a>
     
   
 
 
   </div>
 
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      <p></p>
-      <p>
-        <a href="/2018/09/npl-use-python-part-01/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/09/npl-use-python-part-01/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/09/13/5b99c16ff0094.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
+</div>
           
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <!--more-->
+<div id="section" class="section level2">
+<h2>简单拟合一个线性模型</h2>
+<pre class="r"><code>states &lt;- as.data.frame(state.x77[,c(&quot;Murder&quot;, &quot;Population&quot;, 
+                                     &quot;Illiteracy&quot;, &quot;Income&quot;, &quot;Frost&quot;)])
+
+fit &lt;- lm(Murder ~ Population + Illiteracy + Income + Frost, data=states)
+#summary(fit)</code></pre>
+</div>
+<div id="section-1" class="section level2">
+<h2>线性模型假设的综合验证</h2>
+<p>使用gvlma包中的<code>gvlma</code>函数验证模型的线性假设。<code>gvlma</code>函数由Pena和Slate ( 2006 )编写，能对线性模型假设进行综合验证，同时还能做偏斜度、峰度和异方差性的评价。换句话说，它给模型假设提供了一个单独的综合检验(通过/不通过)。</p>
+<pre class="r"><code># Listing 8.8 - Global test of linear model assumptions
+library(gvlma)
+gvmodel &lt;- gvlma(fit) 
+summary(gvmodel)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Murder ~ Population + Illiteracy + Income + Frost, 
+##     data = states)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.7960 -1.6495 -0.0811  1.4815  7.6210 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 1.235e+00  3.866e+00   0.319   0.7510    
+## Population  2.237e-04  9.052e-05   2.471   0.0173 *  
+## Illiteracy  4.143e+00  8.744e-01   4.738 2.19e-05 ***
+## Income      6.442e-05  6.837e-04   0.094   0.9253    
+## Frost       5.813e-04  1.005e-02   0.058   0.9541    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.535 on 45 degrees of freedom
+## Multiple R-squared:  0.567,  Adjusted R-squared:  0.5285 
+## F-statistic: 14.73 on 4 and 45 DF,  p-value: 9.133e-08
+## 
+## 
+## ASSESSMENT OF THE LINEAR MODEL ASSUMPTIONS
+## USING THE GLOBAL TEST ON 4 DEGREES-OF-FREEDOM:
+## Level of Significance =  0.05 
+## 
+## Call:
+##  gvlma(x = fit) 
+## 
+##                     Value p-value                Decision
+## Global Stat        2.7728  0.5965 Assumptions acceptable.
+## Skewness           1.5374  0.2150 Assumptions acceptable.
+## Kurtosis           0.6376  0.4246 Assumptions acceptable.
+## Link Function      0.1154  0.7341 Assumptions acceptable.
+## Heteroscedasticity 0.4824  0.4873 Assumptions acceptable.</code></pre>
+<p>从输出项( Global Stat中的 文字栏)我们可以看到数据满足OLS回归模型所有的统计假设( p=0.597 )。 若Decision下的文字表明违反了假设条件(比如p&lt;0.05 ),</p>
+</div>
+<div id="section-2" class="section level2">
+<h2><font color="darkred">接下来的工作就是:判断哪些假设没有被满足?</font></h2>
+<p><font color="darkred">这里我们只讨论正态性和同方差性假设没被满足</font></p>
+</div>
+<div id="section-3" class="section level2">
+<h2>变量变换</h2>
+<blockquote>
+<p>当模型不符合正态性、线性或者同方差性假设时, 一个或多个变量的变换通常可以改善或调整模型效果。</p>
+</blockquote>
+</div>
+<div id="powertransform" class="section level2">
+<h2>powerTransform</h2>
+<p>当模型违反了正态假设时,通常可以对响应变量尝试某种变换。car包中的<code>powerTransform()</code>函数通过λ的最大似然估计来正态化变量x^λ代码清单8-10是对数据states的应用。</p>
+<pre class="r"><code># Listing 8.10 - Box-Cox Transformation to normality
+library(car)
+summary(powerTransform(states$Murder))</code></pre>
+<pre><code>## bcPower Transformation to Normality 
+##               Est Power Rounded Pwr Wald Lwr Bnd Wald Upr Bnd
+## states$Murder    0.6055           1       0.0884       1.1227
+## 
+## Likelihood ratio test that transformation parameter is equal to 0
+##  (log transformation)
+##                            LRT df     pval
+## LR test, lambda = (0) 5.665991  1 0.017297
+## 
+## Likelihood ratio test that no transformation is needed
+##                            LRT df    pval
+## LR test, lambda = (1) 2.122763  1 0.14512</code></pre>
+<p>结果表明，你可以用Murder^0.87来正态化变量Murder。由于0.6很接近0.5,你可以尝试用平方根变换来提高模型正态性的符合程度。但在本例中, λ= 1的假设也无法拒绝(p= =0.145),因此没有强有力的证据表明本例需要变量变换.</p>
+</div>
+<div id="boxtidwell" class="section level2">
+<h2>boxTidwell</h2>
+<p>car包中的<code>boxTidwell()</code>函数通过获得预测变量幂数的最大似然估计来改善线性关系。下面的例子为用州的人口和文盲率来预测谋杀率，对模型进行了Box-Tidwell变换:</p>
+<pre class="r"><code># Box-Tidwell Transformations to linearity
+library(car)
+boxTidwell(Murder~Population+Illiteracy,data=states)</code></pre>
+<pre><code>##            MLE of lambda Score Statistic (z) Pr(&gt;|z|)
+## Population       0.86939             -0.3228   0.7468
+## Illiteracy       1.35812              0.6194   0.5357
+## 
+## iterations =  19</code></pre>
+<p>结果显示，使用变换Population<sup>0.87和Illiteracy</sup>1.36能够大大改善线性关系。但是对Population(p=0.75 )和Iliteracy ( p =0.54 )的计分检验又表明变量并不需要变换。这些结果与图8-11的成分残差图是一致的。</p>
+<p>响应变量变换还能改善异方差性(误差方差非恒定)。在代码清单8-7中,你可以看到car包中spreadLevelPlot ()函数提供的幂次变换应用，不过，states例子满足了方差不变性,不需要进行变量变换。</p>
+</div>
+<div id="section-4" class="section level2">
+<h2>谨慎使用变量变换</h2>
+<p>统计学中流传着一个很老的笑话:如果你不能证明A，那就证明B,假装它就是A。(对于统计学家来说，这很滑稽好笑。)此处引申的意思是，如果你变换了变量，你的解释必须基于变换后的变量，而不是初始变量。如果变换得有意义，比如收入的对数变换、距离的逆变换，解释起来就会容易得多。但是若变换得没有意义，你就应该避免这样做。比如，你怎样解释自杀意念的频率与抑郁程度的立方根间的关系呢?</p>
+</div>
+
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
             
-  
-    
-  
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small">TAGGED IN</span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="//tags/caret/">caret</a>
 
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/09/will_data_scientists_be_replaced_by_machines_2018-09-10/">
-          数据科学家会不会被机器取?
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-09-10T00:00:00Z">
-        
-  September 10, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/computers">computers</a>, 
-    
-      <a class="category-link" href="/categories/machine-learning">machine learning</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      数据科学自动化 曾今是一个热门话题, 大多数人都在讨论所谓的“自动化”工具, 人们声称他们的工具可以自动化数据科学过程。给人一种错觉, 只要将这些工具与大数据架构相结合就可以解决任何业务问题。
-但是其实在实际的数据分析工作中, 自动化建模部分仅仅占到总工作量的10%, 大多数的时间和精力花在了 feature engineering 和 feature selection。 比起构建一个复杂的模型, 我们更应该关注的问题这些问题 例如: 定义要解决的问题，获取数据，探索数据，部署项目，调试和监视, 而这些问题往往都无法完全自动化。
-这里 Berry 和 Linoff 从摄影的角度给了一个有趣的比喻:
- “The camera can relieve the photographer from having to set the shutter speed, aperture and other settings every time a picture is taken. This makes the process easier for expert photographers and makes better photography accessible to people who are not experts. But this is still automating only a small part of the process of producing a photograph.
-      <p>
-        <a href="/2018/09/will_data_scientists_be_replaced_by_machines_2018-09-10/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/09/will_data_scientists_be_replaced_by_machines_2018-09-10/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/09/10/5b96096f6da6b.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-          
+                  </div>
+                
+              
             
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/08/some-opinion-about-data-science/">
-          Some Opinion For Data Scientist
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-08-19T00:00:00Z">
-        
-  August 19, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/computers">computers</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      Some View From Hadley    Pragmatically, if you’re a data scientist, learning the basics of SQL is really important.    You should also have a minimal reading knowledge of R and Python, because so many data science teams use both .    Then I think you’re better off specializing in one of these two and getting really good at it, rather than spreading yourself too thin and being mediocre at several languages.
-      <p>
-        <a href="/2018/08/some-opinion-about-data-science/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/08/some-opinion-about-data-science/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/08/19/5b797846cd01f.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-          
             
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/08/the_linear_algebra_view_of_least-squares_regression/">
-          线性代数角度理解最小二乘回归
-        </a>
-      </h1>
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/10/after-efforts-have-failed/" data-tooltip="努力后的失败，才是诚实的失败">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
       
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-08-15T00:00:00Z">
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
         
-  August 15, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/math">Math</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2019/10/%E5%A6%82%E4%BD%95%E6%8B%9F%E5%90%88%E4%B8%80%E6%9D%A1%E6%9B%B2%E7%BA%BF/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
         
-      <p>
-        <a href="/2018/08/the_linear_algebra_view_of_least-squares_regression/" class="postShorten-excerpt_link link">Continue reading</a>
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/10/%E5%A6%82%E4%BD%95%E6%8B%9F%E5%90%88%E4%B8%80%E6%9D%A1%E6%9B%B2%E7%BA%BF/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
         
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/08/the_linear_algebra_view_of_least-squares_regression/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/08/15/5b73e5ca968a9.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-          
-            
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/08/bianliang-he-cunliang/">
-          变量与存量
-        </a>
-      </h1>
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/10/%E5%A6%82%E4%BD%95%E6%8B%9F%E5%90%88%E4%B8%80%E6%9D%A1%E6%9B%B2%E7%BA%BF/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
       
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-08-14T00:00:00Z">
-        
-  August 14, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/life">life</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      《刀塔传奇》的制作人王信文说：变量大于存量，这话怎么理解？
-最近，在美团点评进入打车领域向滴滴宣战之后，王信文问了一个朋友美团点评做打车的逻辑是什么。 对方的回答是：没有人为了出行而出行，出行总要有个目的，比如去餐厅、酒店、电影院。美团点评做打车优势不在于打车上，而是在大众点评上找到目的地之后，可以直接打车，免去了输入目的地和切换APP的过程。美团点评省了这两步，就比滴滴有效率优势。这个效率优势看起来不大，也许是10%，也许是20%，但在长期作战中就会非常有用。这让王信文意识到，在持久作战过程中，比的和看的不是过去的实力存量，而是变量 。
-要赢得长跑，一时的领先不重要，重要的是速度。长跑比的是耐力和持久。 决定公司估值的，最重要的不是账上有多少现金，而是获得现金流的能力。 在找工作选公司，公司有多少钱不是最重要的指标，公司的发展速度才重要。 找男朋友，他现在有多少钱不是最重要的，重要的是他赚钱的能力。  所以对于“变量大于存量”的启发是：把“变量”作为最重要的目标，而不那么在意“存量”，要努力去寻找变量，“因为最终变量会决定存量”。
-      <p>
-        <a href="/2018/08/bianliang-he-cunliang/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/08/bianliang-he-cunliang/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/08/14/5b72063705036.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-          
-            
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/08/mcmc/">
-          MCMC
-        </a>
-      </h1>
       
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-08-13T00:00:00Z">
-        
-  August 13, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/math">Math</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-       “MCMC 就是一种通过在概率空间 中随机采样 来近似感兴趣参数的后验分布 的方法”
- Concept 感兴趣的参数 只是用来抽象我们感兴趣的现象的一些数字。通常我们会使用统计的方法来估计这些参数。例如，如果我们想了解成年人的身高，那么我们需要的参数可能就是以英寸为单位的平均身高。
-分布 就是参数的各个可能值和我们能观察到每个参数的可能性的数学表示。分布描述了我们对参数的确信度。因此，上面的钟形曲线可以表明我们非常确定参数的值接近于零，同时我们认为真实值高于或低于该值的可能性是相等的。
-在得到任何数据之前，通过以往的知识，对参数确信度的描述分布被称为先验分布 。
-从总体出发估计样本（观察数据）通过概率（probability）体现，从样本出发估计总体通过统计推论（infer）解释 。一般样本有具体的数值，而总体通过参数表示。
-似然分布 以参数值范围的形式总结了数据可以告诉我们什么，而参数范围值中的每个参数解释了我们正在观察的数据的可能性，属于从总体（参数值范围中的每个参数）出发估计现有样本的可能性。估计最大似然分布的参数值就是回答了这个问题：什么样的参数值能使分布最有可能观察到我们观察得到的数据？在没有先验信息的情况下，我们可能会就此打住，无法进行下去了。
-贝叶斯分析 的关键是将先验信息和似然分布结合起来去确定后验分布（可以把它看作一种先验和可能性分布的平均值）。这告诉我们，在有先验数据的情况下，哪些参数值能够最大化观察到我们指定数据的可能性，缩小了似然分布的参数值范围
-先验分布较短且较为分散，所以它代表了一组关于平均人体身高真实值 “不太确定” 的概率。 同时，可能性分布在相对较窄的范围内就可以总结数据，因此它代表了对真实参数值 “更确定” 的概率。当先验和可能性结合在一起时，数据（可能性分布表示）弱化了个体在巨人中长大的可能性，纠正了先验分布。 尽管那个人仍然认为人的平均身高比数据告诉他的稍高一些，但是他最相信的还是数据。
- MCMC 回到最初的问题：我们试图估计我们感兴趣参数的后验分布，即人均身高μ ：
-我们知道后验分布在先验分布和似然分布范围内，但是，我们很难直接计算它，MCMC 方法考虑选择一个随机参数值。然后模拟会继续生成随机值（这是蒙特卡罗的一部分），但要根据一些规则来确定什么是一个好的参数值。这个诀窍就是，对于一对参数值，基于先验信息，通过计算每个值在解释数据时的可能性有多大，来计算哪个参数值更好。如果随机生成的参数值比最后一个参数值更好，则以一定的概率值将其添加到参数值链中（这是马尔科夫链部分）
-对于单个参数 ，MCMC 方法是沿 x 轴开始随机采样：由于随机样本受到固定概率 的影响，经过一段时间之后，它们往往会在我们感兴趣参数概率最高的区域收敛 ，在数据收敛之后，MCMC 抽样产生一组来自后验分布的样本点 。 在这些点周围绘制直方图，并计算任何您喜欢的统计数据。
-根据 MCMC 模拟生成的样本集计算出的任何统计量就是我们对该真实后验分布统计量的最佳预测。
-MCMC 方法也可以用来估计多个参数的后验分布（比如说人的身高和体重）。
-对于 n 个参数，存在 n 维空间中的高概率区域，这些区域中的某些参数值组可以更好地解释观察到的数据。 因此，我认为 MCMC 是一种在概率空间内进行随机采样来接近后验分布的方法
- 
-      <p>
-        <a href="/2018/08/mcmc/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/08/mcmc/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/08/13/5b70bd4dc9763.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-          
-            
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/08/wuzhi-zhi-mu/">
-          如果没有今天，明天还会有昨天吗？- “无知之幕”
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-08-08T00:00:00Z">
-        
-  August 8, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/life">life</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      几天看了一本书叫 如果没有今天，明天还会有昨天吗？
-这本书的灵魂就是，如何从思想实验的角度来认识哲学。
-所谓的思想实验就是，用想象力去进行的实验，因为所做的都是在现实中做不到的实验。
-无知之幕 公平是所有人都想要的。关于公平的种种设计中，美国哲学家罗尔斯所提出的“无知之幕”，是其中最为知名的一种设计。
-所谓的无知之幕就是指： 如果不让政策制定者知道自己在这个社会中处于什么位置、从事什么样的职业、有什么样的爱好和背景，那么他们才会尽力制定出最照顾弱者利益的社会制度，由此就能实现公平。
-举个例子： 地球上70亿人，假设有两种情况： 1.第一种情况是，所有人每天都赚10块钱，最弱的人也能赚到10块。 2.第二种情况，最弱的那个人赚9块钱，其他人每个人都赚100块钱。 那么按照“无知之幕”的原则，我们应该选择第一种情况。这样不知道自己处在什么样的位置，就会选择大家都赚9块
-但是 诺齐克提出的“张伯伦论证” 的思想实验却认为，“无知之幕”并不能保证完全的公平。
-举例： 假如一支 NBA 球队，所有球员的总收入相同，其他种种条件也都齐全，那这就是一个公平的状况。在球队签约张伯伦这样的高薪大牌球星后，虽然球队内收入的分配状况发生了变化，但由于大家都同意这一决定，因此新的分配状况同样是公平的。
-哲学家诺齐克认为，不应当总想着靠政策制定者去设计出一套公平的制度，而是应该把一切都交给市场，只要所有的选择都是自由的 ，那无论最终出现什么结果，都可以称之为公平。
-这让我想起我们国家之前提出的共同富裕概念，计划经济就是在这种情况下诞生的，结果大家也就看到，这样的公平并没有给大家带来生活的进步，而最终的自由市场经济带来了经济提升，但是也带来少部分人富裕的不公平，随之而来的就是各种资源的聚集，阶层分化越来越严重，看来偏向任何一块都不是明智之举？
- 
-      <p>
-        <a href="/2018/08/wuzhi-zhi-mu/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/08/wuzhi-zhi-mu/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/08/08/5b6a2e69a0d6f.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-          
-          
-  <div class="pagination-bar">
-    <ul class="pagination">
-      
-        <li class="pagination-prev">
-          <a class="btn btn--default btn--small" href="/page/2/">
-            <i class="fa fa-angle-left text-base icon-mr"></i>
-            <span>NEWER POSTS</span>
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
           </a>
         </li>
       
-      
-        <li class="pagination-next">
-          <a class="btn btn--default btn--small" href="/page/4/">
-            <span>OLDER POSTS</span>
-            <i class="fa fa-angle-right text-base icon-ml"></i>
-          </a>
-        </li>
-      
-      <li class="pagination-number">page 3 of 9</li>
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
     </ul>
   </div>
 
 
-        </section>
+            
+              
+                <div id="disqus_thread">
+  <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+              
+            
+          </div>
+        </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
     &copy; 2019 Jixing Liu. All Rights Reserved
@@ -663,6 +445,100 @@ MCMC 方法也可以用来估计多个参数的后验分布（比如说人的身
 </footer>
 
       </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        
+  <div class="post-actions-wrap">
+      <nav >
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                <i class="fa fa-angle-left"></i>
+                <span class="hide-xs hide-sm text-small icon-ml">NEXT</span>
+              </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="/2019/10/after-efforts-have-failed/" data-tooltip="努力后的失败，才是诚实的失败">
+              
+                <span class="hide-xs hide-sm text-small icon-mr">PREVIOUS</span>
+                <i class="fa fa-angle-right"></i>
+              </a>
+            </li>
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=/2019/10/%E5%A6%82%E4%BD%95%E6%8B%9F%E5%90%88%E4%B8%80%E6%9D%A1%E6%9B%B2%E7%BA%BF/">
+              <i class="fa fa-facebook-official"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=/2019/10/%E5%A6%82%E4%BD%95%E6%8B%9F%E5%90%88%E4%B8%80%E6%9D%A1%E6%9B%B2%E7%BA%BF/">
+              <i class="fa fa-twitter"></i>
+            </a>
+          </li>
+        
+          <li class="post-action hide-xs">
+            <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=/2019/10/%E5%A6%82%E4%BD%95%E6%8B%9F%E5%90%88%E4%B8%80%E6%9D%A1%E6%9B%B2%E7%BA%BF/">
+              <i class="fa fa-google-plus"></i>
+            </a>
+          </li>
+        
+      
+      
+        <li class="post-action">
+          <a class="post-action-btn btn btn--default" href="#disqus_thread">
+            <i class="fa fa-comment-o"></i>
+          </a>
+        </li>
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=%2F2019%2F10%2F%25E5%25A6%2582%25E4%25BD%2595%25E6%258B%259F%25E5%2590%2588%25E4%25B8%2580%25E6%259D%25A1%25E6%259B%25B2%25E7%25BA%25BF%2F">
+          <i class="fa fa-facebook-official"></i><span>Share on Facebook</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=%2F2019%2F10%2F%25E5%25A6%2582%25E4%25BD%2595%25E6%258B%259F%25E5%2590%2588%25E4%25B8%2580%25E6%259D%25A1%25E6%259B%25B2%25E7%25BA%25BF%2F">
+          <i class="fa fa-twitter"></i><span>Share on Twitter</span>
+        </a>
+      </li>
+    
+      <li class="share-option">
+        <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=%2F2019%2F10%2F%25E5%25A6%2582%25E4%25BD%2595%25E6%258B%259F%25E5%2590%2588%25E4%25B8%2580%25E6%259D%25A1%25E6%259B%25B2%25E7%25BA%25BF%2F">
+          <i class="fa fa-google-plus"></i><span>Share on Google&#43;</span>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
     </div>
     
     <div id="about">
@@ -974,8 +850,35 @@ $(document).ready(function() {
 });
 </script>
 
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = '\/2019\/10\/%E5%A6%82%E4%BD%95%E6%8B%9F%E5%90%88%E4%B8%80%E6%9D%A1%E6%9B%B2%E7%BA%BF\/';
+          
+            this.page.identifier = '\/2019\/10\/%E5%A6%82%E4%BD%95%E6%8B%9F%E5%90%88%E4%B8%80%E6%9D%A1%E6%9B%B2%E7%BA%BF\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'jixing';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
 
 
     
   </body>
 </html>
+

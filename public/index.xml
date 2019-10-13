@@ -2,12 +2,123 @@
   <title>student zero </title>
   <link href="/index.xml" rel="self"/>
   <link href="/"/>
-  <updated>2019-10-12T00:00:00+00:00</updated>
+  <updated>2019-10-13T00:00:00+00:00</updated>
   <id>/</id>
   <author>
     <name>Jixing Liu</name>
   </author>
   <generator>Hugo -- gohugo.io</generator>
+  <entry>
+    <title type="html"><![CDATA[如何拟合一条曲线]]></title>
+    <link href="/2019/10/%E5%A6%82%E4%BD%95%E6%8B%9F%E5%90%88%E4%B8%80%E6%9D%A1%E6%9B%B2%E7%BA%BF/"/>
+    <id>/2019/10/%E5%A6%82%E4%BD%95%E6%8B%9F%E5%90%88%E4%B8%80%E6%9D%A1%E6%9B%B2%E7%BA%BF/</id>
+    <published>2019-10-13T00:00:00+00:00</published>
+    <updated>2019-10-13T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<!--more-->
+<div id="section" class="section level2">
+<h2>简单拟合一个线性模型</h2>
+<pre class="r"><code>states &lt;- as.data.frame(state.x77[,c(&quot;Murder&quot;, &quot;Population&quot;, 
+                                     &quot;Illiteracy&quot;, &quot;Income&quot;, &quot;Frost&quot;)])
+
+fit &lt;- lm(Murder ~ Population + Illiteracy + Income + Frost, data=states)
+#summary(fit)</code></pre>
+</div>
+<div id="section-1" class="section level2">
+<h2>线性模型假设的综合验证</h2>
+<p>使用gvlma包中的<code>gvlma</code>函数验证模型的线性假设。<code>gvlma</code>函数由Pena和Slate ( 2006 )编写，能对线性模型假设进行综合验证，同时还能做偏斜度、峰度和异方差性的评价。换句话说，它给模型假设提供了一个单独的综合检验(通过/不通过)。</p>
+<pre class="r"><code># Listing 8.8 - Global test of linear model assumptions
+library(gvlma)
+gvmodel &lt;- gvlma(fit) 
+summary(gvmodel)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Murder ~ Population + Illiteracy + Income + Frost, 
+##     data = states)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -4.7960 -1.6495 -0.0811  1.4815  7.6210 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 1.235e+00  3.866e+00   0.319   0.7510    
+## Population  2.237e-04  9.052e-05   2.471   0.0173 *  
+## Illiteracy  4.143e+00  8.744e-01   4.738 2.19e-05 ***
+## Income      6.442e-05  6.837e-04   0.094   0.9253    
+## Frost       5.813e-04  1.005e-02   0.058   0.9541    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 2.535 on 45 degrees of freedom
+## Multiple R-squared:  0.567,  Adjusted R-squared:  0.5285 
+## F-statistic: 14.73 on 4 and 45 DF,  p-value: 9.133e-08
+## 
+## 
+## ASSESSMENT OF THE LINEAR MODEL ASSUMPTIONS
+## USING THE GLOBAL TEST ON 4 DEGREES-OF-FREEDOM:
+## Level of Significance =  0.05 
+## 
+## Call:
+##  gvlma(x = fit) 
+## 
+##                     Value p-value                Decision
+## Global Stat        2.7728  0.5965 Assumptions acceptable.
+## Skewness           1.5374  0.2150 Assumptions acceptable.
+## Kurtosis           0.6376  0.4246 Assumptions acceptable.
+## Link Function      0.1154  0.7341 Assumptions acceptable.
+## Heteroscedasticity 0.4824  0.4873 Assumptions acceptable.</code></pre>
+<p>从输出项( Global Stat中的 文字栏)我们可以看到数据满足OLS回归模型所有的统计假设( p=0.597 )。 若Decision下的文字表明违反了假设条件(比如p&lt;0.05 ),</p>
+</div>
+<div id="section-2" class="section level2">
+<h2><font color="darkred">接下来的工作就是:判断哪些假设没有被满足?</font></h2>
+<p><font color="darkred">这里我们只讨论正态性和同方差性假设没被满足</font></p>
+</div>
+<div id="section-3" class="section level2">
+<h2>变量变换</h2>
+<blockquote>
+<p>当模型不符合正态性、线性或者同方差性假设时, 一个或多个变量的变换通常可以改善或调整模型效果。</p>
+</blockquote>
+</div>
+<div id="powertransform" class="section level2">
+<h2>powerTransform</h2>
+<p>当模型违反了正态假设时,通常可以对响应变量尝试某种变换。car包中的<code>powerTransform()</code>函数通过λ的最大似然估计来正态化变量x^λ代码清单8-10是对数据states的应用。</p>
+<pre class="r"><code># Listing 8.10 - Box-Cox Transformation to normality
+library(car)
+summary(powerTransform(states$Murder))</code></pre>
+<pre><code>## bcPower Transformation to Normality 
+##               Est Power Rounded Pwr Wald Lwr Bnd Wald Upr Bnd
+## states$Murder    0.6055           1       0.0884       1.1227
+## 
+## Likelihood ratio test that transformation parameter is equal to 0
+##  (log transformation)
+##                            LRT df     pval
+## LR test, lambda = (0) 5.665991  1 0.017297
+## 
+## Likelihood ratio test that no transformation is needed
+##                            LRT df    pval
+## LR test, lambda = (1) 2.122763  1 0.14512</code></pre>
+<p>结果表明，你可以用Murder^0.87来正态化变量Murder。由于0.6很接近0.5,你可以尝试用平方根变换来提高模型正态性的符合程度。但在本例中, λ= 1的假设也无法拒绝(p= =0.145),因此没有强有力的证据表明本例需要变量变换.</p>
+</div>
+<div id="boxtidwell" class="section level2">
+<h2>boxTidwell</h2>
+<p>car包中的<code>boxTidwell()</code>函数通过获得预测变量幂数的最大似然估计来改善线性关系。下面的例子为用州的人口和文盲率来预测谋杀率，对模型进行了Box-Tidwell变换:</p>
+<pre class="r"><code># Box-Tidwell Transformations to linearity
+library(car)
+boxTidwell(Murder~Population+Illiteracy,data=states)</code></pre>
+<pre><code>##            MLE of lambda Score Statistic (z) Pr(&gt;|z|)
+## Population       0.86939             -0.3228   0.7468
+## Illiteracy       1.35812              0.6194   0.5357
+## 
+## iterations =  19</code></pre>
+<p>结果显示，使用变换Population<sup>0.87和Illiteracy</sup>1.36能够大大改善线性关系。但是对Population(p=0.75 )和Iliteracy ( p =0.54 )的计分检验又表明变量并不需要变换。这些结果与图8-11的成分残差图是一致的。</p>
+<p>响应变量变换还能改善异方差性(误差方差非恒定)。在代码清单8-7中,你可以看到car包中spreadLevelPlot ()函数提供的幂次变换应用，不过，states例子满足了方差不变性,不需要进行变量变换。</p>
+</div>
+<div id="section-4" class="section level2">
+<h2>谨慎使用变量变换</h2>
+<p>统计学中流传着一个很老的笑话:如果你不能证明A，那就证明B,假装它就是A。(对于统计学家来说，这很滑稽好笑。)此处引申的意思是，如果你变换了变量，你的解释必须基于变换后的变量，而不是初始变量。如果变换得有意义，比如收入的对数变换、距离的逆变换，解释起来就会容易得多。但是若变换得没有意义，你就应该避免这样做。比如，你怎样解释自杀意念的频率与抑郁程度的立方根间的关系呢?</p>
+</div>
+]]></content>
+  </entry>
   <entry>
     <title type="html"><![CDATA[努力后的失败，才是诚实的失败]]></title>
     <link href="/2019/10/after-efforts-have-failed/"/>

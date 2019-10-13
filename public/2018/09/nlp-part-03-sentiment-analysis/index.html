@@ -1009,6 +1009,24 @@ print(model.predict(vect.transform(['not an issue, phone is working',
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2019/10/%E5%A6%82%E4%BD%95%E6%8B%9F%E5%90%88%E4%B8%80%E6%9D%A1%E6%9B%B2%E7%BA%BF/">
+                <h3 class="media-heading">如何拟合一条曲线</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">简单拟合一个线性模型 states &lt;- as.data.frame(state.x77[,c(&quot;Murder&quot;, &quot;Population&quot;, &quot;Illiteracy&quot;, &quot;Income&quot;, &quot;Frost&quot;)]) fit &lt;- lm(Murder ~ Population + Illiteracy + Income + Frost, data=states) #summary(fit)  线性模型假设的综合验证 使用gvlma包中的gvlma函数验证模型的线性假设。gvlma函数由Pena和Slate ( 2006 )编写，能对线性模型假设进行综合验证，同时还能做偏斜度、峰度和异方差性的评价。换句话说，它给模型假设提供了一个单独的综合检验(通过/不通过)。
+# Listing 8.8 - Global test of linear model assumptions library(gvlma) gvmodel &lt;- gvlma(fit) summary(gvmodel) ## ## Call: ## lm(formula = Murder ~ Population + Illiteracy + Income + Frost, ## data = states) ## ## Residuals: ## Min 1Q Median 3Q Max ## -4.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2019/10/after-efforts-have-failed/">
                 <h3 class="media-heading">努力后的失败，才是诚实的失败</h3>
               </a>
@@ -1208,20 +1226,106 @@ X: -1, 0, 1, 2, 3, 4 Y: -3, -1, 1, 3, 5, 7
             <hr>
           </div>
         
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         61 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://i.loli.net/2018/02/26/5a9416186c149.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" integrity="sha256-IFHWFEbU2/+wNycDECKgjIRSirRNIDp2acEB5fvdVRU=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js" integrity="sha256-+mpyNVJsNt4rVXCw0F+pAOiB3YxmHgrbJsx4ecPuUaI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js" integrity="sha256-vMxgR/7FtLovVA+IPrR7+xTgIgARH7y9VZQnmmi0HDI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js" integrity="sha256-N0qFUh7/9vLvia87dDndewmsgsyYoNkdA212tPc+2NI=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-kr8dyqj6rb6ortyib7whfo9x9p6td6zo8t1v4fdz4ecx5kwybsdlmk1slygn.min.js"></script>
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+  
+    
+      <script>
+        var disqus_config = function () {
+          this.page.url = '\/2018\/09\/nlp-part-03-sentiment-analysis\/';
+          
+            this.page.identifier = '\/2018\/09\/nlp-part-03-sentiment-analysis\/'
+          
+        };
+        (function() {
+          
+          
+          if (window.location.hostname == "localhost") {
+            return;
+          }
+          var d = document, s = d.createElement('script');
+          var disqus_shortname = 'jixing';
+          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+          s.setAttribute('data-timestamp', +new Date());
+          (d.head || d.body).appendChild(s);
+        })();
+      </script>
+    
+  
+
+
+
+    
+  </body>
+</html>
+
+pan>
+              </span>
+              <div class="media-content hide-xs font-merryweather">介绍 iPhone 的 health APP 存储着我们的私人健康数据, 这里有一篇帖子是用 Python 分析 health APP 的数据Apple Health Data How to Export Analyze Visualize Guide - ryanpraski.com , 而我更喜欢 R 的版本.
+让我们赶紧开始吧!!
+ 首先获取数据并读取 从你的 health APP 应用中导出数据 在 R 中读取数据  加载包并读入数据 library(XML) library(tidyverse) library(lubridate) library(scales) library(here) library(ggthemes) xml &lt;- xmlParse(here(&quot;data/apple_health_export/export.xml&quot;)) summary(xml) ## $nameCounts ## ## Record ExportDate HealthData Me Workout ## 90037 1 1 1 1 ## ## $numNodes ## [1] 90041 Record 是我的主要数据, 有 90,037 条</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
           <div class="media">
             
             <div class="media-body">
-              <a class="link-unstyled" href="/2018/10/pubchunks_extract_parts_of_scholarly_xml_articles/">
-                <h3 class="media-heading">pubchunks：提取学术文章的某部分</h3>
+              <a class="link-unstyled" href="/2019/03/tao_wang_bei_shang_guang/">
+                <h3 class="media-heading">逃往北上广</h3>
               </a>
               <span class="media-meta">
                 <span class="media-date text-small">
-                  Oct 10, 2018
+                  Mar 3, 2019
                 </span>
               </span>
-              <div class="media-content hide-xs font-merryweather">背景 pubchunks 的目的是从XML格式的学术文章中获取部分数据。我们不需要了解XML及其所有的格式原理。只需知道我们的文件或XML字符串在哪里以及我们想要每篇文章的哪些部分。然后用户可以组合这些部分并做我们希望下游的任何事情; 例如,分析文本结构
- pubchunks中的函数 两个主要功能是：
-pub_chunks()：获取XML部分 pub_tabularize()：强制输出pub_chunks()到data.frame中 pub_guess_publisher()：从XML文件或字符串猜测发布者 pub_sections()：部分pubchunks知道如何处理 pub_providers()：提供者（即发布者）pubchunks知道如何明确处理   支持的出版商 elife plos elsevier hindawi pensoft peerj copernicus frontiers f1000research   支持提取的部分有: Front - 发布者，期刊和文章元数据元素 Body - 文章的正文 Back - 文章的背面，致谢，作者贡献，参考文献 Title - 文章标题 Doi - 文章doi Categories - 发布商的类别，如果有的话 Author - 作者 Aff - 隶属关系（包括作者姓名） Keyword - 关键字 Abstract - 文章摘要 Executive_summary - 文章执行摘要 Refs - 参考文献 Refs_dois - 参考dois - 如果有的话 Publisher - 发布者名称 Journal_meta - 期刊元数据 Article_meta - 文章元数据 Acknowledgments - 致谢 Permissions - 文章权限 History - 日期，收到，出版，接受等   安装 #install.</div>
+              <div class="media-content hide-xs font-merryweather">奋斗，应该是一种生活方式, 登山并不全是为了登顶的那一刻
+ 只有不停奋斗的人生，才有意义，才活的有劲儿，混吃等死的日子其实是很艰难的，无聊死了，一头扎进人堆儿里不停的扑棱才有意思啊！
+逃往北京、上海、广州、深圳
+在家乡，在那个你生长了二三十年的小城镇，如果你拒绝过上和所有人一样循规蹈矩的生活，拒绝结婚生子，拒绝稳定工作，拒绝放弃影响你赚钱升职的爱好，那么你就变成了一头和周围的一切格格不入的怪物。
+于是大家要挽救你，要教育你，要让你学会认命，停止毫无意义的折腾，这样你才能和大家一样“踏踏实实过日子”。
+许多人因此选择了对抗，在愤怒中慢慢变得绝望，在绝望中变得麻木，在麻木中逃往虚无</div>
             </div>
             <div style="clear:both;"></div>
             <hr>
@@ -1234,7 +1338,7 @@ pub_chunks()：获取XML部分 pub_tabularize()：强制输出pub_chunks()到dat
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         60 posts found
+         61 posts found
       </p>
     </div>
   </div>

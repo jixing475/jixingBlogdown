@@ -214,6 +214,64 @@
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="/2018/05/purrr-use-partial-and-map-instead-of-loop/">
+          purrr: Use partial and map instead of loop
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2018-05-22T00:00:00Z">
+        
+  May 22, 2018
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/computers">computers</a>
+    
+  
+
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      🐌 I want to …   create three normal distribution with purrr::map as simple as possible
+  🐌 Here’s how to:   library(tidyverse) #rnorm(n=5, mean = mu, sd = sigma) #函数的一般形式 black_box &lt;- partial(rnorm, n=5)# 先把不变的固定下来，生成新的黑箱函数，黑箱函数只需要接受 map 传递的参数即可， 其他的参数已经通过 ·partial· 固定下来了 mu &lt;- list(10, 100, -100)# 参数 x sigma &lt;- list(0.01, 1, 10)# 参数 y map2(mu, sigma, ~ black_box(mean=.x, sd=.y)) %&gt;% do.call(cbind, .) ## [,1] [,2] [,3] ## [1,] 10.
+      <p>
+        <a href="/2018/05/purrr-use-partial-and-map-instead-of-loop/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="/2018/05/purrr-use-partial-and-map-instead-of-loop/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="/post/2018-05-22-purrr-use-partial-and-map-instead-of-loop_files/IMG_4733.JPG"/>
+      </div>
+    </a>
+  
+</article>
+
+          
+            
+  
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
         <a class="link-unstyled" href="/2018/05/iga-three-subgroup-deg-and-enrichment-analysis/">
           IgA-three-subgroup-DEG-and-enrichment-analysis
         </a>
@@ -561,63 +619,6 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
 </article>
 
           
-            
-  
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="/2018/04/algorithms-quick-sort/">
-          algorithms: quick sort
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2018-04-18T00:00:00Z">
-        
-  April 18, 2018
-
-      </time>
-    
-    
-  
-  
-    <span>in</span>
-    
-      <a class="category-link" href="/categories/machine-learning">machine learning</a>
-    
-  
-
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      快速排序 和 分而治之（D&amp;C）divde and conquer  D&amp;C 将问题逐步分解，找到最基本的情况为止 快速排序，随机的选择基准值，平均运行时间为**O(n*logn)**  def quicksort(array): if len(array) &lt; 2:# base case, arrays with 0 or 1 element are already &quot;sorted&quot; return array else:# recursive case pivot = array[0]# sub-array of all the elements less than the pivot less = [i for i in array[1:] if i &lt;= pivot]# sub-array of all the elements greater than the pivot greater = [i for i in array[1:] if i &gt; pivot] return quicksort(less) + [pivot] + quicksort(greater) print(quicksort([10, 5, 2, 3]))  ## [2, 3, 5, 10]  
-      <p>
-        <a href="/2018/04/algorithms-quick-sort/" class="postShorten-excerpt_link link">Continue reading</a>
-        
-      </p>
-    </div>
-  </div>
-  
-    <a href="/2018/04/algorithms-quick-sort/">
-      <div class="postShorten-thumbnailimg">
-        <img alt="" itemprop="image" src="https://i.loli.net/2018/04/18/5ad684af2080b.jpg"/>
-      </div>
-    </a>
-  
-</article>
-
-          
           
   <div class="pagination-bar">
     <ul class="pagination">
@@ -699,6 +700,24 @@ library(purrr) safe_log &lt;- safely(log)#high-order functions safe_log(&quot;a&
       <div class="no-result text-color-light text-center">no post found</div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/10/%E5%A6%82%E4%BD%95%E6%8B%9F%E5%90%88%E4%B8%80%E6%9D%A1%E6%9B%B2%E7%BA%BF/">
+                <h3 class="media-heading">如何拟合一条曲线</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">简单拟合一个线性模型 states &lt;- as.data.frame(state.x77[,c(&quot;Murder&quot;, &quot;Population&quot;, &quot;Illiteracy&quot;, &quot;Income&quot;, &quot;Frost&quot;)]) fit &lt;- lm(Murder ~ Population + Illiteracy + Income + Frost, data=states) #summary(fit)  线性模型假设的综合验证 使用gvlma包中的gvlma函数验证模型的线性假设。gvlma函数由Pena和Slate ( 2006 )编写，能对线性模型假设进行综合验证，同时还能做偏斜度、峰度和异方差性的评价。换句话说，它给模型假设提供了一个单独的综合检验(通过/不通过)。
+# Listing 8.8 - Global test of linear model assumptions library(gvlma) gvmodel &lt;- gvlma(fit) summary(gvmodel) ## ## Call: ## lm(formula = Murder ~ Population + Illiteracy + Income + Frost, ## data = states) ## ## Residuals: ## Min 1Q Median 3Q Max ## -4.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -902,25 +921,6 @@ X: -1, 0, 1, 2, 3, 4 Y: -3, -1, 1, 3, 5, 7
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2018/10/pubchunks_extract_parts_of_scholarly_xml_articles/">
-                <h3 class="media-heading">pubchunks：提取学术文章的某部分</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Oct 10, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">背景 pubchunks 的目的是从XML格式的学术文章中获取部分数据。我们不需要了解XML及其所有的格式原理。只需知道我们的文件或XML字符串在哪里以及我们想要每篇文章的哪些部分。然后用户可以组合这些部分并做我们希望下游的任何事情; 例如,分析文本结构
- pubchunks中的函数 两个主要功能是：
-pub_chunks()：获取XML部分 pub_tabularize()：强制输出pub_chunks()到data.frame中 pub_guess_publisher()：从XML文件或字符串猜测发布者 pub_sections()：部分pubchunks知道如何处理 pub_providers()：提供者（即发布者）pubchunks知道如何明确处理   支持的出版商 elife plos elsevier hindawi pensoft peerj copernicus frontiers f1000research   支持提取的部分有: Front - 发布者，期刊和文章元数据元素 Body - 文章的正文 Back - 文章的背面，致谢，作者贡献，参考文献 Title - 文章标题 Doi - 文章doi Categories - 发布商的类别，如果有的话 Author - 作者 Aff - 隶属关系（包括作者姓名） Keyword - 关键字 Abstract - 文章摘要 Executive_summary - 文章执行摘要 Refs - 参考文献 Refs_dois - 参考dois - 如果有的话 Publisher - 发布者名称 Journal_meta - 期刊元数据 Article_meta - 文章元数据 Acknowledgments - 致谢 Permissions - 文章权限 History - 日期，收到，出版，接受等   安装 #install.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -928,7 +928,7 @@ pub_chunks()：获取XML部分 pub_tabularize()：强制输出pub_chunks()到dat
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         60 posts found
+         61 posts found
       </p>
     </div>
   </div>
