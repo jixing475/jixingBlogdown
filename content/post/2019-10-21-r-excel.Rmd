@@ -1,0 +1,137 @@
+---
+title: 使用 R 输出格式化的 Excel
+author: ZERO
+date: '2019-10-21'
+slug: r-excel
+categories:
+  - computers
+tags:
+  - data clean
+keywords:
+  - tech
+thumbnailImagePosition: left
+thumbnailImage: https://i.loli.net/2019/10/21/3JSX1fUECv7dWxM.jpg
+metaAlignment: center
+coverMeta: out
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+	echo = TRUE,#show code and output
+	eval = FALSE, 
+	message = FALSE,
+	warning = FALSE,
+	engine.path="/Users/zero/anaconda3/bin/python"
+)
+```
+
+<!--more-->
+
+## how to do?
+
+1. createStyle
+2. location
+
+
+```{r include=FALSE}
+library(dplyr)
+library(openxlsx)
+```
+
+##  the data frame to write 
+```{r}
+df <- res_after_filter_2019_smiles
+```
+
+
+## Create a new workbook 
+```{r}
+wb <- createWorkbook("hello_excel")
+```
+
+
+
+## Add a worksheets
+```{r}
+addWorksheet(wb, "sheet01", gridLines = FALSE) 
+```
+
+
+## write data to worksheet 1
+```{r}
+writeData(wb, sheet = 1, df, rowNames = FALSE)
+```
+
+
+## create and add a style to the column headers 
+
+```{r}
+headerStyle <-
+  createStyle(
+    fontSize = 12,
+    fontColour = "#FFFFFF",
+    halign = "center",
+    fgFill = "#4F81BD",
+    border = "TopBottom",
+    borderColour = "#4F81BD"
+  )
+
+addStyle(
+  wb,
+  sheet = 1,
+  headerStyle,
+  rows = 1,
+  cols = 1:ncol(df),
+  gridExpand = TRUE
+)
+```
+
+
+## style for body  
+
+```{r}
+bodyStyle <-
+  createStyle(border = "TopBottom",
+              borderColour = "#4F81BD",
+              fgFill = "#CDEDD0")
+
+row_to_color <- 
+df %>%
+  tibble::rowid_to_column(., var = "row_id") %>%
+  janitor::get_dupes(pdb_id) %>%
+  pull(row_id)
+
+addStyle(
+  wb,
+  sheet = 1,
+  bodyStyle,
+  rows = row_to_color + 1,
+  cols = 1:ncol(df),
+  gridExpand = TRUE
+)
+```
+
+
+## style for columns
+
+```{r}
+col_to_date <- 
+  which(colnames(df) == "date_re")
+
+addStyle(wb,
+         sheet = 1,
+         style = createStyle(numFmt = "DATE"),
+         rows = 2:nrow(df),
+         cols = col_to_date)
+```
+
+
+## wrtie the excel workbook 
+
+```{r}
+saveWorkbook(wb, "~/Desktop/row_to_color.xlsx", overwrite = TRUE)
+```
+
+
+
+

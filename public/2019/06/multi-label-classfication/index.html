@@ -765,6 +765,23 @@ print(&quot;Accuracy = &quot;,accuracy_score(y_test,predictions_new))</code></pr
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="/2019/10/r-excel/">
+                <h3 class="media-heading">使用 R 输出格式化的 Excel</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">how to do? createStyle location   the data frame to write df &lt;- res_after_filter_2019_smiles  Create a new workbook wb &lt;- createWorkbook(&quot;hello_excel&quot;)  Add a worksheets addWorksheet(wb, &quot;sheet01&quot;, gridLines = FALSE)   write data to worksheet 1 writeData(wb, sheet = 1, df, rowNames = FALSE)  create and add a style to the column headers headerStyle &lt;- createStyle( fontSize = 12, fontColour = &quot;#FFFFFF&quot;, halign = &quot;center&quot;, fgFill = &quot;#4F81BD&quot;, border = &quot;TopBottom&quot;, borderColour = &quot;#4F81BD&quot; ) addStyle( wb, sheet = 1, headerStyle, rows = 1, cols = 1:ncol(df), gridExpand = TRUE )  style for body bodyStyle &lt;- createStyle(border = &quot;TopBottom&quot;, borderColour = &quot;#4F81BD&quot;, fgFill = &quot;#CDEDD0&quot;) row_to_color &lt;- df %&gt;% tibble::rowid_to_column(.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="/2019/10/%E5%A6%82%E4%BD%95%E6%8B%9F%E5%90%88%E4%B8%80%E6%9D%A1%E6%9B%B2%E7%BA%BF/">
                 <h3 class="media-heading">如何拟合一条曲线</h3>
               </a>
@@ -960,28 +977,6 @@ X: -1, 0, 1, 2, 3, 4 Y: -3, -1, 1, 3, 5, 7
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="/2019/03/tao_wang_bei_shang_guang/">
-                <h3 class="media-heading">逃往北上广</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Mar 3, 2019
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">奋斗，应该是一种生活方式, 登山并不全是为了登顶的那一刻
- 只有不停奋斗的人生，才有意义，才活的有劲儿，混吃等死的日子其实是很艰难的，无聊死了，一头扎进人堆儿里不停的扑棱才有意思啊！
-逃往北京、上海、广州、深圳
-在家乡，在那个你生长了二三十年的小城镇，如果你拒绝过上和所有人一样循规蹈矩的生活，拒绝结婚生子，拒绝稳定工作，拒绝放弃影响你赚钱升职的爱好，那么你就变成了一头和周围的一切格格不入的怪物。
-于是大家要挽救你，要教育你，要让你学会认命，停止毫无意义的折腾，这样你才能和大家一样“踏踏实实过日子”。
-许多人因此选择了对抗，在愤怒中慢慢变得绝望，在绝望中变得麻木，在麻木中逃往虚无</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -989,7 +984,7 @@ X: -1, 0, 1, 2, 3, 4 Y: -3, -1, 1, 3, 5, 7
          data-message-zero="no post found"
          data-message-one="1 post found"
          data-message-other="{n} posts found">
-         61 posts found
+         62 posts found
       </p>
     </div>
   </div>

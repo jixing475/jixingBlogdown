@@ -2,12 +2,102 @@
   <title>student zero </title>
   <link href="/index.xml" rel="self"/>
   <link href="/"/>
-  <updated>2019-10-13T00:00:00+00:00</updated>
+  <updated>2019-10-21T00:00:00+00:00</updated>
   <id>/</id>
   <author>
     <name>Jixing Liu</name>
   </author>
   <generator>Hugo -- gohugo.io</generator>
+  <entry>
+    <title type="html"><![CDATA[使用 R 输出格式化的 Excel]]></title>
+    <link href="/2019/10/r-excel/"/>
+    <id>/2019/10/r-excel/</id>
+    <published>2019-10-21T00:00:00+00:00</published>
+    <updated>2019-10-21T00:00:00+00:00</updated>
+    <content type="html"><![CDATA[<!--more-->
+<div id="how-to-do" class="section level2">
+<h2>how to do?</h2>
+<ol style="list-style-type: decimal">
+<li>createStyle</li>
+<li>location</li>
+</ol>
+</div>
+<div id="the-data-frame-to-write" class="section level2">
+<h2>the data frame to write</h2>
+<pre class="r"><code>df &lt;- res_after_filter_2019_smiles</code></pre>
+</div>
+<div id="create-a-new-workbook" class="section level2">
+<h2>Create a new workbook</h2>
+<pre class="r"><code>wb &lt;- createWorkbook(&quot;hello_excel&quot;)</code></pre>
+</div>
+<div id="add-a-worksheets" class="section level2">
+<h2>Add a worksheets</h2>
+<pre class="r"><code>addWorksheet(wb, &quot;sheet01&quot;, gridLines = FALSE) </code></pre>
+</div>
+<div id="write-data-to-worksheet-1" class="section level2">
+<h2>write data to worksheet 1</h2>
+<pre class="r"><code>writeData(wb, sheet = 1, df, rowNames = FALSE)</code></pre>
+</div>
+<div id="create-and-add-a-style-to-the-column-headers" class="section level2">
+<h2>create and add a style to the column headers</h2>
+<pre class="r"><code>headerStyle &lt;-
+  createStyle(
+    fontSize = 12,
+    fontColour = &quot;#FFFFFF&quot;,
+    halign = &quot;center&quot;,
+    fgFill = &quot;#4F81BD&quot;,
+    border = &quot;TopBottom&quot;,
+    borderColour = &quot;#4F81BD&quot;
+  )
+
+addStyle(
+  wb,
+  sheet = 1,
+  headerStyle,
+  rows = 1,
+  cols = 1:ncol(df),
+  gridExpand = TRUE
+)</code></pre>
+</div>
+<div id="style-for-body" class="section level2">
+<h2>style for body</h2>
+<pre class="r"><code>bodyStyle &lt;-
+  createStyle(border = &quot;TopBottom&quot;,
+              borderColour = &quot;#4F81BD&quot;,
+              fgFill = &quot;#CDEDD0&quot;)
+
+row_to_color &lt;- 
+df %&gt;%
+  tibble::rowid_to_column(., var = &quot;row_id&quot;) %&gt;%
+  janitor::get_dupes(pdb_id) %&gt;%
+  pull(row_id)
+
+addStyle(
+  wb,
+  sheet = 1,
+  bodyStyle,
+  rows = row_to_color + 1,
+  cols = 1:ncol(df),
+  gridExpand = TRUE
+)</code></pre>
+</div>
+<div id="style-for-columns" class="section level2">
+<h2>style for columns</h2>
+<pre class="r"><code>col_to_date &lt;- 
+  which(colnames(df) == &quot;date_re&quot;)
+
+addStyle(wb,
+         sheet = 1,
+         style = createStyle(numFmt = &quot;DATE&quot;),
+         rows = 2:nrow(df),
+         cols = col_to_date)</code></pre>
+</div>
+<div id="wrtie-the-excel-workbook" class="section level2">
+<h2>wrtie the excel workbook</h2>
+<pre class="r"><code>saveWorkbook(wb, &quot;~/Desktop/row_to_color.xlsx&quot;, overwrite = TRUE)</code></pre>
+</div>
+]]></content>
+  </entry>
   <entry>
     <title type="html"><![CDATA[如何拟合一条曲线]]></title>
     <link href="/2019/10/%E5%A6%82%E4%BD%95%E6%8B%9F%E5%90%88%E4%B8%80%E6%9D%A1%E6%9B%B2%E7%BA%BF/"/>

@@ -1,0 +1,586 @@
+
+
+
+  
+
+
+
+
+
+  
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.32.2 with theme Tranquilpeak 0.4.1-BETA">
+    <title>Data Clean</title>
+    <meta name="author" content="Jixing Liu">
+    <meta name="keywords" content=", R">
+
+    <link rel="icon" href="img/R_py.png">
+    
+
+    
+    <meta name="description" content="Exploring and playing with data in R and python">
+    <meta property="og:description" content="Exploring and playing with data in R and python">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Data Clean">
+    <meta property="og:url" content="/tags/data-clean/">
+    <meta property="og:site_name" content="student zero ">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="student zero ">
+    <meta name="twitter:description" content="Exploring and playing with data in R and python">
+    
+      <meta name="twitter:creator" content="@studentZero475">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="https://i.loli.net/2018/02/26/5a937bb148b02.jpg">
+    
+
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="/css/style-hbs5om8csx9a8yrv5hnhpi2qqdv4ykuslajwbramhqxvleqbfklxgek50hye.min.css" />
+    
+    
+
+    
+      
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <link rel="stylesheet" href="/css/monokai-sublime.css" rel="stylesheet" id="theme-stylesheet">
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<header id="header" data-behavior="1">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="/">student zero </a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="1">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <h1 class="sidebar-profile-title">Data Clean</h1>
+        <a href="/#about">
+          <img class="sidebar-profile-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
+        </a>
+        <h4 class="sidebar-profile-name">Jixing Liu</h4>
+        
+          <h5 class="sidebar-profile-bio">Reading And Writing</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/archives/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-archive"></i>
+      
+      <span class="sidebar-button-desc">Archives</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/categories/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-bookmark"></i>
+      
+      <span class="sidebar-button-desc">Categories</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/tags/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="/page/about/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/studentZero475">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">Twitter</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.r-bloggers.com/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-book"></i>
+      
+      <span class="sidebar-button-desc">R-bloggers</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+
+    </ul>
+  </div>
+</nav>
+
+      
+        
+
+      
+      <div id="main" data-behavior="1"
+        class="
+               hasCoverMetaIn
+               ">
+        
+          <section class="postShorten-group main-content-wrap">
+            
+            
+              
+  
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="/2019/10/r-excel/">
+          使用 R 输出格式化的 Excel
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2019-10-21T00:00:00Z">
+        
+  October 21, 2019
+
+      </time>
+    
+    
+  
+  
+    <span>in</span>
+    
+      <a class="category-link" href="/categories/computers">computers</a>
+    
+  
+
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      how to do? createStyle location   the data frame to write df &lt;- res_after_filter_2019_smiles  Create a new workbook wb &lt;- createWorkbook(&quot;hello_excel&quot;)  Add a worksheets addWorksheet(wb, &quot;sheet01&quot;, gridLines = FALSE)   write data to worksheet 1 writeData(wb, sheet = 1, df, rowNames = FALSE)  create and add a style to the column headers headerStyle &lt;- createStyle( fontSize = 12, fontColour = &quot;#FFFFFF&quot;, halign = &quot;center&quot;, fgFill = &quot;#4F81BD&quot;, border = &quot;TopBottom&quot;, borderColour = &quot;#4F81BD&quot; ) addStyle( wb, sheet = 1, headerStyle, rows = 1, cols = 1:ncol(df), gridExpand = TRUE )  style for body bodyStyle &lt;- createStyle(border = &quot;TopBottom&quot;, borderColour = &quot;#4F81BD&quot;, fgFill = &quot;#CDEDD0&quot;) row_to_color &lt;- df %&gt;% tibble::rowid_to_column(.
+      <p>
+        <a href="/2019/10/r-excel/" class="postShorten-excerpt_link link">Continue reading</a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="/2019/10/r-excel/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="https://i.loli.net/2019/10/21/3JSX1fUECv7dWxM.jpg"/>
+      </div>
+    </a>
+  
+</article>
+
+            
+            
+
+          </section>
+        
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2019 Jixing Liu. All Rights Reserved
+  </span>
+</footer>
+
+      </div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://i.loli.net/2018/02/26/5a937bb148b02.jpg" alt="Author&#39;s picture" />
+    
+    <h4 id="about-card-name">Jixing Liu</h4>
+    
+      <div id="about-card-bio">Reading And Writing</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Data Scientist
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        China
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="Search" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center">no post found</div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/10/r-excel/">
+                <h3 class="media-heading">使用 R 输出格式化的 Excel</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">how to do? createStyle location   the data frame to write df &lt;- res_after_filter_2019_smiles  Create a new workbook wb &lt;- createWorkbook(&quot;hello_excel&quot;)  Add a worksheets addWorksheet(wb, &quot;sheet01&quot;, gridLines = FALSE)   write data to worksheet 1 writeData(wb, sheet = 1, df, rowNames = FALSE)  create and add a style to the column headers headerStyle &lt;- createStyle( fontSize = 12, fontColour = &quot;#FFFFFF&quot;, halign = &quot;center&quot;, fgFill = &quot;#4F81BD&quot;, border = &quot;TopBottom&quot;, borderColour = &quot;#4F81BD&quot; ) addStyle( wb, sheet = 1, headerStyle, rows = 1, cols = 1:ncol(df), gridExpand = TRUE )  style for body bodyStyle &lt;- createStyle(border = &quot;TopBottom&quot;, borderColour = &quot;#4F81BD&quot;, fgFill = &quot;#CDEDD0&quot;) row_to_color &lt;- df %&gt;% tibble::rowid_to_column(.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/10/%E5%A6%82%E4%BD%95%E6%8B%9F%E5%90%88%E4%B8%80%E6%9D%A1%E6%9B%B2%E7%BA%BF/">
+                <h3 class="media-heading">如何拟合一条曲线</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">简单拟合一个线性模型 states &lt;- as.data.frame(state.x77[,c(&quot;Murder&quot;, &quot;Population&quot;, &quot;Illiteracy&quot;, &quot;Income&quot;, &quot;Frost&quot;)]) fit &lt;- lm(Murder ~ Population + Illiteracy + Income + Frost, data=states) #summary(fit)  线性模型假设的综合验证 使用gvlma包中的gvlma函数验证模型的线性假设。gvlma函数由Pena和Slate ( 2006 )编写，能对线性模型假设进行综合验证，同时还能做偏斜度、峰度和异方差性的评价。换句话说，它给模型假设提供了一个单独的综合检验(通过/不通过)。
+# Listing 8.8 - Global test of linear model assumptions library(gvlma) gvmodel &lt;- gvlma(fit) summary(gvmodel) ## ## Call: ## lm(formula = Murder ~ Population + Illiteracy + Income + Frost, ## data = states) ## ## Residuals: ## Min 1Q Median 3Q Max ## -4.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/10/after-efforts-have-failed/">
+                <h3 class="media-heading">努力后的失败，才是诚实的失败</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">记得吗？读书时候，我们只崇拜和欣赏无需努力或者看上去不怎么需要努力，就取得好成绩的同学。不够聪明的人才需要全力以赴，聪明的人都轻松上阵。
+这个由固定型思维衍生和推导出来的观点有多致命？这个观点让固定型思维模式者不愿意努力了。许多人认为需要大量努力是能力低下的表现 ，他们不愿意自己看起来能力低下。如果他们不努力，他们至少可以找到一个借口:我之所以失败了，我之所以表现不佳，是因为我压根没尽力。努力了，仍然失败了，是固定型思维模式者更大的恐惧。可是努力后的失败，才是诚实的失败。
+两种思维模式的人，想法和行为有太多不同: 对待挑战，固定型思维模式者只对他们一开始就做得很好的事情，保持兴趣，当开始感到困难的时候，获得的乐趣就骤减，如果这件事不能证明他们有多聪明，他们就无法对其感兴趣，但是呢，成长性思维的人，越有挑战，他就越来劲，越感兴趣，越沉浸其中。固定思维的人不想接受挑战，他们因此错过许多机会，成长思维的人喜欢挑战，即使刚开始磕磕绊绊，但他们会越来越好。关注优胜，会很容易焦虑，但是如果关心的是成长，心态会发生巨大的改变。</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/10/the-lord-of-files/">
+                <h3 class="media-heading">蝇王</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">  You Become A Monster, You Will Not Be Scare A Monster
+ 一群孩子被放到隔绝外界环境的孤岛, (这样的设定有点像实验术语中的控制变量. 作者想要证明人性本恶, 与外界无关, 也就是和其他变量没有关系.) 天真的孩子是如何从文明走向罪恶的过程, 完美的推演了由善像恶的自发过程. 表明人性本恶, 恶就存在人的身体里, 天生就带着恶的属性.
+总结起来需要三个自带的条件:
+ 共同的敌人 迫切的基础需求 主流的裹挟(集体无意思)  </div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/10/what-are-we-talking-about-when-we-say-reading-literature/">
+                <h3 class="media-heading">如何阅读大量的学术论文, 而不发疯？</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Oct 10, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">某个宁静的下午, 我带着一个急需解决的问题或者困惑去 Google Scholar 上查阅文献, 但是我在阅读过程中不断点击正在阅读的论文的参考文献链接, 然后继续阅读这些文章的引用论文, 无休无止, 很快我发现我想了解的这个问题所在领域是一个深不可测的海洋, 需要用一生去研究才可能有所作为, 因此很快我变得不知所措, 对阅读论文这件事感到无比焦虑、惶恐, 那么你在做研究时是否碰到类似的问题, 又有什么办法应对这种感觉呢？
+所以“如何高效阅读论文”对于刚入门的研究人员来说, 是一个永恒的问题
+数学 数学是一篇文献的基本要素之一, 并且是有限的, 学会如何拆解他, 并理解和解释, 这些东西是不变的.
+ 综述 阅读综述: 在40-60页的综述文章中, 你通常能够以一种优美、整洁、结构化、条理清晰的方式获取100-200篇论文中的重要信息。
+当你阅读了2-3篇最近(过去5年内)的综述论文后, 你会发现三点：
+总是被引用的论文； 其具体工作听起来很酷或很相关的作者； 你感兴趣的子领域中相对较新的进展, 以及关于这些主题的值得注意的论文。  一旦有了这三点, 那么你就很清楚接下来该读什么, 为什么读, 以及读的顺序了。
+ 略读 最重要的是, 你要回答一个具体的问题。提出这样一个问题, 可以帮助你在一分钟内确定这篇论文是否包含答案。
+至少以粗略的方式阅读各种论文是件好事, 因为即使你不了解如何实现这些论文, 你也会知道有这样的方法/想法存在 , 并且当有机会或当它与你的研究相关性很大时, 你可以回过头来深入阅读。将这些论文视为工具箱中的可能有用的工具就行。头脑里的关键字积累是很重要的.
+如果你能在5分钟内意识到一篇论文可能不是你现在需要学习的东西, 漂亮！这样你只浪费了5分钟的时间就可以进行下一步操作了。
+ 精读 随手列出问题清单, 一定要抵制立即查找你遇到的不理解内容的冲动！ 并在获得答案时写下答案, 仅在读完论文之后, 才去查阅里面的知识点
+再怎么强调都不为过的是: 一定要确保你在阅读的同时进行输出.  哪怕只是在白纸上写写画画。只要确保将相关的思想联系在一起, 并跟踪这些思想的准确引用即可。对关键概念做一点文献笔记很有必要, 当你为了找到一个准确的引用需要回顾1-3年前读过的论文时, 你会发现将两个关键思想联系在一起很有帮助。
+慢慢地, 随着你的进步, 你将开始了解更多, 并且由于你已经积累了框架, 很多让你早期感觉困惑的知识点开始变得不言而喻。对于我来说, 很多时候我会浏览论文中的公式。因为人们的写作风格和某些单词背后的含义含糊不清, 但是公式是清晰的。</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/06/multi-label-classfication/">
+                <h3 class="media-heading">多标签分类问题</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Difference between multi-class classification &amp; multi-label classification is that in multi-class problems the classes are mutually exclusive, whereas for multi-label problems each label represents a different classification task, but the tasks are somehow related.
+  multi-class classification makes the assumption that each sample is assigned to one and only one label: a fruit can be either an apple or a pear but not both at the same time.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/06/drug-discovery/">
+                <h3 class="media-heading">新药研发</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">确定致病机制 1. 皇后确诊乳腺癌  2. 药物遍寻均无效  3. 精准医疗项目启动 生物信息分析 特异化突变基因鉴定 蛋白通路与疾病关联性 XYZ蛋白三维晶体结构 XYZ蛋白药物结合口袋突变前后分析    先导化合物 1. 计算机辅助药物设计:  在 蛋白质三维结构基础上，彻底分析突变后XYZ蛋白结合口袋周围理化性质
+ 突变前：小分子包围在疏水口袋，亲水氨基酸R125、E154与其形成氢键铆钉作用，使其牢牢稳固在蛋白质中 突变后：疏水环境大致不变，但氨基酸N125、I154(无法形成氢键)造成很大空隙，亲水性转换为疏水口袋，稳定性降低     2. 分子动力学方法  分子动力学方法对XYZ蛋白突变后与小分子Hormone间相互作用状况进行了计算模拟分析, 目的:以期得到蛋白质在突变后的小分子结合信息
+ 计算中心首席科学家是这么解释分析结果的:
+突变后XYZ蛋白Region A区域没有变化，对该部分不做任何修改； Region B区域中，小分子下方出现巨大空洞，需要对该部分进行补漏； Region B区域巨大空袭，在小分子稳定结合时，下方出现由10~13个水分子组成的“水氢键网络体系”； “水氢键网络体系”中，水分子能量Energy（球体大小）和占有率Occupancy（球体颜色）均能表达出蛋白质局部区域理化性质。 &gt; 具体总结：Region B区域绝大多数水分子能量Energy极小、占有率Occupancy较小，说明该区域极为疏水；但其中W1水分子，能量较好、占有率较高，说明W1水分子极为稳定，周围氨基酸为极亲水性氨基酸，将来可以通过替换W1水分子或通过桥键作用对其进行化学修饰  ; ;
+ 3. 基于体内原生激素Hormone的药物设计:化学片段增长设计法  首先设计的化学片段，将能够有效的到达W1水分子附近或将其替换掉, 福斯坦国立大学化学院研究团队，共设计母核结构50枚，且均具备有机合成实验方法实现的可能性
+ ; ;
+ 4. 分子对接方法判定最佳化学母核结构  利用分子对接方法，将50枚母核结构分别对接进入突变后蛋白质XYZ结构中， 利用分子对接权重值, 判定3枚小分子药物在对接结果中占据较好的权重位置。奥古斯汀·Khan将此结果呈现给，福斯坦国立大学化学院研究团队，经过再三斟酌分析，决定采用C2、C1和C3进行后期化学结构改造
+      5.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/06/deep-work/">
+                <h3 class="media-heading">Deep Work</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">最近在读 卡尔.纽波特的 深度工作, 以下是阅读的一点感悟和笔记.
+ 深度工作是 21 世纪的超级力量
+ 作者介绍: 卡尔·纽波特，畅销书作家，人气博主，创办了在美国很受欢迎的博客“学习黑客”，破解工作和学习领域的成功模式。
+ 关于本书 这是一本自我管理类书籍，讲述了在碎片化时代，如何训练大脑排除干扰，提高大脑的深度思维能力，创造更多价值。这本书的英文原版2016年在美国出版，一发行就占据了亚马逊美国网站的职场励志书榜首。
+几个问题:
+在职场中，为什么有些人越忙碌越无法产出有价值的成果？ 又该如何通过训练大脑排除干扰，提高深度思维能力，创造更多价值？  这本书从2个方面解释了大部分人无法进行深度工作的原因，并给出了培养深度工作的4个步骤，分别是:
+选择适合自己的深度工作模式 将工作内化成习惯 像经商一样去执行 适当减少整体工作时间遵循这几个步骤进行刻意练习   概念介绍 深度工作(Deep Work): 在没有干扰的情况下专注的进行职业活动, 使个人的认知能力达到极限, 这种努力能够创造新价值, 提升技能, 而且难以复制.
+肤浅工作(shallow work): 对认知要求不高的任务, 在收到干扰的情况下也能进行, 此类工作创造的价值不高, 且容易复制.
+ 深度工作的重要性 作者前面花了大量篇幅说明深度工作的重要性, 其中关于注意的论断深以为然.
+快速学习复杂的技能, 这能为我们带来价值, 这件事需要深度工作.
+但是现实生活中, 网络工具使我们分心, 导致专注能力的下降. 不分心是很难的, 我们都有一种冲动就是, 把自己的注意力转移到肤浅的事物上.
+比如, 工作累了或者遇到难题了就要刷刷社交网络, 但是这种行为其实还是在消耗着你的注意力和能量. 你的意志力是有限的, 它在使用的过程中是不断的被消耗的. 而进入深度工作状态是需要意志力能量, 如何使得这个转化过程变得容易使我们应该掌握的技巧. 简而言之, 我们增加深度工作的评率, 而减小转移到肤浅工作的冲动和频率. 我们都有过类似的经历, 打开 word 文档, 准备写论文和报告, 一瞬间脑袋空白, 这时候平时不相干的事情, 突然都变得可爱起来, 比如: 洗完, 扫地, 洗衣服, 收拾房间, 下楼买💊, 总之只要是不是写论文, 什么其他能拖延这件事情的事, 我们都愿意干.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/05/the-hello-world-of-neural-network/">
+                <h3 class="media-heading">The Hello World Of Neural Network</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">简单来说神经网络和我们一般的编程区别在于: 一个是输入数据和函数规则, 然后得到结果. 而神经网络是输入数据和答案, 通过迭代学习, 神经网络能学习出函数规则.如下图:
+举个简单的例子, 这里有两组数据:
+X: -1, 0, 1, 2, 3, 4 Y: -3, -1, 1, 3, 5, 7
+你可以把 x 看做是数据, y 看做是答案, 现在你要做的是找到其中的函数关系, 这个关系能够帮助我们, 用 x 去预测 Y 的值(假设你没有学过解方程组).
+最常用的方法就是归纳法, 首先你根据第一对数据猜一个对应关系规则, 拿着这个规则计算答案值, 评估计算的答案和真实答案差多远, 然后在调整你的规则, 继续评估, 直到你的规则能够拟合所有的数据.
+这就是神经网络的逻辑过程.
+我们来看一个简单的神经网络的例子
+1.Import: 加载所需模块 import tensorflow as tf ## /Users/zero/anaconda3/envs/tfdeeplearning/lib/python3.5/importlib/_bootstrap.py:222: RuntimeWarning: compiletime version 3.6 of module &#39;tensorflow.python.framework.fast_tensor_util&#39; does not match runtime version 3.5 ## return f(*args, **kwds) import numpy as np from tensorflow import keras  2.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="/2019/04/analyze-and-visualize-your-iphone-s-health-app-data-in-r/">
+                <h3 class="media-heading">使用 R 分析可视化你的 iPhone 健康 APP 数据</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2019
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">介绍 iPhone 的 health APP 存储着我们的私人健康数据, 这里有一篇帖子是用 Python 分析 health APP 的数据Apple Health Data How to Export Analyze Visualize Guide - ryanpraski.com , 而我更喜欢 R 的版本.
+让我们赶紧开始吧!!
+ 首先获取数据并读取 从你的 health APP 应用中导出数据 在 R 中读取数据  加载包并读入数据 library(XML) library(tidyverse) library(lubridate) library(scales) library(here) library(ggthemes) xml &lt;- xmlParse(here(&quot;data/apple_health_export/export.xml&quot;)) summary(xml) ## $nameCounts ## ## Record ExportDate HealthData Me Workout ## 90037 1 1 1 1 ## ## $numNodes ## [1] 90041 Record 是我的主要数据, 有 90,037 条</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero="no post found"
+         data-message-one="1 post found"
+         data-message-other="{n} posts found">
+         62 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://i.loli.net/2018/02/26/5a9416186c149.jpg');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" integrity="sha256-IFHWFEbU2/+wNycDECKgjIRSirRNIDp2acEB5fvdVRU=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js" integrity="sha256-+mpyNVJsNt4rVXCw0F+pAOiB3YxmHgrbJsx4ecPuUaI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js" integrity="sha256-vMxgR/7FtLovVA+IPrR7+xTgIgARH7y9VZQnmmi0HDI=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js" integrity="sha256-N0qFUh7/9vLvia87dDndewmsgsyYoNkdA212tPc+2NI=" crossorigin="anonymous"></script>
+
+
+<script src="/js/script-kr8dyqj6rb6ortyib7whfo9x9p6td6zo8t1v4fdz4ecx5kwybsdlmk1slygn.min.js"></script>
+
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight, pre > code').each(function(i, block) {
+    if (!$(this).hasClass('codeblock')) {
+      $(this).addClass('codeblock');
+    }
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+
+    
+  </body>
+</html>
+
